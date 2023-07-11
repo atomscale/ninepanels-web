@@ -1,2 +1,2 @@
-# ninepanels-web
-web gui for ninepanels
+# hydrogen-web
+hydrogen scaffold - web app front end 
