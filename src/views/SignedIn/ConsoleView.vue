@@ -4,7 +4,7 @@
 
 <script>
 import SideNav from '@/components/SideNav.vue'
-import ConsoleDataDisplay from '@/components/ConsoleDataDisplay.vue'
+import DailyPanelFrame from '@/components/DailyPanelFrame.vue'
 import { useMainStore } from '@/stores/mainStore.js'
 import { mapStores } from 'pinia'
 
@@ -14,7 +14,7 @@ export default {
   },
   components: {
     SideNav,
-    ConsoleDataDisplay
+    DailyPanelFrame
   }
 }
 </script>

@@ -36,10 +36,10 @@
               </TransitionChild>
 
               <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                <div class="flex flex-shrink-0 items-center px-4">
+                <!-- <div class="flex flex-shrink-0 items-center px-4">
                   <img class="h-8 w-auto" src="src/assets/hydrogen-logo-base-blue.png" alt="Hydrogen Web" />
-                  <div class="text-blue-300 pl-2 pt-1 font-bold">Nine Panels</div>
-                </div>
+                  <div class="text-gray-300 pl-2 pt-1 font-bold">9P</div>
+                </div> -->
 
                 <nav class="mt-5 space-y-1 px-2">
                   <a v-for="item in navigation" :key="item.name" :href="item.href"
@@ -90,8 +90,8 @@
       <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
-            <img class="h-8 w-auto" src="src/assets/hydrogen-logo-base-blue.png" alt="Hydrogen Web" />
-            <div class="text-blue-300 pl-2 pt-1 font-bold">9P</div>
+            <img class="h-8 w-auto" src="src/assets/9p-logo-empty.png" alt="9P logo" />
+            <!-- <div class="text-gray-300 pl-2 pt-1 font-bold">9P</div> -->
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
             <a v-for="item in navigation" :key="item.name" :href="item.href"
@@ -139,13 +139,13 @@
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
             @click="sidebarOpen = true">
             <span class="sr-only">Open sidebar</span>
-            <Bars3Icon class="h-6 w-6 ml-3 text-gray-100 " aria-hidden="true" />
+            <!-- <Bars3Icon class="h-6 w-6 ml-3 text-gray-100 " aria-hidden="true" /> -->
+            <img class="h-7 ml-3 mb-1" src="src/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <div class="text-blue-300  grow mt-2 items-center justify-center px-4">
+          <div class="text-blue-300  grow mt-2 items-center justify-center">
             <div class="flex items-center justify-center">
 
-              <img class="h-7" src="src/assets/hydrogen-logo-base-blue.png" alt="Hydrogen Web" />
-              <div class="text-blue-300 pl-2 pt-1 font-bold">9P</div>
+              <!-- <div class="text-gray-300 pl-2 pt-1 font-bold">9P</div> -->
             </div>
           </div>
         </div>
@@ -153,24 +153,13 @@
       <main class="">
         <div class="py-6">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+            <!-- <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1> -->
           </div>
           <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
             <!-- Replace with your content -->
 
-            <!-- <VerifyInput v-if="!mainStore.user.is_verified" /> -->
-            <!-- <button @click="addFlash()" class="bg-gray-600 mt-4 text-white h-8  px-2 rounded-md">add a message</button> -->
 
-            <!-- <div class="flex flex-col items-start fixed bottom-2 right-2 z-50 " v-if="mainStore.messages">
-              <FlashMessage v-for="message in mainStore.messages" :key="message.message" :message="message.message" :error="message.error" />
-            </div> -->
-
-            <ConsoleDataDisplay />
-
-            <!-- <div v-if="mainStore.user" class="flex flex-col ml-20">
-              <VerifyInput v-if="!mainStore.user.is_verified" />
-
-            </div> -->
+            <DailyPanelFrame />
 
 
             <!-- /End replace -->
@@ -183,13 +172,14 @@
 
 <script>
 import { useMainStore } from '@/stores/mainStore.js'
-import VerifyInput from '@/components/VerifyInput.vue'
+// import VerifyInput from '@/components/VerifyInput.vue'
 import FlashMessage from '@/components/FlashMessage.vue'
-import ConsoleDataDisplay from '@/components/ConsoleDataDisplay.vue'
+import DailyPanelFrame from '@/components/DailyPanelFrame.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
   CalendarIcon,
+  CalendarDaysIcon,
   ChartBarIcon,
   FolderIcon,
   HomeIcon,
@@ -198,6 +188,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
+  CalculatorIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -210,11 +201,10 @@ export default {
   data() {
     return {
       navigation: [
-        { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-        { name: 'View 1', href: '#', icon: UsersIcon, current: false },
-        { name: 'View 2', href: '#', icon: FolderIcon, current: false },
-        { name: 'View 3', href: '#', icon: CalendarIcon, current: false },
-        { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+        { name: 'Daily', href: '#', icon: CalendarIcon, current: true },
+        { name: 'Weekly', href: '#', icon: CalendarDaysIcon, current: false },
+        { name: 'Stats', href: '#', icon: CalculatorIcon, current: false },
+        { name: 'Graph', href: '#', icon: ChartBarIcon, current: false },
       ],
       secondaryNavigation: [
         { name: 'API Docs', icon: BookOpenIcon, href: '#', action: this.useDocsTest },
@@ -259,10 +249,10 @@ export default {
     DialogPanel,
     TransitionChild,
     TransitionRoot,
-    VerifyInput,
+
     FlashMessage,
-    VerifyInput,
-    ConsoleDataDisplay
+
+    DailyPanelFrame
   }
 }
 

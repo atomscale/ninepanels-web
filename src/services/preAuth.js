@@ -1,4 +1,7 @@
-import axios from "axios";
+import axios from "axios"
+import VueCookies from 'vue-cookies'
+
+
 
 var baseURL = "http://127.0.0.1:8000"
 
@@ -20,7 +23,14 @@ export default {
         form.append('password', password)
         return apiClient.post("/user", form)
     },
-    getPanels() {
-        return apiClient.get("/panels")
+    getPanels(access_token) {
+
+        return apiClient.get("/panels", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+
     },
 }
