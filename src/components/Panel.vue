@@ -1,7 +1,7 @@
 <template >
 
 
-    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300" :class="entry && entry.is_complete ? 'bg-green-300' : 'bg-white'">
+    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-sm" :class="entry && entry.is_complete ? 'bg-green-300' : 'bg-white'">
 
       <div v-if="entry">
         {{ this.panel.title }}

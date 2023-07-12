@@ -4,7 +4,7 @@
       <div class="aspect-content">
 
         <Panel v-if="this.mainStore.panels[i - 1]" :panel="this.mainStore.panels[i - 1]" />
-        <div v-else class="flex items-center justify-center text-gray-500 border border-gray-300">
+        <div v-else class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-md">
           Create
         </div>
       </div>

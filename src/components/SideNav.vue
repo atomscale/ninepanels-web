@@ -155,7 +155,7 @@
           <div class="mx-auto max-w-7xl px-2 sm:px-2 lg:px-8">
             <!-- <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1> -->
           </div>
-          <div class="mx-auto max-w-7xl px-2 sm:px-2 md:px-8">
+          <div class=" max-w-7xl px-1 sm:px-2 md:px-8">
             <!-- Replace with your content -->
 
 
