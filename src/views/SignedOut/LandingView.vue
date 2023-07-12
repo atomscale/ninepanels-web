@@ -1,18 +1,21 @@
 <template>
+
   <div class="bg-gray-50 flex flex-col min-h-screen">
 
     <div class="flex-grow">
       <NavBar />
-      <CTA />
-      <!-- <BadgesOfHonour />
-    <Features />
-    <Pricing />
-    <Team />
-    <EmailSignUp /> -->
-      <!-- <CookieAccept /> -->
+      <transition name="fade" appear>
+        <CTA />
+        <!-- <BadgesOfHonour />
+      <Features />
+      <Pricing />
+      <Team />
+      <EmailSignUp /> -->
+        <!-- <CookieAccept /> -->
+      </transition>
+      </div>
+      <!-- <FooterBar /> -->
     </div>
-    <!-- <FooterBar /> -->
-  </div>
 </template>
 
 <script>
@@ -51,3 +54,15 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 3.5s ease;
+}
+</style>
