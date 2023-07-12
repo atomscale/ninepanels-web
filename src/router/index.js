@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import { useMainStore } from '@/stores/mainStore.js'
-import ConsoleView from '@/Views/SignedIn/ConsoleView.vue'
+import ConsoleView from '@/views/SignedIn/ConsoleView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
