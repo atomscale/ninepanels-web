@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import preAuth from '../services/preAuth.js'
+import preAuth from '@/services/preAuth.js'
 import VueCookies from 'vue-cookies'
 import { useRouter } from 'vue-router'
 

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import { useMainStore } from '@/stores/mainStore.js'
-import Landing from '../views/SignedOut/LandingView.vue'
-import SignUpView from '../views/SignedOut/SignUpView.vue'
-import SignInView from '../views/SignedOut/SignInView.vue'
-import ConsoleView from '../Views/SignedIn/ConsoleView.vue'
+import Landing from '@/views/SignedOut/LandingView.vue'
+import SignUpView from '@/views/SignedOut/SignUpView.vue'
+import SignInView from '@/views/SignedOut/SignInView.vue'
+import ConsoleView from '@/Views/SignedIn/ConsoleView.vue'
 
 
 import NProgress from 'nprogress'
@@ -63,7 +63,7 @@ const router = createRouter({
     //   // route level code-splitting
     //   // this generates a separate chunk (About.[hash].js) for this route
     //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
+    //   component: () => import('@/views/AboutView.vue')
     // }
   ],
   scrollBehavior(to, from, savedPosition) {

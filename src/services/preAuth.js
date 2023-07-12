@@ -1,9 +1,6 @@
 import axios from "axios"
-import VueCookies from 'vue-cookies'
 
-
-
-var baseURL = "http://127.0.0.1:8000"
+var baseURL = "https://api.ninepanels.com"
 
 const apiClient = axios.create({
     baseURL: baseURL,
@@ -24,7 +21,7 @@ export default {
         return apiClient.post("/user", form)
     },
     getPanels(access_token) {
-
+        console.log("api url:", baseURL)
         return apiClient.get("/panels", {
             headers: {
                 Authorization: "Bearer " + access_token,

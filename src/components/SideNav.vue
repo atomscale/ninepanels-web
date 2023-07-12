@@ -90,7 +90,7 @@
       <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
-            <img class="h-8 w-auto" src="src/assets/9p-logo-empty.png" alt="9P logo" />
+            <img class="h-8 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" />
             <!-- <div class="text-gray-300 pl-2 pt-1 font-bold">9P</div> -->
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
@@ -140,7 +140,7 @@
             @click="sidebarOpen = true">
             <span class="sr-only">Open sidebar</span>
             <!-- <Bars3Icon class="h-6 w-6 ml-3 text-gray-100 " aria-hidden="true" /> -->
-            <img class="h-7 ml-3 mb-1" src="src/assets/9p-logo-empty.png" alt="9P logo" />
+            <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
           <div class="text-blue-300  grow mt-2 items-center justify-center">
             <div class="flex items-center justify-center">
