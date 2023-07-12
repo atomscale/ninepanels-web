@@ -1,13 +1,15 @@
 <template >
 
 
-    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-sm" :class="entry && entry.is_complete ? 'bg-green-300' : 'bg-white'">
+    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-xs" :class="entry && entry.is_complete ? 'bg-green-300' : 'bg-white'">
+      <div class="m-2">
 
-      <div v-if="entry">
-        {{ this.panel.title }}
-      </div>
-      <div v-else>
-        {{ this.panel.title }}
+        <div v-if="entry">
+          {{ this.panel.title }}
+        </div>
+        <div v-else>
+          {{ this.panel.title }}
+        </div>
       </div>
     </button>
 
