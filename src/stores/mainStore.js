@@ -6,8 +6,9 @@ import { useRouter } from 'vue-router'
 export const useMainStore = defineStore({
     id: 'main', // this is the first part + Store
     state: () => ({
-        panels: '',
+        panels: [],
         messages: [],
+        entries: []
     }),
     actions: {
         getLoginToken(email, password) {
@@ -44,6 +45,56 @@ export const useMainStore = defineStore({
                     })
             } else {
                 console.log("getPanels access_token error, implementing redirect")
+                this.messages.push({ message: "no access_token, redirect sign in", error: true })
+                const router = useRouter()
+                router.push("SignIn")
+                setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
+        getEntries() {
+
+            var access_token = VueCookies.get("9p_access_token")
+
+            if (access_token) {
+                return preAuth.getEntries(access_token)
+                    .then(response => {
+                        console.log(response.status)
+                        this.entries = response.data
+                        console.log("rcvd user entries", this.entries)
+                        return response.data
+                    })
+                    .catch(error => {
+                        console.log("issue gettign user entries", error.response.data.detail)
+                        this.messages.push({ message: error.response.data.detail, error: true })
+                        setTimeout(() => this.messages.shift(), 5000)
+                    })
+            } else {
+                console.log("getEntries access_token error, implementing redirect")
+                this.messages.push({ message: "no access_token, redirect sign in", error: true })
+                const router = useRouter()
+                router.push("SignIn")
+                setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
+        postEntry(panel_id, is_complete) {
+            var access_token = VueCookies.get("9p_access_token")
+
+            if (access_token) {
+                return preAuth.postEntry(access_token, panel_id, is_complete)
+                    .then(response => {
+                        console.log(response.status)
+                        // this.entries = response.data
+                        console.log("posted user entry with id:", response.data.id)
+                        this.getEntries()
+                        return response.data
+                    })
+                    .catch(error => {
+                        console.log("issue posting user entry", error.response.data.detail)
+                        this.messages.push({ message: error.response.data.detail, error: true })
+                        setTimeout(() => this.messages.shift(), 5000)
+                    })
+            } else {
+                console.log("postEntry access_token error, implementing redirect")
                 this.messages.push({ message: "no access_token, redirect sign in", error: true })
                 const router = useRouter()
                 router.push("SignIn")
