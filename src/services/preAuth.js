@@ -5,7 +5,7 @@ let baseURL
 if (import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION") {
     baseURL = "https://api.ninepanels.com"
 } else if (import.meta.env.VITE_NINEPANELS_ENV === "STAGING"){
-    baseURL = "https://staging.api.ninepanels.com"
+    baseURL = "https://ninepanels-staging.onrender.com"
 } else {
     baseURL = "http://127.0.0.1:8000"
 }
