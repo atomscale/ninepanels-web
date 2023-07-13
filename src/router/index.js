@@ -1,16 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useMainStore } from '@/stores/mainStore.js'
 import DailyView from '@/views/SignedIn/DailyView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
 
-
 import NProgress from 'nprogress'
+
+import {useMainStore} from '@/stores/mainStore.js'
 
 NProgress.configure({ minimum: 0.3 })
 NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 
+import VueCookies from 'vue-cookies'
+
+function requireAccessToken(to, from, next) {
+  const store = useMainStore()
+  const access_token = VueCookies.get("9p_access_token")
+  if (access_token) {
+    next()
+  } else {
+    store.messages.push({ message: "Session expired. Please sign in.", error: true })
+    setTimeout(() => store.messages.shift(), 5000)
+    next('/signin')
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,29 +47,10 @@ const router = createRouter({
       path: '/daily',
       name: 'Daily',
       component: DailyView,
-      // beforeEnter: async(to, from) => {
-      //   NProgress.start()
-      //   const mainStore = useMainStore()
-      //   await mainStore.getUser()
-      //   NProgress.done()
-      // }
-    },
+      beforeEnter: requireAccessToken
 
-    // {
-    //   path: '/update',
-    //   name: 'UpdateUser',
-    //   component: AccountUpdateView
-    // },
-    // {
-    //   path: '/createvehicle',
-    //   name: 'CreateVehicle',
-    //   component: CreateVehicleView
-    // },
-    // {
-    //   path: '/createfjuleup',
-    //   name: 'CreateFjuleUp',
-    //   component: CreateFjuleUpView
-    // },
+      },
+
     // {
     //   path: '/about',
     //   name: 'about',
@@ -74,6 +68,19 @@ const router = createRouter({
     } else {
       return { x: 0, y: 0 }
     }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    const access_token = VueCookies.get("9p_access_token")
+    if (access_token) {
+      next('/daily')
+    } else {
+      next()
+    }
+  } else {
+    next() // for all other routes, carry on
   }
 })
 
