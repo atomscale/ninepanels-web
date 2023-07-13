@@ -58,7 +58,7 @@ const data = ref({
 
 function sendAuthCode() {
     mainStore.verifyUser(mainStore.user.id, this.data.auth_code)
-    router.push({name: "Console"})
+    router.push({name: "Daily"})
 }
 
 function reqNewCode() {

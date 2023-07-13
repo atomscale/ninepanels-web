@@ -8,7 +8,11 @@ export const useMainStore = defineStore({
     state: () => ({
         panels: [],
         messages: [],
-        entries: []
+        entries: [],
+        user: {
+            name: 'Ben'
+        },
+        slideover: false
     }),
     actions: {
         getLoginToken(email, password) {
@@ -100,6 +104,12 @@ export const useMainStore = defineStore({
                 router.push("SignIn")
                 setTimeout(() => this.messages.shift(), 5000)
             }
+        },
+        openSlideover() {
+            this.slideover = true
+        },
+        closeSlideover() {
+            this.slideover = false
         }
 
     }

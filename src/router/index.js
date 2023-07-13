@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import { useMainStore } from '@/stores/mainStore.js'
-import ConsoleView from '@/views/SignedIn/ConsoleView.vue'
+import DailyView from '@/views/SignedIn/DailyView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
@@ -31,9 +31,9 @@ const router = createRouter({
       component: SignInView,
     },
     {
-      path: '/console',
-      name: 'Console',
-      component: ConsoleView,
+      path: '/daily',
+      name: 'Daily',
+      component: DailyView,
       // beforeEnter: async(to, from) => {
       //   NProgress.start()
       //   const mainStore = useMainStore()

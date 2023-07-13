@@ -57,7 +57,7 @@ export default {
         async signUserUp() {
             var resp = await this.mainStore.signUp(this.email, this.password)
             if (resp) {
-                this.$router.push({name: 'Console'})
+                this.$router.push({name: 'Daily'})
             } else {
                 this.$router.push({name: 'SignUp'})
             }

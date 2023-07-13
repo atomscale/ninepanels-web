@@ -61,7 +61,7 @@ async function sendLogIn(data) {
     var token = await mainStore.getLoginToken(data.username, data.password)
     console.log("access token rcvd", token)
     if (token) {
-        router.push({ name: 'Console' })
+        router.push({ name: 'Daily' })
         NProgress.done()
     } else {
         router.push({ name: 'SignIn' })

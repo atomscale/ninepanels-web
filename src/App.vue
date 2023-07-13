@@ -15,16 +15,7 @@
 <script setup>
 import FlashMessage from '@/components/FlashMessage.vue'
 import { useMainStore } from '@/stores/mainStore.js'
-import {useRouter} from 'vue-router'
-
-
-import VueCookies from 'vue-cookies'
-
 
 const mainStore = useMainStore()
-const router = useRouter()
-
-console.log("ninepanels running in env:", import.meta.env.VITE_NINEPANELS_ENV)
-
 
 </script>
