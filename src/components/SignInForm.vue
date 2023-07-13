@@ -62,8 +62,10 @@ async function sendLogIn(data) {
     console.log("access token rcvd", token)
     if (token) {
         router.push({ name: 'Console' })
+        NProgress.done()
     } else {
         router.push({ name: 'SignIn' })
+        NProgress.done()
     }
     NProgress.done()
 
