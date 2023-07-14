@@ -33,10 +33,9 @@
                   </button>
                 </div>
               </TransitionChild>
+
               <div class="h-0 flex-1 overflow-y-auto pt-5 ">
-
-
-                <nav class="mt-1 space-y-1 px-2">
+                <!-- <nav class="mt-1 space-y-1 px-2">
                   <a v-for="item in navigation" :key="item.name" :href="item.href"
                     :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                     <component :is="item.icon"
@@ -44,7 +43,14 @@
                       aria-hidden="true" />
                     {{ item.name }}
                   </a>
-                </nav>
+                </nav> -->
+
+                <div class="m-2 space-y-1" aria-labelledby="projects-headline">
+                  <a v-for="item in primaryNavigation" :key="item.name" :href="item.href" @click="item.action"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
+                  </a>
+                </div>
               </div>
 
               <div class="mt-8">
@@ -73,23 +79,19 @@
       <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
         <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 justify-between px-4">
-            <img class="h-8 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" />
-            <!-- <div class="text-gray-300 pl-2 pt-1 font-bold">9P</div> -->
+            <router-link to="/"><img class="h-6 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" /></router-link>
             <button type="button" class="text-blue-300 mb-1 " @click="this.sendOpenSlideover()">
 
               <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
 
             </button>
           </div>
-          <nav class="mt-5 flex-1 space-y-1 px-2">
-            <a v-for="item in navigation" :key="item.name" :href="item.href"
-              :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
-              <component :is="item.icon"
-                :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']"
-                aria-hidden="true" />
-              {{ item.name }}
-            </a>
-          </nav>
+          <div class="m-2 space-y-1" aria-labelledby="projects-headline">
+                  <a v-for="item in primaryNavigation" :key="item.name" :href="item.href" @click="item.action"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
+                  </a>
+                </div>
         </div>
 
 
@@ -129,8 +131,8 @@
           <div class=" max-w-7xl px-1 sm:px-2 md:px-8">
             <!-- Replace with your content -->
 
-
-            <DailyPanelFrame />
+            <RouterView />
+            <!-- <DailyPanelFrame /> -->
             <SlideOver />
 
             <!-- /End replace -->
@@ -161,6 +163,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
+  QuestionMarkCircleIcon,
   CalculatorIcon,
   BeakerIcon
 } from '@heroicons/vue/24/outline'
@@ -174,24 +177,23 @@ import VueCookies from 'vue-cookies'
 export default {
   data() {
     return {
-      navigation: [
-        { name: 'Daily', href: '#', icon: CalendarIcon, current: false },
-        // { name: 'Weekly', href: '#', icon: CalendarDaysIcon, current: false },
-        // { name: 'Stats', href: '#', icon: CalculatorIcon, current: false },
-        // { name: 'Graph', href: '#', icon: ChartBarIcon, current: false },
-      ],
-
       sidebarOpen: false
     }
   },
   computed: {
     ...mapStores(useMainStore),
-    secondaryNavigation() {
+    primaryNavigation() {
+      let prime_nav = [
+        { name: 'Daily', icon: CalendarIcon, href: '#', action: this.dailyLink },
+      ]
 
+      return prime_nav
+    },
+    secondaryNavigation() {
       let second_nav = [
+        { name: "huh?", icon: QuestionMarkCircleIcon, href: '#', action: this.whyLink },
         { name: 'API Docs', icon: BookOpenIcon, href: '#', action: this.sendToDocs },
         { name: 'v0.0.2 Portobello', icon: BeakerIcon, href: '#', action: this.sendToGithub },
-
       ]
 
       if (this.mainStore.user) {
@@ -222,6 +224,14 @@ export default {
     },
     sendOpenSlideover() {
       this.mainStore.openSlideover()
+    },
+    dailyLink() {
+      this.$router.push({ name: "Daily" })
+      this.sidebarOpen = false
+    },
+    whyLink() {
+      this.$router.push({ name: "Why" })
+      this.sidebarOpen = false
     }
   },
   components: {
@@ -240,7 +250,7 @@ export default {
     DialogPanel,
     TransitionChild,
     TransitionRoot,
-
+    QuestionMarkCircleIcon,
     FlashMessage,
 
     DailyPanelFrame,

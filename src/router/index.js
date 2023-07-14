@@ -3,6 +3,7 @@ import DailyView from '@/views/SignedIn/DailyView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
+import WhyView from '@/views/SignedOut/WhyView.vue'
 
 import NProgress from 'nprogress'
 
@@ -15,11 +16,12 @@ import VueCookies from 'vue-cookies'
 
 function requireAccessToken(to, from, next) {
   const store = useMainStore()
-  const access_token = VueCookies.get("9p_access_token")
-  if (access_token) {
+  // const access_token = VueCookies.get("9p_access_token")
+  const user = store.user
+  if (user) {
     next()
   } else {
-    store.messages.push({ message: "Session expired. Please sign in.", error: true })
+    store.messages.push({ message: "Please sign in.", error: true })
     setTimeout(() => store.messages.shift(), 5000)
     next('/signin')
   }
@@ -44,11 +46,15 @@ const router = createRouter({
       component: SignInView,
     },
     {
+      path: '/why',
+      name: 'Why',
+      component: WhyView,
+    },
+    {
       path: '/daily',
       name: 'Daily',
       component: DailyView,
       beforeEnter: requireAccessToken
-
       },
 
     // {

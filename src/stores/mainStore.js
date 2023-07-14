@@ -9,9 +9,9 @@ export const useMainStore = defineStore({
         panels: [],
         messages: [],
         entries: [],
-        user: {
-            name: 'Ben'
-        },
+        // user: {
+        //     name: 'Ben'
+        // },
         slideover: false
     }),
     actions: {
