@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterView />
+    <SideNav />
 
 
   </div>
@@ -15,6 +15,7 @@
 <script setup>
 import FlashMessage from '@/components/FlashMessage.vue'
 import { useMainStore } from '@/stores/mainStore.js'
+import SideNav from '@/components/SideNav.vue'
 
 const mainStore = useMainStore()
 
