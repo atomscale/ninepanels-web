@@ -166,32 +166,32 @@ export default {
       setTimeout(() => this.mainStore.messages.shift(), 5000)
     },
     sendToDocs() {
-      window.open('https://api.ninepanels.com/docs', '_blank')
       this.sidebarOpen = false
+      window.open('https://api.ninepanels.com/docs', '_blank')
     },
     sendToGithub() {
-      window.open('https://github.com/atomscale', '_blank')
       this.sidebarOpen = false
+      window.open('https://github.com/atomscale', '_blank')
     },
     sendOpenSlideover() {
       this.sidebarOpen = false
       this.mainStore.openSlideover()
     },
     dailyLink() {
-      this.$router.push({ name: "Daily" })
       this.sidebarOpen = false
+      this.$router.push({ name: "Daily" })
     },
     whyLink() {
-      this.$router.push({ name: "Why" })
       this.sidebarOpen = false
+      this.$router.push({ name: "Why" })
     },
     sendSignIn() {
-      this.$router.push({name: "SignIn"})
       this.sidebarOpen = false
+      this.$router.push({name: "SignIn"})
     },
     sendAccount() {
-      this.$router.push({name: "Account"})
       this.sidebarOpen = false
+      this.$router.push({name: "Account"})
     }
   },
   components: {
