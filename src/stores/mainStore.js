@@ -31,7 +31,7 @@ export const useMainStore = defineStore({
             try {
                 const response = await requests.deleteUser(access_token)
                 console.log(response.data)
-                await this.signUserOutAction()
+                this.signUserOutAction()
                 return true
             } catch (error) {
                 console.log("issue deleting user in action", error)
