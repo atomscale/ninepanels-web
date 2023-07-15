@@ -1,7 +1,16 @@
 import axios from "axios"
 
-var baseURL = "https://api.ninepanels.com"
-// var baseURL = "http://127.0.0.1:8000"
+let baseURL
+
+if (import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION") {
+    baseURL = "https://api.ninepanels.com"
+} else if (import.meta.env.VITE_NINEPANELS_ENV === "STAGING"){
+    baseURL = "https://ninepanels-staging.onrender.com"
+} else {
+    baseURL = "http://127.0.0.1:8000"
+}
+
+console.log(baseURL)
 
 const apiClient = axios.create({
     baseURL: baseURL,
@@ -21,8 +30,21 @@ export default {
         form.append('password', password)
         return apiClient.post("/user", form)
     },
+    getUser(access_token) {
+        return apiClient.get("/users", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
+    },
+    deleteUser(access_token) {
+        return apiClient.delete("/users", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
+    },
     getPanels(access_token) {
-        console.log("api url:", baseURL)
         return apiClient.get("/panels", {
             headers: {
                 Authorization: "Bearer " + access_token,

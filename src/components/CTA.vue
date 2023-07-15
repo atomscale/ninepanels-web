@@ -4,9 +4,10 @@
 
 
         <div>
-            <h1 class="text-center mt-12 text-4xl mb-12 font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block text-gray-600">Consistency</span>
-                <span class="block text-gray-600">vigilance.</span>
+            <h1 class="text-center mt-12 text-2xl mb-12  tracking-tight  sm:text-5xl md:text-6xl">
+                <span class="block text-gray-600 text-3xl font-light">Holistic visibility</span>
+                <span class="block text-gray-600 text-3xl font-light">for the chronically inconsistent.</span>
+
             </h1>
 
                     <div class="mx-auto  max-w-7xl px-4 sm:mt-24 sm:px-6 ">
