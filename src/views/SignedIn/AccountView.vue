@@ -23,8 +23,6 @@ export default {
   computed: {
     ...mapStores(useMainStore)
   },
-  components: {
-  },
   methods: {
     sendUserDelete() {
       this.mainStore.deleteUserAction()
