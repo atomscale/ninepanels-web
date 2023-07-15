@@ -62,8 +62,8 @@ async function sendLogIn(data) {
     console.log("access token rcvd", token)
     if (token) {
         NProgress.done()
-        this.mainStore.messages.push({ message: "Welcome" })
-        setTimeout(() => this.mainStore.messages.shift(), 5000)
+        mainStore.messages.push({ message: "Welcome" })
+        setTimeout(() => mainStore.messages.shift(), 5000)
         router.push({ name: 'Daily' })
     } else {
         router.push({ name: 'SignIn' })
