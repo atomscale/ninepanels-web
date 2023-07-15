@@ -26,8 +26,8 @@ export default {
   components: {
   },
   methods: {
-    async sendUserDelete() {
-      await this.mainStore.deleteUserAction()
+    sendUserDelete() {
+      this.mainStore.deleteUserAction()
       this.$router.push('/')
     }
   }
