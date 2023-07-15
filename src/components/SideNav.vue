@@ -39,6 +39,10 @@
 
               <div class="mt-8">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
+                  <router-link :to="{ name: 'Why' }"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <span>icon</span>why link
+                  </router-link>
                   <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href" @click="item.action"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
@@ -76,15 +80,15 @@
         </div>
       </div>
       <main class="max-w-lg h-screen w-full">
-            <!-- Replace with your content -->
-            <div class="">
+        <!-- Replace with your content -->
+        <div class="">
 
-              <RouterView />
-            </div>
-            <!-- <DailyPanelFrame /> -->
-            <SlideOver />
+          <RouterView />
+        </div>
+        <!-- <DailyPanelFrame /> -->
+        <SlideOver />
 
-            <!-- /End replace -->
+        <!-- /End replace -->
 
       </main>
     </div>
@@ -187,11 +191,11 @@ export default {
     },
     sendSignIn() {
       this.sidebarOpen = false
-      this.$router.push({name: "SignIn"})
+      this.$router.push({ name: "SignIn" })
     },
     sendAccount() {
       this.sidebarOpen = false
-      this.$router.push({name: "Account"})
+      this.$router.push({ name: "Account" })
     }
   },
   components: {
