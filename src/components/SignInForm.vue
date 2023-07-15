@@ -56,9 +56,9 @@ const data = ref({
 })
 
 
-function sendLogIn(data) {
+async function sendLogIn(data) {
     NProgress.start()
-    const token = mainStore.getLoginToken(data.username, data.password)
+    const token = await mainStore.getLoginToken(data.username, data.password)
     console.log("access token rcvd", token)
     if (token) {
         NProgress.done()
