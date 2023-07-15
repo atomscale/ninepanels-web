@@ -27,22 +27,35 @@
               </TransitionChild>
 
               <div class="h-0 flex-1 overflow-y-auto pt-5 ">
-                <router-link @click="this.sidebarOpen = false" to="/"><img class="h-7 ml-5 w-auto"
+                <router-link @click="this.sidebarOpen = false" :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto"
                     src="@/assets/9p-logo-empty.png" alt="9P logo" /></router-link>
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
-                  <a v-for="item in primaryNavigation" :key="item.name" :href="item.href" @click="item.action"
+                  <router-link v-if="this.mainStore.user" @click="this.sidebarOpen = false" :to="{ name: 'Daily' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
-                  </a>
+                    <CalendarIcon class="h-6 w-6" /><span class="ml-3">Daily</span>
+                  </router-link>
                 </div>
               </div>
 
               <div class="mt-8">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-                  <a v-for="item in secondaryNavigation" :key="item.name" :href="item.href" @click="item.action"
+                  <router-link @click="this.sidebarOpen = false" :to="{ name: 'Why' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
-                  </a>
+                    <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">Why Link</span>
+                  </router-link>
+                  <router-link v-if="this.mainStore.user" @click="this.sidebarOpen = false" :to="{ name: 'Account' }"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Account</span>
+                  </router-link>
+                  <router-link v-if="this.mainStore.user" @click="this.signUserOut()" :to="{ name: 'Landing' }"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
+                  </router-link>
+                  <router-link v-if="!this.mainStore.user" @click="this.sidebarOpen = false" :to="{ name: 'SignIn' }"
+                    class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <ArrowRightOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign In</span>
+                  </router-link>
+
                 </div>
               </div>
 
@@ -58,8 +71,8 @@
     </TransitionRoot>
 
 
-    <div class="flex flex-col">
-      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 ">
+    <div class="flex flex-col items-center w-full">
+      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 w-full ">
         <div class="flex justify-between">
           <button type="button"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -75,16 +88,16 @@
           </button>
         </div>
       </div>
-      <main class="max-w-lg h-screen w-screen">
-            <!-- Replace with your content -->
-            <div class="">
+      <main class="max-w-lg h-screen w-full">
+        <!-- Replace with your content -->
 
-              <RouterView />
-            </div>
-            <!-- <DailyPanelFrame /> -->
-            <SlideOver />
 
-            <!-- /End replace -->
+        <RouterView />
+
+
+        <SlideOver />
+
+        <!-- /End replace -->
 
       </main>
     </div>
@@ -111,6 +124,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
   QuestionMarkCircleIcon,
   CalculatorIcon,
   BeakerIcon
@@ -119,7 +133,6 @@ import {
 
 
 import { mapStores } from 'pinia'
-import VueCookies from 'vue-cookies'
 
 
 export default {
@@ -130,33 +143,6 @@ export default {
   },
   computed: {
     ...mapStores(useMainStore),
-    primaryNavigation() {
-      let prime_nav = []
-
-      if (this.mainStore.user) {
-        prime_nav.push({ name: 'Daily', icon: CalendarIcon, href: '#', action: this.dailyLink },)
-      }
-
-      return prime_nav
-    },
-    secondaryNavigation() {
-      let second_nav = [
-        { name: "About", icon: QuestionMarkCircleIcon, href: '#', action: this.whyLink },
-        { name: 'API Docs', icon: BookOpenIcon, href: '#', action: this.sendToDocs },
-        // { name: 'v0.0.2 Portobello', icon: BeakerIcon, href: '#', action: this.sendToGithub },
-      ]
-
-      if (!this.mainStore.user) {
-        second_nav.push({ name: 'Sign In', icon: UserCircleIcon, href: '#', action: this.sendSignIn })
-      }
-
-      if (this.mainStore.user) {
-        second_nav.push({ name: 'Account', icon: UserCircleIcon, href: '#', action: this.sendAccount })
-        second_nav.push({ name: 'Sign Out', icon: ArrowLeftOnRectangleIcon, href: '#', action: this.signUserOut })
-      }
-
-      return second_nav
-    }
   },
 
 
@@ -169,33 +155,8 @@ export default {
       this.mainStore.messages.push({ message: "Signed out" })
       setTimeout(() => this.mainStore.messages.shift(), 5000)
     },
-    sendToDocs() {
-      window.open('https://api.ninepanels.com/docs', '_blank')
-      this.sidebarOpen = false
-    },
-    sendToGithub() {
-      window.open('https://github.com/atomscale', '_blank')
-      this.sidebarOpen = false
-    },
     sendOpenSlideover() {
-      this.sidebarOpen = false
-      this.mainStore.openSlideover()
-    },
-    dailyLink() {
-      this.$router.push({ name: "Daily" })
-      this.sidebarOpen = false
-    },
-    whyLink() {
-      this.$router.push({ name: "Why" })
-      this.sidebarOpen = false
-    },
-    sendSignIn() {
-      this.$router.push({name: "SignIn"})
-      this.sidebarOpen = false
-    },
-    sendAccount() {
-      this.$router.push({name: "Account"})
-      this.sidebarOpen = false
+      this.mainStore.slideover = true
     }
   },
   components: {
@@ -209,6 +170,7 @@ export default {
     XMarkIcon,
     UserCircleIcon,
     ArrowLeftOnRectangleIcon,
+    ArrowRightOnRectangleIcon,
     ChartBarSquareIcon,
     Dialog,
     DialogPanel,
@@ -216,7 +178,6 @@ export default {
     TransitionRoot,
     QuestionMarkCircleIcon,
     FlashMessage,
-
     DailyPanelFrame,
     SlideOver
   }

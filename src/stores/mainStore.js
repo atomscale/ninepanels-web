@@ -31,13 +31,13 @@ export const useMainStore = defineStore({
             try {
                 const response = await requests.deleteUser(access_token)
                 console.log(response.data)
-                await this.signUserOutAction()
+                this.signUserOutAction()
                 return true
             } catch (error) {
                 console.log("issue deleting user in action", error)
             }
         },
-        async signUserOutAction() {
+        signUserOutAction() {
             try {
                 VueCookies.remove("9p_access_token")
             } catch (error) {

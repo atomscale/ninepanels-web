@@ -23,11 +23,9 @@ export default {
   computed: {
     ...mapStores(useMainStore)
   },
-  components: {
-  },
   methods: {
-    async sendUserDelete() {
-      await this.mainStore.deleteUserAction()
+    sendUserDelete() {
+      this.mainStore.deleteUserAction()
       this.$router.push('/')
     }
   }
