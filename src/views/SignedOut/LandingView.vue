@@ -11,12 +11,12 @@
 
 <script>
 import CTA from '@/components/CTA.vue'
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useMainStore)
+    ...mapStores(useStore)
   },
   components: {
     CTA,
