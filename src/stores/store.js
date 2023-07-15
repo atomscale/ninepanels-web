@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia'
 import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
-import { useRouter } from 'vue-router'
 
-export const useMainStore = defineStore({
-    id: 'main', // this is the first part + Store
+export const useStore = defineStore({
+    id: '',
     state: () => ({
         panels: [],
         messages: [],
         entries: [],
         user: null,
-        slideover: false
+        trayIsOpen: false,
+        leftNavIsOpen: false
     }),
     actions: {
-        async getLoginToken(email, password) {
+        async getLoginTokenAction(email, password) {
             try {
                 const response = await requests.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
@@ -67,7 +67,7 @@ export const useMainStore = defineStore({
                 // setTimeout(() => this.messages.shift(), 5000)
             }
         },
-        getPanels() {
+        getPanelsAction() {
 
             var access_token = VueCookies.get("9p_access_token")
 
@@ -85,14 +85,14 @@ export const useMainStore = defineStore({
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
-                console.log("getPanels access_token error, implementing redirect")
-                this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                const router = useRouter()
-                router.push("SignIn")
-                setTimeout(() => this.messages.shift(), 5000)
+                console.log("getPanelsAction access_token error, implementing redirect")
+                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
+                // const router = useRouter()
+                // router.push("SignIn")
+                // setTimeout(() => this.messages.shift(), 5000)
             }
         },
-        getEntries() {
+        getEntriesAction() {
 
             var access_token = VueCookies.get("9p_access_token")
 
@@ -110,14 +110,14 @@ export const useMainStore = defineStore({
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
-                console.log("getEntries access_token error, implementing redirect")
-                this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                const router = useRouter()
-                router.push("SignIn")
-                setTimeout(() => this.messages.shift(), 5000)
+                console.log("getEntriesAction access_token error, implementing redirect")
+                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
+                // const router = useRouter()
+                // router.push("SignIn")
+                // setTimeout(() => this.messages.shift(), 5000)
             }
         },
-        postEntry(panel_id, is_complete) {
+        postEntryAction(panel_id, is_complete) {
             var access_token = VueCookies.get("9p_access_token")
 
             if (access_token) {
@@ -126,7 +126,7 @@ export const useMainStore = defineStore({
                         console.log(response.status)
                         // this.entries = response.data
                         console.log("posted user entry with id:", response.data.id)
-                        this.getEntries()
+                        this.getEntriesAction()
                         return response.data
                     })
                     .catch(error => {
@@ -135,18 +135,12 @@ export const useMainStore = defineStore({
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
-                console.log("postEntry access_token error, implementing redirect")
-                this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                const router = useRouter()
-                router.push("SignIn")
-                setTimeout(() => this.messages.shift(), 5000)
+                console.log("postEntryAction access_token error, implementing redirect")
+                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
+                // const router = useRouter()
+                // router.push("SignIn")
+                // setTimeout(() => this.messages.shift(), 5000)
             }
-        },
-        openSlideover() {
-            this.slideover = true
-        },
-        closeSlideover() {
-            this.slideover = false
         }
 
     }

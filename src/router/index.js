@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DailyView from '@/views/SignedIn/DailyView.vue'
+import PanelsView from '@/views/SignedIn/PanelsView.vue'
 import AccountView from '@/views/SignedIn/AccountView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
-import WhyView from '@/views/SignedOut/WhyView.vue'
+import AboutView from '@/views/SignedOut/AboutView.vue'
 
 import NProgress from 'nprogress'
 
-import {useMainStore} from '@/stores/mainStore.js'
+import { useStore } from '@/stores/Store.js'
 
 NProgress.configure({ minimum: 0.3 })
 NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
@@ -17,13 +17,13 @@ import VueCookies from 'vue-cookies'
 
 // this could be requireUserState
 function requireUserState(to, from, next) {
-  const store = useMainStore()
+  const store = useStore()
   const user = store.user
   console.log("route guard user state: ", user)
   if (user) {
     next()
   } else {
-    store.messages.push({ message: "Please sign in.", error: true })
+    store.messages.push({ message: "Please sign in", error: true })
     setTimeout(() => store.messages.shift(), 5000)
     next('/signin')
   }
@@ -48,16 +48,16 @@ const router = createRouter({
       component: SignInView,
     },
     {
-      path: '/why',
-      name: 'Why',
-      component: WhyView,
+      path: '/about',
+      name: 'About',
+      component: AboutView,
     },
     {
-      path: '/daily',
-      name: 'Daily',
-      component: DailyView,
+      path: '/panels',
+      name: 'Panels',
+      component: PanelsView,
       beforeEnter: requireUserState
-      },
+    },
 
     {
       path: '/account',
@@ -78,12 +78,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const store = useStore()
+  const user = store.user
+  const access_token = VueCookies.get("9p_access_token")
   if (to.path === '/') {
-    const access_token = VueCookies.get("9p_access_token")
-    if (access_token) {
-      next('/daily')
+    if (access_token && user) {
+      next('/panels')
     } else {
-      next()
+      next() // allow user to just go to '/'
     }
   } else {
     next() // for all other routes, carry on

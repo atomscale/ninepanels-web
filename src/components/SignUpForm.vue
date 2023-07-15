@@ -41,7 +41,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/Store.js'
 
 export default {
     data() {
@@ -51,13 +51,13 @@ export default {
         }
     },
     computed: {
-        ...mapStores(useMainStore)
+        ...mapStores(useStore)
     },
     methods: {
         async signUserUp() {
-            var resp = await this.mainStore.signUp(this.email, this.password)
+            var resp = await this.Store.signUp(this.email, this.password)
             if (resp) {
-                this.$router.push({name: 'Daily'})
+                this.$router.push({name: 'Panels'})
             } else {
                 this.$router.push({name: 'SignUp'})
             }

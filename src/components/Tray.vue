@@ -1,6 +1,6 @@
 <template>
-    <TransitionRoot as="template" :show="store.slideover">
-      <Dialog as="div" class="relative z-10" @close="store.closeSlideover()">
+    <TransitionRoot as="template" :show="store.trayIsOpen">
+      <Dialog as="div" class="relative z-10" @close="store.trayIsOpen = false">
         <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
           <div class="fixed inset-0 bg-gray-600 bg-opacity-75 " />
         </TransitionChild>
@@ -15,7 +15,7 @@
                       <div class="flex items-start justify-between">
                         <DialogTitle class="text-base font-semibold leading-6 text-gray-900">Mmmm stats</DialogTitle>
                         <div class="ml-3 flex h-5 items-center">
-                          <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500" @click="store.closeSlideover()">
+                          <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500" @click="store.trayIsOpen = false">
                             <span class="sr-only">Close panel</span>
                             <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                           </button>
@@ -38,9 +38,9 @@
 
 
   <script setup>
- import { useMainStore } from '@/stores/mainStore.js'
+ import { useStore } from '@/stores/Store.js'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
 
-  const store = useMainStore()
+  const store = useStore()
   </script>

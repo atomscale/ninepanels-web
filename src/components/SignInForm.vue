@@ -40,14 +40,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/Store.js'
 import { useRouter } from 'vue-router'
 import NProgress from 'nprogress'
 
 NProgress.configure({ minimum: 0.3 })
 NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 
-const mainStore = useMainStore()
+const Store = useStore()
 const router = useRouter()
 
 const data = ref({
@@ -58,13 +58,13 @@ const data = ref({
 
 async function sendLogIn(data) {
     NProgress.start()
-    const token = await mainStore.getLoginToken(data.username, data.password)
+    const token = await Store.getLoginTokenAction(data.username, data.password)
     console.log("access token rcvd", token)
     if (token) {
         NProgress.done()
-        mainStore.messages.push({ message: "Welcome" })
-        setTimeout(() => mainStore.messages.shift(), 5000)
-        router.push({ name: 'Daily' })
+        // Store.messages.push({ message: "Welcome" })
+        // setTimeout(() => Store.messages.shift(), 5000)
+        router.push({ name: 'Panels' })
     } else {
         router.push({ name: 'SignIn' })
         NProgress.done()

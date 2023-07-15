@@ -8,7 +8,7 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form @submit.prevent="onSubmit" class="space-y-6" action="#" method="POST">
-                    <div class="text-sm text-gray-600 text-center">A code was emailed to {{mainStore.user.email_value}}, enter that below.</div>
+                    <div class="text-sm text-gray-600 text-center">A code was emailed to {{Store.user.email_value}}, enter that below.</div>
                     <div>
 
                         <div class="mt-1">
@@ -45,10 +45,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/Store.js'
 import { useRouter } from 'vue-router'
 
-const mainStore = useMainStore()
+const Store = useStore()
 const router = useRouter()
 
 const data = ref({
@@ -57,12 +57,12 @@ const data = ref({
 
 
 function sendAuthCode() {
-    mainStore.verifyUser(mainStore.user.id, this.data.auth_code)
-    router.push({name: "Daily"})
+    Store.verifyUser(Store.user.id, this.data.auth_code)
+    router.push({name: "Panels"})
 }
 
 function reqNewCode() {
-    mainStore.newAuthCode(mainStore.user.id)
+    Store.newAuthCode(Store.user.id)
     // router.push({name: "Landing"})
 }
 

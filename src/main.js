@@ -10,6 +10,7 @@ import router from './router'
 import './index.css'
 
 import "nprogress/nprogress.css";
+import "@/assets/css/nprogcustom.css"
 
 const app = createApp(App)
 const pinia = createPinia()
