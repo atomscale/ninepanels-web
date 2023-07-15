@@ -5,7 +5,7 @@
             :class="error ? 'bg-white' : 'bg-white'">
             <div v-if="!error" class="">
                 <div class="flex">
-                    <CheckCircleIcon class="h-4 w-4 mt-0.5 text-green-700" aria-hidden="true" />
+                    <!-- <CheckCircleIcon class="h-4 w-4 mt-0.5 text-green-700" aria-hidden="true" /> -->
                     <div class="ml-3">
                         <p class="text-sm text-gray-500">{{ message }}</p>
                     </div>
@@ -14,7 +14,7 @@
             <div v-else class="">
 
                 <div class="flex items-center justify-center">
-                    <ExclamationTriangleIcon class="h-4 w-4 mt-0.5 text-red-700" aria-hidden="true" />
+                    <!-- <ExclamationTriangleIcon class="h-4 w-4 mt-0.5 text-red-700" aria-hidden="true" /> -->
                     <div class="ml-3">
                         <p class="text-sm text-gray-500">{{ message }}</p>
                     </div>

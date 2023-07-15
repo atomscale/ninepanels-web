@@ -17,14 +17,14 @@
 
 <script>
 
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useMainStore),
+    ...mapStores(useStore),
     entry() {
-      const store = useMainStore();
+      const store = useStore();
       return store.entries.find(entry => entry.panel_id === this.panel.id);
     }
   },
@@ -33,19 +33,19 @@ export default {
   },
   methods: {
     sendEntry() {
-      const store = useMainStore();
+      const store = useStore();
 
       const entry = this.entry
       if (entry) {
-        store.postEntry(this.panel.id, !entry.is_complete)
+        store.postEntryAction(this.panel.id, !entry.is_complete)
         console.log(entry.panel_id, entry.is_complete)
       } else {
-        store.postEntry(this.panel.id, true)
+        store.postEntryAction(this.panel.id, true)
       }
     }
   },
   // setup(props) {
-  //   const store = useMainStore()
+  //   const store = useStore()
 
   //   const entry = computed(() => {
   //     return store.entries.find(entry => entry.panel_id === props.panel.id)

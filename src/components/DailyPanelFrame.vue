@@ -3,7 +3,7 @@
     <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-md">
       <div class="aspect-content">
 
-        <Panel v-if="this.mainStore.panels[i - 1]" :panel="this.mainStore.panels[i - 1]" />
+        <Panel v-if="this.Store.panels[i - 1]" :panel="this.Store.panels[i - 1]" />
         <div v-else class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-md">
           Create
         </div>
@@ -14,17 +14,17 @@
 
 <script>
 
-import { useMainStore } from '@/stores/mainStore.js'
+import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import Panel from '@/components/Panel.vue'
 
 export default {
   computed: {
-    ...mapStores(useMainStore),
+    ...mapStores(useStore),
   },
   created() {
-    this.mainStore.getPanels()
-    this.mainStore.getEntries()
+    this.Store.getPanelsAction()
+    this.Store.getEntriesAction()
   },
   components: {
     Panel,
