@@ -1,7 +1,7 @@
 <template>
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
-      <Dialog as="div" class="relative z-40 md:hidden" @close="sidebarOpen = false">
+      <Dialog as="div" class="relative z-40 " @close="sidebarOpen = false">
         <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"
           enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100"
           leave-to="opacity-0">
@@ -57,44 +57,9 @@
       </Dialog>
     </TransitionRoot>
 
-    <!-- Static sidebar for desktop -->
-    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-      <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
-        <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-          <div class="flex flex-shrink-0 justify-between px-4">
-            <router-link to="/"><img class="h-6 ml-1 w-auto" src="@/assets/9p-logo-empty.png"
-                alt="9P logo" /></router-link>
-            <button type="button" v-if="this.mainStore.user" class="text-blue-300 mb-1 "
-              @click="this.sendOpenSlideover()">
 
-              <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
-
-            </button>
-          </div>
-          <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
-            <a v-for="item in primaryNavigation" :key="item.name" :href="item.href" @click="item.action"
-              class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-              <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
-            </a>
-          </div>
-        </div>
-        <div class="mt-8">
-          <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-            <button v-for="item in secondaryNavigation" :key="item.name" :href="item.href" @click="item.action"
-              class="group w-full flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-              <component :is="item.icon" class="truncate h-6 w-6 mr-3" />{{ item.name }}
-            </button>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-    <div class="flex flex-col md:pl-64">
-
-
-      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
+    <div class="flex flex-col">
+      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 ">
         <div class="flex justify-between">
           <button type="button"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -110,18 +75,17 @@
           </button>
         </div>
       </div>
-      <main class="">
-        <div class="py-2">
-          <div class=" max-w-7xl px-1 sm:px-2 md:px-8">
+      <main class="max-w-lg h-screen w-screen">
             <!-- Replace with your content -->
+            <div class="">
 
-            <RouterView />
+              <RouterView />
+            </div>
             <!-- <DailyPanelFrame /> -->
             <SlideOver />
 
             <!-- /End replace -->
-          </div>
-        </div>
+
       </main>
     </div>
   </div>
@@ -187,7 +151,7 @@ export default {
       }
 
       if (this.mainStore.user) {
-        second_nav.push({ name: 'Account', icon: UserCircleIcon, href: '#', action: this.signUserOut })
+        second_nav.push({ name: 'Account', icon: UserCircleIcon, href: '#', action: this.sendAccount })
         second_nav.push({ name: 'Sign Out', icon: ArrowLeftOnRectangleIcon, href: '#', action: this.signUserOut })
       }
 
@@ -199,10 +163,9 @@ export default {
 
   methods: {
     signUserOut() {
-      console.log("sign out clicked")
+      this.mainStore.signUserOutAction()
       this.sidebarOpen = false
       this.$router.push({ name: "Landing" })
-      VueCookies.remove("9p_access_token")
       this.mainStore.messages.push({ message: "Signed out" })
       setTimeout(() => this.mainStore.messages.shift(), 5000)
     },
@@ -228,6 +191,10 @@ export default {
     },
     sendSignIn() {
       this.$router.push({name: "SignIn"})
+      this.sidebarOpen = false
+    },
+    sendAccount() {
+      this.$router.push({name: "Account"})
       this.sidebarOpen = false
     }
   },

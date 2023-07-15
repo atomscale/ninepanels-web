@@ -30,6 +30,20 @@ export default {
         form.append('password', password)
         return apiClient.post("/user", form)
     },
+    getUser(access_token) {
+        return apiClient.get("/users", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
+    },
+    deleteUser(access_token) {
+        return apiClient.delete("/users", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
+    },
     getPanels(access_token) {
         return apiClient.get("/panels", {
             headers: {

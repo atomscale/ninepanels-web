@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DailyView from '@/views/SignedIn/DailyView.vue'
+import AccountView from '@/views/SignedIn/AccountView.vue'
 import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
@@ -14,10 +15,11 @@ NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 
 import VueCookies from 'vue-cookies'
 
-function requireAccessToken(to, from, next) {
+// this could be requireUserState
+function requireUserState(to, from, next) {
   const store = useMainStore()
-  // const access_token = VueCookies.get("9p_access_token")
   const user = store.user
+  console.log("route guard user state: ", user)
   if (user) {
     next()
   } else {
@@ -54,17 +56,15 @@ const router = createRouter({
       path: '/daily',
       name: 'Daily',
       component: DailyView,
-      beforeEnter: requireAccessToken
+      beforeEnter: requireUserState
       },
 
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('@/views/AboutView.vue')
-    // }
+    {
+      path: '/account',
+      name: 'Account',
+      component: AccountView,
+      beforeEnter: requireUserState
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
