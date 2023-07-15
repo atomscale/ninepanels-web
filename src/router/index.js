@@ -77,17 +77,17 @@ const router = createRouter({
   }
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/') {
-//     const access_token = VueCookies.get("9p_access_token")
-//     if (access_token) {
-//       next('/daily')
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next() // for all other routes, carry on
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    const access_token = VueCookies.get("9p_access_token")
+    if (access_token) {
+      next('/daily')
+    } else {
+      next()
+    }
+  } else {
+    next() // for all other routes, carry on
+  }
+})
 
 export default router

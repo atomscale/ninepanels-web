@@ -119,7 +119,6 @@ import {
 
 
 import { mapStores } from 'pinia'
-import VueCookies from 'vue-cookies'
 
 
 export default {
