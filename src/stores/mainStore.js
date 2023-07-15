@@ -37,7 +37,7 @@ export const useMainStore = defineStore({
                 console.log("issue deleting user in action", error)
             }
         },
-        async signUserOutAction() {
+        signUserOutAction() {
             try {
                 VueCookies.remove("9p_access_token")
             } catch (error) {
