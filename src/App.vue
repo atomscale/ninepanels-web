@@ -14,7 +14,7 @@
 
 <script setup>
 import FlashMessage from '@/components/FlashMessage.vue'
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 import LeftNav from '@/components/LeftNav.vue'
 
 const Store = useStore()

@@ -45,7 +45,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 import { useRouter } from 'vue-router'
 
 const Store = useStore()

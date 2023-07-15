@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 // import VerifyInput from '@/components/VerifyInput.vue'
 import FlashMessage from '@/components/FlashMessage.vue'

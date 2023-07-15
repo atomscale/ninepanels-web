@@ -4,7 +4,7 @@
 
 <script>
 import DailyPanelFrame from '@/components/DailyPanelFrame.vue'
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {

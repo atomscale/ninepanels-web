@@ -41,7 +41,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 
 export default {
     data() {

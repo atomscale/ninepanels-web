@@ -38,7 +38,7 @@
 
 
   <script setup>
- import { useStore } from '@/stores/Store.js'
+ import { useStore } from '@/stores/store.js'
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XMarkIcon } from '@heroicons/vue/24/outline'
 

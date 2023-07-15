@@ -8,7 +8,7 @@ import AboutView from '@/views/SignedOut/AboutView.vue'
 
 import NProgress from 'nprogress'
 
-import { useStore } from '@/stores/Store.js'
+import { useStore } from '@/stores/store.js'
 
 NProgress.configure({ minimum: 0.3 })
 NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
