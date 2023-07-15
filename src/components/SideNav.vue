@@ -58,8 +58,8 @@
     </TransitionRoot>
 
 
-    <div class="flex flex-col">
-      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 ">
+    <div class="flex flex-col items-center w-full">
+      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 w-full ">
         <div class="flex justify-between">
           <button type="button"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -75,7 +75,7 @@
           </button>
         </div>
       </div>
-      <main class="max-w-lg h-screen w-screen">
+      <main class="max-w-lg h-screen w-full">
             <!-- Replace with your content -->
             <div class="">
 
@@ -143,12 +143,9 @@ export default {
       let second_nav = [
         { name: "About", icon: QuestionMarkCircleIcon, href: '#', action: this.whyLink },
         { name: 'API Docs', icon: BookOpenIcon, href: '#', action: this.sendToDocs },
+        { name: 'Sign In', icon: UserCircleIcon, href: '#', action: this.sendSignIn }
         // { name: 'v0.0.2 Portobello', icon: BeakerIcon, href: '#', action: this.sendToGithub },
       ]
-
-      if (!this.mainStore.user) {
-        second_nav.push({ name: 'Sign In', icon: UserCircleIcon, href: '#', action: this.sendSignIn })
-      }
 
       if (this.mainStore.user) {
         second_nav.push({ name: 'Account', icon: UserCircleIcon, href: '#', action: this.sendAccount })

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 ">
         <div class="sm:mx-auto sm:w-full sm:max-w-md flex flex-col justify-center items-center">
             <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600">Sign up to get started</h2>
 
@@ -62,9 +62,6 @@ export default {
                 this.$router.push({name: 'SignUp'})
             }
         }
-    },
-    beforeRouteLeave() {
-        if (!this.mainStore.user) return false
     }
 
 }

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="bg-gray-50 flex flex-col min-h-screen">
+  <div class="border border-red-500  flex flex-col min-h-screen">
     <div class="flex-grow">
       <transition name="fade" appear>
         <CTA />
