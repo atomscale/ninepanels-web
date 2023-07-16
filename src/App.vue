@@ -4,7 +4,7 @@
 
 
   </div>
-  <div class="flex flex-col items-start fixed bottom-2 right-2 z-50 " v-if="Store.messages">
+  <div class="flex flex-col items-start fixed top-2 left-12 z-50" v-if="Store.messages">
     <FlashMessage v-for="message in Store.messages" :key="message.message" :message="message.message"
       :error="message.error" />
   </div>

@@ -51,9 +51,10 @@ export const useStore = defineStore({
                 await this.getLoginTokenAction(email, password)
                 return true
             } catch (error) {
-                this.messages.push({ message: error, error: true })
+                this.messages.push({ message: error.response.data.detail, error: true })
                 setTimeout(() => this.messages.shift(), 5000)
                 console.log("createUserAction error: " + error)
+                return false
             }
         },
         getUserAction() {

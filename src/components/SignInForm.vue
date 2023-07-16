@@ -5,14 +5,14 @@
         </div>
 
         <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 text-sm">
-                <form @submit.prevent="onSubmit" class="space-y-6" action="#" method="POST">
+            <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
+                <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                     <div>
                         <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
                         <div class="mt-1">
                             <input v-model="data.username" id="email" name="email" type="email" autocomplete="email"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" />
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                         </div>
                     </div>
 
@@ -21,7 +21,7 @@
                         <div class="mt-1">
                             <input v-model="data.password" id="password" name="password" type="password"
                                 autocomplete="current-password" required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" />
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                         </div>
                     </div>
 
