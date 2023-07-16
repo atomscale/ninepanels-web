@@ -1,7 +1,7 @@
 <template >
 
 
-    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-xs text-gray-600" :class="entry && entry.is_complete ? 'bg-green-300' : 'bg-white'">
+    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-xs text-gray-600" :class="entry && entry.is_complete ? 'bg-gray-800 text-gray-300' : 'bg-gray-100'">
       <div class="m-2">
 
         <div v-if="entry">

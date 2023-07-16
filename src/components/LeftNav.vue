@@ -41,7 +41,7 @@
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
                   <router-link @click="this.Store.leftNavIsOpen = false" :to="{ name: 'About' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About NinePanels</span>
+                    <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
                   </router-link>
                   <router-link v-if="this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Account' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -84,7 +84,7 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <button v-if="this.Store.user" type="button" class="text-blue-300 mb-1 mr-4" @click="this.sendOpenSlideover()">
+          <button v-if="this.Store.user" type="button" class=" mb-1 mr-4" @click="this.openTray()">
 
             <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
 
@@ -157,7 +157,7 @@ export default {
       // this.Store.messages.push({ message: "Signed out" })
       // setTimeout(() => this.Store.messages.shift(), 5000)
     },
-    sendOpenSlideover() {
+    openTray() {
       this.Store.trayIsOpen = true
     }
   },
