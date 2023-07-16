@@ -59,6 +59,7 @@
 <script>
 import { mapStores } from 'pinia'
 import { useStore } from '@/stores/store.js'
+import NProgress from 'nprogress'
 
 export default {
     data() {
@@ -73,7 +74,9 @@ export default {
     },
     methods: {
         async signUserUp() {
+            NProgress.start()
             const resp = await this.Store.createUserAction(this.email, this.name, this.password)
+            NProgress.done()
             if (resp) {
                 this.$router.push({ name: 'Panels' })
             }
