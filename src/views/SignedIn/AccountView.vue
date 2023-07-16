@@ -7,7 +7,7 @@
       <div class="font-medium text-xl mt-2">{{ this.Store.user.email }}</div>
     </div>
     <button type="submit"
-      class="flex justify-center mt-8 mb-8 border border-gray-200 rounded-md w-full max-w-sm  py-2 px-4 text-sm hover:bg-gray-800 text-gray-600 hover:text-gray-50"
+      class="flex justify-center border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-gray-800 text-gray-50 hover:bg-white hover:text-gray-600  shadow-sm"
       @click="sendUserDelete(data)">
       Delete account
     </button>
@@ -24,8 +24,8 @@ export default {
     ...mapStores(useStore)
   },
   methods: {
-    sendUserDelete() {
-      this.Store.deleteUserAction()
+    async sendUserDelete() {
+      await this.Store.deleteUserAction()
       this.$router.push('/')
     }
   }
