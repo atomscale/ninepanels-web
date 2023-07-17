@@ -84,11 +84,11 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <button v-if="this.Store.user" type="button" class=" mb-1 mr-4" @click="this.openTray()">
+          <!-- <button v-if="this.Store.user" type="button" class=" mb-1 mr-4" @click="this.openTray()">
 
             <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
 
-          </button>
+          </button> -->
         </div>
       </div>
       <main class="max-w-2xl w-full">
