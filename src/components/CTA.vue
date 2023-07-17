@@ -4,13 +4,13 @@
 
 
         <div>
-            <h1 class="text-center mt-12 text-2xl mb-12  tracking-tight  sm:text-5xl md:text-6xl">
-                <span class="block text-gray-600 text-3xl font-light">Holistic visibility</span>
+            <h1 class="text-center mt-24 text-2xl mb-12  tracking-tight  sm:text-5xl md:text-6xl">
+                <span class="block text-gray-600 text-3xl font-light">Consistency visibility</span>
                 <span class="block text-gray-600 text-3xl font-light">for the chronically inconsistent.</span>
 
             </h1>
 
-                    <div class="mx-auto  max-w-7xl px-4 sm:mt-24 sm:px-6 ">
+                    <!-- <div class="mx-auto  max-w-7xl px-4 sm:mt-24 sm:px-6 ">
                         <div class="text-center ">
                             <div class="flex flex-col justify-center items-center w-full ">
                                 <router-link :to="{ name: 'SignIn' }"
@@ -23,7 +23,7 @@
                                 </router-link>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
         </div>
 

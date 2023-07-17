@@ -41,7 +41,7 @@
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
                   <router-link @click="this.Store.leftNavIsOpen = false" :to="{ name: 'About' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About NinePanels</span>
+                    <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
                   </router-link>
                   <router-link v-if="this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Account' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -76,7 +76,7 @@
 
 
     <div class="flex flex-col items-center w-full">
-      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 sm:pl-3 sm:pt-3 w-full ">
+      <div class="sticky top-0 bg-gray-800 pl-1 pt-1   w-full ">
         <div class="flex justify-between">
           <button type="button"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -84,7 +84,7 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <button v-if="this.Store.user" type="button" class="text-blue-300 mb-1 mr-4" @click="this.sendOpenSlideover()">
+          <button v-if="this.Store.user" type="button" class=" mb-1 mr-4" @click="this.openTray()">
 
             <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
 
@@ -112,7 +112,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 // import VerifyInput from '@/components/VerifyInput.vue'
 import FlashMessage from '@/components/FlashMessage.vue'
-import DailyPanelFrame from '@/components/DailyPanelFrame.vue'
+import PanelFrame from '@/components/PanelFrame.vue'
 import Tray from '@/components/Tray.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
@@ -157,7 +157,7 @@ export default {
       // this.Store.messages.push({ message: "Signed out" })
       // setTimeout(() => this.Store.messages.shift(), 5000)
     },
-    sendOpenSlideover() {
+    openTray() {
       this.Store.trayIsOpen = true
     }
   },
@@ -180,7 +180,7 @@ export default {
     TransitionRoot,
     QuestionMarkCircleIcon,
     FlashMessage,
-    DailyPanelFrame,
+    PanelFrame,
     Tray,
     UserPlusIcon,
     GlobeEuropeAfricaIcon,

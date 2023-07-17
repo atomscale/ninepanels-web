@@ -10,7 +10,9 @@ export const useStore = defineStore({
         entries: [],
         user: null,
         trayIsOpen: false,
-        leftNavIsOpen: false
+        leftNavIsOpen: false,
+        componentName: null,
+        componentProps: {}
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -26,13 +28,11 @@ export const useStore = defineStore({
             }
         },
         async deleteUserAction() {
-
-            var access_token = VueCookies.get("9p_access_token")
+            const access_token = VueCookies.get("9p_access_token")
             try {
                 const response = await requests.deleteUser(access_token)
                 console.log(response.data)
                 this.signUserOutAction()
-                return true
             } catch (error) {
                 console.log("issue deleting user in action", error)
             }
@@ -44,10 +44,26 @@ export const useStore = defineStore({
                 console.log("no cookie to remove " + error)
             }
             this.user = null
+            this.entries = []
+            this.panels = []
+        },
+        async createUserAction(email, name, password) {
+            const access_token = VueCookies.get("9p_access_token")
+            try {
+                const response = await requests.postUser(access_token, email, name, password)
+                console.log("created user: " + response.data.id)
+                await this.getLoginTokenAction(email, password)
+                return true
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+                console.log("createUserAction error: " + error)
+                return false
+            }
         },
         getUserAction() {
 
-            var access_token = VueCookies.get("9p_access_token")
+            const access_token = VueCookies.get("9p_access_token")
 
             if (access_token) {
                 return requests.getUser(access_token)
@@ -62,15 +78,33 @@ export const useStore = defineStore({
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
-                console.log("getUserAction access_token error, implementing redirect")
-                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                // setTimeout(() => this.messages.shift(), 5000)
+                console.log("getUserAction access_token error")
+            }
+        },
+        async createPanelAction(title) {
+            const access_token = VueCookies.get("9p_access_token")
+            try {
+                const response = await requests.postPanel(access_token, title)
+                await this.getPanelsAction()
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+                console.log("createPanelAction error: " + error)
+            }
+        },
+        async deletePanelAction(panel_id) {
+            const access_token = VueCookies.get("9p_access_token")
+            try {
+                const response = await requests.deletePanel(access_token, panel_id)
+                await this.getPanelsAction()
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+                console.log("deletePanelAction error: " + error)
             }
         },
         getPanelsAction() {
-
-            var access_token = VueCookies.get("9p_access_token")
-
+            const access_token = VueCookies.get("9p_access_token")
             if (access_token) {
                 return requests.getPanels(access_token)
                     .then(response => {
@@ -85,48 +119,37 @@ export const useStore = defineStore({
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
-                console.log("getPanelsAction access_token error, implementing redirect")
-                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                // const router = useRouter()
-                // router.push("SignIn")
-                // setTimeout(() => this.messages.shift(), 5000)
+                console.log("getPanelsAction access_token error")
             }
         },
-        getEntriesAction() {
-
-            var access_token = VueCookies.get("9p_access_token")
-
-            if (access_token) {
-                return requests.getEntries(access_token)
-                    .then(response => {
-                        console.log(response.status)
-                        this.entries = response.data
-                        console.log("rcvd user entries", this.entries)
-                        return response.data
-                    })
-                    .catch(error => {
-                        console.log("issue gettign user entries", error.response.data.detail)
-                        this.messages.push({ message: error.response.data.detail, error: true })
-                        setTimeout(() => this.messages.shift(), 5000)
-                    })
-            } else {
-                console.log("getEntriesAction access_token error, implementing redirect")
-                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                // const router = useRouter()
-                // router.push("SignIn")
-                // setTimeout(() => this.messages.shift(), 5000)
-            }
-        },
+        // getEntriesAction() {
+        //     const access_token = VueCookies.get("9p_access_token")
+        //     if (access_token) {
+        //         return requests.getEntries(access_token)
+        //             .then(response => {
+        //                 console.log(response.status)
+        //                 this.entries = response.data
+        //                 console.log("rcvd user entries", this.entries)
+        //                 return response.data
+        //             })
+        //             .catch(error => {
+        //                 console.log("issue gettign user entries", error.response.data.detail)
+        //                 this.messages.push({ message: error.response.data.detail, error: true })
+        //                 setTimeout(() => this.messages.shift(), 5000)
+        //             })
+        //     } else {
+        //         console.log("getEntriesAction access_token error, implementing redirect")
+        //     }
+        // },
         postEntryAction(panel_id, is_complete) {
-            var access_token = VueCookies.get("9p_access_token")
-
+            const access_token = VueCookies.get("9p_access_token")
+            console.log('passed values to postEntryAction: ', panel_id, is_complete)
             if (access_token) {
                 return requests.postEntry(access_token, panel_id, is_complete)
                     .then(response => {
                         console.log(response.status)
-                        // this.entries = response.data
                         console.log("posted user entry with id:", response.data.id)
-                        this.getEntriesAction()
+                        this.getPanelsAction()
                         return response.data
                     })
                     .catch(error => {
@@ -136,10 +159,6 @@ export const useStore = defineStore({
                     })
             } else {
                 console.log("postEntryAction access_token error, implementing redirect")
-                // this.messages.push({ message: "no access_token, redirect sign in", error: true })
-                // const router = useRouter()
-                // router.push("SignIn")
-                // setTimeout(() => this.messages.shift(), 5000)
             }
         }
 

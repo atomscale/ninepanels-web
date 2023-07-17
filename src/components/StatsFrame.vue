@@ -1,18 +1,23 @@
-<template>
-    <PanelFrame />
+<template >
+  Stats frame where the numeros will go
 </template>
 
 <script>
-import PanelFrame from '@/components/PanelFrame.vue'
+
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useStore)
+    ...mapStores(useStore),
+  },
+  methods: {
   },
   components: {
-    PanelFrame
+  },
+  props: {
   }
+
 }
+
 </script>
