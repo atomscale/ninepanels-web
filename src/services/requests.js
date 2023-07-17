@@ -62,6 +62,26 @@ export default {
         })
 
     },
+    postPanel(access_token, title) {
+        const form = new URLSearchParams()
+        form.append('title', title)
+        return apiClient.post("/panels",
+            form,
+            {
+                headers: {
+                    Authorization: "Bearer " + access_token,
+                }
+            }
+
+        )
+    },
+    deletePanel(access_token, panel_id) {
+        return apiClient.delete("/panels/" + panel_id, {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
+    },
     getEntries(access_token) {
 
         return apiClient.get("/entries", {
