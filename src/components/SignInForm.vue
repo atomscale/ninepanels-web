@@ -51,7 +51,7 @@ const Store = useStore()
 const router = useRouter()
 
 const data = ref({
-    username: 'ben@ben.com',
+    username: '',
     password: ''
 })
 

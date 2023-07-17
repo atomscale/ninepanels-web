@@ -29,8 +29,8 @@
                     <div>
                         <label for="password_first" class="block font-light text-xs text-gray-800">Password</label>
                         <div class="mt-1">
-                            <input id="password_first" name="password" type="password"
-                                v-model="password_first" required="true"
+                            <input id="password_first" name="password" type="password" v-model="password_first"
+                                required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                         </div>
                     </div>
@@ -38,8 +38,8 @@
                     <div>
                         <label for="password_second" class="block font-light text-xs text-gray-800">Repeat password</label>
                         <div class="mt-1">
-                            <input id="password_second" name="password" type="password"
-                                v-model="password_second" required="true"
+                            <input id="password_second" name="password" type="password" v-model="password_second"
+                                required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                         </div>
                     </div>
@@ -73,10 +73,10 @@ import NProgress from 'nprogress'
 export default {
     data() {
         return {
-            email: 'do@do.com',
-            name: 'Dodo',
-            password_first: 'dodo',
-            password_second: 'dodoy',
+            email: '',
+            name: '',
+            password_first: '',
+            password_second: '',
             passwordMismatch: false
         }
     },
@@ -88,7 +88,7 @@ export default {
 
             if (this.password_first !== this.password_second) {
                 this.passwordMismatch = true
-                this.Store.messages.push({message: "Passwords do not match"})
+                this.Store.messages.push({ message: "Passwords do not match" })
                 setTimeout(() => this.Store.messages.shift(), 5000)
                 return // stop function
             }

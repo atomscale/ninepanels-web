@@ -1,18 +1,18 @@
 <template >
+  <div class="relative">
 
-
-    <button type="submit" @click="sendEntry()" class="h-full w-full rounded-md border border-gray-300 text-xs text-gray-600" :class="entry && entry.is_complete ? 'bg-gray-800 text-gray-300' : 'bg-gray-100'">
+    <button type="submit" @click="sendEntry()"
+      class="h-full w-full rounded-md border border-gray-300 text-xs text-gray-600"
+      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-300' : 'bg-gray-100'">
       <div class="m-2">
-
-        <div v-if="entry">
-          {{ this.panel.title }}
-        </div>
-        <div v-else>
-          {{ this.panel.title }}
-        </div>
+        {{ this.panel.title }}
       </div>
     </button>
-
+    <button @click="this.openPanelDetail()" class="absolute top-0 right-0 p-1 text-gray-600"
+      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-gray-300' : ''">
+      <InformationCircleIcon class="h-4" />
+    </button>
+  </div>
 </template>
 
 <script>
@@ -20,42 +20,43 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
+import {
+  InformationCircleIcon
+} from '@heroicons/vue/24/outline'
+
 export default {
   computed: {
     ...mapStores(useStore),
-    entry() {
-      const store = useStore();
-      return store.entries.find(entry => entry.panel_id === this.panel.id);
-    }
+    // entry() {
+    //   const store = useStore();
+    //   return store.entries.find(entry => entry.panel_id === this.panel.id);
+    // }
   },
   props: {
     panel: { type: Object }
   },
   methods: {
     sendEntry() {
-      const store = useStore();
+      // const store = useStore();
 
-      const entry = this.entry
-      if (entry) {
-        store.postEntryAction(this.panel.id, !entry.is_complete)
-        console.log(entry.panel_id, entry.is_complete)
+      // const entry = this.entry
+      if (this.panel.entries && this.panel.entries.length > 0) {
+        this.Store.postEntryAction(this.panel.id, !this.panel.entries[this.panel.entries.length - 1].is_complete)
+        // console.log(entry.panel_id, entry.is_complete)
       } else {
-        store.postEntryAction(this.panel.id, true)
+        this.Store.postEntryAction(this.panel.id, true)
       }
+    },
+    openPanelDetail() {
+      this.Store.getPanelsAction()
+      this.Store.trayIsOpen = true
+      this.Store.componentName = 'PanelDetail'
+      this.Store.componentProps = { panel: this.panel }
     }
   },
-  // setup(props) {
-  //   const store = useStore()
-
-  //   const entry = computed(() => {
-  //     return store.entries.find(entry => entry.panel_id === props.panel.id)
-  //   })
-
-  //   return {
-  //     entry
-  //   }
-  // }
-
+  components: {
+    InformationCircleIcon
+  }
 }
 
 </script>

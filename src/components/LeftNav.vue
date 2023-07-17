@@ -112,7 +112,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 // import VerifyInput from '@/components/VerifyInput.vue'
 import FlashMessage from '@/components/FlashMessage.vue'
-import DailyPanelFrame from '@/components/DailyPanelFrame.vue'
+import PanelFrame from '@/components/PanelFrame.vue'
 import Tray from '@/components/Tray.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
@@ -180,7 +180,7 @@ export default {
     TransitionRoot,
     QuestionMarkCircleIcon,
     FlashMessage,
-    DailyPanelFrame,
+    PanelFrame,
     Tray,
     UserPlusIcon,
     GlobeEuropeAfricaIcon,
