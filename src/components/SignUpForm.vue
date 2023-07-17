@@ -52,13 +52,13 @@
                             up
                         </button>
                     </div>
-                    <div class="font-light text-xs text-gray-500 m-4">Built for me. Free to you. No ads, ever.
+                    <div class="font-light text-xs text-gray-500 m-4">Free forever. No funny business. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-gray-500 m-4">By signing up you agree for ninepanels.com to store
                         your data. It will never, ever be sold.</div>
 
                     <div class="font-light text-xs text-gray-500 m-4">By signing up you also agree to a single, lonely
-                        little cookie being stored on your device.</div>
+                        little cookie being stored on your device (so you can be kept logged in between visits).</div>
                 </form>
             </div>
         </div>

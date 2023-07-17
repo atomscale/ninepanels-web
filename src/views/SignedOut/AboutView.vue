@@ -23,8 +23,11 @@
           </div>
           <div class="m-4 font-light">So here we are, at ninepanels.com.
           </div>
-          <div class="m-4 font-light">Cheers, Ben.
+          <div class="m-4 font-light"> It's still early and unfinished. Get in touch with feedback or ideas:
           </div>
+          <div class="m-4 font-bold"><a href="https://github.com/atomscale/ninepanels" target="_blank">Github</a></div>
+          <div class="m-4 font-bold"><a href="mailto:ben@atomscale.co" target="_blank">Email</a></div>
+
         </div>
       </div>
     </div>

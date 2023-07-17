@@ -2,21 +2,23 @@
   <div class="ml-4">
     <div class="text-2xl font-bold">{{ this.panel.title }}</div>
     <div v-if="this.panel.entries.length > 0" class="mt-4">
-      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today. Good job.
+      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today. 
       </div>
-      <div v-else class="mt-2 flex">
+      <div v-else class="mt-2 flex flex-col">
       <div class="items-center flex mr-4">You can still complete this today.</div>
-      <div class="flex">
-        <div class="h-8 w-8 rounded  bg-gray-500"></div>
-        <div class=" ml-2 items-center flex text-xs text-gray-500">= done</div>
+      <div class="flex mt-4">
+        <div class=" mr-2 items-center flex text-xs text-gray-500">(Tap the panel to be </div>
+        <div class="h-4 w-4 rounded  bg-gray-500"></div>
+        <div class=" ml-2 items-center flex text-xs text-gray-500">to mark it as done)</div>
       </div>
     </div>
     </div>
-    <div v-else class="mt-2 flex">
+    <div v-else class="mt-2 flex flex-col">
       <div class="items-center flex mr-4">You can still complete this today.</div>
-      <div class="flex">
-        <div class="h-8 w-8 rounded  bg-gray-500"></div>
-        <div class=" ml-2 items-center flex text-xs text-gray-500">= done</div>
+      <div class="flex mt-4">
+        <div class=" mr-2 items-center flex text-xs text-gray-500">(Tap the panel to be </div>
+        <div class="h-4 w-4 rounded  bg-gray-500"></div>
+        <div class=" ml-2 items-center flex text-xs text-gray-500">to mark it as done)</div>
       </div>
     </div>
     <button type="submit"
