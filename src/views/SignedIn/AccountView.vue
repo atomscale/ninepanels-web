@@ -36,7 +36,13 @@ export default {
       await this.Store.deleteUserAction()
       NProgress.done()
       this.$router.push('/')
+    },
+    async getUserActionMethod() {
+      await this.Store.getUserAction()
     }
+  },
+  created() {
+    this.getUserActionMethod()
   }
 }
 </script>

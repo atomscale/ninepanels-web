@@ -15,12 +15,10 @@ NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 
 import VueCookies from 'vue-cookies'
 
-// this could be requireUserState
-function requireUserState(to, from, next) {
+function requireAccessToken(to, from, next) {
+  const access_token = VueCookies.get('9p_access_token')
   const store = useStore()
-  const user = store.user
-  console.log("route guard user state: ", user)
-  if (user) {
+  if (access_token) {
     next()
   } else {
     store.messages.push({ message: "Please sign in", error: true })
@@ -56,14 +54,14 @@ const router = createRouter({
       path: '/panels',
       name: 'Panels',
       component: PanelsView,
-      beforeEnter: requireUserState
+      beforeEnter: requireAccessToken
     },
 
     {
       path: '/account',
       name: 'Account',
       component: AccountView,
-      beforeEnter: requireUserState
+      beforeEnter: requireAccessToken
     }
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -79,10 +77,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = useStore()
-  const user = store.user
+  // const user = store.user
   const access_token = VueCookies.get("9p_access_token")
   if (to.path === '/') {
-    if (access_token && user) {
+    if (access_token) {
       next('/panels')
     } else {
       next() // allow user to just go to '/'

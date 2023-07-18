@@ -114,7 +114,7 @@ export const useStore = defineStore({
                         return response.data
                     })
                     .catch(error => {
-                        console.log("issue gettign user panels", error.response.data.detail)
+                        console.log("issue gettign user panels", error.response)
                         this.messages.push({ message: error.response.data.detail, error: true })
                         setTimeout(() => this.messages.shift(), 5000)
                     })
