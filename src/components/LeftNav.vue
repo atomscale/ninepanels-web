@@ -30,7 +30,7 @@
                 <router-link @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Landing' }"><img
                     class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" /></router-link>
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
-                  <router-link v-if="this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Panels' }"
+                  <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Panels' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">NinePanels</span>
                   </router-link>
@@ -43,19 +43,19 @@
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
                   </router-link>
-                  <router-link v-if="this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Account' }"
+                  <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Account' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Account</span>
                   </router-link>
-                  <router-link v-if="this.Store.user" @click="this.signUserOut()" :to="{ name: 'Landing' }"
+                  <router-link v-if="this.accessTokenIsPresent()" @click="this.signUserOut()" :to="{ name: 'Landing' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
                   </router-link>
-                  <router-link v-if="!this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'SignIn' }"
+                  <router-link v-if="!this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'SignIn' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Sign In</span>
                   </router-link>
-                  <router-link v-if="!this.Store.user" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'SignUp' }"
+                  <router-link v-if="!this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'SignUp' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserPlusIcon class="h-6 w-6" /><span class="ml-3">Sign Up</span>
                   </router-link>
@@ -84,7 +84,7 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <!-- <button v-if="this.Store.user" type="button" class=" mb-1 mr-4" @click="this.openTray()">
+          <!-- <button v-if="this.accessTokenIsPresent()" type="button" class=" mb-1 mr-4" @click="this.openTray()">
 
             <ChartBarSquareIcon class="text-gray-300 h-6 w-6" />
 
@@ -110,7 +110,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-// import VerifyInput from '@/components/VerifyInput.vue'
+import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
 import PanelFrame from '@/components/PanelFrame.vue'
 import Tray from '@/components/Tray.vue'
@@ -159,6 +159,14 @@ export default {
     },
     openTray() {
       this.Store.trayIsOpen = true
+    },
+    accessTokenIsPresent() {
+      const access_token = VueCookies.get("9p_access_token")
+      if (access_token) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   components: {
