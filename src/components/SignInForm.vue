@@ -79,8 +79,20 @@ export default {
             NProgress.done()
         },
         togglePasswordVisibility() {
+            if (this.timeoutId) {
+                clearTimeout(this.timeoutId)
+                this.timeoutId = null
+            }
+
             this.passwordVisible = !this.passwordVisible
-            setTimeout(() => this.passwordVisible = false, 5000)
+
+            if (this.passwordVisible) {
+                this.timeoutId = setTimeout(() => {
+                    this.passwordVisible = false;
+                    this.timeoutId = null;
+                }, 5000);
+            }
+
         }
     },
     components: {
