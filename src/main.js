@@ -12,6 +12,11 @@ import './index.css'
 import "nprogress/nprogress.css";
 import "@/assets/css/nprogcustom.css"
 
+import NProgress from 'nprogress'
+
+NProgress.configure({ minimum: 0.3 })
+NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
+
 const app = createApp(App)
 const pinia = createPinia()
 
