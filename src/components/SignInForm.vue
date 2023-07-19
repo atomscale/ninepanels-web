@@ -80,6 +80,7 @@ export default {
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible
+            setTimeout(() => this.passwordVisible = false, 5000)
         }
     },
     components: {
