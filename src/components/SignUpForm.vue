@@ -28,19 +28,29 @@
 
                     <div>
                         <label for="password_first" class="block font-light text-xs text-gray-800">Password</label>
-                        <div class="mt-1">
-                            <input id="password_first" name="password" type="password" v-model="password_first"
+                        <div class="mt-1 flex relative">
+                            <input v-model="password_first" id="password" name="password"
+                                :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
+                                <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
+                                </component>
+                            </button>
                         </div>
                     </div>
 
                     <div>
                         <label for="password_second" class="block font-light text-xs text-gray-800">Repeat password</label>
-                        <div class="mt-1">
-                            <input id="password_second" name="password" type="password" v-model="password_second"
+                        <div class="mt-1 flex relative">
+                            <input v-model="password_second" id="password" name="password"
+                                :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
+                                <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
+                                </component>
+                            </button>
                         </div>
                     </div>
 
@@ -69,6 +79,10 @@
 import { mapStores } from 'pinia'
 import { useStore } from '@/stores/store.js'
 import NProgress from 'nprogress'
+import {
+    EyeIcon,
+    EyeSlashIcon
+} from '@heroicons/vue/24/outline'
 
 export default {
     data() {
@@ -77,7 +91,8 @@ export default {
             name: '',
             password_first: '',
             password_second: '',
-            passwordMismatch: false
+            passwordMismatch: false,
+            passwordVisible: false
         }
     },
     computed: {
@@ -99,7 +114,15 @@ export default {
             if (resp) {
                 this.$router.push({ name: 'Panels' })
             }
+        },
+        togglePasswordVisibility() {
+            this.passwordVisible = !this.passwordVisible
+            setTimeout(() => this.passwordVisible = false, 5000)
         }
+    },
+    components: {
+        EyeIcon,
+        EyeSlashIcon
     }
 
 }
