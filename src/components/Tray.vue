@@ -65,7 +65,6 @@ export default {
     clearTrayState() {
       this.Store.componentName = null
       this.Store.componentProps = {}
-      this.Store.panelTitleEditState = false
     }
   },
   components: {

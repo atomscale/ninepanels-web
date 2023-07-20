@@ -23,7 +23,7 @@
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button type="button" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
+                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
                             </button>
@@ -79,20 +79,8 @@ export default {
             NProgress.done()
         },
         togglePasswordVisibility() {
-            if (this.timeoutId) {
-                clearTimeout(this.timeoutId)
-                this.timeoutId = null
-            }
-
             this.passwordVisible = !this.passwordVisible
-
-            if (this.passwordVisible) {
-                this.timeoutId = setTimeout(() => {
-                    this.passwordVisible = false;
-                    this.timeoutId = null;
-                }, 5000);
-            }
-
+            setTimeout(() => this.passwordVisible = false, 5000)
         }
     },
     components: {

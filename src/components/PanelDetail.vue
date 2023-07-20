@@ -1,27 +1,17 @@
 <template >
   <div class="ml-4">
-
-
-
-    <!-- <PanelTitleDisplay :title="this.panel.title" />
-    <PanelTitleEdit :title="this.panel.title"/> -->
-
-    <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :title="this.panel.title" :panelId="this.panel.id"></component>
-
-
-
-
+    <div class="text-2xl font-bold">{{ this.panel.title }}</div>
     <div v-if="this.panel.entries.length > 0" class="mt-4">
-      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today.
+      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today. 
       </div>
       <div v-else class="mt-2 flex flex-col">
-        <div class="items-center flex mr-4">You can still complete this today.</div>
-        <div class="flex mt-4">
-          <div class=" mr-2 items-center flex text-xs text-gray-500">(Tap the panel to be </div>
-          <div class="h-4 w-4 rounded  bg-gray-500"></div>
-          <div class=" ml-2 items-center flex text-xs text-gray-500">to mark it as done)</div>
-        </div>
+      <div class="items-center flex mr-4">You can still complete this today.</div>
+      <div class="flex mt-4">
+        <div class=" mr-2 items-center flex text-xs text-gray-500">(Tap the panel to be </div>
+        <div class="h-4 w-4 rounded  bg-gray-500"></div>
+        <div class=" ml-2 items-center flex text-xs text-gray-500">to mark it as done)</div>
       </div>
+    </div>
     </div>
     <div v-else class="mt-2 flex flex-col">
       <div class="items-center flex mr-4">You can still complete this today.</div>
@@ -44,18 +34,11 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import NProgress from 'nprogress'
-import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
-import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
 
 export default {
   computed: {
     ...mapStores(useStore),
   },
-  // data() {
-  //   return {
-  //     titleEditState: false
-  //   }
-  // },
   methods: {
     sendPanelDelete() {
       NProgress.start()
@@ -67,8 +50,6 @@ export default {
     }
   },
   components: {
-    PanelTitleDisplay,
-    PanelTitleEdit
   },
   props: {
     panel: {
