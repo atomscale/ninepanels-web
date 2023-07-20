@@ -1,8 +1,18 @@
 <template >
   <div class="ml-4">
-    <div class="text-2xl font-bold">{{ this.panel.title }}</div>
+
+
+
+    <!-- <PanelTitleDisplay :title="this.panel.title" />
+    <PanelTitleEdit :title="this.panel.title"/> -->
+
+    <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id"></component>
+
+
+
+
     <div v-if="this.panel.entries.length > 0" class="mt-4">
-      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today. 
+      <div v-if="this.panel.entries[this.panel.entries.length - 1].is_complete" class="mt-2"> Complete for today.
       </div>
       <div v-else class="mt-2 flex flex-col">
       <div class="items-center flex mr-4">You can still complete this today.</div>
