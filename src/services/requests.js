@@ -75,6 +75,18 @@ export default {
 
         )
     },
+    patchPanel(access_token, panel_id, update) {
+
+        return apiClient.patch("/panels/" + panel_id,
+            update,
+            {
+                headers: {
+                    Authorization: "Bearer " + access_token,
+                }
+
+            })
+    },
+
     deletePanel(access_token, panel_id) {
         return apiClient.delete("/panels/" + panel_id, {
             headers: {

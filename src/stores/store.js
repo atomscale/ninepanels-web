@@ -12,7 +12,8 @@ export const useStore = defineStore({
         trayIsOpen: false,
         leftNavIsOpen: false,
         componentName: null,
-        componentProps: {}
+        componentProps: {},
+        panelTitleEditState: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -90,6 +91,20 @@ export const useStore = defineStore({
                 this.messages.push({ message: error.response.data.detail, error: true })
                 setTimeout(() => this.messages.shift(), 5000)
                 console.log("createPanelAction error: " + error)
+            }
+        },
+        async updatePanelAction(panel_id, update) {
+            const access_token = VueCookies.get("9p_access_token")
+            try {
+                const response = await requests.patchPanel(access_token, panel_id, update)
+                console.log("updated panel ")
+                await this.getPanelsAction()
+                return true
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+                console.log("patchPanelAction error: " + error)
+                return false
             }
         },
         async deletePanelAction(panel_id) {
