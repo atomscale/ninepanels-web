@@ -1,9 +1,9 @@
 <template>
-    <PanelFrame />
+    <PanelGridFrame />
 </template>
 
 <script>
-import PanelFrame from '@/components/PanelFrame.vue'
+import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
@@ -12,7 +12,7 @@ export default {
     ...mapStores(useStore)
   },
   components: {
-    PanelFrame
+    PanelGridFrame
   }
 }
 </script>
