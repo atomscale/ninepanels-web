@@ -1,13 +1,13 @@
 <template >
   <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
     <div>
-      <label for="email" class="block font-light text-xs text-gray-800">Title</label>
+      <label for="email" class="block font-light text-xs text-gray-800">Panel title</label>
       <div class="mt-1">
-        <input v-model="title" id="title" name="title" type="text" required="true"
+        <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true" :maxlength="maxFieldLen"
           class="block w-full appearance-none max-w-sm rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
       </div>
+      <div class="text-xs mt-1" :class="currentFieldLen === 50 ? 'text-red-900' : 'text-gray-400'"> {{currentFieldLen }}/{{ maxFieldLen }}</div>
     </div>
-
 
 
     <div>
@@ -18,19 +18,7 @@
       </button>
     </div>
   </form>
-  <!-- <div name="how-to" class="border flex flex-col max-w-sm justify-end ">
 
-    <div class="flex border justify-evenly mt-24 ">
-      <div class="flex">
-        <div class="h-8 w-8 rounded  bg-gray-500"></div>
-        <div class=" ml-2 items-center flex text-xs text-gray-500">= done</div>
-      </div>
-      <div class="flex">
-        <div class="h-8 w-8 rounded  border border-gray-500"></div>
-        <div class=" ml-2 items-center flex text-xs text-gray-500">= not done</div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -45,7 +33,9 @@ export default {
   },
   data() {
     return {
-      title: ''
+      title: '',
+      maxFieldLen: 50,
+      currentFieldLen: 0
     }
   },
   methods: {
@@ -56,6 +46,9 @@ export default {
       this.Store.trayIsOpen = false
       this.Store.componentName = null
       this.Store.componentProps = {}
+    },
+    updateLen() {
+      this.currentFieldLen = this.title.length
     }
   },
   components: {

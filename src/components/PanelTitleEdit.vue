@@ -1,24 +1,27 @@
 <template >
-  <div class="flex relative">
+  <div class="flex h-auto">
 
 
 
-    <input v-model="panel.title" id="password" name="password" type="text" :placeholder="panel.title" required="true"
-      class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+    <textarea @input="updateLen()" v-model="panel.title" id="password" name="password" type="text"
+      :placeholder="panel.title" required="true" :maxlength="maxFieldLen"
+      class="block resize-none h-auto w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
-    <div class="flex">
+    <div class="flex ">
 
-      <button class="absolute right-0 top-3 px-2" @click="toggleEditState()">
-
-        <XMarkIcon class="h-5 w-5 text-gray-400 " />
-      </button>
-      <button class="absolute right-8 top-3 px-2" @click="dispatchUpdatePanelAction()">
+      <button class=" top-3 px-2" @click="dispatchUpdatePanelAction()">
 
         <CheckIcon class="h-5 w-5 text-gray-400 " />
       </button>
+      <button class=" top-3 px-2" @click="toggleEditState()">
+
+        <XMarkIcon class="h-5 w-5 text-gray-400 " />
+      </button>
     </div>
   </div>
+  <div class="text-xs mt-1" :class="currentFieldLen === 50 ? 'text-red-900' : 'text-gray-400'"> {{ currentFieldLen }}/{{
+    maxFieldLen }}</div>
 </template>
 
 <script>
@@ -36,7 +39,8 @@ export default {
     ...mapStores(useStore),
     panel() {
       const panel = this.Store.panels.find(panel => panel.id === this.panelId)
-      return {...panel}
+      this.currentFieldLen = panel.title.length
+      return { ...panel }
     }
   },
   methods: {
@@ -55,6 +59,15 @@ export default {
         this.Store.panelTitleEditState = false
         NProgress.done()
       }
+    },
+    updateLen() {
+      this.currentFieldLen = this.panel.title.length
+    }
+  },
+  data() {
+    return {
+      maxFieldLen: 50,
+      currentFieldLen: null
     }
   },
   components: {

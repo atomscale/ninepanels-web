@@ -6,7 +6,7 @@
     <!-- <PanelTitleDisplay :title="this.panel.title" />
     <PanelTitleEdit :title="this.panel.title"/> -->
 
-    <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :title="this.panel.title" :panelId="this.panel.id"></component>
+    <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id"></component>
 
 
 
