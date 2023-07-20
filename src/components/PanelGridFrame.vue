@@ -20,6 +20,7 @@ import Panel from '@/components/Panel.vue'
 import PanelAdd from '@/components/PanelAdd.vue'
 
 
+
 export default {
   computed: {
     ...mapStores(useStore),

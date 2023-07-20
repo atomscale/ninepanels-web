@@ -19,6 +19,7 @@ export default {
 
   },
 
+  
   methods: {
     openCreatePanelTray() {
       this.Store.trayIsOpen = true
