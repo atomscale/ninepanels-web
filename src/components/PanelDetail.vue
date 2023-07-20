@@ -44,6 +44,8 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import NProgress from 'nprogress'
+import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
+import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
 
 export default {
   computed: {
@@ -60,6 +62,8 @@ export default {
     }
   },
   components: {
+    PanelTitleDisplay,
+    PanelTitleEdit
   },
   props: {
     panel: {
