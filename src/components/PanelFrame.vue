@@ -4,7 +4,7 @@
       <div class="aspect-content">
 
         <Panel v-if="this.Store.panels[i - 1]" :panel="this.Store.panels[i - 1]" />
-        <PanelGridAdd v-else-if="this.Store.panels.length == (i -1)"/>
+        <PanelAdd v-else-if="this.Store.panels.length == (i -1)"/>
         <div v-else class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-md">
         </div>
       </div>
@@ -17,7 +17,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import Panel from '@/components/Panel.vue'
-import PanelGridAdd from '@/components/PanelGridAdd.vue'
+import PanelAdd from '@/components/PanelAdd.vue'
 
 
 export default {
@@ -30,7 +30,7 @@ export default {
   },
   components: {
     Panel,
-    PanelGridAdd
+    PanelAdd
   },
 
 }

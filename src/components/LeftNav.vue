@@ -112,7 +112,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
-import PanelGridFrame from '@/components/PanelGridFrame.vue'
+import PanelFrame from '@/components/PanelFrame.vue'
 import Tray from '@/components/Tray.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
@@ -188,7 +188,7 @@ export default {
     TransitionRoot,
     QuestionMarkCircleIcon,
     FlashMessage,
-    PanelGridFrame,
+    PanelFrame,
     Tray,
     UserPlusIcon,
     GlobeEuropeAfricaIcon,
