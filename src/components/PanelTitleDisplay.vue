@@ -3,9 +3,9 @@
 
 
 
-    <div class="text-2xl font-bold py-2">{{ panel.title }}</div>
+    <div class="text-2xl font-bold py-2 w-auto">{{ panel.title }}</div>
 
-    <button class="absolute right-0 top-4 px-2" @click="toggleEditState()">
+    <button class="w-8 top-4 px-2" @click="toggleEditState()">
 
       <PencilIcon class="h-4 w-4 text-gray-400 " />
     </button>
@@ -38,10 +38,6 @@ export default {
     PencilIcon
   },
   props: {
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
     panelId: {
       type: Number,
       required: true
