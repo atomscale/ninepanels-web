@@ -1,5 +1,5 @@
 <template >
-  <button type="submit" @click="this.openCreatePanelTray()" class="h-full w-full rounded-md border border-gray-300 border-dashed text-xs text-gray-600">
+  <button type="submit" @click="this.openCreatePanelTray()" class="h-full w-full rounded-lg border border-gray-300 border-dashed text-xs text-gray-600">
     <div class="flex items-center justify-center">
       <PlusCircleIcon class="h-8 w-8 text-gray-400 " />
 
@@ -19,7 +19,7 @@ export default {
 
   },
 
-  
+
   methods: {
     openCreatePanelTray() {
       this.Store.trayIsOpen = true

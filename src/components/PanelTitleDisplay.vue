@@ -4,9 +4,9 @@
     <div class="text-2xl font-bold py-2 w-auto">{{ panel.title }}</div>
     <button class="w-8 top-4 px-2" @click="toggleEditState()">
 
-      <PencilIcon class="h-4 w-4 text-gray-400 " />
+      <PencilIcon class="ml-1 h-4 w-4 text-gray-400 " />
     </button>
-    
+
 
   </div>
 </template>
