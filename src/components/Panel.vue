@@ -2,14 +2,14 @@
   <div class="relative">
 
     <button type="submit" @click="sendEntry()"
-      class="h-full w-full rounded-lg border border-gray-300 text-xs text-gray-600"
-      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-300' : 'bg-gray-100'">
+      class="h-full w-full rounded-lg border border-gray-300 text-xs "
+      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-600'">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
     </button>
-    <button @click="this.openPanelDetail()" class="absolute top-0.5 right-0.5 p-1.5 text-gray-600 "
-      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-gray-300' : ''">
+    <button @click="this.openPanelDetail()" class="absolute top-0.5 right-0.5 p-1.5 "
+      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-gray-300' : 'text-gray-600'">
       <InformationCircleIcon class="h-4" />
     </button>
   </div>
