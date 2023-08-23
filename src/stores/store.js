@@ -12,7 +12,9 @@ export const useStore = defineStore({
         trayIsOpen: false,
         leftNavIsOpen: false,
         componentName: null,
-        componentProps: {}
+        componentProps: {},
+        panelTitleEditState: false,
+        panelDescEditState: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {

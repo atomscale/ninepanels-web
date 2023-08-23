@@ -1,8 +1,8 @@
 <template >
-  <div class="flex-col mb-4">
+  <div class="flex-col">
 
-    <div class="flex justify-between items-center">
-      <div class="text-xs font-semibold h-5 text-gray-500">Panel</div>
+    <div class="flex justify-between items-center mb-2">
+      <div class="text-xs font-semibold h-5 text-gray-500">About</div>
       <div>
 
         <button class="ml-4 mr-2" @click="toggleEditState()">
@@ -11,7 +11,10 @@
       </div>
     </div>
 
-    <div class="text-2xl font-bold w-auto">{{ panel.title }}</div>
+    <!-- <div class="text-sm w-auto whitespace-pre-line">{{ panel.description }}</div> -->
+    <VueShowdown class="text-sm w-auto whitespace-pre-line"
+  flavor="vanilla"
+  :options="{ emoji: true }" :markdown="panel.description"></VueShowdown>
 
   </div>
 </template>
@@ -20,6 +23,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import { VueShowdown } from 'vue-showdown'
 import NProgress from 'nprogress'
 import {
   PencilIcon
@@ -34,11 +38,12 @@ export default {
   },
   methods: {
     toggleEditState() {
-      this.Store.panelTitleEditState = !this.Store.panelTitleEditState
+      this.Store.panelDescEditState = !this.Store.panelDescEditState
     }
   },
   components: {
-    PencilIcon
+    PencilIcon,
+    VueShowdown
   },
   props: {
     panelId: {
