@@ -3,7 +3,7 @@
 
     <button type="submit" @click="sendEntry()"
       class="h-full w-full rounded-lg border border-gray-300 text-xs "
-      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-600'">
+      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-100 border-4 border-emerald-700' : 'bg-gray-100 text-gray-600'">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
