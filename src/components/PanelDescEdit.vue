@@ -12,13 +12,13 @@
   </div>
 
   <div class="flex h-auto">
-    <textarea @input="updateLen()" v-model="panel.description" type="text" :placeholder="panel.title" required="true"
-      :maxlength="maxFieldLen"
+    <textarea @input="updateLen()" v-model="panel.description" type="text" required="true" :maxlength="maxFieldLen"
       class="block resize-none h-80 w-full appearance-none text-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 
 
-  <div class="text-xs mt-1" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{ currentFieldLen }}/{{
+  <div class="text-xs mt-1" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
+    currentFieldLen }}/{{
     maxFieldLen }}
   </div>
 </template>
@@ -38,7 +38,12 @@ export default {
     ...mapStores(useStore),
     panel() {
       const panel = this.Store.panels.find(panel => panel.id === this.panelId)
-      this.currentFieldLen = panel.description.length
+      if (panel.description) {
+        this.currentFieldLen = panel.description.length
+      } else {
+        this.currentFieldLen = 0
+      }
+
       return { ...panel }
     }
   },
