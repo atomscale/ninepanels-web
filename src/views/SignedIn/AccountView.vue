@@ -9,12 +9,7 @@
           <div class="font-light text-sm mt-5">Email</div>
           <div class="font-medium text-xl mt-2">{{ this.Store.user.email }}</div>
         </div>
-        <button type="submit"
-          class="flex justify-center mb-4 border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-gray-800 text-gray-50 hover:bg-white hover:text-gray-600  shadow-sm"
-          @click="sendUserDelete(data)">
-          Delete account
-        </button>
-
+        <DeleteButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
       </div>
     </div>
   </div>
@@ -25,6 +20,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import NProgress from 'nprogress'
+import DeleteButton from '@/components/DeleteButton.vue'
 
 export default {
   computed: {
@@ -43,6 +39,9 @@ export default {
   },
   created() {
     this.getUserActionMethod()
+  },
+  components: {
+    DeleteButton
   }
 }
 </script>

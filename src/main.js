@@ -11,6 +11,7 @@ import './index.css'
 
 import "nprogress/nprogress.css";
 import "@/assets/css/nprogcustom.css"
+import "@/assets/css/custom.css"
 
 import NProgress from 'nprogress'
 
