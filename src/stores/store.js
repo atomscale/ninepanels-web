@@ -83,10 +83,10 @@ export const useStore = defineStore({
                 console.log("getUserAction access_token error")
             }
         },
-        async createPanelAction(title) {
+        async createPanelAction(title, description) {
             const access_token = VueCookies.get("9p_access_token")
             try {
-                const response = await requests.postPanel(access_token, title)
+                const response = await requests.postPanel(access_token, title, description)
                 await this.getPanelsAction()
             } catch (error) {
                 this.messages.push({ message: error.response.data.detail, error: true })
