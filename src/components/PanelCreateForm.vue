@@ -3,19 +3,23 @@
     <div>
       <label class="block font-light text-xs text-gray-600">Panel title</label>
       <div class="mt-1">
-        <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true" :maxlength="maxTitleLen"
+        <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true"
+          :maxlength="maxTitleLen"
           class="block w-full resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
       </div>
-      <div class="text-xs mt-1" :class="currentTitleLen === maxTitleLen ? 'text-red-900' : 'text-gray-400'"> {{currentTitleLen }}/{{ maxTitleLen }}</div>
+      <div class="text-xs mt-1" :class="currentTitleLen === maxTitleLen ? 'text-red-900' : 'text-gray-400'">
+        {{ currentTitleLen }}/{{ maxTitleLen }}</div>
     </div>
 
     <div>
       <label class="block font-light text-xs text-gray-600">Description (optional)</label>
       <div class="mt-1">
-        <textarea @input="updateLen()" v-model="description" id="description" name="description" type="text" required="false" :maxlength="maxDescLen"
+        <textarea @input="updateLen()" v-model="description" id="description" name="description" type="text"
+          required="false" :maxlength="maxDescLen"
           class="block w-full h-80 resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
       </div>
-      <div class="text-xs mt-1" :class="currentDescLen === maxDescLen ? 'text-red-900' : 'text-gray-400'"> {{currentDescLen }}/{{ maxDescLen }}</div>
+      <div class="text-xs mt-1" :class="currentDescLen === maxDescLen ? 'text-red-900' : 'text-gray-400'">
+        {{ currentDescLen }}/{{ maxDescLen }}</div>
     </div>
 
 
@@ -27,7 +31,6 @@
       </button>
     </div>
   </form>
-
 </template>
 
 <script>
@@ -47,20 +50,26 @@ export default {
       maxTitleLen: 65,
       currentTitleLen: 0,
       maxDescLen: 300,
-      currentDescLen: 0
+      currentDescLen: 0,
+
     }
   },
   methods: {
     async sendCreatePanel() {
-      NProgress.start()
-      await this.Store.createPanelAction(this.title, this.description)
-      NProgress.done()
-      this.Store.trayIsOpen = false
-      this.Store.componentName = null
-      this.Store.componentProps = {}
+      if (this.title.length == 0) {
+        return
+      } else {
+        NProgress.start()
+        await this.Store.createPanelAction(this.title, this.description)
+        NProgress.done()
+        this.Store.trayIsOpen = false
+        this.Store.componentName = null
+        this.Store.componentProps = {}
+      }
     },
     updateLen() {
-      this.currentFieldLen = this.title.length
+      this.currentTitleLen = this.title.length
+      this.currentDescLen = this.description.length
     }
   },
   components: {
