@@ -10,12 +10,12 @@
 
         <div v-else
             class="flex justify-center mb-4 border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-gray-800 text-gray-50  shadow-sm">
-            <div>{{ this.confirmText }}</div>
-            <button aria-label="Confirm button action" class="px-2 ml-4 hover:scale-125 transition ease-in-out duration-200 " @click="dispatchParentMethod()">
+            <button aria-label="Confirm button action" class="px-2 mr-5 hover:scale-125 transition ease-in-out duration-200 " @click="dispatchParentMethod()">
 
                 <CheckIcon class="h-5 w-5 text-gray-100 " />
             </button>
-            <button aria-label="Cancel" class=" top-3 px-2 ml-4 hover:scale-125 transition ease-in-out duration-200" @click="toggleConfirmState()">
+            <div>{{ this.confirmText }}</div>
+            <button aria-label="Cancel" class=" top-3 px-2 ml-5 hover:scale-125 transition ease-in-out duration-200" @click="toggleConfirmState()">
 
                 <XMarkIcon class="h-5 w-5 text-gray-100 " />
             </button>

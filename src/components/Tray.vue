@@ -14,12 +14,12 @@
               leave="transform transition ease-in-out duration-300 sm:duration-300" leave-from="translate-x-0"
               leave-to="translate-x-full">
               <DialogPanel class="pointer-events-auto w-screen max-w-md">
-                <div class="flex h-full flex-col  bg-white py-6 shadow-xl">
+                <div class="flex h-full flex-col  bg-white pt-4 shadow-xl">
                   <div class="px-4 sm:px-6">
                     <div class="flex items-start justify-between">
                       <DialogTitle class="text-base font-semibold leading-6 text-gray-900">
                       </DialogTitle>
-                      <div class="ml-3 flex h-5 items-center">
+                      <div class="ml-3 flex h-5  items-center">
                         <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500"
                           @click="this.clearTrayState(); this.Store.trayIsOpen = false">
                           <span class="sr-only">Close panel</span>
@@ -28,12 +28,12 @@
                       </div>
                     </div>
                   </div>
-                  <div v-if="this.Store.trayIsOpen && !this.Store.componentName" class="relative mt-6 flex-1 px-4 sm:px-6">
-                    <StatsFrame />
-                  </div>
-                  <div v-if="this.Store.trayIsOpen && this.Store.componentName" class="relative mt-6 flex-1 px-4 sm:px-6">
+
+                  <div v-if="this.Store.trayIsOpen && this.Store.componentName" class="relative mt-4 flex-1 px-4 sm:px-6 overflow-auto">
                     <component :is="this.Store.componentName" v-bind="this.Store.componentProps" />
                   </div>
+
+
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -53,7 +53,6 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import PanelDetail from '@/components/PanelDetail.vue'
 import PanelCreateForm from '@/components/PanelCreateForm.vue'
-import StatsFrame from '@/components/StatsFrame.vue'
 
 // const store = useStore()
 
@@ -65,6 +64,8 @@ export default {
     clearTrayState() {
       this.Store.componentName = null
       this.Store.componentProps = {}
+      this.Store.panelTitleEditState = false
+      this.Store.panelDescEditState = false
     }
   },
   components: {
@@ -75,8 +76,7 @@ export default {
     DialogTitle,
     XMarkIcon,
     PanelDetail,
-    PanelCreateForm,
-    StatsFrame
+    PanelCreateForm
   }
 }
 </script>

@@ -62,9 +62,10 @@ export default {
         })
 
     },
-    postPanel(access_token, title) {
+    postPanel(access_token, title, description) {
         const form = new URLSearchParams()
         form.append('title', title)
+        form.append('description', description)
         return apiClient.post("/panels",
             form,
             {
