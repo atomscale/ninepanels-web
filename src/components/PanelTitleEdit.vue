@@ -36,6 +36,16 @@ import {
 export default {
   computed: {
     ...mapStores(useStore),
+    panel() {
+      const panelFromStore = this.Store.panels.find(panel => panel.id === this.panelId)
+      if (panelFromStore.title) {
+        this.currentFieldLen = panelFromStore.title.length
+      } else {
+        this.currentFieldLen = 0
+      }
+
+      return { ...panelFromStore }
+    }
   },
   methods: {
     toggleEditState() {
@@ -66,7 +76,12 @@ export default {
     }
   },
   mounted() {
-    this.localTitle = this.title
+    if (this.title === this.panel.title) {
+
+      this.localTitle = this.title
+    } else {
+      this.localTitle = this.panel.title
+    }
   },
   components: {
     XMarkIcon,
