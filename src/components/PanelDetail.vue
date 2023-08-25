@@ -2,10 +2,10 @@
   <div class="ml-1 flex flex-col justify-between h-full">
     <div>
 
-      <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id">
+      <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id" :title="this.panel.title">
       </component>
 
-      <component :is="this.Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="this.panel.id">
+      <component :is="this.Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="this.panel.id" :description="this.panel.description">
       </component>
 
     </div>

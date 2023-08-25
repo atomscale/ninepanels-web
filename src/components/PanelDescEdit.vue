@@ -12,7 +12,7 @@
   </div>
 
   <div class="flex h-auto">
-    <textarea @input="updateLen()" v-model="panel.description" type="text" required="true" :maxlength="maxFieldLen"
+    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true" :maxlength="maxFieldLen"
       class="block resize-none h-80 w-full appearance-none text-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 
@@ -37,14 +37,14 @@ export default {
   computed: {
     ...mapStores(useStore),
     panel() {
-      const panel = this.Store.panels.find(panel => panel.id === this.panelId)
-      if (panel.description) {
-        this.currentFieldLen = panel.description.length
+      const panelFromStore = this.Store.panels.find(panel => panel.id === this.panelId)
+      if (panelFromStore.description) {
+        this.currentFieldLen = panelFromStore.description.length
       } else {
         this.currentFieldLen = 0
       }
 
-      return { ...panel }
+      return { ...panelFromStore }
     }
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
     async dispatchUpdatePanelAction() {
       try {
         NProgress.start()
-        await this.Store.updatePanelAction(this.panelId, { description: this.panel.description })
+        await this.Store.updatePanelAction(this.panelId, { description: this.localDescription })
         this.Store.panelDescEditState = false
         NProgress.done()
       } catch (error) {
@@ -65,11 +65,20 @@ export default {
       }
     },
     updateLen() {
-      this.currentFieldLen = this.panel.description.length
+      this.currentFieldLen = this.localDescription.length
+    }
+  },
+  mounted() {
+    if (this.description === this.panel.description) {
+
+      this.localDescription = this.description
+    } else {
+      this.localDescription = this.panel.description
     }
   },
   data() {
     return {
+      localDescription: '',
       maxFieldLen: 300,
       currentFieldLen: null
     }
@@ -79,6 +88,10 @@ export default {
     CheckIcon
   },
   props: {
+    description: {
+      type: String,
+      required: true
+    },
     panelId: {
       type: Number,
       required: true

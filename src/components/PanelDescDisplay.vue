@@ -14,7 +14,7 @@
     <!-- <div class="text-sm w-auto whitespace-pre-line">{{ panel.description }}</div> -->
     <VueShowdown class="text-sm w-auto whitespace-pre-line"
   flavor="vanilla"
-  :options="{ emoji: true }" :markdown="panel.description"></VueShowdown>
+  :options="{ emoji: true }" :markdown="this.panel.description"></VueShowdown>
 
   </div>
 </template>
@@ -45,7 +45,16 @@ export default {
     PencilIcon,
     VueShowdown
   },
+  data() {
+    return {
+      localDescription: ''
+    }
+  },
   props: {
+    description: {
+      type: String,
+      required: true
+    },
     panelId: {
       type: Number,
       required: true

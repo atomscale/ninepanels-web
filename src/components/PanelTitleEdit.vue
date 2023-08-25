@@ -14,8 +14,8 @@
     </div>
 
 
-    <textarea @input="updateLen()" v-model="panel.title" type="text"
-      :placeholder="panel.title" required="true" :maxlength="maxFieldLen"
+    <textarea @input="updateLen()" v-model="this.localTitle" type="text"
+       required="true" :maxlength="maxFieldLen"
       class="block resize-none  h-auto w-full appearance-none rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
@@ -37,9 +37,14 @@ export default {
   computed: {
     ...mapStores(useStore),
     panel() {
-      const panel = this.Store.panels.find(panel => panel.id === this.panelId)
-      this.currentFieldLen = panel.title.length
-      return { ...panel }
+      const panelFromStore = this.Store.panels.find(panel => panel.id === this.panelId)
+      if (panelFromStore.title) {
+        this.currentFieldLen = panelFromStore.title.length
+      } else {
+        this.currentFieldLen = 0
+      }
+
+      return { ...panelFromStore }
     }
   },
   methods: {
@@ -49,7 +54,7 @@ export default {
     async dispatchUpdatePanelAction() {
       try {
         NProgress.start()
-        await this.Store.updatePanelAction(this.panelId, { title: this.panel.title })
+        await this.Store.updatePanelAction(this.panelId, { title: this.localTitle })
         this.Store.panelTitleEditState = false
         NProgress.done()
       } catch (error) {
@@ -60,13 +65,22 @@ export default {
       }
     },
     updateLen() {
-      this.currentFieldLen = this.panel.title.length
+      this.currentFieldLen = this.localTitle.length
     }
   },
   data() {
     return {
+      localTitle: '',
       maxFieldLen: 65,
       currentFieldLen: null
+    }
+  },
+  mounted() {
+    if (this.title === this.panel.title) {
+
+      this.localTitle = this.title
+    } else {
+      this.localTitle = this.panel.title
     }
   },
   components: {
@@ -74,6 +88,10 @@ export default {
     CheckIcon
   },
   props: {
+    title: {
+      type: String,
+      required: true
+    },
     panelId: {
       type: Number,
       required: true
