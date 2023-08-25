@@ -41,6 +41,10 @@ export default {
     PencilIcon
   },
   props: {
+    title: {
+      type: String,
+      required: true
+    },
     panelId: {
       type: Number,
       required: true
