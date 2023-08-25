@@ -9,7 +9,7 @@ export const useStore = defineStore({
         messages: [],
         entries: [],
         user: null,
-        trayIsOpen: false,
+        primaryTrayIsOpen: false,
         leftNavIsOpen: false,
         componentName: null,
         componentProps: {},

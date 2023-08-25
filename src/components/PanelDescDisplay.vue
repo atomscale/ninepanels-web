@@ -2,11 +2,12 @@
   <div class="flex-col">
 
     <div class="flex justify-between items-center mb-2">
-      <div class="text-xs font-semibold h-5 text-gray-500">About</div>
+      <div class="text-xs  h-5 text-gray-500">About</div>
       <div>
 
-        <button class="ml-4 mr-2" @click="toggleEditState()">
-          <PencilIcon class="h-4 w-4 text-gray-400 " />
+        <button class="ml-4 mr-1" @click="toggleEditState()">
+          <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-gray-400 " />
+          <PlusCircleIcon v-else class="h-6 w-6 text-gray-400 " />
         </button>
       </div>
     </div>
@@ -26,7 +27,8 @@ import { mapStores } from 'pinia'
 import { VueShowdown } from 'vue-showdown'
 import NProgress from 'nprogress'
 import {
-  PencilIcon
+  PencilIcon,
+  PlusCircleIcon
 } from '@heroicons/vue/24/outline'
 
 export default {
@@ -43,13 +45,10 @@ export default {
   },
   components: {
     PencilIcon,
+    PlusCircleIcon,
     VueShowdown
   },
-  data() {
-    return {
-      localDescription: ''
-    }
-  },
+
   props: {
     description: {
       type: String,

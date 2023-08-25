@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="this.Store.trayIsOpen">
-    <Dialog as="div" class="relative z-10" @close="this.clearTrayState(); this.Store.trayIsOpen = false">
+  <TransitionRoot as="template" :show="this.Store.primaryTrayIsOpen">
+    <Dialog as="div" class="relative z-10" @close="this.clearTrayState(); this.Store.primaryTrayIsOpen = false">
       <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-600 bg-opacity-75 " />
@@ -21,7 +21,7 @@
                       </DialogTitle>
                       <div class="ml-3 flex h-5  items-center">
                         <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500"
-                          @click="this.clearTrayState(); this.Store.trayIsOpen = false">
+                          @click="this.clearTrayState(); this.Store.primaryTrayIsOpen = false">
                           <span class="sr-only">Close panel</span>
                           <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                         </button>
@@ -29,7 +29,7 @@
                     </div>
                   </div>
 
-                  <div v-if="this.Store.trayIsOpen && this.Store.componentName" class="relative mt-4 flex-1 px-4 sm:px-6 overflow-auto">
+                  <div v-if="this.Store.primaryTrayIsOpen && this.Store.componentName" class="relative mt-4 flex-1 px-4 sm:px-6 overflow-auto">
                     <component :is="this.Store.componentName" v-bind="this.Store.componentProps" />
                   </div>
 

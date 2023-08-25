@@ -22,7 +22,7 @@ export default {
 
   methods: {
     openCreatePanelTray() {
-      this.Store.trayIsOpen = true
+      this.Store.primaryTrayIsOpen = true
       this.Store.componentName = 'PanelCreateForm'
       // this.Store.componentProps = {title: "Panel Create Form from props"}
     }

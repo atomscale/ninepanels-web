@@ -98,7 +98,7 @@
         <RouterView />
 
 
-        <Tray />
+        <PrimaryTray />
 
         <!-- /End replace -->
 
@@ -113,7 +113,7 @@ import { mapStores } from 'pinia'
 import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
-import Tray from '@/components/Tray.vue'
+import PrimaryTray from '@/components/PrimaryTray.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -154,11 +154,9 @@ export default {
       this.Store.signUserOutAction()
       this.Store.leftNavIsOpen = false
       this.$router.push({ name: "Landing" })
-      // this.Store.messages.push({ message: "Signed out" })
-      // setTimeout(() => this.Store.messages.shift(), 5000)
     },
     openTray() {
-      this.Store.trayIsOpen = true
+      this.Store.primaryTrayIsOpen = true
     },
     accessTokenIsPresent() {
       const access_token = VueCookies.get("9p_access_token")
@@ -189,7 +187,7 @@ export default {
     QuestionMarkCircleIcon,
     FlashMessage,
     PanelGridFrame,
-    Tray,
+    PrimaryTray,
     UserPlusIcon,
     GlobeEuropeAfricaIcon,
     GlobeAltIcon,

@@ -1,6 +1,6 @@
 <template >
   <div class="flex justify-between items-center mb-2 h-5">
-    <div class="text-xs font-semibold text-gray-500">About</div>
+    <div class="text-xs  text-gray-500">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
         <CheckIcon class="h-5 w-5 text-gray-400 " />
