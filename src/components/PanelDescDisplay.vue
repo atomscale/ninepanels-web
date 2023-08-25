@@ -5,9 +5,9 @@
       <div class="text-xs  h-5 text-gray-500">About</div>
       <div>
 
-        <button class="ml-4 mr-1" @click="toggleEditState()">
+        <button class="" @click="toggleEditState()">
           <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-gray-400 " />
-          <PlusCircleIcon v-else class="h-6 w-6 text-gray-400 " />
+          <PlusIcon v-else class="h-5 w-5 text-gray-400 hover:text-gray-500" />
         </button>
       </div>
     </div>
@@ -28,7 +28,7 @@ import { VueShowdown } from 'vue-showdown'
 import NProgress from 'nprogress'
 import {
   PencilIcon,
-  PlusCircleIcon
+  PlusIcon
 } from '@heroicons/vue/24/outline'
 
 export default {
@@ -45,7 +45,7 @@ export default {
   },
   components: {
     PencilIcon,
-    PlusCircleIcon,
+    PlusIcon,
     VueShowdown
   },
 

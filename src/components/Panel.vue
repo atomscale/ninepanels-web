@@ -50,8 +50,8 @@ export default {
     openPanelDetail() {
       this.Store.getPanelsAction()
       this.Store.primaryTrayIsOpen = true
-      this.Store.componentName = 'PanelDetail'
-      this.Store.componentProps = { panel: this.panel }
+      this.Store.primaryComponentName = 'PanelDetail'
+      this.Store.primaryComponentProps = { panel: this.panel }
     }
   },
   components: {

@@ -3,10 +3,10 @@
     <div class="text-xs  text-gray-500">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-gray-400 " />
+        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-gray-400 " />
+        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
       </button>
     </div>
   </div>

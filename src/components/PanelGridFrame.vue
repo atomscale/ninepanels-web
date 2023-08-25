@@ -27,7 +27,6 @@ export default {
   },
   created() {
     this.Store.getPanelsAction()
-    // this.Store.getEntriesAction()
   },
   components: {
     Panel,

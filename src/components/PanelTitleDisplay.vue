@@ -5,8 +5,8 @@
       <div class="text-xs h-5 text-gray-500">Panel</div>
       <div>
 
-        <button class="ml-4 mr-2" @click="toggleEditState()">
-          <PencilIcon class="h-4 w-4 text-gray-400 " />
+        <button class="ml-4 " @click="toggleEditState()">
+          <PencilIcon class="h-4 w-4 text-gray-400 hover:text-gray-500" />
         </button>
       </div>
     </div>

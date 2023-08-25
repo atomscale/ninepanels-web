@@ -62,9 +62,9 @@ export default {
         NProgress.start()
         await this.Store.createPanelAction(this.title, this.description)
         NProgress.done()
-        this.Store.trayIsOpen = false
-        this.Store.componentName = null
-        this.Store.componentProps = {}
+        this.Store.primaryTrayIsOpen = false
+        this.Store.primaryComponentName = null
+        this.Store.primaryComponentProps = {}
       }
     },
     updateLen() {

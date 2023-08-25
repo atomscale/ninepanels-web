@@ -10,9 +10,11 @@ export const useStore = defineStore({
         entries: [],
         user: null,
         primaryTrayIsOpen: false,
+        secondaryTrayIsOpen: false,
         leftNavIsOpen: false,
-        componentName: null,
-        componentProps: {},
+        primaryComponentName: null,
+        primaryComponentProps: {},
+        panelSortBoxIsOpen: false,
         panelTitleEditState: false,
         panelDescEditState: false
     }),
