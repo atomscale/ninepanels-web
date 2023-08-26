@@ -11,27 +11,29 @@
         :description="this.panel.description">
       </component>
 
-      <div class="flex justify-between items-center mt-5">
+      <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
         <div class="text-xs text-gray-500">Order</div>
-        <button @click="this.togglePanelSortBox()">
+        <div>
+
           <ChevronDownIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronDownIcon>
           <ChevronUpIcon v-else class="h-5 w-5 text-gray-400"></ChevronUpIcon>
-        </button>
-      </div>
+        </div>
+      </button>
+
 
       <component class="overflow-hidden transition-all ease-in-out duration-300"
-        :is="this.Store.panelSortBoxIsOpen ? 'PanelSort' : null " :panelId="this.panel.id">
+        :is="this.Store.panelSortBoxIsOpen ? 'PanelSort' : null " :panel="this.panel">
       </component>
 
-      <div class="mt-6 flex justify-between align-middle">
+      <!-- <div class="mt-6 flex justify-between align-middle">
         <div class="text-xs text-gray-500">Lock panel</div>
-        <Switch v-model="enabled"
+        <Switch @click="this.togglePanelLock()" v-model="enabled"
           :class="[enabled ? 'bg-gray-600' : 'bg-gray-100', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ']">
           <span class="sr-only">Use setting</span>
           <span aria-hidden="true"
             :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
         </Switch>
-      </div>
+      </div> -->
 
 
     </div>
@@ -69,6 +71,9 @@ export default {
     },
     togglePanelSortBox() {
       this.Store.panelSortBoxIsOpen = !this.Store.panelSortBoxIsOpen
+    },
+    togglePanelLock() {
+      console.log("dispatch panel lock")
     }
   },
   components: {
@@ -90,7 +95,7 @@ export default {
   },
   data() {
     return {
-      enabled: true
+      enabled: false
     }
   }
 

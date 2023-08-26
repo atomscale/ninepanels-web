@@ -1,7 +1,7 @@
 <template >
   <button type="submit" @click="this.openCreatePanelTray()" class="h-full w-full rounded-lg border border-gray-300 border-dashed text-xs text-gray-600">
     <div class="flex items-center justify-center">
-      <PlusCircleIcon class="h-8 w-8 text-gray-400 " />
+      <PlusIcon class="h-6 w-6 text-gray-400 " />
 
     </div>
   </button>
@@ -11,7 +11,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import { PlusCircleIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 
 export default {
   computed: {
@@ -24,11 +24,17 @@ export default {
     openCreatePanelTray() {
       this.Store.primaryTrayIsOpen = true
       this.Store.primaryComponentName = 'PanelCreateForm'
-      // this.Store.primaryComponentProps = {title: "Panel Create Form from props"}
+      this.Store.primaryComponentProps = {emptySlotIndex: this.slotIndex}
     }
   },
   components: {
-    PlusCircleIcon
+    PlusIcon
+  },
+  props: {
+    slotIndex: {
+      type: Number,
+      required: true
+    }
   }
 
 }

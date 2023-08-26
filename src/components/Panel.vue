@@ -10,7 +10,7 @@
     </button>
     <button @click="this.openPanelDetail()" class="absolute top-0.5 right-0.5 p-1.5 "
       :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-gray-300' : 'text-gray-600'">
-      <InformationCircleIcon class="h-4" />
+      <InformationCircleIcon class="h-4 text-gray-400" />
     </button>
   </div>
 </template>

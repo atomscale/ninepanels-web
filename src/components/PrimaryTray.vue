@@ -63,6 +63,7 @@ export default {
       this.Store.primaryComponentProps = {}
       this.Store.panelTitleEditState = false
       this.Store.panelDescEditState = false
+      this.Store.panelSortBoxIsOpen = false
     }
   },
   components: {

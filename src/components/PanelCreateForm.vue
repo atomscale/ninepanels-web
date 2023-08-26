@@ -1,7 +1,7 @@
 <template >
   <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
     <div>
-      <label class="block font-light text-xs text-gray-600">Panel title</label>
+      <label class="block font-light text-xs text-gray-600">Your panel</label>
       <div class="mt-1">
         <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true"
           :maxlength="maxTitleLen"
@@ -12,10 +12,10 @@
     </div>
 
     <div>
-      <label class="block font-light text-xs text-gray-600">Description (optional)</label>
+      <label class="block font-light text-xs text-gray-600">About your panel (optional)</label>
       <div class="mt-1">
         <textarea @input="updateLen()" v-model="description" id="description" name="description" type="text"
-          required="false" :maxlength="maxDescLen"
+          :maxlength="maxDescLen"
           class="block w-full h-80 resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
       </div>
       <div class="text-xs mt-1" :class="currentDescLen === maxDescLen ? 'text-red-900' : 'text-gray-400'">
@@ -56,11 +56,11 @@ export default {
   },
   methods: {
     async sendCreatePanel() {
-      if (this.title.length == 0) {
+      if (this.title.length === 0) {
         return
       } else {
         NProgress.start()
-        await this.Store.createPanelAction(this.title, this.description)
+        await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
         NProgress.done()
         this.Store.primaryTrayIsOpen = false
         this.Store.primaryComponentName = null
@@ -75,6 +75,10 @@ export default {
   components: {
   },
   props: {
+    emptySlotIndex: {
+      type: Number,
+      required: true
+    }
   }
 
 }

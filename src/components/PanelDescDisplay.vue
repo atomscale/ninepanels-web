@@ -52,7 +52,7 @@ export default {
   props: {
     description: {
       type: String,
-      required: true
+      required: false
     },
     panelId: {
       type: Number,
