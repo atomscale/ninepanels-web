@@ -15,8 +15,8 @@
         <div class="text-xs text-gray-500">Order</div>
         <div>
 
-          <ChevronDownIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronDownIcon>
-          <ChevronUpIcon v-else class="h-5 w-5 text-gray-400"></ChevronUpIcon>
+          <ChevronRightIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronRightIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
         </div>
       </button>
 
@@ -52,7 +52,7 @@ import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
 import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
 import DeleteButton from '@/components/DeleteButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
-import { ChevronUpIcon } from '@heroicons/vue/24/outline'
+import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import PanelSort from '@/components/PanelSort.vue'
 import { Switch } from '@headlessui/vue'
 
@@ -83,7 +83,7 @@ export default {
     PanelTitleEdit,
     DeleteButton,
     ChevronDownIcon,
-    ChevronUpIcon,
+    ChevronRightIcon,
     PanelSort,
     Switch
   },
