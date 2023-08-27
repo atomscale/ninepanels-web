@@ -4,7 +4,7 @@
       <div class="aspect-content">
 
         <Panel v-if="this.Store.panels[i - 1]" :panel="this.Store.panels[i - 1]" />
-        <PanelGridAdd v-else-if="this.Store.panels.length == (i -1)"/>
+        <PanelGridAdd v-else-if="this.Store.panels.length == (i -1)" :slotIndex="(i - 1)"/>
         <div v-else class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-lg">
         </div>
       </div>
@@ -27,7 +27,6 @@ export default {
   },
   created() {
     this.Store.getPanelsAction()
-    // this.Store.getEntriesAction()
   },
   components: {
     Panel,

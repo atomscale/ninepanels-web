@@ -32,7 +32,7 @@
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
                   <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Panels' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">NinePanels</span>
+                    <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">Nine Panels</span>
                   </router-link>
                 </div>
               </div>
@@ -98,7 +98,8 @@
         <RouterView />
 
 
-        <Tray />
+        <PrimaryTray />
+
 
         <!-- /End replace -->
 
@@ -113,7 +114,7 @@ import { mapStores } from 'pinia'
 import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
-import Tray from '@/components/Tray.vue'
+import PrimaryTray from '@/components/PrimaryTray.vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -154,11 +155,9 @@ export default {
       this.Store.signUserOutAction()
       this.Store.leftNavIsOpen = false
       this.$router.push({ name: "Landing" })
-      // this.Store.messages.push({ message: "Signed out" })
-      // setTimeout(() => this.Store.messages.shift(), 5000)
     },
     openTray() {
-      this.Store.trayIsOpen = true
+      this.Store.primaryTrayIsOpen = true
     },
     accessTokenIsPresent() {
       const access_token = VueCookies.get("9p_access_token")
@@ -189,7 +188,7 @@ export default {
     QuestionMarkCircleIcon,
     FlashMessage,
     PanelGridFrame,
-    Tray,
+    PrimaryTray,
     UserPlusIcon,
     GlobeEuropeAfricaIcon,
     GlobeAltIcon,

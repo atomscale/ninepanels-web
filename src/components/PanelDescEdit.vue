@@ -1,12 +1,12 @@
 <template >
   <div class="flex justify-between items-center mb-2 h-5">
-    <div class="text-xs font-semibold text-gray-500">About</div>
+    <div class="text-xs  text-gray-500">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-gray-400 " />
+        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-gray-400 " />
+        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
       </button>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
   props: {
     description: {
       type: String,
-      required: true
+      required: false
     },
     panelId: {
       type: Number,

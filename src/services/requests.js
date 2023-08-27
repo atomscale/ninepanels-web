@@ -10,8 +10,6 @@ if (import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION") {
     baseURL = "http://127.0.0.1:8000"
 }
 
-console.log(baseURL)
-
 const apiClient = axios.create({
     baseURL: baseURL,
 });
@@ -62,8 +60,9 @@ export default {
         })
 
     },
-    postPanel(access_token, title, description) {
+    postPanel(access_token, position, title, description) {
         const form = new URLSearchParams()
+        form.append('position', position)
         form.append('title', title)
         form.append('description', description)
         return apiClient.post("/panels",
