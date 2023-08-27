@@ -1,5 +1,5 @@
 <template >
-  <div class="ml-1 flex flex-col justify-between h-full">
+  <div class="flex flex-col justify-between h-full">
     <div>
 
       <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id"
@@ -11,11 +11,12 @@
         :description="this.panel.description">
       </component>
 
+
       <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
         <div class="text-xs text-gray-500">Order</div>
         <div>
 
-          <ChevronRightIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronRightIcon>
+          <ChevronLeftIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>
           <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
         </div>
       </button>
@@ -52,7 +53,7 @@ import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
 import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
 import DeleteButton from '@/components/DeleteButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
-import { ChevronRightIcon } from '@heroicons/vue/24/outline'
+import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import PanelSort from '@/components/PanelSort.vue'
 import { Switch } from '@headlessui/vue'
 
@@ -83,7 +84,7 @@ export default {
     PanelTitleEdit,
     DeleteButton,
     ChevronDownIcon,
-    ChevronRightIcon,
+    ChevronLeftIcon,
     PanelSort,
     Switch
   },

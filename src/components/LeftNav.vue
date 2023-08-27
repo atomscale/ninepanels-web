@@ -32,7 +32,7 @@
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
                   <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Panels' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">NinePanels</span>
+                    <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">Nine Panels</span>
                   </router-link>
                 </div>
               </div>
