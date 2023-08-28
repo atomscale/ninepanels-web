@@ -1,7 +1,7 @@
 <template>
     <transition name="fade" appear>
 
-        <div class="rounded-md mb-2 p-2 mr-2 transition-opacity ease-in-out duration-700 bg-gray-200"
+        <div class="animate-custom-bounce rounded-md mb-2 p-2 mr-2 bg-gray-200"
             :class="error ? '' : ''">
             <div v-if="!error" class="">
                 <div class="flex">
@@ -32,13 +32,5 @@ defineProps({
 </script>
 
 <style scoped>
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-.fade-enter-to, .fade-leave-from {
-  opacity: 1;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.75s ease;
-}
+
 </style>

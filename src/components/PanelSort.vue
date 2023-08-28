@@ -5,7 +5,7 @@
                 <div class="aspect-content">
                     <button @click="dispatchUpdatePanelAction(i - 1)"
                         :class="[this.Store.panels[i - 1] ? 'border-2 border-gray-600' : 'border-dashed', this.Store.panels[i - 1] && this.Store.panels[i - 1].id === this.panel.id ? 'bg-gray-700 border-0' : null]"
-                        class="flex items-center justify-center text-gray-500 border  border-gray-300 text-sm rounded-lg">
+                        class="flex items-center justify-center text-gray-500 border  border-gray-300 text-sm rounded-lg hover:scale-105">
                     </button>
                 </div>
             </div>
@@ -53,6 +53,7 @@ export default {
                         { 'position': i }
                     )
                     NProgress.done()
+                    this.Store.primaryTrayIsOpen = false
                 }
             }
             else {

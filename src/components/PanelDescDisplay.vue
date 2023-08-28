@@ -13,9 +13,8 @@
     </div>
 
     <!-- <div class="text-sm w-auto whitespace-pre-line">{{ panel.description }}</div> -->
-    <VueShowdown class="text-sm w-auto whitespace-pre-line"
-  flavor="vanilla"
-  :options="{ emoji: true }" :markdown="this.panel.description"></VueShowdown>
+    <VueShowdown class="text-sm max-h-80 test-gray-600 w-auto whitespace-pre-line overflow-hidden overflow-y-auto" flavor="vanilla" :options="{ emoji: true }"
+      :markdown="this.panel.description"></VueShowdown>
 
   </div>
 </template>

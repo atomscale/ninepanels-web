@@ -33,7 +33,8 @@
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
+                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                                @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
                             </button>
@@ -47,7 +48,8 @@
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center" @click="togglePasswordVisibility()">
+                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                                @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
                             </button>
@@ -57,10 +59,8 @@
 
 
                     <div>
-                        <button type="submit" @click="signUserUp()"
-                            class="flex justify-center border border-gray-200 rounded-md w-full mt-3 max-w-sm  py-2 px-4 text-sm bg-gray-800 text-gray-50 hover:bg-white hover:text-gray-600  shadow-sm">Sign
-                            up
-                        </button>
+                        <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
+                            :confirmRequired="false" />
                     </div>
                     <div class="font-light text-xs text-gray-500 m-4">Free forever. No funny business. No ads, ever.
                     </div>
@@ -83,6 +83,7 @@ import {
     EyeIcon,
     EyeSlashIcon
 } from '@heroicons/vue/24/outline'
+import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
     data() {
@@ -122,7 +123,8 @@ export default {
     },
     components: {
         EyeIcon,
-        EyeSlashIcon
+        EyeSlashIcon,
+        DynamicButton
     }
 
 }

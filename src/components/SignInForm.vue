@@ -31,11 +31,7 @@
                     </div>
 
                     <div>
-                        <button type="submit"
-                            class="flex justify-center border border-gray-200 rounded-md w-full mt-3 max-w-sm  py-2 px-4 text-sm bg-gray-800 text-gray-50 hover:bg-white hover:text-gray-600  shadow-sm"
-                            @click="sendLogIn()">
-                            Sign in
-                        </button>
+                        <DynamicButton :parentMethod="sendLogIn" :buttonText="'Sign in'" :confirmRequired="false" />
                     </div>
                 </form>
             </div>
@@ -47,6 +43,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import NProgress from 'nprogress'
+import DynamicButton from '@/components/DynamicButton.vue'
 import {
     EyeIcon,
     EyeSlashIcon
@@ -85,7 +82,8 @@ export default {
     },
     components: {
         EyeIcon,
-        EyeSlashIcon
+        EyeSlashIcon,
+        DynamicButton
     }
 }
 

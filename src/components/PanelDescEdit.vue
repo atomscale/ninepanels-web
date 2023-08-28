@@ -12,15 +12,15 @@
   </div>
 
   <div class="flex h-auto">
-    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true" :maxlength="maxFieldLen"
+    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true" 
       class="block resize-none h-80 w-full appearance-none text-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 
 
-  <div class="text-xs mt-1" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
+  <!-- <div class="text-xs mt-1" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
     currentFieldLen }}/{{
     maxFieldLen }}
-  </div>
+  </div> -->
 </template>
 
 <script>

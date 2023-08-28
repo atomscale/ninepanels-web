@@ -9,7 +9,7 @@
           <div class="font-light text-sm mt-5">Email</div>
           <div class="font-medium text-xl mt-2">{{ this.Store.user.email }}</div>
         </div>
-        <DeleteButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
+        <DynamicButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import NProgress from 'nprogress'
-import DeleteButton from '@/components/DeleteButton.vue'
+import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
   computed: {
@@ -41,7 +41,7 @@ export default {
     this.getUserActionMethod()
   },
   components: {
-    DeleteButton
+    DynamicButton
   }
 }
 </script>
