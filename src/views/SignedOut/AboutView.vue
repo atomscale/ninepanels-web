@@ -1,9 +1,9 @@
 <template>
-  <div class="flex min-h-full flex-col mx-auto justify-center py-6 sm:px-6 lg:px-8">
+  <div class="flex h-full flex-col mx-auto justify-center ">
 
-    <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
-        <div class="text-gray-600 mt-4  text-sm">
+    <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="bg-white   sm:rounded-lg  ">
+        <div class="text-gray-600  text-sm">
 
           <div class="m-4 font-light">Being consistent at one thing is hard.
           </div>
@@ -27,6 +27,8 @@
           </div>
           <div class="m-4 font-bold"><a href="https://github.com/atomscale/ninepanels" target="_blank">Github</a></div>
           <div class="m-4 font-bold"><a href="mailto:ben@atomscale.co" target="_blank">Email</a></div>
+          <div class="m-4 font-light"> Thanks, Ben
+          </div>
 
         </div>
       </div>
