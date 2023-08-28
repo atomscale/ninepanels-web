@@ -13,7 +13,7 @@
 
 
   <textarea @input="updateLen()" v-model="this.localTitle" type="text" required="true" :maxlength="maxFieldLen"
-    class="block resize-none  h-auto w-full appearance-none rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+    class="block resize-none text-gray-600 h-auto w-full appearance-none rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
   <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
