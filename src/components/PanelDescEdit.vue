@@ -1,6 +1,6 @@
 <template >
   <div class="flex justify-between items-center mb-2 h-5">
-    <div class="text-xs  text-gray-500">About</div>
+    <div class="data-heading">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
         <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
@@ -12,7 +12,7 @@
   </div>
 
   <div class="flex h-auto">
-    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true" 
+    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true"
       class="block resize-none h-80 w-full appearance-none text-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 

@@ -13,7 +13,7 @@
 
 
       <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
-        <div class="text-xs text-gray-500">Order</div>
+        <div class="data-heading">Order</div>
         <div>
 
           <ChevronLeftIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>

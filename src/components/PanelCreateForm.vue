@@ -5,7 +5,7 @@
 
       <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
         <div>
-          <label class="block font-light text-xs text-gray-600">Your panel</label>
+          <label class="data-heading">Your panel</label>
           <div class="mt-1">
             <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true"
               :maxlength="maxTitleLen"
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-          <label class="block font-light text-xs text-gray-600">About your panel (optional)</label>
+          <label class="data-heading">About your panel (optional)</label>
           <div class="mt-1">
             <textarea v-model="description" id="description" name="description" type="text"
               class="block w-full h-80 resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />

@@ -1,17 +1,17 @@
 <template>
-  <div class="flex min-h-full flex-col mx-auto justify-center py-6 sm:px-6 lg:px-8">
-
-    <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
+  <!-- <div class="flex min-h-full flex-col mx-auto justify-between py-6 sm:px-6 lg:px-8"> -->
+  <div class="flex flex-col justify-between h-full px-4 pt-4 ">
+    <div class="mt-4 mx-auto w-full">
+      <div class="bg-white  ">
         <div v-if="this.Store.user">
-          <div class="font-light text-sm mt-5">Name</div>
-          <div class="font-medium text-xl mt-2">{{ this.Store.user.name }}</div>
-          <div class="font-light text-sm mt-5">Email</div>
-          <div class="font-medium text-xl mt-2">{{ this.Store.user.email }}</div>
+          <div class="data-heading">Name</div>
+          <div class="font-light text-xl mb-2">{{ this.Store.user.name }}</div>
+          <div class="data-heading">Email</div>
+          <div class="font-light text-xl mb-2">{{ this.Store.user.email }}</div>
         </div>
-        <DynamicButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
       </div>
     </div>
+    <DynamicButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template >
   <div class="flex justify-between items-center mb-2">
-    <div class="text-xs  h-5 text-gray-500">Panel</div>
+    <div class="data-heading">Panel</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
         <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500 " />

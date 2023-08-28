@@ -2,7 +2,7 @@
   <div class="flex-col mb-4">
 
     <div class="flex justify-between items-center">
-      <div class="text-xs h-5 text-gray-500">Panel</div>
+      <div class="data-heading">Panel</div>
       <div>
 
         <button class="ml-4 " @click="toggleEditState()">

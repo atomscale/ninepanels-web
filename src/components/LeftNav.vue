@@ -84,10 +84,10 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-       
+
         </div>
       </div>
-      <main class="max-w-2xl w-full">
+      <main class="max-w-md w-full">
         <!-- Replace with your content -->
 
 

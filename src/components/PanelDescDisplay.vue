@@ -2,7 +2,7 @@
   <div class="flex-col">
 
     <div class="flex justify-between items-center mb-2">
-      <div class="text-xs  h-5 text-gray-500">About</div>
+      <div class="data-heading">About</div>
       <div>
 
         <button class="" @click="toggleEditState()">
