@@ -13,7 +13,7 @@
 
 
       <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
-        <div class="text-xs text-gray-500">Order</div>
+        <div class="data-heading">Order</div>
         <div>
 
           <ChevronLeftIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>
@@ -38,7 +38,7 @@
 
 
     </div>
-    <DeleteButton :parentMethod="sendPanelDelete" :buttonText="'Delete panel'" :confirmText="'Are you sure?'" />
+    <DynamicButton :parentMethod="sendPanelDelete" :buttonText="'Delete panel'" :confirmRequired="true" :confirmText="'Are you sure?'" />
   </div>
 </template>
 
@@ -51,7 +51,7 @@ import PanelDescDisplay from '@/components/PanelDescDisplay.vue'
 import PanelDescEdit from '@/components/PanelDescEdit.vue'
 import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
 import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
-import DeleteButton from '@/components/DeleteButton.vue'
+import DynamicButton from '@/components/DynamicButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import PanelSort from '@/components/PanelSort.vue'
@@ -82,7 +82,7 @@ export default {
     PanelDescEdit,
     PanelTitleDisplay,
     PanelTitleEdit,
-    DeleteButton,
+    DynamicButton,
     ChevronDownIcon,
     ChevronLeftIcon,
     PanelSort,
