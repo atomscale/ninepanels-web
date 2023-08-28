@@ -8,6 +8,7 @@ export const useStore = defineStore({
         panels: [],
         messages: [],
         entries: [],
+        consistency: [],
         user: null,
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
@@ -149,7 +150,17 @@ export const useStore = defineStore({
                 this.messages.push({ message: "Having a bit of trouble setting your panel status... 😬", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
-        }
+        },
+        async getPanelConsistencyAction() {
+            const access_token = VueCookies.get("9p_access_token")
+            try {
+                const response = await requests.getPanelConsistency(access_token)
+                this.consistency = response.data
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
 
     }
 },

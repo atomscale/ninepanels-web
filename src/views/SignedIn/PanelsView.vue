@@ -1,9 +1,11 @@
 <template>
-    <PanelGridFrame />
+  <PanelGridFrame />
+  <!-- <ConsistencyGrid /> -->
 </template>
 
 <script>
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
+import ConsistencyGrid from '@/components/ConsistencyGrid.vue'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
@@ -12,7 +14,8 @@ export default {
     ...mapStores(useStore)
   },
   components: {
-    PanelGridFrame
+    PanelGridFrame,
+    ConsistencyGrid
   }
 }
 </script>
