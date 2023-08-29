@@ -18,7 +18,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 
 
 export default {
@@ -47,13 +47,14 @@ export default {
                     setTimeout(() => this.Store.messages.shift(), 5000)
                 } else {
 
-                    NProgress.start()
+                    this.Store.primaryTrayIsOpen = false
+                    this.Store.loadingBar = true
                     await this.Store.updatePanelAction(
                         this.panel.id,
                         { 'position': i }
                     )
-                    NProgress.done()
-                    this.Store.primaryTrayIsOpen = false
+                    this.Store.getPanelConsistencyAction()
+                    this.Store.loadingBar = false
                 }
             }
             else {

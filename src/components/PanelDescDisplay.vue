@@ -24,7 +24,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { VueShowdown } from 'vue-showdown'
-import NProgress from 'nprogress'
+
 import {
   PencilIcon,
   PlusIcon

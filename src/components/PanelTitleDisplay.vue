@@ -20,7 +20,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 import {
   PencilIcon
 } from '@heroicons/vue/24/outline'

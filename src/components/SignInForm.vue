@@ -42,7 +42,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 import DynamicButton from '@/components/DynamicButton.vue'
 import {
     EyeIcon,
@@ -64,16 +64,16 @@ export default {
     },
     methods: {
         async sendLogIn() {
-            NProgress.start()
+            this.Store.loadingBar = true
             const token = await this.Store.getLoginTokenAction(this.username, this.password)
             if (token) {
-                NProgress.done()
+                this.Store.loadingBar = false
                 this.$router.push({ name: 'Panels' })
             } else {
                 this.$router.push({ name: 'SignIn' })
-                NProgress.done()
+                this.Store.loadingBar = false
             }
-            NProgress.done()
+            this.Store.loadingBar = false
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible

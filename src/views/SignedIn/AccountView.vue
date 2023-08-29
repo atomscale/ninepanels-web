@@ -19,7 +19,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
@@ -28,9 +28,9 @@ export default {
   },
   methods: {
     async sendUserDelete() {
-      NProgress.start()
+      this.Store.loadingBar = true
       await this.Store.deleteUserAction()
-      NProgress.done()
+      this.Store.loadingBar = false
       this.$router.push('/')
     },
     async getUserActionMethod() {

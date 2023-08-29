@@ -37,7 +37,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 import DynamicButton from '@/components/DynamicButton.vue'
 
 
@@ -58,10 +58,11 @@ export default {
       if (this.title.length === 0) {
         return
       } else {
-        NProgress.start()
-        await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
-        NProgress.done()
+        this.Store.loadingBar = true
         this.Store.primaryTrayIsOpen = false
+        await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
+        this.Store.getPanelConsistencyAction()
+        this.Store.loadingBar = false
         this.Store.primaryComponentName = null
         this.Store.primaryComponentProps = {}
       }

@@ -76,7 +76,7 @@
 
 
     <div class="flex flex-col items-center w-full">
-      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-50  w-full ">
+      <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-30  w-full ">
         <div class="flex justify-between">
           <button type="button"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -111,6 +111,7 @@ import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
+import NProgress from 'nprogress'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -143,13 +144,20 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-
-
-
+  watch: {
+    'Store.loadingBar'(newVal) {
+      if (newVal) {
+        NProgress.start();
+      } else {
+        NProgress.done();
+      }
+    },
+  },
   methods: {
     signUserOut() {
       this.Store.signUserOutAction()
       this.Store.leftNavIsOpen = false
+      this.Store.$reset()
       this.$router.push({ name: "Landing" })
     },
     openTray() {

@@ -78,7 +78,7 @@
 <script>
 import { mapStores } from 'pinia'
 import { useStore } from '@/stores/store.js'
-import NProgress from 'nprogress'
+
 import {
     EyeIcon,
     EyeSlashIcon
@@ -109,9 +109,9 @@ export default {
                 return // stop function
             }
 
-            NProgress.start()
+            this.Store.loadingBar = true
             const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
-            NProgress.done()
+            this.Store.loadingBar = false
             if (resp) {
                 this.$router.push({ name: 'Panels' })
             }
