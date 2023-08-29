@@ -1,9 +1,9 @@
 <template >
   <div class="relative">
 
-    <button type="submit" @click="sendEntry()"
+    <button type="submit" @click="this.Store.toggleEntryOptimistically(this.panel.id)" :disabled="this.Store.entryLoading"
       class="h-full w-full rounded-lg border  text-xs "
-      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? 'bg-gray-800 text-gray-100 ' : 'bg-white border-gray-300 text-gray-600'">
+      :class="isComplete ? 'bg-gray-800 text-gray-100 ' : 'bg-white border-gray-300 text-gray-600'">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
@@ -27,26 +27,17 @@ import {
 export default {
   computed: {
     ...mapStores(useStore),
-    // entry() {
-    //   const store = useStore();
-    //   return store.entries.find(entry => entry.panel_id === this.panel.id);
-    // }
+    isComplete() {
+      const userPanel = this.Store.panels.find(panel => panel.id === this.panel.id)
+      if (userPanel){
+        return userPanel.is_complete
+      }
+    }
   },
   props: {
     panel: { type: Object }
   },
   methods: {
-    sendEntry() {
-      // const store = useStore();
-
-      // const entry = this.entry
-      if (this.panel.entries && this.panel.entries.length > 0) {
-        this.Store.postEntryAction(this.panel.id, !this.panel.entries[this.panel.entries.length - 1].is_complete)
-        // console.log(entry.panel_id, entry.is_complete)
-      } else {
-        this.Store.postEntryAction(this.panel.id, true)
-      }
-    },
     openPanelDetail() {
       this.Store.getPanelsAction()
       this.Store.primaryTrayIsOpen = true

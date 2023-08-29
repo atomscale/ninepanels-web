@@ -22,6 +22,8 @@ import LeftNav from '@/components/LeftNav.vue'
 
 const Store = useStore()
 
+
+
 </script>
 
 <style scoped>

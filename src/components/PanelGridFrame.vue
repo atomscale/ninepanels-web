@@ -10,6 +10,7 @@
           <div v-else
             class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-lg">
           </div>
+          
         </div>
       </div>
     </div>

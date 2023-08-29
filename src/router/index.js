@@ -5,13 +5,7 @@ import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
 import AboutView from '@/views/SignedOut/AboutView.vue'
-
-import NProgress from 'nprogress'
-
 import { useStore } from '@/stores/store.js'
-
-NProgress.configure({ minimum: 0.3 })
-NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 
 import VueCookies from 'vue-cookies'
 

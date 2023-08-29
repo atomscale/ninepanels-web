@@ -25,7 +25,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
+
 import {
   XMarkIcon,
   CheckIcon
@@ -56,10 +56,10 @@ export default {
         return
       } else {
 
-        NProgress.start()
+        this.Store.loadingBar = true
         await this.Store.updatePanelAction(this.panelId, { title: this.localTitle })
         this.Store.panelTitleEditState = false
-        NProgress.done()
+        this.Store.loadingBar = false
       }
 
     },

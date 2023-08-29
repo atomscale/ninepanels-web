@@ -8,6 +8,7 @@ export const useStore = defineStore({
         panels: [],
         messages: [],
         entries: [],
+        consistency: [],
         user: null,
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
@@ -16,7 +17,10 @@ export const useStore = defineStore({
         primaryComponentProps: {},
         panelSortBoxIsOpen: false,
         panelTitleEditState: false,
-        panelDescEditState: false
+        panelDescEditState: false,
+        entryLoading: false,
+        loadingBar: false,
+        visGridLoading: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -132,25 +136,57 @@ export const useStore = defineStore({
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
-        postEntryAction(panel_id, is_complete) {
+        async postEntryAction(panel_id, is_complete) {
             const access_token = VueCookies.get("9p_access_token")
-            if (access_token) {
-                return requests.postEntry(access_token, panel_id, is_complete)
-                    .then(response => {
-
-                        this.getPanelsAction()
-                        return response.data
-                    })
-                    .catch(error => {
-                        this.messages.push({ message: error.response.data.detail, error: true })
-                        setTimeout(() => this.messages.shift(), 5000)
-                    })
-            } else {
-                this.messages.push({ message: "Having a bit of trouble setting your panel status... 😬", error: true })
+            if (!access_token) {
+                this.messages.push({ message: "Not authorized", error: true });
+                setTimeout(() => this.messages.shift(), 5000);
+                return;
+            }
+            try {
+                const response = await requests.postEntry(access_token, panel_id, is_complete)
+                await this.getPanelsAction()
+                return response.data
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
-        }
+        },
+        async getPanelConsistencyAction() {
+            const access_token = VueCookies.get("9p_access_token")
+            this.visGridLoading = true
+            try {
+                const response = await requests.getPanelConsistency(access_token)
+                this.consistency = response.data
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            } finally {
+                this.visGridLoading = false
+            }
+        },
+        async toggleEntryOptimistically(panelId) {
+            const panel = this.panels.find(panel => panel.id === panelId)
 
+            panel.is_complete = !panel.is_complete
+            this.loadingBar = true
+            this.entryLoading = true
+
+            try {
+                await this.postEntryAction(panelId, panel.is_complete)
+                this.getPanelConsistencyAction()
+                console.log('actual /panels response rcvd')
+            } catch (error) {
+                console.log('panel update failed, reverting')
+                this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+                const panel = this.panels.find(panel => panel.id === panelId)
+                panel.is_complete = !panel.is_complete
+            } finally {
+                this.entryLoading = false
+                this.loadingBar = false
+            }
+        }
     }
 },
 )

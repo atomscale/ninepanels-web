@@ -46,7 +46,6 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import NProgress from 'nprogress'
 import PanelDescDisplay from '@/components/PanelDescDisplay.vue'
 import PanelDescEdit from '@/components/PanelDescEdit.vue'
 import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
@@ -62,13 +61,14 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
-    sendPanelDelete() {
-      NProgress.start()
-      this.Store.deletePanelAction(this.panel.id)
-      NProgress.done()
+    async sendPanelDelete() {
+      this.Store.loadingBar = true
       this.Store.primaryTrayIsOpen = false
+      await this.Store.deletePanelAction(this.panel.id)
+      this.Store.loadingBar = false
       this.Store.primaryComponentName = null
       this.Store.primaryComponentProps = {}
+      this.Store.getPanelConsistencyAction()
     },
     togglePanelSortBox() {
       this.Store.panelSortBoxIsOpen = !this.Store.panelSortBoxIsOpen

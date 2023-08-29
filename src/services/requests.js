@@ -116,4 +116,13 @@ export default {
 
             })
     },
+    getPanelConsistency(access_token) {
+
+        return apiClient.get("/metrics/panels/consistency", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+    },
 }
