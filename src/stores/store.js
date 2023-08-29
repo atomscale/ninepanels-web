@@ -14,14 +14,15 @@ export const useStore = defineStore({
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
         leftNavIsOpen: false,
+        panelSortBoxIsOpen: false,
         primaryComponentName: null,
         primaryComponentProps: {},
-        panelSortBoxIsOpen: false,
         panelTitleEditState: false,
         panelDescEditState: false,
         entryLoading: false,
         loadingBar: false,
         visGridLoading: false,
+        visGridIsOpen: false,
         deleteResetBoxIsOpen: false
     }),
     actions: {

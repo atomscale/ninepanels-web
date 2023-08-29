@@ -47,6 +47,21 @@
   animation: custom-bounce 1s;  /* Remove 'infinite' for a single bounce */
 }
 
+@keyframes visgrid-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 1, 1, 1);
+  }
+  50% {
+    transform: translateY(-60%);  /* Change the bounce height here */
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 0.2);
+  }
+}
+
+.animate-visgrid-bounce {
+  animation: visgrid-bounce 1s 2;  /* Remove 'infinite' for a single bounce */
+}
+
 .data-heading {
-  @apply text-xs font-light h-5 text-gray-500;
+  @apply text-sm font-light h-5 text-gray-500;
 }

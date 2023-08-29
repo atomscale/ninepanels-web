@@ -21,20 +21,3 @@ const Store = useStore()
 
 
 </script>
-
-<style scoped>
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1.5s ease;
-}
-</style>
