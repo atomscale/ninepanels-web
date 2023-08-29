@@ -50,7 +50,7 @@
       <div v-if="this.Store.deleteResetBoxIsOpen">
 
         <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset panel'"
-          :confirmRequired="true" :confirmText="'Reset history on this panel?'" />
+          :confirmRequired="true" :confirmText="'Reset this panel?'" />
         <DynamicButton class="mt-2 mb-4" :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
           :confirmRequired="true" :confirmText="'Delete? Are you sure?'" />
       </div>
