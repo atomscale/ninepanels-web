@@ -48,6 +48,7 @@ export default {
                 } else {
 
                     this.Store.primaryTrayIsOpen = false
+                    this.Store.panelSortBoxIsOpen = false
                     this.Store.loadingBar = true
                     await this.Store.updatePanelAction(
                         this.panel.id,

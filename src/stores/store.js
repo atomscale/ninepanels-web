@@ -15,7 +15,7 @@ export const useStore = defineStore({
         leftNavIsOpen: false,
         primaryComponentName: null,
         primaryComponentProps: {},
-        panelSortBoxIsOpen: true,
+        panelSortBoxIsOpen: false,
         panelTitleEditState: false,
         panelDescEditState: false,
         entryLoading: false,
