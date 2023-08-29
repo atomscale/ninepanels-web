@@ -109,6 +109,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import VueCookies from 'vue-cookies'
 import FlashMessage from '@/components/FlashMessage.vue'
+import Welcome from '@/components/Welcome.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
 import NProgress from 'nprogress'
@@ -171,6 +172,7 @@ export default {
         return false
       }
     }
+
   },
   components: {
     Bars3Icon,
@@ -196,7 +198,8 @@ export default {
     UserPlusIcon,
     GlobeEuropeAfricaIcon,
     GlobeAltIcon,
-    CalendarDaysIcon
+    CalendarDaysIcon,
+    Welcome
   }
 }
 

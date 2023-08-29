@@ -10,6 +10,7 @@ export const useStore = defineStore({
         entries: [],
         consistency: [],
         user: null,
+        showWelcome: false,
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
         leftNavIsOpen: false,
@@ -20,7 +21,8 @@ export const useStore = defineStore({
         panelDescEditState: false,
         entryLoading: false,
         loadingBar: false,
-        visGridLoading: false
+        visGridLoading: false,
+        deleteResetBoxIsOpen: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -150,6 +152,19 @@ export const useStore = defineStore({
             } catch (error) {
                 this.messages.push({ message: error.response.data.detail, error: true })
                 setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
+        async deleteEntriesAction(panel_id) {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.deleteEntries(access_token, panel_id)
+                await this.getPanelsAction()
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            } finally {
+                this.loadingBar = false
             }
         },
         async getPanelConsistencyAction() {

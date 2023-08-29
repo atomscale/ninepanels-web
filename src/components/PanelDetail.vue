@@ -38,7 +38,25 @@
 
 
     </div>
-    <DynamicButton :parentMethod="sendPanelDelete" :buttonText="'Delete panel'" :confirmRequired="true" :confirmText="'Are you sure?'" />
+    <div>
+      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 mb-4">
+        <div class="data-heading">Danger Zone</div>
+        <div>
+
+          <ChevronLeftIcon v-if="!this.Store.deleteResetBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
+        </div>
+      </button>
+      <div v-if="this.Store.deleteResetBoxIsOpen">
+
+        <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset panel'"
+          :confirmRequired="true" :confirmText="'Reset history on this panel?'" />
+        <DynamicButton class="mt-2 mb-4" :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
+          :confirmRequired="true" :confirmText="'Delete? Are you sure?'" />
+      </div>
+
+    </div>
+
   </div>
 </template>
 
@@ -64,7 +82,18 @@ export default {
     async sendPanelDelete() {
       this.Store.loadingBar = true
       this.Store.primaryTrayIsOpen = false
+      this.Store.deleteResetBoxIsOpen = false
       await this.Store.deletePanelAction(this.panel.id)
+      this.Store.loadingBar = false
+      this.Store.primaryComponentName = null
+      this.Store.primaryComponentProps = {}
+      this.Store.getPanelConsistencyAction()
+    },
+    async sendEntriesDelete() {
+      this.Store.loadingBar = true
+      this.Store.primaryTrayIsOpen = false
+      this.Store.deleteResetBoxIsOpen = false
+      await this.Store.deleteEntriesAction(this.panel.id)
       this.Store.loadingBar = false
       this.Store.primaryComponentName = null
       this.Store.primaryComponentProps = {}
@@ -75,6 +104,9 @@ export default {
     },
     togglePanelLock() {
       console.log("dispatch panel lock")
+    },
+    toggleDeleteResetBox() {
+      this.Store.deleteResetBoxIsOpen = !this.Store.deleteResetBoxIsOpen
     }
   },
   components: {

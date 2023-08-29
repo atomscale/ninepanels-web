@@ -1,10 +1,7 @@
 <template>
 
-
     <div>
       <LeftNav />
-
-
     </div>
 
   <div class="flex flex-col items-start fixed top-2 left-12 z-50" v-if="Store.messages">
@@ -21,7 +18,6 @@ import { useStore } from '@/stores/store.js'
 import LeftNav from '@/components/LeftNav.vue'
 
 const Store = useStore()
-
 
 
 </script>
