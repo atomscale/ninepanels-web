@@ -78,7 +78,7 @@
       </Dialog>
     </TransitionRoot>
 
-    <div class="flex flex-col h-screen items-center w-full">
+    <div class="flex flex-col viewport-height items-center w-full">
       <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-30  w-full ">
         <div class="flex justify-between">
           <button type="button"

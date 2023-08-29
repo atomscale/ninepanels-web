@@ -65,3 +65,12 @@
 .data-heading {
   @apply text-sm font-light h-5 text-gray-500;
 }
+
+button:active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viewport-height {
+  height: calc(var(--vh, 1vh) * 100);
+}
