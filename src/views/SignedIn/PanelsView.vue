@@ -1,6 +1,6 @@
 <template>
   <PanelGridFrame />
-  <!-- <ConsistencyGrid /> -->
+  <ConsistencyGrid />
 </template>
 
 <script>

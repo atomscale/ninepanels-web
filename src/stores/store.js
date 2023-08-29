@@ -154,6 +154,7 @@ export const useStore = defineStore({
         },
         async getPanelConsistencyAction() {
             const access_token = VueCookies.get("9p_access_token")
+            // this.loadingBar = true
             this.visGridLoading = true
             try {
                 const response = await requests.getPanelConsistency(access_token)
@@ -163,6 +164,7 @@ export const useStore = defineStore({
                 setTimeout(() => this.messages.shift(), 5000)
             } finally {
                 this.visGridLoading = false
+                // this.loadingBar = false
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -175,7 +177,6 @@ export const useStore = defineStore({
             try {
                 await this.postEntryAction(panelId, panel.is_complete)
                 this.getPanelConsistencyAction()
-                console.log('actual /panels response rcvd')
             } catch (error) {
                 console.log('panel update failed, reverting')
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
