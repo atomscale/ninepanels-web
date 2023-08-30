@@ -177,16 +177,22 @@ export default {
         return false
       }
     },
-    shareApp() {
+    async shareApp() {
       if (navigator.share) {
         console.log("sharing")
-        navigator.share({
-          title: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
-          text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
-          url: "https://ninepanels.com",
-        })
-          .then(() => console.log('Successful share'))
-          .catch((error) => console.log('Error sharing', error));
+        try {
+
+          await navigator.share({
+            title: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            url: "https://ninepanels.com",
+          })
+
+        } catch (error) {
+          console.log(error)
+        }
+        // .then(() => console.log('Successful share'))
+        // .catch((error) => console.log('Error sharing', error));
       } else {
         this.toggleShareBox()
       }
