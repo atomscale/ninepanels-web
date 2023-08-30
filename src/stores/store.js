@@ -10,17 +10,20 @@ export const useStore = defineStore({
         entries: [],
         consistency: [],
         user: null,
+        showWelcome: false,
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
         leftNavIsOpen: false,
+        panelSortBoxIsOpen: false,
         primaryComponentName: null,
         primaryComponentProps: {},
-        panelSortBoxIsOpen: false,
         panelTitleEditState: false,
         panelDescEditState: false,
         entryLoading: false,
         loadingBar: false,
-        visGridLoading: false
+        visGridLoading: false,
+        visGridIsOpen: false,
+        deleteResetBoxIsOpen: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -152,8 +155,22 @@ export const useStore = defineStore({
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
+        async deleteEntriesAction(panel_id) {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.deleteEntries(access_token, panel_id)
+                await this.getPanelsAction()
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            } finally {
+                this.loadingBar = false
+            }
+        },
         async getPanelConsistencyAction() {
             const access_token = VueCookies.get("9p_access_token")
+            // this.loadingBar = true
             this.visGridLoading = true
             try {
                 const response = await requests.getPanelConsistency(access_token)
@@ -163,6 +180,7 @@ export const useStore = defineStore({
                 setTimeout(() => this.messages.shift(), 5000)
             } finally {
                 this.visGridLoading = false
+                // this.loadingBar = false
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -175,7 +193,6 @@ export const useStore = defineStore({
             try {
                 await this.postEntryAction(panelId, panel.is_complete)
                 this.getPanelConsistencyAction()
-                console.log('actual /panels response rcvd')
             } catch (error) {
                 console.log('panel update failed, reverting')
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })

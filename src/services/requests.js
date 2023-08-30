@@ -93,15 +93,6 @@ export default {
             }
         })
     },
-    getEntries(access_token) {
-
-        return apiClient.get("/entries", {
-            headers: {
-                Authorization: "Bearer " + access_token,
-            }
-
-        })
-    },
     postEntry(access_token, panel_id, is_complete) {
 
         return apiClient.post("/entries",
@@ -115,6 +106,13 @@ export default {
                 }
 
             })
+    },
+    deleteEntries(access_token, panel_id) {
+        return apiClient.delete("/panels/" + panel_id + '/entries', {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+        })
     },
     getPanelConsistency(access_token) {
 

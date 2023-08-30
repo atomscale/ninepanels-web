@@ -21,11 +21,22 @@ NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 const app = createApp(App)
 const pinia = createPinia()
 
+// dealing with viewport on mobile shenangigans
+const setViewportHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+// Listeners
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+
+setViewportHeight();
 
 app.use(router)
 app.use(pinia)
 
 app.use(VueScrollTo)
-app.use(VueCookies, {'expires': '30d'})
+app.use(VueCookies, { 'expires': '30d' })
 
 app.mount('#app')

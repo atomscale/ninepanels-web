@@ -1,10 +1,7 @@
 <template>
 
-
     <div>
       <LeftNav />
-
-
     </div>
 
   <div class="flex flex-col items-start fixed top-2 left-12 z-50" v-if="Store.messages">
@@ -23,22 +20,4 @@ import LeftNav from '@/components/LeftNav.vue'
 const Store = useStore()
 
 
-
 </script>
-
-<style scoped>
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1.5s ease;
-}
-</style>

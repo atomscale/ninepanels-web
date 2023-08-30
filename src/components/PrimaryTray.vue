@@ -50,6 +50,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import PanelDetail from '@/components/PanelDetail.vue'
 import PanelCreateForm from '@/components/PanelCreateForm.vue'
+import Welcome from '@/components/Welcome.vue'
 
 // const store = useStore()
 
@@ -64,6 +65,7 @@ export default {
       this.Store.panelTitleEditState = false
       this.Store.panelDescEditState = false
       this.Store.panelSortBoxIsOpen = false
+      this.Store.deleteResetBoxIsOpen = false
     }
   },
   components: {
@@ -74,7 +76,8 @@ export default {
     DialogTitle,
     XMarkIcon,
     PanelDetail,
-    PanelCreateForm
+    PanelCreateForm,
+    Welcome
   }
 }
 </script>

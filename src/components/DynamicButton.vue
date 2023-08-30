@@ -1,24 +1,24 @@
 <template>
     <div v-if="this.confirmRequired">
-        <button v-if="!this.buttonConfirmState" type="submit" @click="toggleConfirmState()" :aria-label="this.buttonText"
-            class="flex justify-center mb-4 border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-white text-gray-500 hover:text-gray-500 hover:bg-gray-50 transition ease-in-out duration-200 shadow-sm">
+        <button   v-if="!this.buttonConfirmState" type="submit" @click="toggleConfirmState()" :aria-label="this.buttonText"
+            class="flex justify-center border text-red-800 border-red-800 rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-white   transition ease-in-out duration-200 shadow-sm">
             {{ this.buttonText }}
         </button>
 
 
 
         <div v-else
-            class="flex justify-center mb-4 border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-white text-gray-500  shadow-sm">
+            class="flex justify-center  border border-red-800 bg-red-800 rounded-md w-full  max-w-sm  py-2 px-4 text-sm  text-white  shadow-sm">
             <button aria-label="Confirm button action"
                 class="px-2 mr-5 hover:scale-125 transition ease-in-out duration-200 " @click="dispatchParentMethod()">
 
-                <CheckIcon class="h-5 w-5 text-gray-400 " />
+                <CheckIcon class="h-5 w-5 text-white " />
             </button>
             <div>{{ this.confirmText }}</div>
             <button aria-label="Cancel" class=" top-3 px-2 ml-5 hover:scale-125 transition ease-in-out duration-200"
                 @click="toggleConfirmState()">
 
-                <XMarkIcon class="h-5 w-5 text-gray-400 " />
+                <XMarkIcon class="h-5 w-5 text-white " />
             </button>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <div v-else>
 
         <button type="submit" @click="dispatchParentMethod()" :aria-label="this.buttonText"
-            class="flex justify-center mb-4 border border-gray-200 rounded-md w-full mt-8 max-w-sm  py-2 px-4 text-sm bg-white text-gray-500 hover:text-gray-500 hover:bg-gray-50 transition ease-in-out duration-200 shadow-sm">
+            class="flex justify-center mb-4 border border-gray-200 rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-white text-gray-500  transition ease-in-out duration-200 shadow-sm">
             {{ this.buttonText }}
         </button>
     </div>
