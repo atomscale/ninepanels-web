@@ -21,7 +21,7 @@ NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 const app = createApp(App)
 const pinia = createPinia()
 
-import RollbarPlugin from './rollbar.js'
+import RollbarPlugin from '@/rollbar.js'
 
 
 // dealing with viewport on mobile shenangigans
