@@ -1,7 +1,8 @@
 <template>
   <div>
     <TransitionRoot as="template" :show="this.Store.leftNavIsOpen">
-      <Dialog as="div" class="relative z-40 " @close="this.Store.leftNavIsOpen = false">
+      <Dialog as="div" class="relative z-40 "
+        @close="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false">
         <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"
           enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100"
           leave-to="opacity-0">
@@ -18,8 +19,9 @@
               <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0"
                 enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="absolute top-0 right-0 -mr-12 pt-2">
-                  <button aria-label="Close sidebar" type="button" class="ml-1 flex h-10 w-10 items-center justify-center rounded-full "
-                    @click="this.Store.leftNavIsOpen = false">
+                  <button aria-label="Close sidebar" type="button"
+                    class="ml-1 flex h-10 w-10 items-center justify-center rounded-full "
+                    @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false">
                     <span class="sr-only">Close sidebar</span>
                     <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
                   </button>
@@ -27,11 +29,12 @@
               </TransitionChild>
 
               <div class="h-0 flex-1 overflow-y-auto pt-5 ">
-                <router-link @click="this.Store.leftNavIsOpen = false" :to="{ name: 'Landing' }"><img
-                    class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" /></router-link>
+                <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
+                  :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png"
+                    alt="9P logo" /></router-link>
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
-                  <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false"
-                    :to="{ name: 'Panels' }"
+                  <router-link v-if="this.accessTokenIsPresent()"
+                    @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'Panels' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <CalendarDaysIcon class="h-6 w-6" /><span class="ml-3">Nine Panels</span>
                   </router-link>
@@ -40,12 +43,19 @@
 
               <div class="mt-8">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-                  <router-link @click="this.Store.leftNavIsOpen = false" :to="{ name: 'About' }"
+                  <button @click="shareApp()"
+                    class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
+                  </button>
+                  <ShareBox v-if="this.Store.shareBoxIsOpen">
+                  </ShareBox>
+                  <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
+                    :to="{ name: 'About' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
                   </router-link>
-                  <router-link v-if="this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false"
-                    :to="{ name: 'Account' }"
+                  <router-link v-if="this.accessTokenIsPresent()"
+                    @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'Account' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Account</span>
                   </router-link>
@@ -53,13 +63,13 @@
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
                   </router-link>
-                  <router-link v-if="!this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false"
-                    :to="{ name: 'SignIn' }"
+                  <router-link v-if="!this.accessTokenIsPresent()"
+                    @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'SignIn' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Sign In</span>
                   </router-link>
-                  <router-link v-if="!this.accessTokenIsPresent()" @click="this.Store.leftNavIsOpen = false"
-                    :to="{ name: 'SignUp' }"
+                  <router-link v-if="!this.accessTokenIsPresent()"
+                    @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'SignUp' }"
                     class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <UserPlusIcon class="h-6 w-6" /><span class="ml-3">Sign Up</span>
                   </router-link>
@@ -105,7 +115,9 @@ import FlashMessage from '@/components/FlashMessage.vue'
 import Welcome from '@/components/Welcome.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
+import ShareBox from '@/components/ShareBox.vue'
 import NProgress from 'nprogress'
+import rollbar from '@/rollbarClient.js'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -126,7 +138,8 @@ import {
   GlobeEuropeAfricaIcon,
   CalculatorIcon,
   BeakerIcon,
-  GlobeAltIcon
+  GlobeAltIcon,
+  ShareIcon,
 } from '@heroicons/vue/24/outline'
 
 
@@ -150,7 +163,7 @@ export default {
   methods: {
     signUserOut() {
       this.Store.signUserOutAction()
-      this.Store.leftNavIsOpen = false
+      this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false
       this.Store.$reset()
       this.$router.push({ name: "Landing" })
     },
@@ -164,6 +177,34 @@ export default {
       } else {
         return false
       }
+    },
+    async shareApp() {
+      if (navigator.share) {
+        console.log("sharing")
+        try {
+
+          await navigator.share({
+            title: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            url: "https://ninepanels.com",
+          })
+          if (this.Store.user) {
+            rollbar.info("shared using WebShare by " + this.Store.user.name)
+          } else {
+            rollbar.info("shared using WebShare API by a logged out visitor or this.Store.user unavailbale")
+          }
+
+        } catch (error) {
+          console.log(error)
+        }
+        // .then(() => console.log('Successful share'))
+        // .catch((error) => console.log('Error sharing', error));
+      } else {
+        this.toggleShareBox()
+      }
+    },
+    toggleShareBox() {
+      this.Store.shareBoxIsOpen = !this.Store.shareBoxIsOpen
     }
 
   },
@@ -192,7 +233,9 @@ export default {
     GlobeEuropeAfricaIcon,
     GlobeAltIcon,
     CalendarDaysIcon,
-    Welcome
+    Welcome,
+    ShareIcon,
+    ShareBox
   }
 }
 

@@ -60,11 +60,15 @@ export default {
       } else {
         this.Store.loadingBar = true
         this.Store.primaryTrayIsOpen = false
-        await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
-        this.Store.getPanelConsistencyAction()
-        this.Store.loadingBar = false
-        this.Store.primaryComponentName = null
-        this.Store.primaryComponentProps = {}
+        try {
+          await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
+          this.Store.getPanelConsistencyAction()
+        } finally {
+
+          this.Store.loadingBar = false
+          this.Store.primaryComponentName = null
+          this.Store.primaryComponentProps = {}
+        }
       }
     },
     updateLen() {
