@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
+import rollbar from '@/rollbarClient.js'
 
 export const useStore = defineStore({
     id: '',
@@ -59,12 +60,13 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
+            rollbar.info("New user " + name + "signed up on the app")
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
                 return true
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "error in sign up", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
                 return false
             }

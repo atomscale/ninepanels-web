@@ -21,6 +21,9 @@ NProgress.configure({ trickleRate: 0.2, trickleSpeed: 400 });
 const app = createApp(App)
 const pinia = createPinia()
 
+import RollbarPlugin from './rollbar.js'
+
+
 // dealing with viewport on mobile shenangigans
 const setViewportHeight = () => {
     const vh = window.innerHeight * 0.01;
@@ -35,6 +38,7 @@ setViewportHeight();
 
 app.use(router)
 app.use(pinia)
+app.use(RollbarPlugin)
 
 app.use(VueScrollTo)
 app.use(VueCookies, { 'expires': '30d' })

@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <DynamicButton class="mb-4" :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
+    <DynamicButton class="mb-4" :parentMethod="sendUserDelete" :confirmRequired="false" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
   </div>
 </template>
 
@@ -19,6 +19,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import rollbar from '@/rollbarClient.js'
 
 import DynamicButton from '@/components/DynamicButton.vue'
 
@@ -37,7 +38,7 @@ export default {
       await this.Store.getUserAction()
     }
   },
-  created() {
+  mounted() {
     this.getUserActionMethod()
   },
   components: {
