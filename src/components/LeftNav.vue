@@ -182,7 +182,7 @@ export default {
         console.log("sharing")
         navigator.share({
           title: 'A consistent, balanced life with Nine Panels.',
-          text: 'Hey, I found this and thought you might enjoy it. [https://ninepanels.com]',
+          text: "I've been using Nine Panels to help be have balanced days, consistently. Being able to see my daily consistency is so helpful!",
           url: window.location.href,
         })
           .then(() => console.log('Successful share'))
