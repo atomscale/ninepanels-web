@@ -1,8 +1,6 @@
 <template>
-    <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md flex flex-col justify-center items-center">
-            <div class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-600"></div>
-        </div>
+    <div class="flex h-full flex-col  justify-between py-6 mt-4 sm:px-6 lg:px-8">
+
 
         <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
@@ -30,8 +28,8 @@
                         </div>
                     </div>
 
-                    <div>
-                        <DynamicButton :parentMethod="sendLogIn" :buttonText="'Sign in'" :confirmRequired="false" />
+                    <div class="flex justify-center">
+                        <DynamicButton class="w-full" :parentMethod="sendLogIn" :buttonText="'Sign in'" :confirmRequired="false" />
                     </div>
                 </form>
             </div>

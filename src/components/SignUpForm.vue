@@ -1,9 +1,6 @@
 <template>
-    <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8 ">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md flex flex-col justify-center items-center">
-            <!-- <h2 class="mt-4 text-center text-3xl font-bold tracking-tight text-gray-600">Sign up to get started</h2> -->
-            <div class="mt-4"></div>
-        </div>
+    <div class="flex min-h-full flex-col justify-between py-6 mt-4 sm:px-6 lg:px-8 ">
+
 
 
         <div class=" sm:mx-auto sm:w-full sm:max-w-md">
