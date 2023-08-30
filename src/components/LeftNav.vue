@@ -181,9 +181,9 @@ export default {
       if (navigator.share) {
         console.log("sharing")
         navigator.share({
-          title: 'Lead a consistent, balanced life with Nine Panels: https://ninepanels.com',
-          text: 'Lead a consistent, balanced life with Nine Panels: https://ninepanels.com',
-          url: window.location.href,
+          title: 'Lead a balanced life, every day. Nine Panels bring visbility to your daily consistency, helping you maintain awareness and connection to the most important areas of your life.',
+          text: 'Lead a balanced life, every day. Nine Panels bring visbility to your daily consistency, helping you maintain awareness and connection to the most important areas of your life.',
+          url: "https://ninepanels.com",
         })
           .then(() => console.log('Successful share'))
           .catch((error) => console.log('Error sharing', error));
