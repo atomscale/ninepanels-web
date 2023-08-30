@@ -13,7 +13,7 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-
+import rollbar from '@/rollbarClient.js'
 import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 
 export default {
@@ -25,13 +25,15 @@ export default {
   },
   methods: {
     whatsApp() {
-      const msg = encodeURIComponent("A consistent, balanced life with Nine Panels. [https://ninepanels.com]")
+      const msg = encodeURIComponent("Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]")
       window.location.href = `whatsapp://send?text=${msg}`
+      rollbar.info(`shared to whatsapp not using WebShare by ${this.Store.user.name}`)
     },
     email() {
-      const subject = encodeURIComponent("A consistent, balanced life with Nine Panels. [https://ninepanels.com]");
-      const body = encodeURIComponent("Hey, I found this and thought you might enjoy it. [https://ninepanels.com]");
+      const subject = encodeURIComponent("Lead a balanced life, every day.");
+      const body = encodeURIComponent("Nine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]");
       window.location.href = `mailto:?subject=${subject}&body=${body}`
+      rollbar.info(`shared to email not using WebShare by ${this.Store.user.name}`)
     }
   }
 }

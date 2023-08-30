@@ -117,6 +117,7 @@ import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
 import ShareBox from '@/components/ShareBox.vue'
 import NProgress from 'nprogress'
+import rollbar from '@/rollbarClient.js'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
@@ -187,6 +188,7 @@ export default {
             text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
             url: "https://ninepanels.com",
           })
+          rollbar.info(`shared using WebShare API by ${this.Store.user.name}`)
 
         } catch (error) {
           console.log(error)
