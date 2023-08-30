@@ -4,7 +4,7 @@
                 <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
                     <div class="aspect-content">
                         <transition name="fade" appear>
-                            <button @click="cycleStats()" :class="panelStyle(i)"
+                            <button aria-label="Cycle through consistency stats" @click="cycleStats()" :class="panelStyle(i)"
                                 class="flex items-center justify-center rounded-lg ">
                                 <div class="flex text-xs flex-col"
                                     v-if="this.Store.consistency[i - 1] && this.showFraction">

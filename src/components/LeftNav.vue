@@ -18,7 +18,7 @@
               <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0"
                 enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="absolute top-0 right-0 -mr-12 pt-2">
-                  <button type="button" class="ml-1 flex h-10 w-10 items-center justify-center rounded-full "
+                  <button aria-label="Close sidebar" type="button" class="ml-1 flex h-10 w-10 items-center justify-center rounded-full "
                     @click="this.Store.leftNavIsOpen = false">
                     <span class="sr-only">Close sidebar</span>
                     <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
@@ -81,7 +81,7 @@
     <div class="flex flex-col viewport-height items-center w-full">
       <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-30  w-full ">
         <div class="flex justify-between">
-          <button type="button"
+          <button type="button" aria-label="Open sidebar"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
             @click="this.Store.leftNavIsOpen = true">
             <span class="sr-only">Open sidebar</span>
