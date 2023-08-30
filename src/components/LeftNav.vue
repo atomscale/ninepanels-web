@@ -181,8 +181,8 @@ export default {
       if (navigator.share) {
         console.log("sharing")
         navigator.share({
-          title: 'Lead a balanced life, every day. \n Nine Panels brings visibility to your daily consistency, helping maintain awareness and connection to the most important areas of your life.',
-          text: 'Lead a balanced life, every day. \n Nine Panels brings visibility to your daily consistency, helping maintain awareness and connection to the most important areas of your life.',
+          title: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+          text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
           url: "https://ninepanels.com",
         })
           .then(() => console.log('Successful share'))
