@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-between h-full">
+  <div class="flex flex-col justify-between  h-full">
     <div>
       <PanelGridFrame />
     </div>
@@ -12,7 +12,7 @@
           <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
         </div>
       </button>
-      <div v-if="this.Store.visGridIsOpen" class="mb-6">
+      <div v-if="this.Store.visGridIsOpen" class="pt-2 mb-6">
         <ConsistencyGrid />
       </div>
     </div>
