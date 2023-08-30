@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <DynamicButton :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
+    <DynamicButton class="mb-4" :parentMethod="sendUserDelete" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
   </div>
 </template>
 

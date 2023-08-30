@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.confirmRequired">
+    <div  v-if="this.confirmRequired">
         <button   v-if="!this.buttonConfirmState" type="submit" @click="toggleConfirmState()" :aria-label="this.buttonText"
             class="flex justify-center border text-red-800 border-red-800 rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-white   transition ease-in-out duration-200 shadow-sm">
             {{ this.buttonText }}

@@ -48,11 +48,12 @@
         </div>
       </button>
       <div v-if="this.Store.deleteResetBoxIsOpen">
-
-        <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset panel'"
-          :confirmRequired="true" :confirmText="'Reset this panel?'" />
+        <div class="text-xs text-gray-500 font-light">Need a fresh start on this panel? Reset the completion history and clear all your stats:</div>
+        <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
+          :confirmRequired="true" :confirmText="'Reset all stats?'" />
+        <div class="text-xs text-gray-500 font-light">Delete the entire panel, including all completion history:</div>
         <DynamicButton class="mt-2 mb-4" :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
-          :confirmRequired="true" :confirmText="'Delete? Are you sure?'" />
+          :confirmRequired="true" :confirmText="'Delete forever?'" />
       </div>
 
     </div>

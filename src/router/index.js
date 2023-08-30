@@ -72,6 +72,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = useStore()
   // const user = store.user
+  store.visGridIsOpen = false
   const access_token = VueCookies.get("9p_access_token")
   if (to.path === '/') {
     if (access_token) {
