@@ -189,9 +189,9 @@ export default {
             url: "https://ninepanels.com",
           })
           if (this.Store.user) {
-            rollbar.info("shared using WebShare by " + this.Store.user)
+            rollbar.info("shared using WebShare by " + this.Store.user.name)
           } else {
-            rollbar.info("shared using WebShare API by a logged out visitor")
+            rollbar.info("shared using WebShare API by a logged out visitor or this.Store.user unavailbale")
           }
 
         } catch (error) {
