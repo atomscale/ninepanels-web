@@ -188,7 +188,11 @@ export default {
             text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
             url: "https://ninepanels.com",
           })
-          rollbar.info(`shared using WebShare API by ${this.Store.user.name}`)
+          if (this.Store.user) {
+            rollbar.info(`shared using WebShare API by ${this.Store.user.name}`)
+          } else {
+            rollbar.info(`shared using WebShare API by a logged out visitor`)
+          }
 
         } catch (error) {
           console.log(error)

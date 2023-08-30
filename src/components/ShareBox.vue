@@ -27,13 +27,23 @@ export default {
     whatsApp() {
       const msg = encodeURIComponent("Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]")
       window.location.href = `whatsapp://send?text=${msg}`
-      rollbar.info(`shared to whatsapp not using WebShare by ${this.Store.user.name}`)
+      if (this.Store.user) {
+
+        rollbar.info(`shared to whatsapp not using WebShare by ${this.Store.user.name}`)
+      } else {
+        rollbar.info(`shared to whatsapp not using WebShare by a logged out visitor`)
+      }
     },
     email() {
       const subject = encodeURIComponent("Lead a balanced life, every day.");
       const body = encodeURIComponent("Nine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]");
       window.location.href = `mailto:?subject=${subject}&body=${body}`
-      rollbar.info(`shared to email not using WebShare by ${this.Store.user.name}`)
+      if (this.Store.user) {
+        rollbar.info(`shared to email not using WebShare by ${this.Store.user.name}`)
+
+      } else {
+        rollbar.info(`shared to whatsapp not using WebShare by a logged out visitor`)
+      }
     }
   }
 }
