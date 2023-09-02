@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full flex-col justify-between py-6 mt-4 sm:px-6 lg:px-8 ">
+    <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4 ">
 
 
 
@@ -19,9 +19,9 @@
                         <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="'Get a reset email'"
                             :confirmRequired="false" />
                     </div>
-                    <div class="font-light text-xs text-gray-500">You will receive an email you a reset link to click. This
-                        is valid for one hour. Click the link to set a new password. <br /><br />The email will come from
-                        <span class="font-semibold">ben@ninepanels.com.</span> <br/> <br/>Feel free to email me if you need any help. 👍
+                    <div class="font-light text-xs text-gray-500">You will receive an email with a reset link to click. This
+                        is valid for one hour. Click the link in the email to set a new password. <br /><br />The email will come from
+                        <span class="">ben@ninepanels.com.</span> <br/> <br/>Feel free to email me if you need any help. 👍
                     </div>
                 </form>
             </div>

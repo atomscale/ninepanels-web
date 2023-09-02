@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full flex-col px-4 justify-between py-6 mt-4  ">
+    <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4  ">
 
             <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">

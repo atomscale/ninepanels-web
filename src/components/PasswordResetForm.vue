@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full flex-col justify-between py-6 mt-4 sm:px-6 lg:px-8 ">
+    <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4">
 
 
 
@@ -66,9 +66,8 @@ export default {
         return {
             password_first: '',
             password_second: '',
-            passwordMismatch: false,
             passwordVisible: false,
-            user_id: this.$route.query.user_id,
+            email: this.$route.query.email,
             password_reset_token: this.$route.query.password_reset_token
         }
     },
@@ -79,19 +78,18 @@ export default {
         async dispatchPasswordReset() {
 
             if (this.password_first !== this.password_second) {
-                this.passwordMismatch = true
                 this.Store.messages.push({ message: "New passwords do not match" })
                 setTimeout(() => this.Store.messages.shift(), 5000)
                 return // stop function
             }
 
             this.Store.loadingBar = true
-            const resp = await this.Store.sendPasswordReset(this.password_second, this.user_id, this.password_reset_token)
+            const resp = await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
             this.Store.loadingBar = false
             this.password_first = ''
             this.password_second = ''
             if (resp) {
-                this.$router.push({ name: 'Panels' })
+                this.$router.push({ name: 'SignIn' })
             }
         },
         togglePasswordVisibility() {

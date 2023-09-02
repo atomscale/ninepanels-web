@@ -222,6 +222,21 @@ export const useStore = defineStore({
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
+        async sendPasswordReset(password, email, password_reset_token) {
+            try {
+                const response = await requests.postPasswordReset(password, email, password_reset_token)
+                if (response.status == 200) {
+                    this.messages.push({ message: 'Password successfully reset. Please sign in', error: false })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: 'Something went wrong... email me!', error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
     }
 },
 )

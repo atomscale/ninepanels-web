@@ -131,4 +131,14 @@ export default {
             form,
         )
     },
+    postPasswordReset(new_password, email, password_reset_token) {
+        const form = new URLSearchParams()
+        form.append('new_password', new_password)
+        form.append('email', email)
+        form.append('password_reset_token', password_reset_token)
+
+        return apiClient.post("/password_reset",
+            form,
+        )
+    },
 }
