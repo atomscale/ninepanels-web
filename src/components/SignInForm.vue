@@ -2,7 +2,7 @@
     <div class="flex h-full flex-col mt-4 justify-between py-6 px-4">
 
 
-            <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
+            <div class="bg-white py-4  sm:rounded-lg sm:px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                     <div>
                         <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
