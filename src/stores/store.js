@@ -206,7 +206,22 @@ export const useStore = defineStore({
                 this.entryLoading = false
                 this.loadingBar = false
             }
-        }
+        },
+        async startPasswordResetFlow(email) {
+            try {
+                const response = await requests.postPasswordResetRequest(email)
+                if (response.status == 200) {
+                    this.messages.push({ message: 'Sent you the password reset email', error: false })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: 'Something went wrong... email me!', error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
+            } catch (error) {
+                this.messages.push({ message: error.response.data.detail, error: true })
+                setTimeout(() => this.messages.shift(), 5000)
+            }
+        },
     }
 },
 )

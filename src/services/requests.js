@@ -123,4 +123,12 @@ export default {
 
         })
     },
+    postPasswordResetRequest(email) {
+        const form = new URLSearchParams()
+        form.append('email', email)
+
+        return apiClient.post("/request_password_reset",
+            form,
+        )
+    },
 }

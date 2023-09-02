@@ -1,8 +1,7 @@
 <template>
-    <div class="flex h-full flex-col  justify-between py-6 mt-4 sm:px-6 lg:px-8">
+    <div class="flex h-full flex-col mt-4 justify-between py-6 px-4">
 
 
-        <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-4 px-4  sm:rounded-lg sm:px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                     <div>
@@ -31,10 +30,12 @@
                     <div class="flex justify-center">
                         <DynamicButton class="w-full" :parentMethod="sendLogIn" :buttonText="'Sign in'" :confirmRequired="false" />
                     </div>
+                    <div class="font-light text-xs text-gray-500">
+                        <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
 </template>
 
 <script>

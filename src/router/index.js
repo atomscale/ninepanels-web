@@ -5,6 +5,7 @@ import Landing from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
 import AboutView from '@/views/SignedOut/AboutView.vue'
+import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
 import { useStore } from '@/stores/store.js'
 
 import VueCookies from 'vue-cookies'
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/signin',
       name: 'SignIn',
       component: SignInView,
+    },
+    {
+      path: '/password_reset',
+      name: 'PasswordReset',
+      component: PasswordResetView,
     },
     {
       path: '/about',
