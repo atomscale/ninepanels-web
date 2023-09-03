@@ -43,7 +43,6 @@
                     <div class="font-light text-xs text-gray-500">
                         If you are having any bother resetting your password, feel free to email me at <span class="font-semibold">ben@ninepanels.com</span> 👍
                     </div>
-                    <div class="text-xs font-light">{{ this.password_reset_token }}</div>
 
             </form>
         </div>
@@ -83,9 +82,7 @@ export default {
                 return // stop function
             }
 
-            this.Store.loadingBar = true
             const resp = await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
-            this.Store.loadingBar = false
             this.password_first = ''
             this.password_second = ''
             if (resp) {

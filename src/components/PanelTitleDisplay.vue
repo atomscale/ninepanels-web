@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="text-2xl font-bold text-gray-600 w-auto">{{ panel.title }}</div>
+    <div class="text-xl font-bold text-gray-600 w-auto">{{ panel.title }}</div>
 
   </div>
 </template>

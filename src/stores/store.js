@@ -26,6 +26,7 @@ export const useStore = defineStore({
         visGridIsOpen: false,
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
+        passwordResetRequested: false
     }),
     actions: {
         async getLoginTokenAction(email, password) {
@@ -35,7 +36,7 @@ export const useStore = defineStore({
                 await this.getUserAction()
                 return response.data.access_token
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
@@ -45,7 +46,7 @@ export const useStore = defineStore({
                 const response = await requests.deleteUser(access_token)
                 this.signUserOutAction()
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
@@ -85,7 +86,7 @@ export const useStore = defineStore({
                     })
                     .catch(error => {
 
-                        this.messages.push({ message: error.response.data.detail, error: true })
+                        this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
@@ -99,7 +100,7 @@ export const useStore = defineStore({
                 const response = await requests.postPanel(access_token, position, title, description)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
@@ -110,7 +111,7 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return true
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
                 return false
             }
@@ -121,7 +122,7 @@ export const useStore = defineStore({
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
@@ -134,7 +135,7 @@ export const useStore = defineStore({
                         return response.data
                     })
                     .catch(error => {
-                        this.messages.push({ message: error.response.data.detail, error: true })
+                        this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                         setTimeout(() => this.messages.shift(), 5000)
                     })
             } else {
@@ -154,7 +155,7 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return response.data
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             }
         },
@@ -165,7 +166,7 @@ export const useStore = defineStore({
                 const response = await requests.deleteEntries(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             } finally {
                 this.loadingBar = false
@@ -179,7 +180,7 @@ export const useStore = defineStore({
                 const response = await requests.getPanelConsistency(access_token)
                 this.consistency = response.data
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
             } finally {
                 this.visGridLoading = false
@@ -208,33 +209,48 @@ export const useStore = defineStore({
             }
         },
         async startPasswordResetFlow(email) {
+            this.loadingBar = true
             try {
                 const response = await requests.postPasswordResetRequest(email)
                 if (response.status == 200) {
-                    this.messages.push({ message: 'Sent you the password reset email', error: false })
-                    setTimeout(() => this.messages.shift(), 5000)
+                    this.messages.push({ message: 'Sent you the password reset email...', error: false })
+                    setTimeout(() => this.messages.shift(), 7000)
+                    return true
                 } else {
                     this.messages.push({ message: 'Something went wrong... email me!', error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
+                    setTimeout(() => this.messages.shift(), 7000)
+                    return false
                 }
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "network error?", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
+            } finally {
+                this.loadingBar = false
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
+            this.loadingBar = true
             try {
                 const response = await requests.postPasswordReset(password, email, password_reset_token)
                 if (response.status == 200) {
                     this.messages.push({ message: 'Password successfully reset. Please sign in', error: false })
                     setTimeout(() => this.messages.shift(), 5000)
+                    return true
                 } else {
                     this.messages.push({ message: 'Something went wrong... email me!', error: true })
                     setTimeout(() => this.messages.shift(), 5000)
+                    return false
                 }
             } catch (error) {
-                this.messages.push({ message: error.response.data.detail, error: true })
+                this.messages.push({ message: "error in password reset", error: true })
                 setTimeout(() => this.messages.shift(), 5000)
+            } finally {
+                this.loadingBar = false
             }
         },
     }

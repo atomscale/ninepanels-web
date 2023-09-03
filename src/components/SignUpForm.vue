@@ -3,6 +3,7 @@
 
             <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
+                    <div class="font-bold text-xl text-gray-500 ">Consistent balance awaits...</div>
                     <div>
                         <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
                         <div class="mt-1">
@@ -64,6 +65,14 @@
                     <div class="font-light text-xs text-gray-500">By signing up you also agree to a single, lonely
                         little cookie being stored on your device (so you can be kept logged in between visits).</div>
                 </form>
+                <div class="flex justify-between mt-6">
+                    <div class="font-light text-xs text-gray-500">
+                        <router-link :to=" { name: 'SignIn' }">Sign in instead</router-link>
+                    </div>
+                    <div class="font-light text-xs text-gray-500">
+                        <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
+                    </div>
+                </div>
             </div>
         </div>
 

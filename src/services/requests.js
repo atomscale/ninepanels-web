@@ -1,17 +1,7 @@
 import axios from "axios"
 
-let baseURL
-
-if (import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION") {
-    baseURL = "https://api.ninepanels.com"
-} else if (import.meta.env.VITE_NINEPANELS_ENV === "STAGING") {
-    baseURL = "https://ninepanels-staging.onrender.com"
-} else {
-    baseURL = "http://127.0.0.1:8000"
-}
-
 const apiClient = axios.create({
-    baseURL: baseURL,
+    baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
 });
 
 export default {
