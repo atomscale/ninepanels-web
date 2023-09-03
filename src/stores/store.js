@@ -36,8 +36,13 @@ export const useStore = defineStore({
                 await this.getUserAction()
                 return response.data.access_token
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             }
         },
         async deleteUserAction() {
@@ -46,8 +51,13 @@ export const useStore = defineStore({
                 const response = await requests.deleteUser(access_token)
                 this.signUserOutAction()
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             }
         },
         signUserOutAction() {
@@ -62,14 +72,19 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
-            rollbar.info("New user " + name + "signed up on the app")
+            // rollbar.info("New user " + name + " signed up on the app")
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
                 return true
             } catch (error) {
-                this.messages.push({ message: "error in sign up", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
                 return false
             }
         },
@@ -86,8 +101,13 @@ export const useStore = defineStore({
                     })
                     .catch(error => {
 
-                        this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                        setTimeout(() => this.messages.shift(), 5000)
+                        if (error.response.status) {
+                            this.messages.push({ message: error.response.data.detail, error: true })
+                            setTimeout(() => this.messages.shift(), 5000)
+                        } else {
+                            this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                            setTimeout(() => this.messages.shift(), 5000)
+                        }
                     })
             } else {
                 this.messages.push({ message: "There's an issue with your credentials... 😬", error: true })
@@ -100,8 +120,13 @@ export const useStore = defineStore({
                 const response = await requests.postPanel(access_token, position, title, description)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             }
         },
         async updatePanelAction(panel_id, update) {
@@ -111,8 +136,13 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return true
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
                 return false
             }
         },
@@ -122,8 +152,13 @@ export const useStore = defineStore({
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             }
         },
         getPanelsAction() {
@@ -135,8 +170,13 @@ export const useStore = defineStore({
                         return response.data
                     })
                     .catch(error => {
-                        this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                        setTimeout(() => this.messages.shift(), 5000)
+                        if (error.response.status) {
+                            this.messages.push({ message: error.response.data.detail, error: true })
+                            setTimeout(() => this.messages.shift(), 5000)
+                        } else {
+                            this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                            setTimeout(() => this.messages.shift(), 5000)
+                        }
                     })
             } else {
                 this.messages.push({ message: "Having a bit of trouble getting your panels... 😬", error: true })
@@ -155,8 +195,13 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return response.data
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             }
         },
         async deleteEntriesAction(panel_id) {
@@ -166,8 +211,13 @@ export const useStore = defineStore({
                 const response = await requests.deleteEntries(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             } finally {
                 this.loadingBar = false
             }
@@ -180,8 +230,13 @@ export const useStore = defineStore({
                 const response = await requests.getPanelConsistency(access_token)
                 this.consistency = response.data
             } catch (error) {
-                this.messages.push({ message: "Error msg that will be improved... sorry", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
             } finally {
                 this.visGridLoading = false
                 // this.loadingBar = false
@@ -226,7 +281,7 @@ export const useStore = defineStore({
                     this.messages.push({ message: error.response.data.detail, error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 } else {
-                    this.messages.push({ message: "network error?", error: true })
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 }
             } finally {
