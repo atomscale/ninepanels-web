@@ -28,7 +28,7 @@
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
@@ -43,7 +43,7 @@
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
                                 class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
