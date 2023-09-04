@@ -1,17 +1,7 @@
 import axios from "axios"
 
-let baseURL
-
-if (import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION") {
-    baseURL = "https://api.ninepanels.com"
-} else if (import.meta.env.VITE_NINEPANELS_ENV === "STAGING") {
-    baseURL = "https://ninepanels-staging.onrender.com"
-} else {
-    baseURL = "http://127.0.0.1:8000"
-}
-
 const apiClient = axios.create({
-    baseURL: baseURL,
+    baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
 });
 
 export default {
@@ -122,5 +112,23 @@ export default {
             }
 
         })
+    },
+    postPasswordResetRequest(email) {
+        const form = new URLSearchParams()
+        form.append('email', email)
+
+        return apiClient.post("/request_password_reset",
+            form,
+        )
+    },
+    postPasswordReset(new_password, email, password_reset_token) {
+        const form = new URLSearchParams()
+        form.append('new_password', new_password)
+        form.append('email', email)
+        form.append('password_reset_token', password_reset_token)
+
+        return apiClient.post("/password_reset",
+            form,
+        )
     },
 }

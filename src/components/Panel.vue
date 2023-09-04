@@ -10,7 +10,7 @@
     </button>
     <button @click="this.openPrimaryTray()" class="absolute   top-1 right-1 p-6 "
       :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-gray-300' : 'text-gray-600'">
-      <InformationCircleIcon class="absolute top-0.5 right-0.5 h-6 text-gray-400" />
+      <ArrowTopRightOnSquareIcon class="absolute top-0.5 right-0.5 h-4 text-gray-400" />
     </button>
   </div>
 </template>
@@ -21,7 +21,8 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import {
-  InformationCircleIcon
+  InformationCircleIcon,
+  ArrowTopRightOnSquareIcon
 } from '@heroicons/vue/24/outline'
 
 export default {
@@ -46,7 +47,8 @@ export default {
     }
   },
   components: {
-    InformationCircleIcon
+    InformationCircleIcon,
+    ArrowTopRightOnSquareIcon
   }
 }
 
