@@ -2,32 +2,32 @@
   <div class="flex h-full flex-col mx-auto justify-between ">
 
     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-white   sm:rounded-lg  ">
-        <div class="text-gray-600  text-sm">
-
-          <div class="m-4 font-light">Being consistent at one thing is hard.
+      <div class="bg-white   sm:rounded-lg  mt-2">
+        <div class="text-gray-600  text-sm space-y-3 mx-4 font-light">
+          <div class="text-2xl text-gray-500 font-bold">Daily balance meets long term consistency.</div>
+          <div class="">I've always found being consistent at one thing quite hard.
           </div>
-          <div class="m-4 font-light">Being consistent at all the things
-            seems impossible.
+          <div class="">Being consistent at all the things
+            seems impossible!
           </div>
-          <div class="m-4 font-light">If consistency is attained in one thing, sight is lost of all the other things.
+          <div class="">For me, if consistency is attained in one thing, sight is lost of all the other things.
           </div>
-          <div class="m-4 font-light">This can cause problems.
+          <div class="">This can cause problems.
           </div>
-          <div class="m-4 font-light">So, I built a simplistic app to help keep all my things visible. (well, up to nine
+          <div class="">So, I built a simple app to help keep all my important things visible and keep an eye on my consistency. (well, up to nine
             of them...)
           </div>
-          <div class="m-4 font-light">I told my friend about it, he said it might be useful to him.
+          <div class="">I told my friend about it, he said it might be useful to him, and it has been.
           </div>
-          <div class="m-4 font-light">Then I thought, let's make it free to everyone, forever (and never, ever run ads!).
+          <div class="">So I thought, let's make it free to everyone, forever (and never, ever run ads!).
           </div>
-          <div class="m-4 font-light">So here we are, at ninepanels.com.
+          <div class="">So here we are, at ninepanels.com.
           </div>
-          <div class="m-4 font-light"> It's still early and unfinished. Get in touch with feedback or ideas:
+          <div class=""> It's open source, still early and unfinished. Get in touch with feedback or ideas:
           </div>
-          <div class="m-4 font-bold"><a href="https://github.com/atomscale/ninepanels" target="_blank">Github</a></div>
-          <div class="m-4 font-bold"><a href="mailto:ben@atomscale.co" target="_blank">Email</a></div>
-          <div class="m-4 font-light"> Thanks, Ben
+          <div class="font-bold"><a href="https://github.com/atomscale/ninepanels" target="_blank">Github</a></div>
+          <div class="font-bold"><a href="mailto:ben@ninepanels.com" target="_blank">Email me</a></div>
+          <div class=""> Thanks, Ben
           </div>
 
         </div>

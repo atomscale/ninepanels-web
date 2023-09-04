@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     whatsApp() {
-      const msg = encodeURIComponent("Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]")
+      const msg = encodeURIComponent("Daily balance, long-term consistency.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]")
       window.location.href = `whatsapp://send?text=${msg}`
       if (this.Store.user) {
 
@@ -35,7 +35,7 @@ export default {
       }
     },
     email() {
-      const subject = encodeURIComponent("Lead a balanced life, every day.");
+      const subject = encodeURIComponent("Daily balance, long-term consistency.");
       const body = encodeURIComponent("Nine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]");
       window.location.href = `mailto:?subject=${subject}&body=${body}`
       if (this.Store.user) {
