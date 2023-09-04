@@ -97,6 +97,9 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
+          <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help" class="pb-1 pr-4">
+            <QuestionMarkCircleIcon class="text-gray-300 h-6" />
+          </button>
         </div>
       </div>
       <main class="max-w-md h-full w-full">
@@ -115,6 +118,7 @@ import FlashMessage from '@/components/FlashMessage.vue'
 import Welcome from '@/components/Welcome.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
+import HelpDetail from '@/components/HelpDetail.vue'
 import ShareBox from '@/components/ShareBox.vue'
 import NProgress from 'nprogress'
 import rollbar from '@/rollbarClient.js'
@@ -160,6 +164,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.Store.getUserAction()
+  },
   methods: {
     signUserOut() {
       this.Store.signUserOutAction()
@@ -184,8 +191,8 @@ export default {
         try {
 
           await navigator.share({
-            title: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
-            text: 'Lead a balanced life, every day.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            title: 'Daily balance, long-term consistency.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
+            text: 'Daily balance, long-term consistency.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life.',
             url: "https://ninepanels.com",
           })
           if (this.Store.user) {
@@ -205,6 +212,11 @@ export default {
     },
     toggleShareBox() {
       this.Store.shareBoxIsOpen = !this.Store.shareBoxIsOpen
+    },
+    openHelpTray() {
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'HelpDetail'
+      this.Store.primaryComponentProps = null
     }
 
   },
@@ -235,7 +247,8 @@ export default {
     CalendarDaysIcon,
     Welcome,
     ShareIcon,
-    ShareBox
+    ShareBox,
+    HelpDetail
   }
 }
 

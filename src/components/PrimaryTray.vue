@@ -49,6 +49,7 @@ import { mapStores } from 'pinia'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import PanelDetail from '@/components/PanelDetail.vue'
+import HelpDetail from '@/components/HelpDetail.vue'
 import PanelCreateForm from '@/components/PanelCreateForm.vue'
 import Welcome from '@/components/Welcome.vue'
 
@@ -76,6 +77,7 @@ export default {
     DialogTitle,
     XMarkIcon,
     PanelDetail,
+    HelpDetail,
     PanelCreateForm,
     Welcome
   }
