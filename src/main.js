@@ -36,7 +36,12 @@ window.addEventListener('orientationchange', setViewportHeight);
 
 
 
-
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  app.config.globalProperties.$deferredPrompt = deferredPrompt;
+});
 
 
 

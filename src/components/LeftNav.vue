@@ -233,7 +233,7 @@ export default {
       this.Store.primaryComponentProps = null
     },
     async installPWA() {
-      const deferredPrompt = this.Store.deferredPrompt;
+      const deferredPrompt = this.$deferredPrompt;
       if (!deferredPrompt) return;
 
       deferredPrompt.prompt();
