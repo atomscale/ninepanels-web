@@ -97,9 +97,16 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help" class="pb-1 pr-4">
-            <QuestionMarkCircleIcon class="text-gray-300 h-6" />
-          </button>
+          <div class="pt-2">
+            <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
+              class="pb-1 pr-4">
+              <QuestionMarkCircleIcon class="text-gray-300 h-5" />
+            </button>
+            <button v-if="this.Store.user" @click="this.installPWA()" type="button"
+              aria-label="Install app to device as progressive web app" class="pr-4">
+              <ArrowDownOnSquareIcon class="text-gray-300 h-6" />
+            </button>
+          </div>
         </div>
       </div>
       <main class="max-w-md h-full w-full">
@@ -144,6 +151,7 @@ import {
   BeakerIcon,
   GlobeAltIcon,
   ShareIcon,
+  ArrowDownOnSquareIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -166,6 +174,12 @@ export default {
   },
   mounted() {
     this.Store.getUserAction()
+    let deferredPrompt
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault()
+      deferredPrompt = e
+      this.Store.deferredPrompt = deferredPrompt
+    })
   },
   methods: {
     signUserOut() {
@@ -217,7 +231,22 @@ export default {
       this.Store.primaryTrayIsOpen = true
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
-    }
+    },
+    async installPWA() {
+      const deferredPrompt = this.Store.deferredPrompt;
+      if (!deferredPrompt) return;
+
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+
+      if (outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      } else {
+        console.log('User dismissed the install prompt');
+      }
+
+      this.$deferredPrompt = null;
+    },
 
   },
   components: {
@@ -248,7 +277,8 @@ export default {
     Welcome,
     ShareIcon,
     ShareBox,
-    HelpDetail
+    HelpDetail,
+    ArrowDownOnSquareIcon
   }
 }
 
