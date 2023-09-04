@@ -102,7 +102,7 @@
               class="pb-1 pr-4">
               <QuestionMarkCircleIcon class="text-gray-300 h-5" />
             </button>
-            <button v-if="this.Store.user" @click="this.installPWA()" type="button"
+            <button v-if="this.Store.user && this.Store.deviceType === 'android'" @click="this.installPWA()" type="button"
               aria-label="Install app to device as progressive web app" class="pr-4">
               <ArrowDownOnSquareIcon class="text-gray-300 h-6" />
             </button>
@@ -180,6 +180,15 @@ export default {
       deferredPrompt = e
       this.Store.deferredPrompt = deferredPrompt
     })
+
+    if (/Android/i.test(navigator.userAgent)) {
+      this.Store.deviceType = 'android';
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      this.Store.deviceType = 'ios';
+    } else {
+      this.Store.deviceType = 'other';
+    }
+
   },
   methods: {
     signUserOut() {

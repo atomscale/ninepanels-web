@@ -27,7 +27,8 @@ export const useStore = defineStore({
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
         passwordResetRequested: false,
-        deferredPrompt: null
+        deferredPrompt: null,
+        deviceType: null
     }),
     actions: {
         async getLoginTokenAction(email, password) {
