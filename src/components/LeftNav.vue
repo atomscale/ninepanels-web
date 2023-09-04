@@ -97,9 +97,12 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help" class="pb-1 pr-4">
-            <QuestionMarkCircleIcon class="text-gray-300 h-6" />
-          </button>
+
+            <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
+              class="pb-1 pr-4">
+              <QuestionMarkCircleIcon class="text-gray-300 h-5" />
+            </button>
+
         </div>
       </div>
       <main class="max-w-md h-full w-full">
@@ -144,6 +147,7 @@ import {
   BeakerIcon,
   GlobeAltIcon,
   ShareIcon,
+  ArrowDownOnSquareIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -217,8 +221,7 @@ export default {
       this.Store.primaryTrayIsOpen = true
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
-    }
-
+    },
   },
   components: {
     Bars3Icon,
@@ -248,7 +251,8 @@ export default {
     Welcome,
     ShareIcon,
     ShareBox,
-    HelpDetail
+    HelpDetail,
+    ArrowDownOnSquareIcon
   }
 }
 

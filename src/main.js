@@ -34,6 +34,7 @@ const setViewportHeight = () => {
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
 
+
 setViewportHeight();
 
 app.use(router)

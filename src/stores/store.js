@@ -26,7 +26,7 @@ export const useStore = defineStore({
         visGridIsOpen: false,
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
-        passwordResetRequested: false
+        passwordResetRequested: false,
     }),
     actions: {
         async getLoginTokenAction(email, password) {
