@@ -97,16 +97,12 @@
             <span class="sr-only">Open sidebar</span>
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
-          <div class="pt-2">
+
             <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
               class="pb-1 pr-4">
               <QuestionMarkCircleIcon class="text-gray-300 h-5" />
             </button>
-            <button v-if="this.Store.user && this.Store.deviceType === 'android'" @click="this.installPWA()" type="button"
-              aria-label="Install app to device as progressive web app" class="pr-4">
-              <ArrowDownOnSquareIcon class="text-gray-300 h-6" />
-            </button>
-          </div>
+
         </div>
       </div>
       <main class="max-w-md h-full w-full">
@@ -174,21 +170,6 @@ export default {
   },
   mounted() {
     this.Store.getUserAction()
-    let deferredPrompt
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault()
-      deferredPrompt = e
-      this.Store.deferredPrompt = deferredPrompt
-    })
-
-    if (/Android/i.test(navigator.userAgent)) {
-      this.Store.deviceType = 'android';
-    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      this.Store.deviceType = 'ios';
-    } else {
-      this.Store.deviceType = 'other';
-    }
-
   },
   methods: {
     signUserOut() {
@@ -241,22 +222,6 @@ export default {
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
     },
-    async installPWA() {
-      const deferredPrompt = this.$deferredPrompt;
-      if (!deferredPrompt) return;
-
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-
-      if (outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      } else {
-        console.log('User dismissed the install prompt');
-      }
-
-      this.$deferredPrompt = null;
-    },
-
   },
   components: {
     Bars3Icon,
