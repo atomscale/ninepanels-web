@@ -86,7 +86,7 @@ export default {
                 { threshold: 0.5, color_value: 'bg-green-300 text-gray-500' },
                 { threshold: 0.6, color_value: 'bg-green-400 text-gray-500' },
                 { threshold: 0.7, color_value: 'bg-green-500 text-gray-500' },
-                { threshold: 0.8, color_value: 'bg-green-600 text-gray-500' },
+                { threshold: 0.8, color_value: 'bg-green-600 text-white' },
                 { threshold: 0.9, color_value: 'bg-green-700 text-white' },
                 { threshold: 1.0, color_value: 'bg-green-700 text-white' },
             ],
