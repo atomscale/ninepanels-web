@@ -33,6 +33,13 @@ const setViewportHeight = () => {
 // Listeners
 window.addEventListener('resize', setViewportHeight);
 window.addEventListener('orientationchange', setViewportHeight);
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome from showing the native prompt
+    e.preventDefault();
+
+    // Save the event for later use, or ignore it
+    deferredPrompt = e;
+  });
 
 
 setViewportHeight();
