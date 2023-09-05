@@ -29,9 +29,16 @@
               </TransitionChild>
 
               <div class="h-0 flex-1 overflow-y-auto pt-5 ">
-                <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
-                  :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png"
-                    alt="9P logo" /></router-link>
+                <div class="flex justify-between">
+
+                  <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
+                    :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" />
+                  </router-link>
+                  <button v-if="this.Store.isPWA" @click="reloadApp()">
+
+                    <ArrowPathIcon class="h-5 w-5 text-gray-300 mr-4 mb-1" />
+                  </button>
+                </div>
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
                   <router-link v-if="this.accessTokenIsPresent()"
                     @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'Panels' }"
@@ -98,10 +105,10 @@
             <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
           </button>
 
-            <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
-              class="pb-1 pr-4">
-              <QuestionMarkCircleIcon class="text-gray-300 h-5" />
-            </button>
+          <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
+            class="pb-1 pr-4">
+            <QuestionMarkCircleIcon class="text-gray-300 h-5" />
+          </button>
 
         </div>
       </div>
@@ -147,7 +154,8 @@ import {
   BeakerIcon,
   GlobeAltIcon,
   ShareIcon,
-  ArrowDownOnSquareIcon
+  ArrowDownOnSquareIcon,
+  ArrowPathIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -223,6 +231,9 @@ export default {
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
     },
+    reloadApp() {
+      window.location.reload()
+    }
   },
   components: {
     Bars3Icon,
@@ -253,7 +264,8 @@ export default {
     ShareIcon,
     ShareBox,
     HelpDetail,
-    ArrowDownOnSquareIcon
+    ArrowDownOnSquareIcon,
+    ArrowPathIcon
   }
 }
 
