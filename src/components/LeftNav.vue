@@ -51,7 +51,7 @@
 
               <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA }">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-                  
+
                   <button @click="shareApp()"
                     class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
@@ -107,10 +107,17 @@
             <img class="h-7 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
           </button>
 
-          <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
-            class="pb-1 pr-4">
-            <QuestionMarkCircleIcon class="text-gray-300 h-5" />
-          </button>
+          <div class="mt-2.5">
+
+            <button v-if="!this.Store.isPWA" @click="this.openPWATray()" type="button" aria-label="Open help"
+              class="pb-1 pr-4">
+              <ArrowDownOnSquareIcon class="text-gray-300 h-5" />
+            </button>
+            <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
+              class="pb-1 pr-4">
+              <QuestionMarkCircleIcon class="text-gray-300 h-5" />
+            </button>
+          </div>
 
         </div>
       </div>
@@ -131,6 +138,7 @@ import Welcome from '@/components/Welcome.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
 import HelpDetail from '@/components/HelpDetail.vue'
+import InstallPWA from '@/components/InstallPWA.vue'
 import ShareBox from '@/components/ShareBox.vue'
 import NProgress from 'nprogress'
 import rollbar from '@/rollbarClient.js'
@@ -158,7 +166,8 @@ import {
   ShareIcon,
   ArrowDownOnSquareIcon,
   ArrowPathIcon,
-  BellAlertIcon
+  BellAlertIcon,
+
 } from '@heroicons/vue/24/outline'
 
 
@@ -234,6 +243,11 @@ export default {
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
     },
+    openPWATray() {
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'InstallPWA'
+      this.Store.primaryComponentProps = null
+    },
     reloadApp() {
       window.location.reload()
     },
@@ -273,7 +287,9 @@ export default {
     HelpDetail,
     ArrowDownOnSquareIcon,
     ArrowPathIcon,
-    BellAlertIcon
+    BellAlertIcon,
+    InstallPWA,
+
   }
 }
 
