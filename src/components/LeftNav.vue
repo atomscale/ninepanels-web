@@ -32,7 +32,8 @@
                 <div class="flex justify-between">
 
                   <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
-                    :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="/android-chrome-512x512.png" alt="9P logo" />
+                    :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="/android-chrome-512x512.png"
+                      alt="9P logo" />
                   </router-link>
                   <button v-if="this.Store.isPWA" @click="reloadApp()">
 
@@ -48,8 +49,12 @@
                 </div>
               </div>
 
-              <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA}">
+              <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA }">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
+                  <button @click="notify()"
+                    class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <BellAlertIcon class="h-6 w-6" /><span class="ml-3">Test notification</span>
+                  </button>
                   <button @click="shareApp()"
                     class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
@@ -155,7 +160,8 @@ import {
   GlobeAltIcon,
   ShareIcon,
   ArrowDownOnSquareIcon,
-  ArrowPathIcon
+  ArrowPathIcon,
+  BellAlertIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -233,7 +239,26 @@ export default {
     },
     reloadApp() {
       window.location.reload()
+    },
+    async requestPermission() {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        throw new Error('Permission not granted for notification');
+      }
+    },
+    createNotification() {
+      new Notification('Test Notification', {
+        body: 'No fucking way!!',
+        // ...other options like icons, etc.
+      });
+    },
+    async notify() {
+      await this.requestPermission();
+      this.createNotification();
     }
+
+
+
   },
   components: {
     Bars3Icon,
@@ -265,7 +290,8 @@ export default {
     ShareBox,
     HelpDetail,
     ArrowDownOnSquareIcon,
-    ArrowPathIcon
+    ArrowPathIcon,
+    BellAlertIcon
   }
 }
 
