@@ -48,7 +48,7 @@
                 </div>
               </div>
 
-              <div class="mt-8">
+              <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA}">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
                   <button @click="shareApp()"
                     class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
