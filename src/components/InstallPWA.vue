@@ -2,7 +2,8 @@
   <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-gray-500 font-light mb-4">
 
     <div class="text-xl text-gray-600 font-bold">You can install Nine Panels as an app on your phone!</div>
-    <div class="text-gray-500">This way it will be easier to find at update your panels. And, in the future, will allow notifications and reminders.</div>
+    <div class="text-gray-500">This way it will be easier to find and update your panels. And, in the future, installing will allow notifications and reminders.</div>
+    <div class="text-gray-500">(You'll need to sign in again, just like you would if you installed the app via your App or Play Store.)</div>
     <div class="text-lg text-gray-600 font-bold">Chrome:</div>
     <div class="">Tap share, find the 'Add to Home Screen' button. Add the app.</div>
     <div class="flex flex-col justify-between items-center">
