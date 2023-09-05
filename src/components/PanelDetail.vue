@@ -39,7 +39,7 @@
 
     </div>
     <div>
-      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 mb-4">
+      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5" :class="{ 'mb-8': this.Store.isPWA, 'mb-4': !this.Store.isPWA}">
         <div class="data-heading">Danger Zone</div>
         <div>
 
