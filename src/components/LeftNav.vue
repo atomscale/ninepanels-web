@@ -32,7 +32,7 @@
                 <div class="flex justify-between">
 
                   <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
-                    :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png" alt="9P logo" />
+                    :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="/android-chrome-512x512.png" alt="9P logo" />
                   </router-link>
                   <button v-if="this.Store.isPWA" @click="reloadApp()">
 
@@ -102,7 +102,7 @@
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
             @click="this.Store.leftNavIsOpen = true">
             <span class="sr-only">Open sidebar</span>
-            <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
+            <img class="h-7 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
           </button>
 
           <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"

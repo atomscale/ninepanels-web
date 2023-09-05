@@ -5,11 +5,11 @@
     </div>
     <div :class="{'mb-6': this.Store.isPWA}">
 
-      <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center pl-2 pr-2 pb-3">
+      <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center ml-1 pl-2 pr-2 pb-3">
         <div class="h-5 text-gray-500" :class="{ 'font-semibold text-base': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA}">Consistency</div>
         <div>
-          <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 text-gray-400"></ChevronUpIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 text-gray-600"></ChevronDownIcon>
+          <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 mr-1 text-gray-500"></ChevronUpIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 mr-1 text-gray-500"></ChevronDownIcon>
         </div>
       </button>
       <div v-if="this.Store.visGridIsOpen" class="pt-2 mb-6">
