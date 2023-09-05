@@ -113,10 +113,7 @@ export const useStore = defineStore({
                             setTimeout(() => this.messages.shift(), 5000)
                         }
                     })
-            } else {
-                this.messages.push({ message: "There's an issue with your credentials... 😬", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
-            }
+            } 
         },
         async createPanelAction(position, title, description) {
             const access_token = VueCookies.get("9p_access_token")

@@ -21,14 +21,21 @@
                     is valid for ten minutes.<br /><br />The email will come from
                     <span class="">ben@ninepanels.com.</span> <br /> <br />Feel free to email me if you need any help. 👍
                 </div>
+                <div class="flex justify-between">
+                    <div class="font-semibold text-xs text-gray-500">
+                        <router-link :to=" { name: 'SignUp' }">Sign in instead</router-link>
+                    </div>
+                    <div class="font-semibold text-xs text-gray-500">
+                        <router-link :to=" { name: 'SignUp' }">Need an account?</router-link>
+                    </div>
+                </div>
             </form>
-            <div v-else class="font-bold text-lg text-gray-500 ">
+            <div v-else class="font-bold text-lg text-gray-500 mt-20">
                 An email is winging it's way to you now.
                 <div class="text-sm font-light mt-2">Click the link within ten minutes.</div>
-                <div class="text-sm font-light mt-2">See you back here soon.</div>
                 <div class="flex justify-center">
-                    <img class="h-36 mt-20 w-auto" src="@/assets/9p-logo-empty-gray-500.png"
-                        alt="9P logo" />
+                    <img class="h-36 mt-6 mb-4 w-auto rounded-2xl" src="/android-chrome-512x512.png"
+                    alt="9P logo" />
 
                 </div>
             </div>

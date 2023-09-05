@@ -38,8 +38,8 @@
 
 
     </div>
-    <div :class="{ 'mb-2': this.Store.isPWA}">
-      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5" >
+    <div :class="{ 'mb-4': this.Store.isPWA}">
+      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 " >
         <div class="data-heading">Danger Zone</div>
         <div>
 
@@ -48,11 +48,11 @@
         </div>
       </button>
       <div v-if="this.Store.deleteResetBoxIsOpen" >
-        <div class="text-xs text-gray-500 font-light">Need a fresh start on this panel? Reset the completion history and clear all your stats:</div>
+        <div class="text-xs text-gray-500 font-light mt-2">Need a fresh start on this panel? Reset the completion history and clear all your stats:</div>
         <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
           :confirmRequired="true" :confirmText="'Reset all stats?'" />
         <div class="text-xs text-gray-500 font-light">Delete the entire panel, including all completion history:</div>
-        <DynamicButton class="mt-2 mb-4" :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
+        <DynamicButton class="mt-2 mb-4 " :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
           :confirmRequired="true" :confirmText="'Delete forever?'" />
       </div>
 
