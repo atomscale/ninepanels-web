@@ -27,8 +27,12 @@ export const useStore = defineStore({
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
         passwordResetRequested: false,
+        isPWA: false
     }),
     actions: {
+        checkPWA() {
+            this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+        },
         async getLoginTokenAction(email, password) {
             try {
                 const response = await requests.getLoginToken(email, password)

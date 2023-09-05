@@ -170,6 +170,7 @@ export default {
   },
   mounted() {
     this.Store.getUserAction()
+    this.Store.checkPWA()
   },
   methods: {
     signUserOut() {
