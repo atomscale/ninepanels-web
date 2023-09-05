@@ -38,8 +38,8 @@
 
 
     </div>
-    <div>
-      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5" :class="{ 'mb-8': this.Store.isPWA, 'mb-4': !this.Store.isPWA}">
+    <div :class="{ 'mb-8': this.Store.isPWA}">
+      <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 mb-4" >
         <div class="data-heading">Danger Zone</div>
         <div>
 
@@ -47,7 +47,7 @@
           <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
         </div>
       </button>
-      <div v-if="this.Store.deleteResetBoxIsOpen">
+      <div v-if="this.Store.deleteResetBoxIsOpen" >
         <div class="text-xs text-gray-500 font-light">Need a fresh start on this panel? Reset the completion history and clear all your stats:</div>
         <DynamicButton class="mt-2 mb-2" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
           :confirmRequired="true" :confirmText="'Reset all stats?'" />
