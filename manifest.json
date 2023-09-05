@@ -3,7 +3,7 @@
     "short_name": "9P",
     "description": "Daily balance, long-term consistency.",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
