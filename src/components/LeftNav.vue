@@ -35,7 +35,7 @@
                     :to="{ name: 'Landing' }"><img class="h-8 ml-5 w-auto" src="/android-chrome-512x512.png"
                       alt="9P logo" />
                   </router-link>
-                  <button v-if="this.Store.isPWA" @click="reloadApp()">
+                  <button @click="reloadApp()">
 
                     <ArrowPathIcon class="h-5 w-5 text-gray-300 mr-4 mb-1" />
                   </button>
