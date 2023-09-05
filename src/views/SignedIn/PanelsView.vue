@@ -6,7 +6,7 @@
     <div :class="{'mb-6': this.Store.isPWA}">
 
       <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center pl-2 pr-2 pb-3">
-        <div class="data-heading">Consistency</div>
+        <div class="data-heading" :class="{'text-lg': this.Store.isPWA}">Consistency</div>
         <div>
           <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 text-gray-400"></ChevronUpIcon>
           <ChevronDownIcon v-else class="h-5 w-5 text-gray-400"></ChevronDownIcon>
