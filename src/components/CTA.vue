@@ -20,7 +20,7 @@
             </h1>
         </div>
         <video src="@/assets/full_demo_cta.mp4" class="px-20 mt-2" autoplay loop muted playsinline></video>
-        <div class="flex justify-between w-2/3 mt-8 ">
+        <div class="flex justify-between w-4/5 mt-8 ">
             <div class=" text-gray-500 font-bold">
                 <router-link :to="{ name: 'SignIn' }">Sign in</router-link>
             </div>
