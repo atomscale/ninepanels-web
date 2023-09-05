@@ -51,10 +51,7 @@
 
               <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA }">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-                  <button @click="notify()"
-                    class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <BellAlertIcon class="h-6 w-6" /><span class="ml-3">Test notification</span>
-                  </button>
+                  
                   <button @click="shareApp()"
                     class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
@@ -240,22 +237,7 @@ export default {
     reloadApp() {
       window.location.reload()
     },
-    async requestPermission() {
-      const permission = await Notification.requestPermission();
-      if (permission !== 'granted') {
-        throw new Error('Permission not granted for notification');
-      }
-    },
-    createNotification() {
-      new Notification('Test Notification', {
-        body: 'No fucking way!!',
-        // ...other options like icons, etc.
-      });
-    },
-    async notify() {
-      await this.requestPermission();
-      this.createNotification();
-    }
+
 
 
 
