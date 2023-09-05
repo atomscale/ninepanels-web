@@ -3,7 +3,7 @@
     <div>
       <PanelGridFrame />
     </div>
-    <div :class="{'mb-6': this.Store.isPWA}">
+    <div :class="{'mb-20': this.Store.isPWA}">
 
       <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center pl-2 pr-2 pb-3">
         <div class="data-heading">Consistency</div>
