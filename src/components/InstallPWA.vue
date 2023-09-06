@@ -3,10 +3,10 @@
   <div class="flex flex-col justify-start  space-y-3 h-full text-sm text-gray-500 font-light">
 
     <div class="text-gray-500 ">Easier to find. App-like experience. Android and iOS.</div>
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col justify-between items-center">
       <div class="flex flex-col mb-2">
 
-        <img src="@/assets/ios_installed.jpg" class="h-32 border border-gray-400 rounded-xl mt-2 mr-2" />
+        <img src="@/assets/ios_installed.jpg" class="h-32 border border-gray-400 rounded-xl mt-2" />
         <div class="text-xs text-gray-400">Apple iOS</div>
       </div>
       <div class="flex flex-col mb-2">
