@@ -46,7 +46,7 @@ export const useStore = defineStore({
                 await this.getUserAction()
                 if (this.user.name) {
 
-                    rollbar.info(this.user.name + "logged in. using PWA:" + this.isPWA + "on mobile:" + this.isMobile)
+                    rollbar.info(this.user.name + " logged in. using PWA: " + this.isPWA + " on mobile: " + this.isMobile)
                 }
                 return response.data.access_token
             } catch (error) {
