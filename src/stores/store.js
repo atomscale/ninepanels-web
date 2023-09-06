@@ -37,7 +37,7 @@ export const useStore = defineStore({
         checkMobile() {
             this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
             console.log("user agent isMobile =", this.isMobile)
-            rollbar.info("user agent isMobile =" + this.isMobile)
+            // rollbar.info("user agent isMobile =" + this.isMobile)
         },
         async getLoginTokenAction(email, password) {
             try {
