@@ -6,22 +6,24 @@
     <div class="flex flex-col justify-between items-center">
       <img src="@/assets/example_install.jpg" class="h-48 border border-gray-400 rounded-xl mt-2 mb-2" />
     </div>
-    <div class="text-gray-500">FYI: You'll need to sign in again, just like you would if you installed the app via your App or
+    <div class="text-gray-500">FYI: You'll need to sign in again, just like you would if you installed the app via your
+      App or
       Play Store.</div>
+    <div class="text-lg text-gray-600 font-bold">Chrome on Android:</div>
+    <div class="">Tap the ellipis top-right, find the 'Add to Home Screen' button. Add the app. Requires latest Chrome (v115 +)</div>
+    <div class="flex flex-col justify-between items-center">
+      <img src="@/assets/android_chrome_1.png" class="h-36 border border-gray-400 rounded-xl mb-4" />
+      <img src="@/assets/android_chrome_2.png" class="h-36 border border-gray-400 rounded-xl" />
+    </div>
     <div class="text-lg text-gray-600 font-bold">Chrome on iOS:</div>
     <div class="">Tap share, find the 'Add to Home Screen' button. Add the app.</div>
     <div class="flex flex-col justify-between items-center">
       <img src="@/assets/chrome_1.jpg" class="h-36 border border-gray-400 rounded-xl mb-4" />
       <img src="@/assets/chrome_2.jpg" class="h-36 border border-gray-400 rounded-xl" />
     </div>
-    <div class="text-lg text-gray-600 font-bold">Chrome on Android:</div>
-    <div class="">Tap the ellipis top-right, find the 'Add to Home Screen' button. Add the app.</div>
-    <div class="flex flex-col justify-between items-center">
-      <img src="@/assets/android_chrome_1.png" class="h-36 border border-gray-400 rounded-xl mb-4" />
-      <img src="@/assets/android_chrome_2.png" class="h-36 border border-gray-400 rounded-xl" />
-    </div>
 
-    <div class="text-lg text-gray-600 font-bold">Safari:</div>
+
+    <div class="text-lg text-gray-600 font-bold">Safari on iOS:</div>
     <div class="">Tap share on bottom menu, find the 'Add to Home Screen' button. Add the app.</div>
     <div class="flex flex-col justify-between items-center">
       <img src="@/assets/safari_1.jpg" class="h-36 border border-gray-400 rounded-xl mb-4" />
