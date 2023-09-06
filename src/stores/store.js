@@ -27,11 +27,17 @@ export const useStore = defineStore({
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
         passwordResetRequested: false,
-        isPWA: false
+        isPWA: false,
+        isMobile: true
     }),
     actions: {
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+        },
+        checkMobile() {
+            this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            console.log("user agent isMobile =", this.isMobile)
+            rollbar.info("user agent isMobile =", this.isMobile)
         },
         async getLoginTokenAction(email, password) {
             try {
@@ -113,7 +119,7 @@ export const useStore = defineStore({
                             setTimeout(() => this.messages.shift(), 5000)
                         }
                     })
-            } 
+            }
         },
         async createPanelAction(position, title, description) {
             const access_token = VueCookies.get("9p_access_token")
