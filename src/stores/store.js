@@ -44,6 +44,10 @@ export const useStore = defineStore({
                 const response = await requests.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
                 await this.getUserAction()
+                if (this.user.name) {
+
+                    rollbar.info(this.user.name + "logged in. using PWA:" + this.isPWA + "on mobile:" + this.isMobile)
+                }
                 return response.data.access_token
             } catch (error) {
                 if (error.response.status) {
