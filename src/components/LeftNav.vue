@@ -29,9 +29,17 @@
               </TransitionChild>
 
               <div class="h-0 flex-1 overflow-y-auto pt-5 ">
-                <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
-                  :to="{ name: 'Landing' }"><img class="h-7 ml-5 w-auto" src="@/assets/9p-logo-empty.png"
-                    alt="9P logo" /></router-link>
+                <div class="flex justify-between">
+
+                  <router-link @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false"
+                    :to="{ name: 'Landing' }"><img class="h-8 ml-5 w-auto" src="/android-chrome-512x512.png"
+                      alt="9P logo" />
+                  </router-link>
+                  <button @click="reloadApp()">
+
+                    <ArrowPathIcon class="h-5 w-5 text-gray-300 mr-4 mb-1" />
+                  </button>
+                </div>
                 <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
                   <router-link v-if="this.accessTokenIsPresent()"
                     @click="this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false" :to="{ name: 'Panels' }"
@@ -41,8 +49,9 @@
                 </div>
               </div>
 
-              <div class="mt-8">
+              <div class="mt-8" :class="{ 'mb-4': this.Store.isPWA }">
                 <div class="m-2 space-y-1" aria-labelledby="projects-headline">
+
                   <button @click="shareApp()"
                     class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                     <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
@@ -95,13 +104,25 @@
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
             @click="this.Store.leftNavIsOpen = true">
             <span class="sr-only">Open sidebar</span>
-            <img class="h-7 ml-3 mb-1" src="@/assets/9p-logo-empty.png" alt="9P logo" />
+            <img class="h-8 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
           </button>
 
+          <div class="mt-2.5">
+
+            <button v-if="!this.Store.isPWA && this.Store.isMobile" @click="this.openPWATray()" type="button"
+              aria-label="Open help" class="pb-1 pr-4 animate-install-bounce">
+              <ArrowDownOnSquareIcon class="text-gray-300 h-5" />
+            </button>
+            <button v-if="this.Store.isPWA && this.Store.isMobile" @click="reloadApp()" type="button" aria-label="Open help"
+              class="pb-1 pr-4">
+
+              <ArrowPathIcon class="h-5 w-5 text-gray-300" />
+            </button>
             <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
               class="pb-1 pr-4">
               <QuestionMarkCircleIcon class="text-gray-300 h-5" />
             </button>
+          </div>
 
         </div>
       </div>
@@ -122,6 +143,7 @@ import Welcome from '@/components/Welcome.vue'
 import PanelGridFrame from '@/components/PanelGridFrame.vue'
 import PrimaryTray from '@/components/PrimaryTray.vue'
 import HelpDetail from '@/components/HelpDetail.vue'
+import InstallPWA from '@/components/InstallPWA.vue'
 import ShareBox from '@/components/ShareBox.vue'
 import NProgress from 'nprogress'
 import rollbar from '@/rollbarClient.js'
@@ -147,7 +169,10 @@ import {
   BeakerIcon,
   GlobeAltIcon,
   ShareIcon,
-  ArrowDownOnSquareIcon
+  ArrowDownOnSquareIcon,
+  ArrowPathIcon,
+  BellAlertIcon,
+
 } from '@heroicons/vue/24/outline'
 
 
@@ -170,6 +195,7 @@ export default {
   },
   mounted() {
     this.Store.getUserAction()
+    this.Store.checkPWA()
   },
   methods: {
     signUserOut() {
@@ -222,6 +248,18 @@ export default {
       this.Store.primaryComponentName = 'HelpDetail'
       this.Store.primaryComponentProps = null
     },
+    openPWATray() {
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'InstallPWA'
+      this.Store.primaryComponentProps = null
+    },
+    reloadApp() {
+      window.location.reload()
+    },
+
+
+
+
   },
   components: {
     Bars3Icon,
@@ -252,7 +290,11 @@ export default {
     ShareIcon,
     ShareBox,
     HelpDetail,
-    ArrowDownOnSquareIcon
+    ArrowDownOnSquareIcon,
+    ArrowPathIcon,
+    BellAlertIcon,
+    InstallPWA,
+
   }
 }
 

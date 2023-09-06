@@ -27,8 +27,18 @@ export const useStore = defineStore({
         deleteResetBoxIsOpen: false,
         shareBoxIsOpen: false,
         passwordResetRequested: false,
+        isPWA: false,
+        isMobile: true
     }),
     actions: {
+        checkPWA() {
+            this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+        },
+        checkMobile() {
+            this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            console.log("user agent isMobile =", this.isMobile)
+            // rollbar.info("user agent isMobile =" + this.isMobile)
+        },
         async getLoginTokenAction(email, password) {
             try {
                 const response = await requests.getLoginToken(email, password)
@@ -109,9 +119,6 @@ export const useStore = defineStore({
                             setTimeout(() => this.messages.shift(), 5000)
                         }
                     })
-            } else {
-                this.messages.push({ message: "There's an issue with your credentials... 😬", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
             }
         },
         async createPanelAction(position, title, description) {

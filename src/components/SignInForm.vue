@@ -33,10 +33,10 @@
                     </div>
                 </form>
                 <div class="flex justify-between">
-                    <div class="font-light text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-gray-500">
                         <router-link :to=" { name: 'SignUp' }">Need an account?</router-link>
                     </div>
-                    <div class="font-light text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-gray-500">
                         <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
                     </div>
                 </div>

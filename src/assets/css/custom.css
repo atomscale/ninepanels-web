@@ -48,7 +48,7 @@
 }
 
 @keyframes visgrid-bounce {
-  0%, 100% {
+  0%, 25%, 100% {
     transform: translateY(0);
     animation-timing-function: cubic-bezier(0.8, 1, 1, 1);
   }
@@ -58,8 +58,29 @@
   }
 }
 
+
+
+@keyframes install-bounce {
+  0%, 11.5%, 35%, 75%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 1, 1, 1);
+  }
+  5.7% {
+    transform: translateY(-20%);  /* First Bounce */
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 0.2);
+  }
+  23% {
+    transform: translateY(-20%);  /* Second Bounce */
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 0.2);
+  }
+}
+
 .animate-visgrid-bounce {
-  animation: visgrid-bounce 1s 2;  /* Remove 'infinite' for a single bounce */
+  animation: visgrid-bounce 1s 1;  /* Remove 'infinite' for a single bounce */
+}
+
+.animate-install-bounce {
+  animation: install-bounce 2.6s 2;  /* Remove 'infinite' for a single bounce */
 }
 
 .data-heading {

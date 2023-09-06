@@ -26,7 +26,7 @@
                   </div>
 
                   <div v-if="this.Store.primaryTrayIsOpen && this.Store.primaryComponentName"
-                    class="relative mt-4 flex-1 px-4 pt-1 sm:px-6 overflow-auto">
+                    class="relative mt-4 flex-1 px-4 pt-1 mb-4 sm:px-6 overflow-auto">
                     <component :is="this.Store.primaryComponentName" v-bind="this.Store.primaryComponentProps" />
                   </div>
 
@@ -50,6 +50,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import PanelDetail from '@/components/PanelDetail.vue'
 import HelpDetail from '@/components/HelpDetail.vue'
+import InstallPWA from '@/components/InstallPWA.vue'
 import PanelCreateForm from '@/components/PanelCreateForm.vue'
 import Welcome from '@/components/Welcome.vue'
 
@@ -79,7 +80,8 @@ export default {
     PanelDetail,
     HelpDetail,
     PanelCreateForm,
-    Welcome
+    Welcome,
+    InstallPWA
   }
 }
 </script>
