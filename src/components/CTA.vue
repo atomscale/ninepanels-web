@@ -21,10 +21,10 @@
         </div>
         <img src="@/assets/cta_static.jpg" class="px-20 mt-2"/>
         <div class="flex justify-between w-4/5 mt-8 mb-4 ">
-            <div class=" text-gray-500 font-bold">
+            <div class=" text-gray-500 font-semibold">
                 <router-link :to="{ name: 'SignIn' }">Sign in</router-link>
             </div>
-            <div class="font-bold text-gray-500">
+            <div class="font-semibold text-gray-500">
                 <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
             </div>
         </div>
