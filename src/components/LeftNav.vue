@@ -109,9 +109,13 @@
 
           <div class="mt-2.5">
 
-            <button v-if="!this.Store.isPWA" @click="this.openPWATray()" type="button" aria-label="Open help"
-              class="pb-1 pr-4 animate-install-bounce">
+            <button v-if="!this.Store.isPWA && this.Store.isMobile" @click="this.openPWATray()" type="button"
+              aria-label="Open help" class="pb-1 pr-4 animate-install-bounce">
               <ArrowDownOnSquareIcon class="text-gray-300 h-5" />
+            </button>
+            <button v-if="this.Store.isPWA && this.Store.isMobile" @click="reloadApp()">
+
+              <ArrowPathIcon class="h-5 w-5 text-gray-300 mr-4 mb-1" />
             </button>
             <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
               class="pb-1 pr-4">
