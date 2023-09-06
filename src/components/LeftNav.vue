@@ -116,7 +116,7 @@
             <button v-if="this.Store.isPWA && this.Store.isMobile" @click="reloadApp()" type="button" aria-label="Open help"
               class="pb-1 pr-4">
 
-              <ArrowPathIcon class="h-5 w-5 text-gray-300 mr-4 mb-1" />
+              <ArrowPathIcon class="h-5 w-5 text-gray-300" />
             </button>
             <button v-if="this.Store.user" @click="this.openHelpTray()" type="button" aria-label="Open help"
               class="pb-1 pr-4">
