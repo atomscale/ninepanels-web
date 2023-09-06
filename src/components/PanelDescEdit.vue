@@ -78,7 +78,7 @@ export default {
   },
   data() {
     return {
-      localDescription: '',
+      localDescription: ' ',
       maxFieldLen: 300,
       currentFieldLen: null
     }
