@@ -16,8 +16,8 @@ function requireAccessToken(to, from, next) {
   if (access_token) {
     next()
   } else {
-    store.messages.push({ message: "Please sign in", error: true })
-    setTimeout(() => store.messages.shift(), 5000)
+    // store.messages.push({ message: "Please sign in", error: true })
+    // setTimeout(() => store.messages.shift(), 5000)
     next('/signin')
   }
 }

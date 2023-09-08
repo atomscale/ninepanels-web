@@ -1,0 +1,71 @@
+<template>
+  <div class="flex flex-col items-center w-full">
+    <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-40  w-full ">
+      <div class="flex justify-between">
+        <button type="button" aria-label="Open sidebar"
+          class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
+          @click="Store.leftNavIsOpen = true">
+          <img class="h-8 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
+        </button>
+
+        <div class="mt-2.5">
+          <button v-if="!Store.isPWA && Store.isMobile" @click="openPWATray" type="button" aria-label="Open help"
+            class="pb-1 pr-4 animate-install-bounce">
+            <ArrowDownOnSquareIcon class="text-gray-300 h-5" />
+          </button>
+          <button v-if="Store.isPWA && Store.isMobile" @click="reloadApp" type="button" aria-label="Open help"
+            class="pb-1 pr-4">
+            <ArrowPathIcon class="h-5 w-5 text-gray-300" />
+          </button>
+          <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class="pb-1 pr-4">
+            <QuestionMarkCircleIcon class="text-gray-300 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { useStore } from '@/stores/store.js'
+import { mapStores } from 'pinia'
+
+import HelpDetail from '@/components/HelpDetail.vue'
+import InstallPWA from '@/components/InstallPWA.vue'
+
+import {
+  QuestionMarkCircleIcon,
+  ArrowDownOnSquareIcon,
+  ArrowPathIcon,
+} from '@heroicons/vue/24/outline'
+
+
+export default {
+  computed: {
+    ...mapStores(useStore),
+  },
+  methods: {
+    openHelpTray() {
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'HelpDetail'
+      this.Store.primaryComponentProps = null
+    },
+    openPWATray() {
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'InstallPWA'
+      this.Store.primaryComponentProps = null
+    },
+    reloadApp() {
+      window.location.reload()
+    },
+  },
+  components: {
+    QuestionMarkCircleIcon,
+    HelpDetail,
+    ArrowDownOnSquareIcon,
+    ArrowPathIcon,
+    InstallPWA,
+  }
+}
+
+</script>
