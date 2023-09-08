@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center w-full">
-    <div class="sticky top-0 bg-gray-800 pl-1 pt-1 z-40  w-full ">
+    <div class="sticky top-0 pl-1 pt-1 z-40  w-full " :class="isStaging ? 'bg-blue-700': 'bg-gray-800'">
       <div class="flex justify-between">
         <button type="button" aria-label="Open sidebar"
           class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
@@ -58,6 +58,14 @@ export default {
     reloadApp() {
       window.location.reload()
     },
+    isStaging() {
+      const env = import.meta.env('VITE_NINEPANELS_ENV')
+      if (env === 'STAGING') {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   components: {
     QuestionMarkCircleIcon,
