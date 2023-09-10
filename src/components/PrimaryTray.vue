@@ -52,7 +52,7 @@ import PanelDetail from '@/components/PanelDetail.vue'
 import HelpDetail from '@/components/HelpDetail.vue'
 import InstallPWA from '@/components/InstallPWA.vue'
 import PanelCreateForm from '@/components/PanelCreateForm.vue'
-import Welcome from '@/components/Welcome.vue'
+
 
 // const store = useStore()
 
@@ -80,7 +80,6 @@ export default {
     PanelDetail,
     HelpDetail,
     PanelCreateForm,
-    Welcome,
     InstallPWA
   }
 }
