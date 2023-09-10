@@ -55,13 +55,14 @@ export const useStore = defineStore({
         apiError(error) {
             let errorMsg = "Unknown error...  😬"
 
-            if (error.request) {
-                // capture request errors like when network not available
-                errorMsg = "Unable to reach the 9P servers"
-            } else if (error.response) {
+            if (error.response) {
                 // catch errors if response code is outwith 2xx range
                 const status = error.response.status
                 errorMsg = error.response.data.detail || "Server is saying ${status}"
+            } else if (error.request) {
+                // capture request errors like when network not available
+                // if this block fires it's becuase no response object was recvd
+                errorMsg = "Unable to reach the 9P servers?"
             }
 
             this.messages.push({ message: errorMsg, error: true })
@@ -79,13 +80,7 @@ export const useStore = defineStore({
                 }
                 return response.data.access_token
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -97,13 +92,7 @@ export const useStore = defineStore({
                 const response = await requests.deleteUser(access_token)
                 this.signUserOutAction()
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -125,13 +114,7 @@ export const useStore = defineStore({
                 await this.getLoginTokenAction(email, password)
                 return true
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
                 return false
             }
         },
@@ -156,13 +139,7 @@ export const useStore = defineStore({
                 const response = await requests.postPanel(access_token, position, title, description)
                 await this.getPanelsAction()
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             }
         },
         async updatePanelAction(panel_id, update) {
@@ -172,13 +149,7 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return true
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
                 return false
             }
         },
@@ -189,13 +160,7 @@ export const useStore = defineStore({
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -208,13 +173,7 @@ export const useStore = defineStore({
                 this.panels = response.data
                 return response.data
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -227,13 +186,7 @@ export const useStore = defineStore({
                 await this.getPanelsAction()
                 return response.data
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             }
         },
         async deleteEntriesAction(panel_id) {
@@ -243,13 +196,7 @@ export const useStore = defineStore({
                 const response = await requests.deleteEntries(access_token, panel_id)
                 await this.getPanelsAction()
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -261,13 +208,7 @@ export const useStore = defineStore({
                 const response = await requests.getPanelConsistency(access_token)
                 this.consistency = response.data
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -304,13 +245,7 @@ export const useStore = defineStore({
                     return false
                 }
             } catch (error) {
-                if (error.response.status) {
-                    this.messages.push({ message: error.response.data.detail, error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                } else {
-                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                }
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }
@@ -329,8 +264,7 @@ export const useStore = defineStore({
                     return false
                 }
             } catch (error) {
-                this.messages.push({ message: "error in password reset", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+                this.apiError(error)
             } finally {
                 this.loadingBar = false
             }

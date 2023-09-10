@@ -34,7 +34,7 @@
                 An email is winging it's way to you now.
                 <div class="text-sm font-light mt-2">Click the link within ten minutes.</div>
                 <div class="flex justify-center">
-                    <img class="h-36 mt-6 mb-4 w-auto rounded-2xl" src="/android-chrome-512x512.png"
+                    <img loading="eager" class="h-36 mt-6 mb-4 w-auto rounded-2xl" src="/android-chrome-512x512.png"
                     alt="9P logo" />
 
                 </div>
