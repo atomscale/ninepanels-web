@@ -8,25 +8,34 @@ export const useStore = defineStore({
     state: () => ({
         panels: [],
         messages: [],
-        entries: [],
+
         consistency: [],
         user: null,
-        showWelcome: false,
+
+        leftNavIsOpen: false,
+
+        panelIsDisabled: false,
+        loadingBar: false,
+
         primaryTrayIsOpen: false,
         secondaryTrayIsOpen: false,
-        leftNavIsOpen: false,
+
         panelSortBoxIsOpen: false,
+
         primaryComponentName: null,
         primaryComponentProps: {},
+
         panelTitleEditState: false,
         panelDescEditState: false,
-        entryLoading: false,
-        loadingBar: false,
-        visGridLoading: false,
+
         visGridIsOpen: false,
+
         deleteResetBoxIsOpen: false,
+
         shareBoxIsOpen: false,
+
         passwordResetRequested: false,
+
         isPWA: false,
         isMobile: true
     }),
@@ -36,10 +45,30 @@ export const useStore = defineStore({
         },
         checkMobile() {
             this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-            console.log("user agent isMobile =", this.isMobile)
-            // rollbar.info("user agent isMobile =" + this.isMobile)
+        },
+        reloadApp() {
+            window.location.reload()
+        },
+        openTray() {
+            this.primaryTrayIsOpen = true
+        },
+        apiError(error) {
+            let errorMsg = "Unknown error...  😬"
+
+            if (error.request) {
+                // capture request errors like when network not available
+                errorMsg = "Unable to reach the 9P servers"
+            } else if (error.response) {
+                // catch errors if response code is outwith 2xx range
+                const status = error.response.status
+                errorMsg = error.response.data.detail || "Server is saying ${status}"
+            }
+
+            this.messages.push({ message: errorMsg, error: true })
+            setTimeout(() => this.messages.shift(), 5000)
         },
         async getLoginTokenAction(email, password) {
+            this.loadingBar = true
             try {
                 const response = await requests.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
@@ -57,10 +86,13 @@ export const useStore = defineStore({
                     this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 }
+            } finally {
+                this.loadingBar = false
             }
         },
         async deleteUserAction() {
             const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
             try {
                 const response = await requests.deleteUser(access_token)
                 this.signUserOutAction()
@@ -72,6 +104,8 @@ export const useStore = defineStore({
                     this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 }
+            } finally {
+                this.loadingBar = false
             }
         },
         signUserOutAction() {
@@ -81,7 +115,6 @@ export const useStore = defineStore({
                 console.log("no cookie to remove " + error)
             }
             this.user = null
-            this.entries = []
             this.panels = []
         },
         async createUserAction(email, name, password) {
@@ -102,27 +135,19 @@ export const useStore = defineStore({
                 return false
             }
         },
-        getUserAction() {
+        async getUserAction() {
 
             const access_token = VueCookies.get("9p_access_token")
 
             if (access_token) {
-                return requests.getUser(access_token)
-                    .then(response => {
-                        this.user = response.data
 
-                        return response.data
-                    })
-                    .catch(error => {
-
-                        if (error.response.status) {
-                            this.messages.push({ message: error.response.data.detail, error: true })
-                            setTimeout(() => this.messages.shift(), 5000)
-                        } else {
-                            this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                            setTimeout(() => this.messages.shift(), 5000)
-                        }
-                    })
+                try {
+                    const response = await requests.getUser(access_token)
+                    this.user = response.data
+                    return response.data
+                } catch (error) {
+                    this.apiError(error)
+                }
             }
         },
         async createPanelAction(position, title, description) {
@@ -159,6 +184,7 @@ export const useStore = defineStore({
         },
         async deletePanelAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
             try {
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.getPanelsAction()
@@ -170,37 +196,32 @@ export const useStore = defineStore({
                     this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 }
+            } finally {
+                this.loadingBar = false
             }
         },
-        getPanelsAction() {
+        async getPanelsAction() {
             const access_token = VueCookies.get("9p_access_token")
-            if (access_token) {
-                return requests.getPanels(access_token)
-                    .then(response => {
-                        this.panels = response.data
-                        return response.data
-                    })
-                    .catch(error => {
-                        if (error.response.status) {
-                            this.messages.push({ message: error.response.data.detail, error: true })
-                            setTimeout(() => this.messages.shift(), 5000)
-                        } else {
-                            this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
-                            setTimeout(() => this.messages.shift(), 5000)
-                        }
-                    })
-            } else {
-                this.messages.push({ message: "Having a bit of trouble getting your panels... 😬", error: true })
-                setTimeout(() => this.messages.shift(), 5000)
+            this.loadingBar = true
+            try {
+                const response = await requests.getPanels(access_token)
+                this.panels = response.data
+                return response.data
+            } catch (error) {
+                if (error.response.status) {
+                    this.messages.push({ message: error.response.data.detail, error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                } else {
+                    this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
+                    setTimeout(() => this.messages.shift(), 5000)
+                }
+            } finally {
+                this.loadingBar = false
             }
         },
         async postEntryAction(panel_id, is_complete) {
             const access_token = VueCookies.get("9p_access_token")
-            if (!access_token) {
-                this.messages.push({ message: "Not authorized", error: true });
-                setTimeout(() => this.messages.shift(), 5000);
-                return;
-            }
+            // does not require loading bars becuase they are triggered in getPanelsActions()
             try {
                 const response = await requests.postEntry(access_token, panel_id, is_complete)
                 await this.getPanelsAction()
@@ -235,8 +256,7 @@ export const useStore = defineStore({
         },
         async getPanelConsistencyAction() {
             const access_token = VueCookies.get("9p_access_token")
-            // this.loadingBar = true
-            this.visGridLoading = true
+
             try {
                 const response = await requests.getPanelConsistency(access_token)
                 this.consistency = response.data
@@ -248,9 +268,6 @@ export const useStore = defineStore({
                     this.messages.push({ message: "An error that is currently not very well understood... 😬", error: true })
                     setTimeout(() => this.messages.shift(), 5000)
                 }
-            } finally {
-                this.visGridLoading = false
-                // this.loadingBar = false
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -258,19 +275,18 @@ export const useStore = defineStore({
 
             panel.is_complete = !panel.is_complete
             this.loadingBar = true
-            this.entryLoading = true
+            this.panelIsDisabled = true
 
             try {
                 await this.postEntryAction(panelId, panel.is_complete)
                 this.getPanelConsistencyAction()
             } catch (error) {
-                console.log('panel update failed, reverting')
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
                 setTimeout(() => this.messages.shift(), 5000)
                 const panel = this.panels.find(panel => panel.id === panelId)
                 panel.is_complete = !panel.is_complete
             } finally {
-                this.entryLoading = false
+                this.panelIsDisabled = false
                 this.loadingBar = false
             }
         },
@@ -320,5 +336,4 @@ export const useStore = defineStore({
             }
         },
     }
-},
-)
+})
