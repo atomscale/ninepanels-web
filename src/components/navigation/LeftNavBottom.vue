@@ -1,5 +1,5 @@
 <template>
-  <div class=" border border-red-500" :class="{ 'mb-4': Store.isPWA }">
+  <div class="border" :class="{ 'mb-4': Store.isPWA }">
     <div class="m-2 space-y-1" aria-labelledby="projects-headline">
 
       <button @click="shareApp"

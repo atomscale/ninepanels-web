@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-3 border border-green-500 ">
+  <div class="pt-3  ">
     <div class="flex justify-between">
 
       <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Landing' }"><img
