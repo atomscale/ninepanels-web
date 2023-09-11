@@ -3,7 +3,20 @@ import axios from "axios"
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
-});
+})
+
+apiClient.interceptors.response.use(
+    (response) => {
+        localStorage.setItem('lastReload', new Date().toDateString())
+        return response;
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
+)
+
+
+
 
 export default {
 

@@ -26,8 +26,8 @@ import RollbarPlugin from '@/rollbar.js'
 
 // dealing with viewport on mobile shenangigans
 const setViewportHeight = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
 
 // Listeners
@@ -36,13 +36,24 @@ window.addEventListener('orientationchange', setViewportHeight);
 
 let deferredPrompt
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome from showing the native prompt
-    e.preventDefault();
+  // Prevent Chrome from showing the native prompt
+  e.preventDefault();
 
-    // Save the event for later use, or ignore it
-    deferredPrompt = e;
-  });
+  // Save the event for later use, or ignore it
+  deferredPrompt = e;
+});
 
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    const lastReloadDate = localStorage.getItem('lastReload');
+    const today = new Date().toDateString();
+
+    if (lastReloadDate !== today) {
+      location.reload(); // Trigger reload
+      localStorage.setItem('lastReload', today); // Update the date
+    }
+  }
+});
 
 setViewportHeight();
 
