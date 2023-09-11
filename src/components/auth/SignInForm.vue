@@ -48,9 +48,8 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-// import { preventEnter } from '@/utils/utils.js'
 
-import DynamicButton from '@/components/DynamicButton.vue'
+import DynamicButton from '@/components/utilities/DynamicButton.vue'
 import {
     EyeIcon,
     EyeSlashIcon
@@ -99,6 +98,5 @@ export default {
         DynamicButton
     }
 }
-
 
 </script>

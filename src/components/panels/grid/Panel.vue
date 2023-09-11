@@ -42,7 +42,7 @@ export default {
     openPrimaryTray() {
       this.Store.getPanelsAction()
       this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PanelDetail'
+      this.Store.primaryComponentName = 'PanelTray'
       this.Store.primaryComponentProps = { panel: this.panel }
     }
   },

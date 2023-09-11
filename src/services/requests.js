@@ -15,9 +15,6 @@ apiClient.interceptors.response.use(
     }
 )
 
-
-
-
 export default {
 
     getLoginToken(email, password) {

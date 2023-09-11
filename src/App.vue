@@ -21,10 +21,10 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import FlashMessage from '@/components/FlashMessage.vue'
+import FlashMessage from '@/components/utilities/FlashMessage.vue'
 import LeftNav from '@/components/navigation/LeftNav.vue'
 import TopNav from '@/components/navigation/TopNav.vue'
-import PrimaryTray from '@/components/PrimaryTray.vue'
+import PrimaryTray from '@/components/navigation/PrimaryTray.vue'
 
 import NProgress from 'nprogress'
 
