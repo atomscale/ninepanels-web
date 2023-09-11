@@ -21,8 +21,8 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import Panel from '@/components/Panel.vue'
-import PanelGridAdd from '@/components/PanelGridAdd.vue'
+import Panel from '@/components/panels/grid/Panel.vue'
+import PanelGridAdd from '@/components/panels/grid/PanelGridAdd.vue'
 
 
 

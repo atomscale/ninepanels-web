@@ -21,7 +21,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import rollbar from '@/rollbarClient.js'
 
-import DynamicButton from '@/components/DynamicButton.vue'
+import DynamicButton from '@/components/utilities/DynamicButton.vue'
 
 export default {
   computed: {

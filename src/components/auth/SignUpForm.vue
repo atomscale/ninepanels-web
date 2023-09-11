@@ -1,12 +1,26 @@
 <template>
-    <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4">
+    <div class="flex min-h-full flex-col justify-between px-4   ">
 
+            <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
+                <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
+                    <div class="font-bold text-xl text-gray-500 ">Consistent balance awaits...</div>
+                    <div>
+                        <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
+                        <div class="mt-1">
+                            <input id="email" name="email" type="email" required="true" v-model="email"
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                        </div>
+                    </div>
 
+                    <div>
+                        <label for="name" class="block font-light text-xs text-gray-800">Name</label>
+                        <div class="mt-1">
+                            <input id="name" name="name" type="text" autocomplete="given-name" required="true"
+                                v-model="name"
+                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                        </div>
+                    </div>
 
-
-        <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
-            <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                <div class="font-bold text-lg text-gray-500 ">Choose a new password:</div>
                     <div>
                         <label for="password_first" class="block font-light text-xs text-gray-800">Password</label>
                         <div class="mt-1 flex relative">
@@ -36,18 +50,32 @@
                             </button>
                         </div>
                     </div>
+
+
+
                     <div>
-                        <DynamicButton :parentMethod="dispatchPasswordReset" :buttonText="'Reset my password'"
+                        <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
                             :confirmRequired="false" />
                     </div>
-                    <div class="font-light text-xs text-gray-500">
-                        If you are having any bother resetting your password, feel free to email me at <span class="font-semibold">ben@ninepanels.com</span> 👍
+                    <div class="font-light text-xs text-gray-500">Free forever. No funny business. No ads, ever.
                     </div>
+                    <div class="font-light text-xs text-gray-500">By signing up you agree for ninepanels.com to store
+                        your data. It will never, ever be sold.</div>
 
-            </form>
+                    <div class="font-light text-xs text-gray-500">By signing up you also agree to a single, lonely
+                        little cookie being stored on your device (so you can be kept logged in between visits).</div>
+                </form>
+                <div class="flex justify-between mt-6">
+                    <div class="font-semibold text-xs text-gray-500">
+                        <router-link :to=" { name: 'SignIn' }">Sign in instead</router-link>
+                    </div>
+                    <div class="font-semibold text-xs text-gray-500">
+                        <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
 </template>
 
 <script>
@@ -58,35 +86,37 @@ import {
     EyeIcon,
     EyeSlashIcon
 } from '@heroicons/vue/24/outline'
-import DynamicButton from '@/components/DynamicButton.vue'
+import DynamicButton from '@/components/utilities/DynamicButton.vue'
 
 export default {
     data() {
         return {
+            email: '',
+            name: '',
             password_first: '',
             password_second: '',
-            passwordVisible: false,
-            email: this.$route.query.email,
-            password_reset_token: this.$route.query.password_reset_token
+            passwordMismatch: false,
+            passwordVisible: false
         }
     },
     computed: {
         ...mapStores(useStore)
     },
     methods: {
-        async dispatchPasswordReset() {
+        async signUserUp() {
 
             if (this.password_first !== this.password_second) {
-                this.Store.messages.push({ message: "New passwords do not match" })
+                this.passwordMismatch = true
+                this.Store.messages.push({ message: "Passwords do not match" })
                 setTimeout(() => this.Store.messages.shift(), 5000)
                 return // stop function
             }
 
-            const resp = await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
-            this.password_first = ''
-            this.password_second = ''
+            this.Store.loadingBar = true
+            const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
+            this.Store.loadingBar = false
             if (resp) {
-                this.$router.push({ name: 'SignIn' })
+                this.$router.push({ name: 'Panels' })
             }
         },
         togglePasswordVisibility() {

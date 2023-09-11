@@ -1,3 +1,3 @@
 # ninepanels
 
-Consistency visibilty for the chronically inconsistent.
+Daily balance. Long term consistency.

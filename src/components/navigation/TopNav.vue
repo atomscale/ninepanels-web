@@ -30,8 +30,8 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import HelpDetail from '@/components/HelpDetail.vue'
-import InstallPWA from '@/components/InstallPWA.vue'
+import HelpTray from '@/components/help/HelpTray.vue'
+import InstallPWATray from '@/components/help/InstallPWATray.vue'
 
 import {
   QuestionMarkCircleIcon,
@@ -50,12 +50,12 @@ export default {
   methods: {
     openHelpTray() {
       this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'HelpDetail'
+      this.Store.primaryComponentName = 'HelpTray'
       this.Store.primaryComponentProps = null
     },
     openPWATray() {
       this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'InstallPWA'
+      this.Store.primaryComponentName = 'InstallPWATray'
       this.Store.primaryComponentProps = null
     },
     reloadApp() {
@@ -64,10 +64,10 @@ export default {
   },
   components: {
     QuestionMarkCircleIcon,
-    HelpDetail,
+    HelpTray,
     ArrowDownOnSquareIcon,
     ArrowPathIcon,
-    InstallPWA,
+    InstallPWATray,
   }
 }
 

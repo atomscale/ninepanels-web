@@ -48,10 +48,10 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import PanelDetail from '@/components/PanelDetail.vue'
-import HelpDetail from '@/components/HelpDetail.vue'
-import InstallPWA from '@/components/InstallPWA.vue'
-import PanelCreateForm from '@/components/PanelCreateForm.vue'
+import PanelTray from '@/components/panels/tray/PanelTray.vue'
+import HelpTray from '@/components/help/HelpTray.vue'
+import InstallPWATray from '@/components/help/InstallPWATray.vue'
+import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
 
 
 // const store = useStore()
@@ -77,10 +77,10 @@ export default {
     TransitionRoot,
     DialogTitle,
     XMarkIcon,
-    PanelDetail,
-    HelpDetail,
+    PanelTray,
+    HelpTray,
     PanelCreateForm,
-    InstallPWA
+    InstallPWATray
   }
 }
 </script>

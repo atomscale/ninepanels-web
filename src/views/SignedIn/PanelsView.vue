@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import PanelGridFrame from '@/components/PanelGridFrame.vue'
-import ConsistencyGrid from '@/components/ConsistencyGrid.vue'
+import PanelGridFrame from '@/components/panels/grid/PanelGridFrame.vue'
+import ConsistencyGrid from '@/components/visgrid/ConsistencyGrid.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useStore } from '@/stores/store.js'

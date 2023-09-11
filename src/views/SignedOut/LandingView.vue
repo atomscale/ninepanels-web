@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CTA from '@/components/CTA.vue'
+import CTA from '@/components/landing/CTA.vue'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 

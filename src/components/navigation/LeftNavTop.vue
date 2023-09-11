@@ -3,7 +3,7 @@
     <div class="flex justify-between">
 
       <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Landing' }"><img
-          class="h-8 ml-5 w-auto" src="/android-chrome-512x512.png" alt="9P logo" />
+          class="h-8 ml-5 w-auto" src="/android-chrome-512x512.png" alt="the nine panels logo" />
       </router-link>
       <button @click="Store.reloadApp">
 

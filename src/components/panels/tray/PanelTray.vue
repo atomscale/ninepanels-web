@@ -65,14 +65,14 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import PanelDescDisplay from '@/components/PanelDescDisplay.vue'
-import PanelDescEdit from '@/components/PanelDescEdit.vue'
-import PanelTitleDisplay from '@/components/PanelTitleDisplay.vue'
-import PanelTitleEdit from '@/components/PanelTitleEdit.vue'
-import DynamicButton from '@/components/DynamicButton.vue'
+import PanelDescDisplay from '@/components/panels/tray/PanelDescDisplay.vue'
+import PanelDescEdit from '@/components/panels/tray/PanelDescEdit.vue'
+import PanelTitleDisplay from '@/components/panels/tray/PanelTitleDisplay.vue'
+import PanelTitleEdit from '@/components/panels/tray/PanelTitleEdit.vue'
+import DynamicButton from '@/components/utilities/DynamicButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
-import PanelSort from '@/components/PanelSort.vue'
+import PanelSort from '@/components/panels/tray/PanelSort.vue'
 import { Switch } from '@headlessui/vue'
 
 export default {

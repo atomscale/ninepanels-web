@@ -47,7 +47,7 @@
 import { mapStores } from 'pinia'
 import { useStore } from '@/stores/store.js'
 
-import DynamicButton from '@/components/DynamicButton.vue'
+import DynamicButton from '@/components/utilities/DynamicButton.vue'
 
 export default {
     data() {

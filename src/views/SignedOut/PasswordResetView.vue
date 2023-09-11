@@ -7,8 +7,8 @@
 
 <script>
 
-import PasswordResetRequestForm from '@/components/PasswordResetRequestForm.vue'
-import PasswordResetForm from '@/components/PasswordResetForm.vue'
+import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
+import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 
 
 export default {
