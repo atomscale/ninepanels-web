@@ -1,5 +1,5 @@
 <template >
-  <button type="submit" @click="this.openCreatePanelTray()" class="h-full w-full rounded-lg border border-gray-300 border-dashed text-xs text-gray-600">
+  <button aria-label="add a new panel" type="submit" @click="this.openCreatePanelTray()" class="h-full w-full rounded-lg border border-gray-300 border-dashed text-xs text-gray-600">
     <div class="flex items-center justify-center">
       <PlusIcon class="h-6 w-6 text-gray-400 " />
 
