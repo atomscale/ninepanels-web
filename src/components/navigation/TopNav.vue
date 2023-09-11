@@ -43,6 +43,9 @@ import {
 export default {
   computed: {
     ...mapStores(useStore),
+    isProd() {
+      return import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION"
+    }
   },
   methods: {
     openHelpTray() {
@@ -58,14 +61,6 @@ export default {
     reloadApp() {
       window.location.reload()
     },
-    isProd() {
-      const env = import.meta.env.VITE_NINEPANELS_ENV
-      if (env === 'PRODUCTION') {
-        return true
-      } else {
-        return false
-      }
-    }
   },
   components: {
     QuestionMarkCircleIcon,
