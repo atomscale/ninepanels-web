@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PanelsView from '@/views/SignedIn/PanelsView.vue'
 import AccountView from '@/views/SignedIn/AccountView.vue'
-import Landing from '@/views/SignedOut/LandingView.vue'
+import LandingView from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
 import AboutView from '@/views/SignedOut/AboutView.vue'
+import NotFound from '@/views/SignedOut/NotFound.vue'
 import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
 import { useStore } from '@/stores/store.js'
 
@@ -28,7 +29,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Landing',
-      component: Landing,
+      component: LandingView,
     },
     {
       path: '/signup',
@@ -62,6 +63,11 @@ const router = createRouter({
       name: 'Account',
       component: AccountView,
       beforeEnter: requireAccessToken
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound
     }
   ],
   scrollBehavior(to, from, savedPosition) {
