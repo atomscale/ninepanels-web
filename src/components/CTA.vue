@@ -4,7 +4,7 @@
 
 
         <div>
-            <h1 class="text-center mt-10 text-2xl mb-6 sm:text-5xl md:text-6xl">
+            <h1 class="text-center text-2xl mb-6 sm:text-5xl md:text-6xl">
 
                 <div class="flex justify-center space-x-2">
 
