@@ -19,7 +19,7 @@
                 </div>
             </h1>
         </div>
-        <img src="@/assets/cta_static.jpg" class="px-20 mt-2"/>
+        <img loading="eager" src="@/assets/cta_static.jpg" class="px-20 mt-2"/>
         <div class="flex justify-between w-4/5 mt-8 mb-4 ">
             <div class=" text-gray-500 font-semibold">
                 <router-link :to="{ name: 'SignIn' }">Sign in</router-link>

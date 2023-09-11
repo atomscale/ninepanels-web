@@ -5,7 +5,7 @@
         <button type="button" aria-label="Open sidebar"
           class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none "
           @click="Store.leftNavIsOpen = true">
-          <img class="h-8 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
+          <img loading="eager" class="h-8 ml-3 mb-1" src="/android-chrome-512x512.png" alt="9P logo" />
         </button>
 
         <div class="mt-2.5">

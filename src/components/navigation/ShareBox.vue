@@ -1,7 +1,7 @@
 <template >
   <div class="flex justify-evenly text-gray-200 pt-3 pb-3 text-sm">
     <button class="flex w-1/2 justify-center h-full " @click="whatsApp()" >
-      <img class="h-7" src="@/assets/icons8-whatsapp-50.png" alt="9P logo" />
+      <img loading="eager" class="h-7" src="@/assets/icons8-whatsapp-50.png" alt="9P logo" />
     </button>
     <button class="flex justify-center w-1/2  h-full " @click="email()" >
       <EnvelopeIcon class="h-7 text-gray-300"></EnvelopeIcon>
