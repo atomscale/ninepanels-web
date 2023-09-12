@@ -13,9 +13,9 @@
         <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
       </router-link>
       <router-link v-if="Store.user" @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
-        :to="{ name: 'Account' }"
+        :to="{ name: 'Settings' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Account</span>
+        <CogIcon class="h-6 w-6" /><span class="ml-3">Settings</span>
       </router-link>
       <router-link v-if="Store.user" @click="signUserOut" :to="{ name: 'Landing' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
@@ -43,8 +43,9 @@ import { mapStores } from 'pinia'
 import ShareBox from '@/components/navigation/ShareBox.vue'
 
 import {
-  UserCircleIcon,
+  CogIcon,
   UserPlusIcon,
+  UserCircleIcon,
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
   ShareIcon,
@@ -94,12 +95,13 @@ export default {
 
   },
   components: {
-    UserCircleIcon,
+    CogIcon,
     ArrowLeftOnRectangleIcon,
     QuestionMarkCircleIcon,
     UserPlusIcon,
     ShareIcon,
     ShareBox,
+    UserCircleIcon,
 
   }
 }

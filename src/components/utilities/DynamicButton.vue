@@ -5,8 +5,6 @@
             {{ this.buttonText }}
         </button>
 
-
-
         <div v-else
             class="flex justify-center  border border-red-800 bg-red-800 rounded-md w-full  max-w-sm  py-2 px-4 text-sm  text-white  shadow-sm">
             <button aria-label="Confirm button action"
