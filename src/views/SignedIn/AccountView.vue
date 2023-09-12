@@ -11,7 +11,10 @@
         </div>
       </div>
     </div>
-    <DynamicButton class="mb-4" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
+    <div :class="Store.isPWA ? 'mb-4': null ">
+
+      <DynamicButton class="mb-4" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete Account'" :confirmText="'Are you sure?'" />
+    </div>
   </div>
 </template>
 
