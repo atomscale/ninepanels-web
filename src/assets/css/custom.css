@@ -83,9 +83,7 @@
   animation: install-bounce 2.6s 2;  /* Remove 'infinite' for a single bounce */
 }
 
-.data-heading {
-  @apply text-sm font-light h-5 text-np-light;
-}
+
 
 button:active {
   outline: none;

@@ -6,7 +6,7 @@
     <div :class="{'mb-8': this.Store.isPWA}">
 
       <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center ml-1 pl-2 pr-2 pb-3">
-        <div class="h-5 text-np-light" :class="{ 'font-semibold text-np-light': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA} " :style="{'font-variant': 'small-caps'}">Consistency</div>
+        <div class="h-5 text-np-light" :class="{ 'font-semibold text-np-light': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA} "  >Consistency</div>
         <div>
           <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 mr-1 text-np-base"></ChevronUpIcon>
           <ChevronDownIcon v-else class="h-5 w-5 mr-1 text-np-base"></ChevronDownIcon>

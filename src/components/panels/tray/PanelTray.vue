@@ -13,7 +13,7 @@
 
 
       <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
-        <div :style="{'font-variant': 'small-caps'}" class="data-heading">Order</div>
+        <div  class="text-sm font-light h-5 text-np-light">Order</div>
         <div>
 
           <ChevronLeftIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>
@@ -40,7 +40,7 @@
     </div>
     <div :class="{ 'mb-4': this.Store.isPWA}">
       <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 " >
-        <div :style="{'font-variant': 'small-caps'}" class="data-heading">Danger Zone</div>
+        <div  class="text-sm font-light h-5 text-np-light">Danger Zone</div>
         <div>
 
           <ChevronLeftIcon v-if="!this.Store.deleteResetBoxIsOpen" class="h-5 w-5 text-np-light"></ChevronLeftIcon>

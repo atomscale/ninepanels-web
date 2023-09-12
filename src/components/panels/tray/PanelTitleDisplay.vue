@@ -2,7 +2,7 @@
   <div class="flex-col mb-4">
 
     <div class="flex justify-between items-center">
-      <div :style="{'font-variant': 'small-caps'}" class="data-heading">Panel</div>
+      <div   class="text-sm font-light h-5 text-np-light">Panel</div>
       <div>
 
         <button class="ml-4 " @click="toggleEditState()">

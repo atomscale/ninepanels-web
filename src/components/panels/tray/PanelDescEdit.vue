@@ -1,6 +1,6 @@
 <template >
   <div class="flex justify-between items-center mb-2 h-5">
-    <div :style="{'font-variant': 'small-caps'}" class="data-heading">About</div>
+    <div   class="text-sm font-light h-5 text-np-light">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
         <CheckIcon class="h-5 w-5 text-np-light hover:text-np-base" />
