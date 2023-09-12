@@ -6,7 +6,7 @@
             <div v-if="!error" class="">
                 <div class="flex">
                     <div >
-                        <p class="text-sm text-gray-600">{{ message }}</p>
+                        <p class="text-sm text-np-base">{{ message }}</p>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
 
                 <div class="flex items-center justify-center">
                     <div >
-                        <p class="text-sm text-gray-600">{{ message }}</p>
+                        <p class="text-sm text-np-base">{{ message }}</p>
                     </div>
                 </div>
             </div>

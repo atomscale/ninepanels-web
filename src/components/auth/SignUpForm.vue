@@ -112,9 +112,9 @@ export default {
                 return // stop function
             }
 
-            this.Store.loadingBar = true
+
             const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
-            this.Store.loadingBar = false
+          
             if (resp) {
                 this.$router.push({ name: 'Panels' })
             }

@@ -18,7 +18,7 @@
 
                   <div class="flex px-5 justify-between">
                     <div></div>
-                    <button type="button" class="rounded-md text-gray-400 hover:text-gray-500"
+                    <button type="button" class="rounded-md text-np-light hover:text-np-base"
                       @click="this.closePrimaryTray(); this.Store.primaryTrayIsOpen = false">
                       <span class="sr-only">Close panel</span>
                       <XMarkIcon class="h-6 w-6" aria-hidden="true" />

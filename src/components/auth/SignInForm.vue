@@ -70,16 +70,10 @@ export default {
     },
     methods: {
         async sendLogIn() {
-            this.Store.loadingBar = true
             const token = await this.Store.getLoginTokenAction(this.username, this.password)
             if (token) {
-                this.Store.loadingBar = false
                 this.$router.push({ name: 'Panels' })
-            } else {
-                this.$router.push({ name: 'SignIn' })
-                this.Store.loadingBar = false
             }
-            this.Store.loadingBar = false
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible

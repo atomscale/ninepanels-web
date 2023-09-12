@@ -84,7 +84,7 @@
 }
 
 .data-heading {
-  @apply text-sm font-light h-5 text-gray-500;
+  @apply text-sm font-light h-5 text-np-light;
 }
 
 button:active {

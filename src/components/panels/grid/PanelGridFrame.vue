@@ -8,7 +8,7 @@
           <Panel v-if="this.Store.panels[i - 1]" :panel="this.Store.panels[i - 1]" />
           <PanelGridAdd v-else-if="this.Store.panels.length == (i - 1)" :slotIndex="(i - 1)" />
           <div v-else
-            class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-lg">
+            class="flex items-center justify-center text-np-base border border-dashed border-np-base text-sm rounded-lg">
           </div>
 
         </div>
@@ -31,7 +31,7 @@ export default {
     ...mapStores(useStore),
   },
   created() {
-    this.Store.getPanelsAction()
+    this.Store.readPanelsAction()
   },
   components: {
     Panel,

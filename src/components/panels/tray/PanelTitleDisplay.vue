@@ -6,12 +6,12 @@
       <div>
 
         <button class="ml-4 " @click="toggleEditState()">
-          <PencilIcon class="h-4 w-4 text-gray-400 hover:text-gray-500" />
+          <PencilIcon class="h-4 w-4 text-np-light hover:text-np-base" />
         </button>
       </div>
     </div>
 
-    <div class="text-xl font-bold text-gray-600 w-auto">{{ panel.title }}</div>
+    <div class="text-xl font-bold text-np-base w-auto">{{ panel.title }}</div>
 
   </div>
 </template>

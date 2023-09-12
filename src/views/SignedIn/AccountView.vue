@@ -35,7 +35,7 @@ export default {
       this.$router.push('/')
     },
     async getUserActionMethod() {
-      await this.Store.getUserAction()
+      await this.Store.readUserAction()
     }
   },
   mounted() {

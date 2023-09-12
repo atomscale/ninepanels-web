@@ -26,7 +26,7 @@
     <div v-else>
 
         <button type="submit" @click="dispatchParentMethod()" :aria-label="this.buttonText"
-            class="flex justify-center mb-4 border border-gray-200 rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-white text-gray-500  transition ease-in-out duration-200 shadow-sm">
+            class="flex justify-center mb-4 border border-np-base rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-white text-np-base  transition ease-in-out duration-200 shadow-sm">
             {{ this.buttonText }}
         </button>
     </div>

@@ -9,7 +9,7 @@
                     <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
                     <div class="mt-1">
                         <input id="email" name="email" type="email" required="true" v-model="email"
-                            class="block w-full appearance-none text-gray-600 rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                            class="block w-full appearance-none text-np-base rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                     </div>
                 </div>
                 <div>

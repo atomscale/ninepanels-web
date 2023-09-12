@@ -42,7 +42,7 @@ export default {
 
     },
     mounted() {
-        this.Store.getPanelConsistencyAction()
+        this.Store.readPanelConsistencyAction()
     },
     methods: {
         panelStyle(i) {

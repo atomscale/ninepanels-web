@@ -6,14 +6,14 @@
       <div>
 
         <button class="" @click="toggleEditState()">
-          <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-gray-400 " />
-          <PlusIcon v-else class="h-5 w-5 text-gray-400 hover:text-gray-500" />
+          <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-np-base" />
+          <PlusIcon v-else class="h-5 w-5 text-np-light hover:text-np-base" />
         </button>
       </div>
     </div>
 
     <!-- <div class="text-sm w-auto whitespace-pre-line">{{ panel.description }}</div> -->
-    <VueShowdown class="text-sm max-h-80 text-gray-600 w-auto whitespace-pre-line overflow-hidden overflow-y-auto" flavor="vanilla" :options="{ emoji: true }"
+    <VueShowdown class="text-sm max-h-80 text-np-base w-auto whitespace-pre-line overflow-hidden overflow-y-auto" flavor="vanilla" :options="{ emoji: true }"
       :markdown="this.panel.description"></VueShowdown>
 
   </div>

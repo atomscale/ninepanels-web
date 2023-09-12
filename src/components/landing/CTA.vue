@@ -8,14 +8,14 @@
 
                 <div class="flex justify-center space-x-2">
 
-                    <span class="block text-gray-600 text-3xl font-light">Daily</span>
-                    <span class="block text-gray-600 text-3xl font-bold">balance.</span>
+                    <span class="block text-np-base text-3xl font-light">Daily</span>
+                    <span class="block text-np-base text-3xl font-bold">balance.</span>
                 </div>
 
                 <div class="flex justify-center space-x-2">
 
-                    <span class="block text-gray-600 text-3xl font-light">Long-term</span>
-                    <span class="block text-gray-600 text-3xl font-bold">consistency.</span>
+                    <span class="block text-np-base text-3xl font-light">Long-term</span>
+                    <span class="block text-np-base text-3xl font-bold">consistency.</span>
                 </div>
             </h1>
         </div>

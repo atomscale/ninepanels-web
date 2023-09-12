@@ -4,8 +4,8 @@
             <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
                 <div class="aspect-content">
                     <button @click="dispatchUpdatePanelAction(i - 1)"
-                        :class="[this.Store.panels[i - 1] ? 'border-2 border-gray-400' : 'border-dashed', this.Store.panels[i - 1] && this.Store.panels[i - 1].id === this.panel.id ? 'bg-gray-700 border-gray-700' : null]"
-                        class="flex items-center justify-center text-gray-500 border  border-gray-300 text-sm rounded-lg hover:scale-105">
+                        :class="[this.Store.panels[i - 1] ? 'border-1 border-np-base' : 'border-dashed border-np-base', this.Store.panels[i - 1] && this.Store.panels[i - 1].id === this.panel.id ? 'bg-np-fill' : null]"
+                        class="flex items-center justify-center text-gray-500 border  border-np-base text-sm rounded-lg hover:scale-105">
                     </button>
                 </div>
             </div>
@@ -51,13 +51,12 @@ export default {
                     this.Store.panelSortBoxIsOpen = false
                     this.Store.deleteResetBoxIsOpen = false
 
-                    this.Store.loadingBar = true
+
                     await this.Store.updatePanelAction(
                         this.panel.id,
                         { 'position': i }
                     )
-                    this.Store.getPanelConsistencyAction()
-                    this.Store.loadingBar = false
+                    this.Store.readPanelConsistencyAction()
                 }
             }
             else {

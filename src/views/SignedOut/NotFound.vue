@@ -3,7 +3,7 @@
 
     <div class="mt-12 sm:mx-auto sm:w-full sm:max-w-md">
 
-        <div class="text-gray-600  text-sm mx-4 font-light">
+        <div class="text-np-base  text-sm mx-4 font-light">
           <div class="text-sm text-gray-500 font-light mb-2 text-center">As JME once said:</div>
           <div class="italic font-serif text-3xl font-extrabold text-center">"Can't see you on no sold out tour, HTTP error 404"</div>
 
