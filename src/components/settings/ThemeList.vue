@@ -15,7 +15,7 @@
                             <ChevronUpDownIcon class="h-5 w-5 text-np-light" aria-hidden="true" />
                         </span>
                     </ListboxButton>
-                    <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-40 border right-0 rounded-md py-1 text-sm">
+                    <ListboxOptions class="absolute z-40 mt-1 max-h-60 w-40 border right-0 rounded-md py-1 text-sm">
                         <ListboxOption v-for="colour in colours" :key="colour" :value="colour"
                             v-slot="{ active, selected }">
                             <li
@@ -32,7 +32,7 @@
             </Listbox>
 
 
-  
+
     </div>
 </template>
 
