@@ -15,9 +15,9 @@
     .ocean {
         --color-fill: #075985; /* lightblue-800 */
         --color-fill-hover: #0C4A6E; /* lightblue-700 */
-        --color-text-base: #0C4A6E; /* lightblue-600 */
-        --color-text-base-dark: #075985; /* lightblue-800 */
-        --color-text-base-hover: #075985; /* lightblue-700 */
+        --color-text-base: #1b71a3; /* custom */
+        --color-text-base-light: #1686a5; /* custom */
+        --color-text-base-hover: #075985; /* lightblue-800 */
         --color-text-inverted: #E0F2FE; /* lightblue-100 */
         --color-border-base: #BAE6FD; /* lightblue-200 */
     }

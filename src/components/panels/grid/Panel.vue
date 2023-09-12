@@ -4,7 +4,7 @@
     <button type="submit" @click="Store.toggleEntryOptimistically(this.panel.id)" :disabled="Store.panelIsDisabled"
       class="h-full w-full rounded-lg border  text-xs "
       :aria-label="this.panel.title"
-      :class="isComplete ? 'bg-np-fill text-np-inverted ' : 'border-np-base text-np-base'">
+      :class="isComplete ? 'bg-np-fill text-np-inverted ' : 'border-np-base text-np-light'">
       <div class="m-2">
         {{ this.panel.title }}
       </div>

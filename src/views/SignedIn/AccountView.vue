@@ -5,9 +5,9 @@
       <div class="bg-white  ">
         <div v-if="this.Store.user">
           <div class="data-heading">Name</div>
-          <div class="font-light text-xl mb-2">{{ this.Store.user.name }}</div>
+          <div class="font-light text-xl mb-2 text-np-base">{{ this.Store.user.name }}</div>
           <div class="data-heading">Email</div>
-          <div class="font-light text-xl mb-2">{{ this.Store.user.email }}</div>
+          <div class="font-light text-xl mb-2 text-np-base">{{ this.Store.user.email }}</div>
         </div>
       </div>
     </div>

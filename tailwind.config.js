@@ -23,7 +23,7 @@ module.exports = {
         np: {
           base: 'var(--color-text-base)',
           inverted: 'var(--color-text-inverted)',
-          light: 'var(--color-text-base-dark)'
+          light: 'var(--color-text-base-light)'
         }
       },
       borderColor: {
