@@ -11,9 +11,11 @@
     </button>
     <button aria-label="open panel detail" @click="openPrimaryTray" class="absolute   top-1 right-1 p-6 "
 
-      :class="isComplete ? ' text-np-inverted' : 'text-np-base opacity-60'">
+      :class="isComplete ? 'text-np-inverted opacity-70' : 'text-np-base opacity-60'">
       <ArrowTopRightOnSquareIcon class="absolute top-0.5 right-0.5 h-4 " />
     </button>
+    <CheckIcon v-if="isComplete" class="absolute top-1.5 text-green-500 left-2 h-4 " />
+
   </div>
 </template>
 
@@ -24,7 +26,8 @@ import { mapStores } from 'pinia'
 
 import {
   InformationCircleIcon,
-  ArrowTopRightOnSquareIcon
+  ArrowTopRightOnSquareIcon,
+  CheckIcon
 } from '@heroicons/vue/24/outline'
 
 // panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete
@@ -52,7 +55,8 @@ export default {
   },
   components: {
     InformationCircleIcon,
-    ArrowTopRightOnSquareIcon
+    ArrowTopRightOnSquareIcon,
+    CheckIcon
   }
 }
 
