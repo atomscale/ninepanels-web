@@ -16,7 +16,7 @@ export const useStore = defineStore({
 
         loadingBar: false,
 
-        isPWA: false,
+        isPWA: true,
         isMobile: true,
 
         leftNavIsOpen: false,
@@ -44,17 +44,12 @@ export const useStore = defineStore({
 
         theme: '',
 
-        announcementVersion: 1,
-        showAnnouncement: true
+        currentAnnouncementVersion: 2,
+        canShow: false
+
     }),
     actions: {
-        checkShowAnnouncement() {
-            const show = localStorage.getItem('showAnnouncement')
 
-            if (show) {
-                this.showAnnouncement = show
-            } 
-        },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
         },

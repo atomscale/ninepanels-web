@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center w-full">
-    <div class="sticky top-0 pl-1  z-40  w-full  bg-np-fill" >
+    <div class="sticky top-0 pl-1  z-40  w-full  bg-np-fill">
       <div class="flex justify-between items-center">
         <button type="button" aria-label="Open sidebar"
           class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
@@ -8,14 +8,14 @@
           <img loading="eager" class="h-8 ml-3 " src="/9p-logo-empty-filled-sq.png" alt="9P logo" />
         </button>
 
-        <AnnouncementBar  />
-        <div class="mt-1">
+        <AnnouncementBar v-if="Store.canShow" />
+        <div class=" flex ">
           <button v-if="!Store.isPWA && Store.isMobile" @click="openPWATray" type="button" aria-label="Open help"
-          class=" pr-4 animate-install-bounce">
-          <ArrowDownOnSquareIcon class="text-np-inverted h-5" />
-        </button>
+            class=" pr-3 animate-install-bounce">
+            <ArrowDownOnSquareIcon class="text-np-inverted h-5" />
+          </button>
           <button v-if="Store.isPWA && Store.isMobile" @click="reloadApp" type="button" aria-label="Open help"
-            class=" pr-4">
+            class=" pr-3">
             <ArrowPathIcon class="h-5 w-5 text-np-inverted" />
           </button>
           <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class=" pr-4">
@@ -45,8 +45,13 @@ import {
 export default {
   computed: {
     ...mapStores(useStore),
-    isProd() {
-      return import.meta.env.VITE_NINEPANELS_ENV === "PRODUCTION"
+    canShow() {
+      return this.Store.canShow
+    }
+  },
+  mounted() {
+    if (localStorage.getItem('hiddenAnnoucementVersion') < this.Store.currentAnnouncementVersion) {
+      this.Store.canShow = true
     }
   },
   methods: {

@@ -1,11 +1,11 @@
 <template>
     <div class="bg-np-accent p-2 rounded-lg flex justify-between items-center">
 
-        <router-link :to="{ name: 'Settings' }" class="text-xs text-np-inverted">🎉 Themes now available in Settings! 🎉
-        </router-link>
-        <button class="ml-2" >
+        <button class="mr-2" @click="hideAnnouncement">
             <XMarkIcon class="h-5 w-5 text-np-inverted " />
         </button>
+        <router-link :to="{ name: 'Settings' }" class="text-xs text-np-inverted">Themes now available! <sp class="ml-1"> 🎉</sp>
+        </router-link>
     </div>
 </template>
 
@@ -14,24 +14,25 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import {
-  XMarkIcon,
+    XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
 export default {
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useStore),
+
     },
     methods: {
-
+        hideAnnouncement() {
+            this.Store.canShow = false
+            localStorage.setItem('hiddenAnnoucementVersion', this.Store.currentAnnouncementVersion)
+        },
     },
-    mounted() {
 
-    },
 
     components: {
         XMarkIcon
     },
 }
-
 
 </script>

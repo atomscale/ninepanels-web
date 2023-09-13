@@ -37,23 +37,20 @@
       <button @click="toggleDangerBox()" class="flex w-full justify-between items-center mb-4 ">
         <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Danger Zone</div>
         <div>
-
           <ChevronLeftIcon v-if="!dangerBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
           <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
         </div>
       </button>
 
 
-        <div class="flex flex-col justify-between items-center mt-6">
-          <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Reset All Panels'"
+      <div class="flex flex-col justify-between items-center mt-6">
+        <!-- <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Reset All Panels'"
           :confirmText="'Are you sure?'" />
           <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete All Panels'"
-          :confirmText="'Are you sure?'" />
-          <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-6" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete Your Account'"
-          :confirmText="'Are you sure?'" />
-        </div>
-
-
+          :confirmText="'Are you sure?'" /> -->
+        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-6" :parentMethod="sendUserDelete" :confirmRequired="true"
+          :buttonText="'Delete Your Account'" :confirmText="'Are you sure?'" />
+      </div>
 
 
     </div>
@@ -86,9 +83,9 @@ export default {
       this.dangerBoxIsOpen = !this.dangerBoxIsOpen
     },
     async sendUserDelete() {
-            await this.Store.deleteUserAction()
-            this.$router.push('/')
-        },
+      await this.Store.deleteUserAction()
+      this.$router.push('/')
+    },
   },
   components: {
     DynamicButton,
