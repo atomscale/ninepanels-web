@@ -6,7 +6,7 @@
 
 
     <button @click="togglePrefsBox()" class="flex w-full justify-between items-center ">
-      <div class="text-sm font-semibold h-5 text-np-light mt-2">Preferences</div>
+      <div class="sm:text-sm text-base font-semibold h-5 text-np-light mt-2">Preferences</div>
       <div>
 
         <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-light mt-2"></ChevronLeftIcon>
