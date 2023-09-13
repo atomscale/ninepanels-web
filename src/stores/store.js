@@ -70,7 +70,7 @@ export const useStore = defineStore({
             if (theme) {
                 this.theme = theme
             } else {
-                this.theme = 'noir'
+                this.theme = 'dusk'
             }
         },
         saveTheme(newTheme) {
