@@ -1,7 +1,7 @@
 <template>
     <transition name="fade" appear>
 
-        <div class="animate-custom-bounce rounded-md mb-2 p-2 mr-2 z-50 bg-np-base"
+        <div class="animate-custom-bounce rounded-md mb-2 p-2  mr-2 z-50 bg-np-accent"
             :class="error ? '' : ''">
             <div v-if="!error" class="">
                 <div class="flex">
