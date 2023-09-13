@@ -1,10 +1,10 @@
 <template >
-  <div class="flex justify-evenly text-gray-200 pt-3 pb-3 text-sm">
+  <div class="flex justify-evenly text-np-inverted pt-3 pb-3 text-sm">
     <button class="flex w-1/2 justify-center h-full " @click="whatsApp()" aria-label="Whatsapp sharing button" >
       <img loading="eager" class="h-7" src="@/assets/icons8-whatsapp-50.png" alt="Whatsapp logo" />
     </button>
     <button class="flex justify-center w-1/2  h-full " @click="email()" aria-label="Email sharing button">
-      <EnvelopeIcon class="h-7 text-gray-300"></EnvelopeIcon>
+      <EnvelopeIcon class="h-7 text-np-inverted"></EnvelopeIcon>
     </button>
   </div>
 </template>

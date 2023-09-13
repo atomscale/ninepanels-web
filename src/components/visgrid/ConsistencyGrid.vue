@@ -1,11 +1,12 @@
 <template >
+    <div :class="{ 'opacity-50': Store.theme === 'night' }">
         <transition name="fade" appear>
             <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
                 <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
                     <div class="aspect-content">
                         <transition name="fade" appear>
-                            <button aria-label="Cycle through consistency stats" @click="cycleStats()" :class="panelStyle(i)"
-                                class="flex items-center justify-center rounded-lg ">
+                            <button aria-label="Cycle through consistency stats" @click="cycleStats()"
+                                :class="panelStyle(i)" class="flex items-center justify-center rounded-lg ">
                                 <div class="flex text-xs flex-col"
                                     v-if="this.Store.consistency[i - 1] && this.showFraction">
                                     {{ this.Store.consistency[i - 1].days_complete }}
@@ -23,7 +24,7 @@
                 </div>
             </div>
         </transition>
-
+    </div>
 </template>
 
 <script>
@@ -42,7 +43,7 @@ export default {
 
     },
     mounted() {
-        this.Store.getPanelConsistencyAction()
+        this.Store.readPanelConsistencyAction()
     },
     methods: {
         panelStyle(i) {
@@ -79,7 +80,7 @@ export default {
     data() {
         return {
             shading: [
-                { threshold: 0.1, color_value: 'bg-white text-gray-500' },
+                { threshold: 0.1, color_value: 'bg-np-base text-gray-500' },
                 { threshold: 0.2, color_value: 'bg-green-50 text-gray-500' },
                 { threshold: 0.3, color_value: 'bg-green-100 text-gray-500' },
                 { threshold: 0.4, color_value: 'bg-green-200 text-gray-500' },

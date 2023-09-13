@@ -1,3 +1,161 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /*
+
+        950 -
+        900 -
+        800 -
+        700 -
+        600 -
+        500 -
+        400 -
+        300 -
+        200 -
+        100 -
+        50 -
+
+        */
+    :root {
+
+        /*
+        aka dusk
+        tw: gray-x
+
+        950 - #030712
+        900 - #111827
+        800 - #1f2937
+        700 - #374151
+        600 - #4b5563
+        500 - #6b7280
+        400 - #9ca3af
+        300 - #d1d5db
+        200 - #e5e7eb
+        100 - #f3f4f6
+        50 - #f9fafb
+
+
+        */
+        --color-fill: #1F2937; /* gray-800 */
+        --color-fill-hover: #111827; /* gray-900 */
+        --color-text-base: #4B5563; /* gray-600 */
+        --color-text-inverted: #F3F4F6; /* gray-100 */
+        --color-border-base: #E5E7EB; /* gray-200 */
+        --color-bg-base: #ffffff;
+        --color-border-alert: #991b1b;
+        --color-text-alert: #991b1b;
+        --color-bg-alert: #991b1b;
+    }
+    .ocean {
+        /*
+        tw: sky-x
+
+        950 - #082f49
+        900 - #0c4a6e
+        800 - #075985
+        700 - #0369a1
+        600 - #0284c7
+        500 - #0ea5e9
+        400 - #38bdf8
+        300 - #7dd3fc
+        200 - #bae6fd
+        100 - #e0f2fe
+        50 - #f0f9ff
+
+        */
+        --color-fill: #075985; /* sky-800 */
+        --color-fill-hover: #0C4A6E; /* sky-900 */
+        --color-text-base: #0369a1; /* sky-700 */
+        --color-text-inverted: #E0F2FE; /* sky-100 */
+        --color-border-base: #E0F2FE; /* sky-100 */
+        --color-bg-base: #ffffff;
+        --color-border-alert: #991b1b;
+        --color-text-alert: #991b1b;
+        --color-bg-alert: #991b1b;
+    }
+    .sky {
+        /*
+        tw: blue-x
+
+        950 - #172554
+        900 - #1e3a8a
+        800 - #1e40af
+        700 - #1d4ed8
+        600 - #2563eb
+        500 - #3b82f6
+        400 - #60a5fa
+        300 - #93c5fd
+        200 - #bfdbfe
+        100 - #dbeafe
+        50 - #eff6ff
+
+        */
+        --color-fill: #1e40af; /* blue-800 */
+        --color-fill-hover: #1e3a8a; /* blue-900 */
+        --color-text-base: #1e40af; /* blue-800 */
+        --color-text-inverted: #dbeafe; /* blue-100 */
+        --color-border-base: #dbeafe; /* blue-100 */
+        --color-bg-base: #ffffff;
+        --color-border-alert: #991b1b;
+        --color-text-alert: #991b1b;
+        --color-bg-alert: #991b1b;
+    }
+    .autumn {
+        /*
+        tw: amber-x
+
+        950 - #451a03
+        900 - #78350f
+        800 - #92400e
+        700 - #b45309
+        600 - #d97706
+        500 - #f59e0b
+        400 - #fbbf24
+        300 - #fcd34d
+        200 - #fde68a
+        100 - #fef3c7
+        50 - #fffbeb
+
+        */
+        --color-fill: #92400e; /* amber-800 */
+        --color-fill-hover: #78350f; /* amber-900 */
+        --color-text-base: #b45309; /* amber-800 */
+        --color-text-inverted: #fef3c7; /* amber-100 */
+        --color-border-base: #fef3c7; /* amber-100 */
+        --color-bg-base: #ffffff;
+        --color-border-alert: #991b1b;
+        --color-text-alert: #991b1b;
+        --color-bg-alert: #991b1b;
+    }
+    .night {
+        /*
+        tw: zinc-x
+
+        950 - #09090b
+        900 - #18181b
+        800 - #27272a
+        700 - #3f3f46
+        600 - #52525b
+        500 - #71717a
+        400 - #a1a1aa
+        300 - #d4d4d8
+        200 - #e4e4e7
+        100 - #f4f4f5
+        50 - #fafafa
+
+        */
+        --color-fill: #18181b;
+        --color-fill-hover: #09090b;
+        --color-text-base: #d4d4d8;
+        --color-text-inverted: #e4e4e7;
+        --color-border-base: #3f3f46;
+        --color-bg-base: #27272a;
+        --color-border-alert: #e11d48;
+        --color-text-alert: #e11d48;
+        --color-bg-alert: #e11d48;
+    }
+
+
+}

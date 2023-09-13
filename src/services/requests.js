@@ -96,9 +96,8 @@ export default {
     },
     postEntry(access_token, panel_id, is_complete) {
 
-        return apiClient.post("/entries",
+        return apiClient.post(`/panels/${panel_id}/entries`,
             {
-                panel_id: panel_id,
                 is_complete: is_complete
             },
             {

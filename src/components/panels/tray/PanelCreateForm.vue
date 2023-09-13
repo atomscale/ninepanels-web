@@ -5,21 +5,21 @@
 
       <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
         <div>
-          <label class="data-heading">Your panel</label>
+          <label   class="text-sm font-light h-5 text-np-base">Your panel</label>
           <div class="mt-1">
             <textarea @input="updateLen()" v-model="title" id="title" name="title" type="text" required="true"
               :maxlength="maxTitleLen"
-              class="block w-full resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+              class="block w-full resize-none text-sm  bg-np-base appearance-none max-w-sm text-np-base rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
           </div>
-          <div class="text-xs mt-1" :class="currentTitleLen === maxTitleLen ? 'text-red-900' : 'text-gray-400'">
+          <div class="text-xs mt-1" :class="currentTitleLen === maxTitleLen ? 'text-red-900' : 'text-np-base'">
             {{ currentTitleLen }}/{{ maxTitleLen }}</div>
         </div>
 
         <div>
-          <label class="data-heading">About your panel (optional)</label>
+          <label   class="text-sm font-light h-5 text-np-base">About your panel (optional)</label>
           <div class="mt-1">
             <textarea v-model="description" id="description" name="description" type="text"
-              class="block w-full h-80 resize-none text-sm appearance-none max-w-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+              class="block w-full h-80 resize-none text-sm bg-np-base text-np-base  appearance-none max-w-sm rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
           </div>
 
         </div>
@@ -58,14 +58,12 @@ export default {
       if (this.title.length === 0) {
         return
       } else {
-        this.Store.loadingBar = true
         this.Store.primaryTrayIsOpen = false
         try {
           await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
-          this.Store.getPanelConsistencyAction()
+          this.Store.readPanelConsistencyAction()
         } finally {
 
-          this.Store.loadingBar = false
           this.Store.primaryComponentName = null
           this.Store.primaryComponentProps = {}
         }

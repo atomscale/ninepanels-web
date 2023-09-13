@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PanelsView from '@/views/SignedIn/PanelsView.vue'
-import AccountView from '@/views/SignedIn/AccountView.vue'
+import SettingsView from '@/views/SignedIn/SettingsView.vue'
 import LandingView from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
@@ -59,9 +59,9 @@ const router = createRouter({
     },
 
     {
-      path: '/account',
-      name: 'Account',
-      component: AccountView,
+      path: '/settings',
+      name: 'Settings',
+      component: SettingsView,
       beforeEnter: requireAccessToken
     },
     {
@@ -87,6 +87,7 @@ router.beforeEach((to, from, next) => {
   store.shareBoxIsOpen = false
   store.checkMobile()
   store.checkPWA()
+  store.readTheme()
   const access_token = VueCookies.get("9p_access_token")
   if (to.path === '/') {
     if (access_token) {

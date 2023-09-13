@@ -3,32 +3,32 @@
     <div class="m-2 space-y-1" aria-labelledby="projects-headline">
 
       <button @click="shareApp"
-        class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <ShareIcon class="h-6 w-6" /><span class="ml-3">Share</span>
       </button>
       <ShareBox v-if="Store.shareBoxIsOpen">
       </ShareBox>
       <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'About' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
       </router-link>
       <router-link v-if="Store.user" @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
-        :to="{ name: 'Account' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-        <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Account</span>
+        :to="{ name: 'Settings' }"
+        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
+        <CogIcon class="h-6 w-6" /><span class="ml-3">Settings</span>
       </router-link>
       <router-link v-if="Store.user" @click="signUserOut" :to="{ name: 'Landing' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
       </router-link>
       <router-link v-if="!Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
         :to="{ name: 'SignIn' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Sign In</span>
       </router-link>
       <router-link v-if="!Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
         :to="{ name: 'SignUp' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <UserPlusIcon class="h-6 w-6" /><span class="ml-3">Sign Up</span>
       </router-link>
 
@@ -43,8 +43,9 @@ import { mapStores } from 'pinia'
 import ShareBox from '@/components/navigation/ShareBox.vue'
 
 import {
-  UserCircleIcon,
+  CogIcon,
   UserPlusIcon,
+  UserCircleIcon,
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
   ShareIcon,
@@ -60,8 +61,8 @@ export default {
   methods: {
     signUserOut() {
       this.Store.signUserOutAction()
-      this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false
-      this.Store.$reset()
+      this.Store.leftNavIsOpen = false
+      this.Store.shareBoxIsOpen = false
       this.$router.push({ name: "Landing" })
     },
 
@@ -94,12 +95,13 @@ export default {
 
   },
   components: {
-    UserCircleIcon,
+    CogIcon,
     ArrowLeftOnRectangleIcon,
     QuestionMarkCircleIcon,
     UserPlusIcon,
     ShareIcon,
     ShareBox,
+    UserCircleIcon,
 
   }
 }

@@ -1,14 +1,14 @@
 <template>
   <transition name="fade" appear>
 
-    <div class="grid grid-cols-3 gap-1 px-2 pt-2 md:px-0 w-full mx-auto">
+    <div class="grid grid-cols-3 gap-2 px-2 pt-2 md:px-0 w-full mx-auto">
       <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
         <div class="aspect-content">
 
           <Panel v-if="this.Store.panels[i - 1]" :panel="this.Store.panels[i - 1]" />
           <PanelGridAdd v-else-if="this.Store.panels.length == (i - 1)" :slotIndex="(i - 1)" />
           <div v-else
-            class="flex items-center justify-center text-gray-500 border border-dashed border-gray-300 text-sm rounded-lg">
+            class="flex items-center justify-center text-np-base border border-dashed border-np-base text-sm rounded-lg">
           </div>
 
         </div>
@@ -30,8 +30,8 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  created() {
-    this.Store.getPanelsAction()
+  mounted() {
+    this.Store.readPanelsAction()
   },
   components: {
     Panel,
@@ -41,24 +41,3 @@ export default {
 }
 
 </script>
-
-<!-- <style scoped>
-.aspect-content {
-  position: relative;
-  width: 100%;
-}
-
-.aspect-content::before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-
-.aspect-content>* {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-</style> -->

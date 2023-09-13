@@ -1,19 +1,19 @@
 <template >
   <div class="flex justify-between items-center mb-2 h-5">
-    <div class="data-heading">About</div>
+    <div   class="text-sm font-light h-5 text-np-base">About</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
+        <CheckIcon class="h-5 w-5 text-np-base hover:text-np-base" />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
+        <XMarkIcon class="h-5 w-5 text-np-base hover:text-np-base" />
       </button>
     </div>
   </div>
 
   <div class="flex h-auto">
     <textarea @input="updateLen()" v-model="localDescription" type="text" required="true"
-      class="block resize-none h-80 w-full text-gray-600 appearance-none text-sm rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+      class="block resize-none h-80 w-full text-np-base bg-np-base appearance-none text-sm rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 
 
@@ -53,15 +53,10 @@ export default {
     },
     async dispatchUpdatePanelAction() {
       try {
-        this.Store.loadingBar = true
         await this.Store.updatePanelAction(this.panelId, { description: this.localDescription })
         this.Store.panelDescEditState = false
-        this.Store.loadingBar = false
       } catch (error) {
-        this.Store.messages.push({ message: "title not updated" })
-        setTimeout(() => this.Store.messages.pop, 5000)
         this.Store.panelDescEditState = false
-        this.Store.loadingBar = false
       }
     },
     updateLen() {

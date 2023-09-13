@@ -1,22 +1,22 @@
 <template >
   <div class="flex justify-between items-center mb-2">
-    <div class="data-heading">Panel</div>
+    <div   class="text-sm font-light h-5 text-np-base">Panel</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-gray-500 " />
+        <CheckIcon class="h-5 w-5 text-np-base hover:text-np-base " />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-gray-500" />
+        <XMarkIcon class="h-5 w-5 text-np-base hover:text-np-base" />
       </button>
     </div>
   </div>
 
 
   <textarea @input="updateLen()" v-model="this.localTitle" type="text" required="true" :maxlength="maxFieldLen"
-    class="block resize-none text-gray-600 h-auto w-full appearance-none rounded-md border border-gray-200 px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+    class="block resize-none  h-auto w-full bg-np-base text-np-base appearance-none rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
-  <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
+  <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-np-base'"> {{
     currentFieldLen }}/{{
     maxFieldLen }}</div>
 </template>
@@ -41,7 +41,6 @@ export default {
       } else {
         this.currentFieldLen = 0
       }
-
       return { ...panelFromStore }
     }
   },
@@ -55,13 +54,9 @@ export default {
         setTimeout(() => this.Store.messages.shift(), 5000)
         return
       } else {
-
-        this.Store.loadingBar = true
         await this.Store.updatePanelAction(this.panelId, { title: this.localTitle })
         this.Store.panelTitleEditState = false
-        this.Store.loadingBar = false
       }
-
     },
     updateLen() {
       this.currentFieldLen = this.localTitle.length

@@ -1,51 +1,51 @@
 <template>
     <div class="flex min-h-full flex-col justify-between px-4   ">
 
-            <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
+            <div class="bg-np-base py-4 sm:rounded-lg sm:px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                    <div class="font-bold text-xl text-gray-500 ">Consistent balance awaits...</div>
+                    <div class="font-bold text-xl text-np-base ">Consistent balance awaits...</div>
                     <div>
-                        <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
+                        <label for="email" class="block font-light text-xs text-np-base">Email address</label>
                         <div class="mt-1">
                             <input id="email" name="email" type="email" required="true" v-model="email"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                                class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                         </div>
                     </div>
 
                     <div>
-                        <label for="name" class="block font-light text-xs text-gray-800">Name</label>
+                        <label for="name" class="block font-light text-xs text-np-base">Name</label>
                         <div class="mt-1">
                             <input id="name" name="name" type="text" autocomplete="given-name" required="true"
                                 v-model="name"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                                class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                         </div>
                     </div>
 
                     <div>
-                        <label for="password_first" class="block font-light text-xs text-gray-800">Password</label>
+                        <label for="password_first" class="block font-light text-xs text-np-base">Password</label>
                         <div class="mt-1 flex relative">
                             <input v-model="password_first" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                                class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
-                                <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
+                                <component class="h-5 w-5 text-np-base" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
                             </button>
                         </div>
                     </div>
 
                     <div>
-                        <label for="password_second" class="block font-light text-xs text-gray-800">Repeat password</label>
+                        <label for="password_second" class="block font-light text-xs text-np-base">Repeat password</label>
                         <div class="mt-1 flex relative">
                             <input v-model="password_second" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                                class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
-                                <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
+                                <component class="h-5 w-5 text-np-base" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                                 </component>
                             </button>
                         </div>
@@ -57,19 +57,19 @@
                         <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
                             :confirmRequired="false" />
                     </div>
-                    <div class="font-light text-xs text-gray-500">Free forever. No funny business. No ads, ever.
+                    <div class="font-light text-xs text-np-base">Free forever. No funny business. No ads, ever.
                     </div>
-                    <div class="font-light text-xs text-gray-500">By signing up you agree for ninepanels.com to store
+                    <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
                         your data. It will never, ever be sold.</div>
 
-                    <div class="font-light text-xs text-gray-500">By signing up you also agree to a single, lonely
+                    <div class="font-light text-xs text-np-base">By signing up you also agree to a single, lonely
                         little cookie being stored on your device (so you can be kept logged in between visits).</div>
                 </form>
                 <div class="flex justify-between mt-6">
-                    <div class="font-semibold text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-np-base">
                         <router-link :to=" { name: 'SignIn' }">Sign in instead</router-link>
                     </div>
-                    <div class="font-semibold text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-np-base">
                         <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
                     </div>
                 </div>
@@ -112,9 +112,9 @@ export default {
                 return // stop function
             }
 
-            this.Store.loadingBar = true
+
             const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
-            this.Store.loadingBar = false
+
             if (resp) {
                 this.$router.push({ name: 'Panels' })
             }
