@@ -3,7 +3,7 @@
 
     <div>
       <div class=" border-b border-np-base "></div>
-      <button @click="togglePrefsBox()" class="flex w-full justify-between items-center mb-4">
+      <button @click="togglePrefsBox()" class="flex w-full justify-between items-center mb-5">
         <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Preferences</div>
         <div>
           <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
@@ -11,12 +11,12 @@
         </div>
       </button>
       <div>
-        <Preferences class="m-2 mt-4 mb-4" v-if="prefsBoxIsOpen" />
+        <Preferences class="m-2 mt-4 mb-5" v-if="prefsBoxIsOpen" />
       </div>
 
 
       <div class=" border-b border-np-base"></div>
-      <button @click="toggleAccountBox()" class="flex w-full justify-between items-center mb-4 ">
+      <button @click="toggleAccountBox()" class="flex w-full justify-between items-center mb-5 ">
         <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Your Account</div>
         <div>
 
@@ -25,7 +25,7 @@
         </div>
       </button>
       <div>
-        <Account class="m-2 mt-4 mb-4" v-if="accountBoxIsOpen" />
+        <Account class="m-2 mt-4 mb-5" v-if="accountBoxIsOpen" />
       </div>
       <div class=" border-b border-np-base  "></div>
 
@@ -48,7 +48,7 @@
           :confirmText="'Are you sure?'" />
           <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete All Panels'"
           :confirmText="'Are you sure?'" /> -->
-        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5" :class="Store.isPWA ? 'mb-6' : 'mb-6'" :parentMethod="sendUserDelete" :confirmRequired="true"
+        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mt-4" :class="Store.isPWA ? 'mb-6' : 'mb-6'" :parentMethod="sendUserDelete" :confirmRequired="true"
           :buttonText="'Delete Your Account'" :confirmText="'Are you sure?'" />
       </div>
 
