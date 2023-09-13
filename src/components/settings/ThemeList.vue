@@ -40,6 +40,8 @@
 
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import rollbar from '@/rollbarClient.js'
+
 
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
