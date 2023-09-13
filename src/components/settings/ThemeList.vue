@@ -53,7 +53,7 @@ export default {
     },
     watch: {
         currentTheme() {
-            console.log(`theme change to ${this.Store.theme}`)
+            rollbar.info(`theme change to ${this.Store.theme}`)
             this.Store.saveTheme(this.Store.theme)
         }
     },
