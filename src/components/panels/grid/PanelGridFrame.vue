@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" appear>
 
-    <div class="grid grid-cols-3 gap-2 px-2 pt-2 md:px-0 w-full mx-auto">
+    <div class="grid grid-cols-3 gap-2.5 px-2 pt-2 md:px-0 w-full mx-auto">
       <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
         <div class="aspect-content">
 
