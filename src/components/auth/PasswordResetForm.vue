@@ -8,12 +8,12 @@
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-lg text-gray-500 ">Choose a new password:</div>
                     <div>
-                        <label for="password_first" class="block font-light text-xs text-gray-800">Password</label>
+                        <label for="password_first" class="block font-light text-xs text-np-base">Password</label>
                         <div class="mt-1 flex relative">
                             <input v-model="password_first" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                                class="block w-full appearance-none rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
@@ -23,12 +23,12 @@
                     </div>
 
                     <div>
-                        <label for="password_second" class="block font-light text-xs text-gray-800">Repeat password</label>
+                        <label for="password_second" class="block font-light text-xs text-np-base">Repeat password</label>
                         <div class="mt-1 flex relative">
                             <input v-model="password_second" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                                class="block w-full appearance-none rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-gray-400" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">

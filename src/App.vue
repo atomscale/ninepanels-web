@@ -42,8 +42,8 @@ export default {
     },
   },
   mounted() {
-    Store.readUserAction(),
-    Store.readTheme()
+    this.Store.readUserAction(),
+    this.Store.readTheme()
   },
   components: {
     FlashMessage,

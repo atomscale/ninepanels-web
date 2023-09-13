@@ -30,7 +30,7 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  created() {
+  mounted() {
     this.Store.readPanelsAction()
   },
   components: {

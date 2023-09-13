@@ -52,7 +52,10 @@ export const useStore = defineStore({
             this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
         },
         reloadApp() {
+            this.loadingBar = true
             window.location.reload()
+            this.loadingBar = true
+
         },
         openTray() {
             this.primaryTrayIsOpen = true
@@ -162,8 +165,8 @@ export const useStore = defineStore({
         async readUserAction() {
 
             const access_token = VueCookies.get("9p_access_token")
-
             if (access_token) {
+                this.loadingBar = true
 
                 try {
                     const response = await requests.getUser(access_token)
@@ -171,6 +174,8 @@ export const useStore = defineStore({
                     return response.data
                 } catch (error) {
                     this.apiError(error)
+                } finally {
+                    this.loadingBar = false
                 }
             }
         },

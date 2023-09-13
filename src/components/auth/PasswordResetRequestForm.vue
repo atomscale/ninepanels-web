@@ -3,34 +3,34 @@
 
         <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
             <form v-if="!this.Store.passwordResetRequested"  @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                <div class="font-bold text-lg text-gray-500 ">Let's reset your password:
+                <div class="font-bold text-lg text-np-base">Let's reset your password:
                 </div>
                 <div>
-                    <label for="email" class="block font-light text-xs text-gray-800">Email address</label>
+                    <label for="email" class="block font-light text-xs text-np-base">Email address</label>
                     <div class="mt-1">
                         <input id="email" name="email" type="email" required="true" v-model="email"
-                            class="block w-full appearance-none text-np-base rounded-md border border-gray-200 px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                            class="block w-full  appearance-none text-np-base rounded-md border border-np-base px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                     </div>
                 </div>
                 <div>
                     <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="'Get a reset link'"
                         :confirmRequired="false" />
                 </div>
-                <div class="font-light text-xs text-gray-500">You will receive an email with a reset link. Click the reset
+                <div class="font-light text-xs text-np-base">You will receive an email with a reset link. Click the reset
                     link in the email to set a new password. The link
                     is valid for ten minutes.<br /><br />The email will come from
                     <span class="">ben@ninepanels.com.</span> <br /> <br />Feel free to email me if you need any help. 👍
                 </div>
                 <div class="flex justify-between">
-                    <div class="font-semibold text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-np-base">
                         <router-link :to=" { name: 'SignUp' }">Sign in instead</router-link>
                     </div>
-                    <div class="font-semibold text-xs text-gray-500">
+                    <div class="font-semibold text-xs text-np-base">
                         <router-link :to=" { name: 'SignUp' }">Need an account?</router-link>
                     </div>
                 </div>
             </form>
-            <div v-else class="font-bold text-lg text-gray-500 mt-20">
+            <div v-else class="font-bold text-lg text-np-base mt-20">
                 An email is winging it's way to you now.
                 <div class="text-sm font-light mt-2">Click the link within ten minutes.</div>
                 <div class="flex justify-center">

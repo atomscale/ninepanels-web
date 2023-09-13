@@ -4,13 +4,14 @@
     <button type="submit" @click="Store.toggleEntryOptimistically(this.panel.id)" :disabled="Store.panelIsDisabled"
       class="h-full w-full rounded-lg border  text-xs "
       :aria-label="this.panel.title"
-      :class="isComplete ? 'bg-np-fill text-np-inverted ' : 'border-np-base text-np-light'">
+      :class="isComplete ? 'bg-np-fill text-np-inverted ' : 'border-np-base text-np-base'">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
     </button>
     <button aria-label="open panel detail" @click="openPrimaryTray" class="absolute   top-1 right-1 p-6 "
-      :class="panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete ? ' text-np-inverted' : 'text-np-light'">
+
+      :class="isComplete ? ' text-np-inverted' : 'text-np-light'">
       <ArrowTopRightOnSquareIcon class="absolute top-0.5 right-0.5 h-4 " />
     </button>
   </div>
@@ -26,6 +27,7 @@ import {
   ArrowTopRightOnSquareIcon
 } from '@heroicons/vue/24/outline'
 
+// panel.entries && panel.entries.length > 0 && panel.entries[panel.entries.length - 1].is_complete
 export default {
   computed: {
     ...mapStores(useStore),
