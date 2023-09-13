@@ -2,12 +2,12 @@
   <div class="flex-col">
 
     <div class="flex justify-between items-center mb-2">
-      <div   class="text-sm font-light h-5 text-np-light">About</div>
+      <div   class="text-sm font-light h-5 text-np-base">About</div>
       <div>
 
         <button class="" @click="toggleEditState()">
           <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-np-base" />
-          <PlusIcon v-else class="h-5 w-5 text-np-light hover:text-np-base" />
+          <PlusIcon v-else class="h-5 w-5 text-np-base hover:text-np-base" />
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template >
-  <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-np-light font-light mb-4">
+  <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-np-base font-light mb-4">
 
     <div class="text-xl text-np-base font-bold">Establish daily balance:</div>
     <div class="">Create panels for important areas of your life. Simply tap the panel when done.</div>

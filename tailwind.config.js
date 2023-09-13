@@ -15,20 +15,23 @@ module.exports = {
       },
       backgroundColor: {
         np: {
+          base: 'var(--color-bg-base)',
           fill: 'var(--color-fill)',
-          accent: 'var(--color-fill-hover)'
+          accent: 'var(--color-fill-hover)',
+          alert: 'var(--color-bg-alert)'
         }
       },
       textColor: {
         np: {
           base: 'var(--color-text-base)',
           inverted: 'var(--color-text-inverted)',
-          light: 'var(--color-text-base-light)'
+          alert: 'var(--color-text-alert)'
         }
       },
       borderColor: {
         np: {
-          base: 'var(--color-border-base)'
+          base: 'var(--color-border-base)',
+          alert: 'var(--color-border-alert)'
         }
       }
     },

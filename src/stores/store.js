@@ -43,8 +43,18 @@ export const useStore = defineStore({
         passwordResetRequested: false,
 
         theme: '',
+
+        announcementVersion: 1,
+        showAnnouncement: true
     }),
     actions: {
+        checkShowAnnouncement() {
+            const show = localStorage.getItem('showAnnouncement')
+
+            if (show) {
+                this.showAnnouncement = show
+            } 
+        },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
         },

@@ -41,24 +41,3 @@ export default {
 }
 
 </script>
-
-<!-- <style scoped>
-.aspect-content {
-  position: relative;
-  width: 100%;
-}
-
-.aspect-content::before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-
-.aspect-content>* {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-</style> -->

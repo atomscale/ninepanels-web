@@ -2,14 +2,14 @@
     <div class="flex h-full flex-col mt-4 justify-between pt-6 px-4">
 
 
-        <div class="bg-white pt-4  sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base pt-4  sm:rounded-lg sm:px-10 ">
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-xl text-np-base ">Welcome back! Sign in...</div>
                 <div>
                     <label for="email" class="block font-light text-xs text-np-base">Email address</label>
                     <div class="mt-1">
                         <input v-model="username" id="email" name="email" type="email" autocomplete="email" required="true"
-                            class="block w-full appearance-none text-np-base rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            class="block w-full appearance-none text-np-base bg-np-base rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                     </div>
                 </div>
 
@@ -18,11 +18,11 @@
                     <div class="mt-1 flex relative">
                         <input @keydown="preventEnter" v-model="password" id="password" name="password"
                             :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password" required="true"
-                            class="block w-full appearance-none rounded-md  text-np-base border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                            class="block w-full appearance-none rounded-md bg-np-base  text-np-base border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                         <button tabindex="-1"
-                            class="text-xs absolute right-2 top-1 bg-white  h-5/6 flex items-center justify-center"
+                            class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
                             @click="togglePasswordVisibility()">
-                            <component class="h-5 w-5 text-np-light" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
+                            <component class="h-5 w-5 text-np-base" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
                             </component>
                         </button>
                     </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4 ">
 
-        <div class="bg-white py-4 sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base py-4 sm:rounded-lg sm:px-10 ">
             <form v-if="!this.Store.passwordResetRequested"  @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-lg text-np-base">Let's reset your password:
                 </div>
@@ -9,7 +9,7 @@
                     <label for="email" class="block font-light text-xs text-np-base">Email address</label>
                     <div class="mt-1">
                         <input id="email" name="email" type="email" required="true" v-model="email"
-                            class="block w-full  appearance-none text-np-base rounded-md border border-np-base px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
+                            class="block w-full  appearance-none  bg-np-base text-np-base rounded-md border border-np-base px-3 py-2 placeholder-gray-400  focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm" />
                     </div>
                 </div>
                 <div>
@@ -34,7 +34,7 @@
                 An email is winging it's way to you now.
                 <div class="text-sm font-light mt-2">Click the link within ten minutes.</div>
                 <div class="flex justify-center">
-                    <img loading="eager" class="h-36 mt-6 mb-4 w-auto rounded-2xl" src="/android-chrome-512x512.png"
+                    <img loading="eager" class="h-36 mt-6 mb-4 w-auto rounded-2xl" src="/9p-logo-empty-filled-sq.png"
                     alt="9P logo" />
 
                 </div>

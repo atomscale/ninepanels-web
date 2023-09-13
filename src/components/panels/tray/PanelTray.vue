@@ -13,7 +13,7 @@
 
 
       <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
-        <div  class="text-sm font-light h-5 text-np-light">Order</div>
+        <div  class="text-sm font-light h-5 text-np-base">Order</div>
         <div>
 
           <ChevronLeftIcon v-if="!this.Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400"></ChevronLeftIcon>
@@ -32,7 +32,7 @@
           :class="[enabled ? 'bg-gray-600' : 'bg-gray-100', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ']">
           <span class="sr-only">Use setting</span>
           <span aria-hidden="true"
-            :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
+            :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-np-base shadow ring-0 transition duration-200 ease-in-out']" />
         </Switch>
       </div> -->
 
@@ -42,11 +42,11 @@
     <div :class="{ 'mb-4': this.Store.isPWA}">
 
       <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 " >
-        <div  class="text-sm font-light h-5 text-np-light">Danger Zone</div>
+        <div  class="text-sm font-light h-5 text-np-base">Danger Zone</div>
         <div>
 
-          <ChevronLeftIcon v-if="!this.Store.deleteResetBoxIsOpen" class="h-5 w-5 text-np-light"></ChevronLeftIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 text-np-light"></ChevronDownIcon>
+          <ChevronLeftIcon v-if="!this.Store.deleteResetBoxIsOpen" class="h-5 w-5 text-np-base"></ChevronLeftIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-np-base"></ChevronDownIcon>
         </div>
       </button>
       <div v-if="this.Store.deleteResetBoxIsOpen" >

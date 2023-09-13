@@ -79,7 +79,7 @@ export default {
     data() {
         return {
             shading: [
-                { threshold: 0.1, color_value: 'bg-white text-gray-500' },
+                { threshold: 0.1, color_value: 'bg-np-base text-gray-500' },
                 { threshold: 0.2, color_value: 'bg-green-50 text-gray-500' },
                 { threshold: 0.3, color_value: 'bg-green-100 text-gray-500' },
                 { threshold: 0.4, color_value: 'bg-green-200 text-gray-500' },

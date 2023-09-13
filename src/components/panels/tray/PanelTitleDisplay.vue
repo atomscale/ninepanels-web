@@ -2,11 +2,11 @@
   <div class="flex-col mb-4">
 
     <div class="flex justify-between items-center">
-      <div   class="text-sm font-light h-5 text-np-light">Panel</div>
+      <div   class="text-sm font-light h-5 text-np-base">Panel</div>
       <div>
 
         <button class="ml-4 " @click="toggleEditState()">
-          <PencilIcon class="h-4 w-4 text-np-light hover:text-np-base" />
+          <PencilIcon class="h-4 w-4 text-np-base hover:text-np-base" />
         </button>
       </div>
     </div>

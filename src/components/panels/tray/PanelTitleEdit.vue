@@ -1,22 +1,22 @@
 <template >
   <div class="flex justify-between items-center mb-2">
-    <div   class="text-sm font-light h-5 text-np-light">Panel</div>
+    <div   class="text-sm font-light h-5 text-np-base">Panel</div>
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-np-light hover:text-np-base " />
+        <CheckIcon class="h-5 w-5 text-np-base hover:text-np-base " />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-np-light hover:text-np-base" />
+        <XMarkIcon class="h-5 w-5 text-np-base hover:text-np-base" />
       </button>
     </div>
   </div>
 
 
   <textarea @input="updateLen()" v-model="this.localTitle" type="text" required="true" :maxlength="maxFieldLen"
-    class="block resize-none text-np-base h-auto w-full appearance-none rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+    class="block resize-none  h-auto w-full bg-np-base text-np-base appearance-none rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
-  <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-np-light'"> {{
+  <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-np-base'"> {{
     currentFieldLen }}/{{
     maxFieldLen }}</div>
 </template>
