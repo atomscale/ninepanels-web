@@ -44,7 +44,7 @@ export const useStore = defineStore({
 
         theme: '',
 
-        currentAnnouncementVersion: 2,
+        currentAnnouncementVersion: 3,
         canShow: false
 
     }),
@@ -66,19 +66,15 @@ export const useStore = defineStore({
             this.primaryTrayIsOpen = true
         },
         readTheme() {
-            console.log('checked theme')
             const theme = localStorage.getItem('theme')
-
             if (theme) {
-                console.log(`theme in storage is ${theme}`)
                 this.theme = theme
             } else {
-                console.log(`no theme in local storage, returning noir`)
                 this.theme = 'noir'
             }
         },
         saveTheme(newTheme) {
-            console.log('saving theme to ls')
+            rollbar.info(`${this.Store.user.name} set profile to ${newTheme}`)
             localStorage.setItem('theme', newTheme)
         },
         apiError(error) {
@@ -122,7 +118,6 @@ export const useStore = defineStore({
                 VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
                 await this.readUserAction()
                 if (this.user.name) {
-
                     rollbar.info(this.user.name + " logged in. using PWA: " + this.isPWA + " on mobile: " + this.isMobile)
                 }
                 return response.data.access_token

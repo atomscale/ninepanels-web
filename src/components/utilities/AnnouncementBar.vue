@@ -12,6 +12,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import rollbar from '@/rollbarClient.js'
 
 import {
     XMarkIcon,
@@ -26,6 +27,7 @@ export default {
         hideAnnouncement() {
             this.Store.canShow = false
             localStorage.setItem('hiddenAnnoucementVersion', this.Store.currentAnnouncementVersion)
+            rollbar.info(`${this.Store.user.name} hid the announcement version ${this.Store.currentAnnouncementVersion}`)
         },
     },
 
