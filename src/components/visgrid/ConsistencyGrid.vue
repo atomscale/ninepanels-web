@@ -1,6 +1,6 @@
 <template >
         <transition name="fade" appear>
-            <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
+            <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto" :class="{'opacity-50': Store.theme === 'night'}">
                 <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
                     <div class="aspect-content">
                         <transition name="fade" appear>
