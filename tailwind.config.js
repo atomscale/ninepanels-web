@@ -11,7 +11,8 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       scale: {
-        '101': '1.01'
+        '101': '1.01',
+        '102': '1.02'
       },
       backgroundColor: {
         np: {
