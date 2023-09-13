@@ -42,8 +42,7 @@ export const useStore = defineStore({
 
         passwordResetRequested: false,
 
-        // theme: null,
-        theme: 'ocean',
+        theme: '',
     }),
     actions: {
         checkPWA() {
@@ -57,6 +56,22 @@ export const useStore = defineStore({
         },
         openTray() {
             this.primaryTrayIsOpen = true
+        },
+        readTheme() {
+            console.log('checked theme')
+            const theme = localStorage.getItem('theme')
+
+            if (theme) {
+                console.log(`theme in storage is ${theme}`)
+                this.theme = theme
+            } else {
+                console.log(`no theme in local storage, returning noir`)
+                this.theme = 'noir'
+            }
+        },
+        saveTheme(newTheme) {
+            console.log('saving theme to ls')
+            localStorage.setItem('theme', newTheme)
         },
         apiError(error) {
             let errorMsg = "Unknown error...  😬"
@@ -129,6 +144,8 @@ export const useStore = defineStore({
             }
             this.user = null
             this.panels = []
+            this.consistency = []
+            this.messages = []
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")

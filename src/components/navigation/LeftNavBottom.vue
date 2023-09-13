@@ -61,8 +61,8 @@ export default {
   methods: {
     signUserOut() {
       this.Store.signUserOutAction()
-      this.Store.leftNavIsOpen = false; this.Store.shareBoxIsOpen = false
-      this.Store.$reset()
+      this.Store.leftNavIsOpen = false
+      this.Store.shareBoxIsOpen = false
       this.$router.push({ name: "Landing" })
     },
 

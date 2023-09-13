@@ -31,9 +31,12 @@ export default {
             await this.Store.deleteUserAction()
             this.$router.push('/')
         },
-        async getUserActionMethod() {
+        async readUser() {
             await this.Store.readUserAction()
-        },
+        }
+    },
+    mounted() {
+        this.readUser()
     },
 
     components: {

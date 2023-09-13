@@ -2,31 +2,42 @@
   <div class="flex px-4 flex-col  justify-start h-full space-y-2 mt-5">
 
 
-    <button @click="togglePrefsBox()" class="flex w-full justify-between items-center">
-      <div  class="text-sm font-semibold h-5 text-np-light">Preferences</div>
+    <div class=" border-b border-np-base "></div>
+
+
+    <button @click="togglePrefsBox()" class="flex w-full justify-between items-center ">
+      <div class="text-sm font-semibold h-5 text-np-light mt-2">Preferences</div>
       <div>
 
-        <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-light"></ChevronLeftIcon>
-        <ChevronDownIcon v-else class="h-5 w-5 text-np-light"></ChevronDownIcon>
+        <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-light mt-2"></ChevronLeftIcon>
+        <ChevronDownIcon v-else class="h-5 w-5 text-np-light mt-2"></ChevronDownIcon>
       </div>
     </button>
 
     <div>
-      <Preferences class="mb-4 mt-4" v-if="prefsBoxIsOpen" />
+      <Preferences class="m-2" v-if="prefsBoxIsOpen" />
     </div>
 
-    <button @click="toggleAccountBox()" class="flex w-full justify-between items-center">
-      <div  class="text-sm font-semibold h-5 text-np-light ">Your Account</div>
+
+    <div class=" border-b border-np-base "></div>
+
+
+    <button @click="toggleAccountBox()" class="flex w-full justify-between items-center ">
+      <div class="text-sm font-semibold h-5 text-np-light mt-2">Your Account</div>
       <div>
 
-        <ChevronLeftIcon v-if="!accountBoxIsOpen" class="h-5 w-5 text-np-light"></ChevronLeftIcon>
-        <ChevronDownIcon v-else class="h-5 w-5 text-np-light"></ChevronDownIcon>
+        <ChevronLeftIcon v-if="!accountBoxIsOpen" class="h-5 w-5 text-np-light mt-2"></ChevronLeftIcon>
+        <ChevronDownIcon v-else class="h-5 w-5 text-np-light mt-2"></ChevronDownIcon>
       </div>
     </button>
 
     <div>
-      <Account class="mb-4 mt-4" v-if="accountBoxIsOpen" />
+      <Account class="m-2" v-if="accountBoxIsOpen" />
     </div>
+
+
+    <div class=" border-b border-np-base  "></div>
+
 
   </div>
 </template>
@@ -47,12 +58,12 @@ export default {
     ...mapStores(useStore)
   },
   methods: {
+    togglePrefsBox() {
+      this.prefsBoxIsOpen = !this.prefsBoxIsOpen
+    },
     toggleAccountBox() {
       this.accountBoxIsOpen = !this.accountBoxIsOpen
     },
-    togglePrefsBox() {
-      this.prefsBoxIsOpen = !this.prefsBoxIsOpen
-    }
   },
   components: {
     DynamicButton,
@@ -63,8 +74,8 @@ export default {
   },
   data() {
     return {
-      accountBoxIsOpen: true,
-      prefsBoxIsOpen: true
+      prefsBoxIsOpen: true,
+      accountBoxIsOpen: false,
     }
   }
 }

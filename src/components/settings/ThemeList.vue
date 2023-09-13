@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between items-center ">
         <div class="text-np-light text-sm">
-            Current theme: {{ Store.theme }}
+            Theme
         </div>
 
 
@@ -47,10 +47,15 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 export default {
     computed: {
         ...mapStores(useStore),
-
+        currentTheme() {
+            return this.Store.theme
+        }
     },
-    methods: {
-
+    watch: {
+        currentTheme() {
+            console.log(`theme change to ${this.Store.theme}`)
+            this.Store.saveTheme(this.Store.theme)
+        }
     },
 
     components: {

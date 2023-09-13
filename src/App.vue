@@ -1,5 +1,5 @@
 <template>
-  <div class="viewport-height" :class="Store.user ? Store.theme : null">
+  <div class="viewport-height" :class="Store.theme">
     <LeftNav :class="Store.user ? Store.theme : null" />
     <PrimaryTray :class="Store.user ? Store.theme : null" />
     <div id="mainbody" class="h-full flex flex-col" >
@@ -42,7 +42,8 @@ export default {
     },
   },
   mounted() {
-    this.Store.readUserAction()
+    Store.readUserAction(),
+    Store.readTheme()
   },
   components: {
     FlashMessage,

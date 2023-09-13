@@ -1,6 +1,6 @@
 <template >
   <div class="flex flex-col justify-between h-full">
-    <div>
+    <div class="space-y-4">
 
       <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id"
         :title="this.panel.title">
@@ -38,7 +38,9 @@
 
 
     </div>
+
     <div :class="{ 'mb-4': this.Store.isPWA}">
+
       <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 " >
         <div  class="text-sm font-light h-5 text-np-light">Danger Zone</div>
         <div>

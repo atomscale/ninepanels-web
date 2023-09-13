@@ -87,6 +87,7 @@ router.beforeEach((to, from, next) => {
   store.shareBoxIsOpen = false
   store.checkMobile()
   store.checkPWA()
+  store.readTheme()
   const access_token = VueCookies.get("9p_access_token")
   if (to.path === '/') {
     if (access_token) {
