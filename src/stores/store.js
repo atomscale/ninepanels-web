@@ -16,8 +16,8 @@ export const useStore = defineStore({
 
         loadingBar: false,
 
-        isPWA: true,
-        isMobile: true,
+        isPWA: false,
+        isMobile: false,
 
         leftNavIsOpen: false,
 

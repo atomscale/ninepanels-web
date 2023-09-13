@@ -43,12 +43,12 @@
       </button>
 
 
-      <div class="flex flex-col justify-between items-center mt-6">
+      <div class="flex flex-col justify-between items-center" :class="Store.isPWA ? 'mb-10' : 'mb-6'">
         <!-- <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Reset All Panels'"
           :confirmText="'Are you sure?'" />
           <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete All Panels'"
           :confirmText="'Are you sure?'" /> -->
-        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-6" :parentMethod="sendUserDelete" :confirmRequired="true"
+        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5" :class="Store.isPWA ? 'mb-6' : 'mb-6'" :parentMethod="sendUserDelete" :confirmRequired="true"
           :buttonText="'Delete Your Account'" :confirmText="'Are you sure?'" />
       </div>
 
