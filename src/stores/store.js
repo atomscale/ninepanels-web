@@ -74,7 +74,7 @@ export const useStore = defineStore({
             }
         },
         saveTheme(newTheme) {
-            rollbar.info(`${this.Store.user.name} set profile to ${newTheme}`)
+            rollbar.info(this.Store.user.name + "set theme to " + newTheme)
             localStorage.setItem('theme', newTheme)
         },
         apiError(error) {
