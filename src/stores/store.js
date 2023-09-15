@@ -49,7 +49,26 @@ export const useStore = defineStore({
 
     }),
     actions: {
+        checkAllComplete() {
+            if (this.panels.length > 0) {
+                const numPanels = this.panels.length
+                let numComplete = 0
 
+                for (let i = 0;  i <  numPanels; i++) {
+                    if (this.panels[i].is_complete) {
+                        numComplete++
+                    }
+                }
+
+                if (numComplete === numPanels) {
+                    this.messages.push({ message: "Nice one! 🔥 💪 😎", error: false })
+
+                setTimeout(() => {
+                    this.messages.shift()
+                }, 5000)
+                }
+            }
+        },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
         },
@@ -266,6 +285,7 @@ export const useStore = defineStore({
 
             try {
                 await this.createEntryAction(panelId, panel.is_complete)
+                this.checkAllComplete()
                 this.readPanelConsistencyAction()
             } catch (error) {
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
