@@ -10,6 +10,8 @@ import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
 import { useStore } from '@/stores/store.js'
 
 import VueCookies from 'vue-cookies'
+import rollbar from '@/rollbarClient.js'
+
 
 function requireAccessToken(to, from, next) {
   const access_token = VueCookies.get('9p_access_token')
@@ -23,6 +25,11 @@ function requireAccessToken(to, from, next) {
   }
 }
 
+function monitorHome(to, from, next) {
+  rollbar.info('home route was visited')
+  next('/')
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -30,6 +37,11 @@ const router = createRouter({
       path: '/',
       name: 'Landing',
       component: LandingView,
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      beforeEnter: monitorHome
     },
     {
       path: '/signup',
