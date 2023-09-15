@@ -57,13 +57,13 @@
                         <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
                             :confirmRequired="false" />
                     </div>
-                    <div class="font-light text-xs text-np-base">Free forever. No funny business. No ads, ever.
+                    <div class="font-light text-xs text-np-base">Free forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
-                        your data. It will never, ever be sold.</div>
+                        your data and you agree to our <router-link class="underline" :to="{name: 'Privacy'}">Privacy Policy</router-link>. Your data will never, ever be sold.</div>
 
                     <div class="font-light text-xs text-np-base">By signing up you also agree to a single, lonely
-                        little cookie being stored on your device (so you can be kept logged in between visits).</div>
+                        little cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
                 </form>
                 <div class="flex justify-between mt-6">
                     <div class="font-semibold text-xs text-np-base">

@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-col justify-between  h-full">
+  <div class="flex flex-col justify-between w-full h-full">
     <div>
       <PanelGridFrame />
     </div>
     <div :class="{'mb-8': this.Store.isPWA}">
 
-      <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center ml-1 pl-2 pr-2 pb-3">
+      <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center  pl-3 pr-2 pb-3">
         <div class="h-5 text-np-base" :class="{ 'font-semibold text-np-base': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA} "  >Consistency</div>
         <div>
-          <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 mr-1 text-np-base"></ChevronUpIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 mr-1 text-np-base"></ChevronDownIcon>
+          <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 pr-1 text-np-base"></ChevronUpIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 pr-1 text-np-base"></ChevronDownIcon>
         </div>
       </button>
       <div v-if="this.Store.visGridIsOpen" class="pt-2 mb-6">
