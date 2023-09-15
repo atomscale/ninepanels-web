@@ -93,7 +93,7 @@ export const useStore = defineStore({
                     // handle other error responses from server
                     errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail : `Server is saying ${status}`
                 }
-                console.log(error.response)
+
             } else if (error.request) {
                 // capture request errors like when network not available
                 // if this block fires it's becuase no response object was recvd
@@ -143,7 +143,7 @@ export const useStore = defineStore({
             try {
                 VueCookies.remove("9p_access_token")
             } catch (error) {
-                console.log("no cookie to remove " + error)
+                console.log("no cookie to remove")
             }
             this.user = null
             this.panels = []

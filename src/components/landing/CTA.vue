@@ -21,11 +21,11 @@
         </div>
         <div class="flex justify-around">
 
-            <img v-if="Store.theme === 'dusk'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_dusk.jpg" class="w-60"/>
-            <img v-if="Store.theme === 'ocean'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_ocean.jpg" class="w-60"/>
-            <img v-if="Store.theme === 'sky'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_sky.jpg" class="w-60"/>
-            <img v-if="Store.theme === 'autumn'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_autumn.jpg" class="w-60"/>
-            <img v-if="Store.theme === 'night'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_night.jpg" class="w-60"/>
+            <img v-if="Store.theme === 'dusk'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_dusk.jpg" class="w-52 sm:w-60"/>
+            <img v-if="Store.theme === 'ocean'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_ocean.jpg" class="w-52 sm:w-60"/>
+            <img v-if="Store.theme === 'sky'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_sky.jpg" class="w-52 sm:w-60"/>
+            <img v-if="Store.theme === 'autumn'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_autumn.jpg" class="w-52 sm:w-60"/>
+            <img v-if="Store.theme === 'night'" loading="eager" alt="screenshot of the Nine Panels main screen showing completed panels and the consistency grid" src="@/assets/cta_screenshot_night.jpg" class="w-52 sm:w-60"/>
         </div>
         <div class="flex justify-between w-4/5 mt-8 mb-4 ">
             <div class=" text-np-base font-semibold">

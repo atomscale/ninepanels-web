@@ -26,16 +26,6 @@
         :is="this.Store.panelSortBoxIsOpen ? 'PanelSort' : null " :panel="this.panel">
       </component>
 
-      <!-- <div class="mt-6 flex justify-between align-middle">
-        <div class="text-xs text-np-base">Lock panel</div>
-        <Switch @click="this.togglePanelLock()" v-model="enabled"
-          :class="[enabled ? 'bg-gray-600' : 'bg-gray-100', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ']">
-          <span class="sr-only">Use setting</span>
-          <span aria-hidden="true"
-            :class="[enabled ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-np-base shadow ring-0 transition duration-200 ease-in-out']" />
-        </Switch>
-      </div> -->
-
 
     </div>
 
@@ -102,9 +92,6 @@ export default {
     },
     togglePanelSortBox() {
       this.Store.panelSortBoxIsOpen = !this.Store.panelSortBoxIsOpen
-    },
-    togglePanelLock() {
-      console.log("dispatch panel lock")
     },
     toggleDeleteResetBox() {
       this.Store.deleteResetBoxIsOpen = !this.Store.deleteResetBoxIsOpen
