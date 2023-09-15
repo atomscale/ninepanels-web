@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="flex flex-col items-center w-full "> -->
-  <div class="sticky top-0 pl-1  z-40  w-full  bg-np-fill">
+  <div class="sticky top-0   z-40  w-full  bg-np-fill">
       <div class="flex justify-between items-center">
         <button type="button" aria-label="Open sidebar"
           class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
@@ -18,7 +18,7 @@
             class=" pr-3">
             <ArrowPathIcon class="h-5 w-5 text-np-inverted" />
           </button>
-          <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class=" pr-4">
+          <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class=" pr-3">
             <QuestionMarkCircleIcon class="text-np-inverted h-5" />
           </button>
         </div>
