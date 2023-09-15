@@ -53,19 +53,28 @@ export const useStore = defineStore({
             if (this.panels.length > 0) {
                 const numPanels = this.panels.length
                 let numComplete = 0
+                const getRandomElement = (arr) => {
+                    const randomIndex = Math.floor(Math.random() * arr.length);
+                    return arr[randomIndex];
+                }
+                const congratsMsgs = [
+                    "🔥 💪 😎",
+                    "🧘 🧘",
+                    "🚀 🚀 🚀",
+                ]
 
-                for (let i = 0;  i <  numPanels; i++) {
+                for (let i = 0; i < numPanels; i++) {
                     if (this.panels[i].is_complete) {
                         numComplete++
                     }
                 }
 
                 if (numComplete === numPanels) {
-                    this.messages.push({ message: "Nice one! 🔥 💪 😎", error: false })
+                    this.messages.push({ message: getRandomElement(congratsMsgs), error: false })
 
-                setTimeout(() => {
-                    this.messages.shift()
-                }, 5000)
+                    setTimeout(() => {
+                        this.messages.shift()
+                    }, 5000)
                 }
             }
         },

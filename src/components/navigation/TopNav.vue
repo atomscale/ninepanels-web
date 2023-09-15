@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center w-full ">
-    <div class="sticky top-0 pl-1  z-40  w-full  bg-np-fill">
+  <!-- <div class="flex flex-col items-center w-full "> -->
+  <div class="sticky top-0 pl-1  z-40  w-full  bg-np-fill">
       <div class="flex justify-between items-center">
         <button type="button" aria-label="Open sidebar"
           class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
