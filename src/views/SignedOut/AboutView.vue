@@ -1,8 +1,8 @@
 <template>
-  <div class="flex h-full flex-col mx-auto justify-between ">
+  <div class="flex h-full flex-col mx-auto justify-between">
 
     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="bg-np-base   sm:rounded-lg  mt-2">
+      <div class="bg-np-base pb-4  sm:rounded-lg  mt-2">
         <div class="text-np-base  text-sm space-y-3 mx-4 font-light">
           <div class="text-2xl text-np-base font-bold">Daily balance meets long term consistency.</div>
           <div class="">I've always found being consistent at one thing quite hard.
