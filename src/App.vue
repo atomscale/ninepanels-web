@@ -4,7 +4,7 @@
     <PrimaryTray :class="Store.user ? Store.theme : null" />
     <div id="mainbody" class="h-full flex flex-col bg-np-base" >
       <TopNav />
-      <div class="flex flex-col h-full justify-center items-center w-full">
+      <div class="flex flex-col h-full justify-center items-center w-full overflow-scroll">
         <RouterView class="max-w-md w-full"/>
       </div>
     </div>

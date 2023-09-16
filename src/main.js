@@ -22,6 +22,8 @@ const app = createApp(App)
 const pinia = createPinia()
 
 import RollbarPlugin from '@/rollbar.js'
+import rollbar from '@/rollbarClient.js'
+
 
 
 // dealing with viewport on mobile shenangigans
@@ -45,12 +47,13 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
-    const lastReloadDate = localStorage.getItem('lastReload');
-    const today = new Date().toDateString();
+    const lastReloadDate = localStorage.getItem('lastReload')
+    const today = new Date().toDateString()
 
     if (lastReloadDate !== today) {
-      location.reload(); // Trigger reload
-      localStorage.setItem('lastReload', today); // Update the date
+      location.reload() // Trigger reload
+      localStorage.setItem('lastReload', today)
+      rollbar.info('9p autoreload')
     }
   }
 });
