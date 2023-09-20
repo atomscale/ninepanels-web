@@ -325,11 +325,16 @@ export const useStore = defineStore({
 
                 const findDuration = performance.getEntriesByName('panelFindDuration')
                 console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
+
                 const entryDuration = performance.getEntriesByName('panelEntryDuration')
                 console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
 
                 const tapDuration = performance.getEntriesByName('panelPanelDuration')
                 console.log(`panel tap duration ${tapDuration[tapDuration.length - 1].duration} ms`)
+
+                if (tapDuration > 1000) {
+                    rollbar.info(`tap for ${this.user.name} > 1000ms`)
+                }
             }
         },
         async startPasswordResetFlow(email) {
