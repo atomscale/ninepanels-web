@@ -290,7 +290,7 @@ export const useStore = defineStore({
                 performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
 
                 const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
-                console.log(`panel consistency duration ${consistencyDuration[0].duration} ms`)
+                console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -324,12 +324,12 @@ export const useStore = defineStore({
                 performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
 
                 const findDuration = performance.getEntriesByName('panelFindDuration')
-                console.log(`panel find duration ${findDuration[0].duration} ms`)
+                console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
                 const entryDuration = performance.getEntriesByName('panelEntryDuration')
-                console.log(`panel entry duration ${entryDuration[0].duration} ms`)
+                console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
 
                 const tapDuration = performance.getEntriesByName('panelPanelDuration')
-                console.log(`panel tap duration ${tapDuration[0].duration} ms`)
+                console.log(`panel tap duration ${tapDuration[tapDuration.length - 1].duration} ms`)
             }
         },
         async startPasswordResetFlow(email) {
