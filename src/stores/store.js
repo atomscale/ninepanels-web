@@ -334,7 +334,7 @@ export const useStore = defineStore({
                 console.log(`panel tap duration ${tapDurationMs} ms`)
 
                 if (tapDurationMs > 1000) {
-                    rollbar.info(`tap for ${this.user.name} > 1000ms`)
+                    rollbar.warn(`tap for ${this.user.name} > 1000ms`)
                 }
             }
         },
