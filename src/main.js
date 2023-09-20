@@ -50,6 +50,7 @@ document.addEventListener('visibilitychange', () => {
     const lastReloadDate = localStorage.getItem('lastReload')
     const today = new Date().toDateString()
 
+
     if (lastReloadDate !== today) {
       location.reload() // Trigger reload
       localStorage.setItem('lastReload', today)
@@ -67,3 +68,4 @@ app.use(VueScrollTo)
 app.use(VueCookies, { 'expires': '30d' })
 
 app.mount('#app')
+

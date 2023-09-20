@@ -44,12 +44,44 @@ export const useStore = defineStore({
 
         theme: '',
 
-        currentAnnouncementVersion: 3,
+        appVersion: 3, // will come from api
+        announcementBarActive: true, // will come from api
+
         canShow: false,
-        announcementBarActive: false,
+
+        performanceArray: []
 
     }),
     actions: {
+        addPerfMetric(perfMeasure) {
+            this.performanceArray.push(perfMeasure)
+            // console.log(`perfmeasure of ${perfMeasure} added`)
+
+            const perfWindow = 4
+            if (this.performanceArray.length >= perfWindow) {
+                // take avg and send to rollbar
+
+                if (this.performanceArray.every(Number.isInteger)) {
+
+                    const sum = this.performanceArray.reduce((acc, curr) => acc + curr, 0)
+                    const avg = this.performanceArray.length ? sum / this.performanceArray.length : 0
+                    console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
+                    this.performanceArray = []
+                    // console.log(`perf array reset`)
+
+                    if (avg > 1000) {
+                        rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+                    }
+                }
+
+            }
+
+        },
+        hideAnnouncement() {
+            this.canShow = false
+            localStorage.setItem('hiddenAnnoucementVersion', this.appVersion)
+            rollbar.info(`app: ${this.user.name} hid the announcement version ${this.appVersion}`)
+        },
         checkAllComplete() {
             if (this.panels.length > 0) {
                 const numPanels = this.panels.length
@@ -105,6 +137,7 @@ export const useStore = defineStore({
         saveTheme(newTheme) {
             localStorage.setItem('theme', newTheme)
         },
+
         apiError(error) {
             let errorMsg = "Unknown error...  😬"
 
@@ -114,7 +147,7 @@ export const useStore = defineStore({
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Network error"
-                    rollbar.error(`app: `)
+                    rollbar.error(`app: network error for a user`)
                 } else if (status === 422) {
                     // handle a pydatic validation error
                     errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail[0].msg : `Server is saying ${status}`
@@ -290,7 +323,7 @@ export const useStore = defineStore({
                 performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
 
                 const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
-                console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
+                // console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
             }
         },
         async toggleEntryOptimistically(panelId) {
@@ -324,17 +357,18 @@ export const useStore = defineStore({
                 performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
 
                 const findDuration = performance.getEntriesByName('panelFindDuration')
-                console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
+                // console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
 
                 const entryDuration = performance.getEntriesByName('panelEntryDuration')
-                console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
+                // console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
 
                 const tapDuration = performance.getEntriesByName('panelPanelDuration')
                 const tapDurationMs = tapDuration[tapDuration.length - 1].duration
-                console.log(`panel tap duration ${tapDurationMs} ms`)
+                // console.log(`panel tap duration ${tapDurationMs} ms`)
+                this.addPerfMetric(tapDurationMs)
 
-                if (tapDurationMs > 1000) {
-                    rollbar.warn(`tap for ${this.user.name} > 1000ms`)
+                if (tapDurationMs > 1500) {
+                    rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
                 }
             }
         },

@@ -50,7 +50,7 @@ export default {
     }
   },
   mounted() {
-    if (localStorage.getItem('hiddenAnnoucementVersion') < this.Store.currentAnnouncementVersion) {
+    if (localStorage.getItem('hiddenAnnoucementVersion') < this.Store.appVersion) {
       this.Store.canShow = true
     }
   },
