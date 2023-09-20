@@ -36,7 +36,7 @@ import rollbar from '@/rollbarClient.js'
 
 export default {
   mounted() {
-    rollbar.info("Not found page loaded for requested route: " + this.$route.path)
+    rollbar.info(`app: 404 loaded for requested route: ${this.$route.path}`)
   }
 }
 

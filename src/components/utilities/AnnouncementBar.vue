@@ -27,7 +27,7 @@ export default {
         hideAnnouncement() {
             this.Store.canShow = false
             localStorage.setItem('hiddenAnnoucementVersion', this.Store.currentAnnouncementVersion)
-            rollbar.info(`${this.Store.user.name} hid the announcement version ${this.Store.currentAnnouncementVersion}`)
+            rollbar.info(`app: ${this.Store.user.name} hid the announcement version ${this.Store.currentAnnouncementVersion}`)
         },
     },
 

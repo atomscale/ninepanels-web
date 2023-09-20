@@ -53,7 +53,6 @@ document.addEventListener('visibilitychange', () => {
     if (lastReloadDate !== today) {
       location.reload() // Trigger reload
       localStorage.setItem('lastReload', today)
-      rollbar.info('9p autoreload')
     }
   }
 });

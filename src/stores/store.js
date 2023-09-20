@@ -103,7 +103,6 @@ export const useStore = defineStore({
             }
         },
         saveTheme(newTheme) {
-            // rollbar.info(this.Store.user.name + "set theme to " + newTheme)
             localStorage.setItem('theme', newTheme)
         },
         apiError(error) {
@@ -115,6 +114,7 @@ export const useStore = defineStore({
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Network error"
+                    rollbar.error(`app: `)
                 } else if (status === 422) {
                     // handle a pydatic validation error
                     errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail[0].msg : `Server is saying ${status}`
@@ -147,7 +147,7 @@ export const useStore = defineStore({
                 VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
                 await this.readUserAction()
                 if (this.user.name) {
-                    rollbar.info(this.user.name + " logged in. using PWA: " + this.isPWA + " on mobile: " + this.isMobile)
+                    rollbar.info(`app: ${this.user.name} logged in. using PWA: ${this.isPWA}  on mobile:  ${this.isMobile}`)
                 }
                 return response.data.access_token
             } catch (error) {
@@ -181,7 +181,6 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
-            // rollbar.info("New user " + name + " signed up on the app")
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)

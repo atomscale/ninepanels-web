@@ -29,9 +29,9 @@ export default {
       window.location.href = `whatsapp://send?text=${msg}`
       if (this.Store.user) {
 
-        rollbar.info(`shared to whatsapp not using WebShare by ${this.Store.user.name}`)
+        rollbar.info(`app: shared to whatsapp not using WebShare by ${this.Store.user.name}`)
       } else {
-        rollbar.info(`shared to whatsapp not using WebShare by a logged out visitor`)
+        rollbar.info(`app: shared to whatsapp not using WebShare by a logged out visitor`)
       }
     },
     email() {
@@ -39,10 +39,10 @@ export default {
       const body = encodeURIComponent("Nine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]");
       window.location.href = `mailto:?subject=${subject}&body=${body}`
       if (this.Store.user) {
-        rollbar.info(`shared to email not using WebShare by ${this.Store.user.name}`)
+        rollbar.info(`app: shared to email not using WebShare by ${this.Store.user.name}`)
 
       } else {
-        rollbar.info(`shared to whatsapp not using WebShare by a logged out visitor`)
+        rollbar.info(`app: shared to whatsapp not using WebShare by a logged out visitor`)
       }
     }
   }

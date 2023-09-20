@@ -76,13 +76,13 @@ export default {
             url: "https://ninepanels.com",
           })
           if (this.Store.user) {
-            rollbar.info("shared using WebShare by " + this.Store.user.name)
+            rollbar.info(`app: shared using WebShare by ${this.Store.user.name}`)
           } else {
-            rollbar.info("shared using WebShare API by a logged out visitor or this.Store.user unavailbale")
+            rollbar.info(`app: shared using WebShare API by a logged out visitor or this.Store.user unavailbale`)
           }
 
         } catch (error) {
-          console.log('web share error')
+          console.log(`web share error`)
         }
       } else {
         this.toggleShareBox()
