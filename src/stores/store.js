@@ -59,7 +59,7 @@ export const useStore = defineStore({
                 }
                 const congratsMsgs = [
                     "🔥 💪 😎",
-                    "🧘 🧘",
+                    "😎 😎 😎",
                     "🚀 🚀 🚀",
                 ]
 
@@ -219,6 +219,7 @@ export const useStore = defineStore({
         async updatePanelAction(panel_id, update) {
             const access_token = VueCookies.get("9p_access_token")
             try {
+
                 const response = await requests.patchPanel(access_token, panel_id, update)
                 await this.readPanelsAction()
                 return true
@@ -279,21 +280,34 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
+                performance.mark('panelConsistencyStart')
                 const response = await requests.getPanelConsistency(access_token)
                 this.consistency = response.data
             } catch (error) {
                 this.apiError(error)
+            }   finally {
+                performance.mark('panelConsistencyEnd')
+                performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
+
+                const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
+                console.log(`panel consistency duration ${consistencyDuration[0].duration} ms`)
             }
         },
         async toggleEntryOptimistically(panelId) {
+            performance.mark('panelTapStart')
+            performance.mark('panelFindStart')
             const panel = this.panels.find(panel => panel.id === panelId)
+            performance.mark('panelFindEnd')
 
             panel.is_complete = !panel.is_complete
             this.loadingBar = true
             this.panelIsDisabled = true
 
+
             try {
+                performance.mark('panelEntryStart')
                 await this.createEntryAction(panelId, panel.is_complete)
+                performance.mark('panelEntryEnd')
                 this.checkAllComplete()
                 this.readPanelConsistencyAction()
             } catch (error) {
@@ -304,6 +318,18 @@ export const useStore = defineStore({
             } finally {
                 this.panelIsDisabled = false
                 this.loadingBar = false
+                performance.mark('panelTapEnd')
+                performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
+                performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
+                performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
+
+                const findDuration = performance.getEntriesByName('panelFindDuration')
+                console.log(`panel find duration ${findDuration[0].duration} ms`)
+                const entryDuration = performance.getEntriesByName('panelEntryDuration')
+                console.log(`panel entry duration ${entryDuration[0].duration} ms`)
+
+                const tapDuration = performance.getEntriesByName('panelPanelDuration')
+                console.log(`panel tap duration ${tapDuration[0].duration} ms`)
             }
         },
         async startPasswordResetFlow(email) {
