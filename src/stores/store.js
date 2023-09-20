@@ -45,7 +45,8 @@ export const useStore = defineStore({
         theme: '',
 
         currentAnnouncementVersion: 3,
-        canShow: false
+        canShow: false,
+        announcementBarActive: false,
 
     }),
     actions: {

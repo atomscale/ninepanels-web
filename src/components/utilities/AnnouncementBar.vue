@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-np-accent p-2 rounded-lg flex justify-between items-center">
+    <div v-if="Store.announcementBarActive" class="bg-np-accent p-2 rounded-lg flex justify-between items-center">
 
         <button class="mr-2" @click="hideAnnouncement">
             <XMarkIcon class="h-5 w-5 text-np-inverted " />
