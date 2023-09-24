@@ -137,7 +137,6 @@ export const useStore = defineStore({
         saveTheme(newTheme) {
             localStorage.setItem('theme', newTheme)
         },
-
         apiError(error) {
             let errorMsg = "Unknown error...  😬"
 
@@ -148,12 +147,9 @@ export const useStore = defineStore({
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Network error"
                     rollbar.error(`app: network error for a user`)
-                } else if (status === 422) {
-                    // handle a pydatic validation error
-                    errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail[0].msg : `Server is saying ${status}`
                 } else {
-                    // handle other error responses from server
-                    errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail : `Server is saying ${status}`
+                    console.log(error.response)
+                    errorMsg = error.response.data.data && error.response.data.is_error ? error.response.data.error_message : `Server is saying ${status}`
                 }
 
             } else if (error.request) {
@@ -177,12 +173,12 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getLoginToken(email, password)
-                VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
+                VueCookies.set('9p_access_token', response.data.data.access_token, '30d', '', '', 'true')
                 await this.readUserAction()
                 if (this.user.name) {
                     rollbar.info(`app: ${this.user.name} logged in. using PWA: ${this.isPWA}  on mobile:  ${this.isMobile}`)
                 }
-                return response.data.access_token
+                return response.data.data.access_token
             } catch (error) {
                 this.apiError(error)
             } finally {
@@ -231,8 +227,8 @@ export const useStore = defineStore({
 
                 try {
                     const response = await requests.getUser(access_token)
-                    this.user = response.data
-                    return response.data
+                    this.user = response.data.data
+                    return response.data.data
                 } catch (error) {
                     this.apiError(error)
                 } finally {
@@ -278,8 +274,8 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getPanels(access_token)
-                this.panels = response.data
-                return response.data
+                this.panels = response.data.data
+                return response.data.data
             } catch (error) {
                 this.apiError(error)
             } finally {
@@ -292,7 +288,7 @@ export const useStore = defineStore({
             try {
                 const response = await requests.postEntry(access_token, panel_id, is_complete)
                 await this.readPanelsAction()
-                return response.data
+                return response.data.data
             } catch (error) {
                 this.apiError(error)
             }
@@ -315,7 +311,7 @@ export const useStore = defineStore({
             try {
                 performance.mark('panelConsistencyStart')
                 const response = await requests.getPanelConsistency(access_token)
-                this.consistency = response.data
+                this.consistency = response.data.data
             } catch (error) {
                 this.apiError(error)
             }   finally {
