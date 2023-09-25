@@ -13,7 +13,7 @@
                             <input v-model="password_first" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none bg-np-base rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                                class="block w-full appearance-none bg-np-base text-np-base rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-np-base" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
@@ -28,7 +28,7 @@
                             <input v-model="password_second" id="password" name="password"
                                 :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
                                 required="true"
-                                class="block w-full appearance-none bg-np-base rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
+                                class="block w-full appearance-none bg-np-base text-np-base rounded-md border border-np-light px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
                                 @click="togglePasswordVisibility()">
                                 <component class="h-5 w-5 text-np-base" :is="passwordVisible ? 'EyeSlashIcon': 'EyeIcon'">
