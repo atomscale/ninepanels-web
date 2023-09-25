@@ -44,11 +44,44 @@ export const useStore = defineStore({
 
         theme: '',
 
-        currentAnnouncementVersion: 3,
-        canShow: false
+        appVersion: 3, // will come from api
+        announcementBarActive: false, // will come from api
+
+        canShow: false,
+
+        performanceArray: []
 
     }),
     actions: {
+        addPerfMetric(perfMeasure) {
+            this.performanceArray.push(perfMeasure)
+            // console.log(`perfmeasure of ${perfMeasure} added`)
+
+            const perfWindow = 4
+            if (this.performanceArray.length >= perfWindow) {
+                // take avg and send to rollbar
+
+                if (this.performanceArray.every(Number.isInteger)) {
+
+                    const sum = this.performanceArray.reduce((acc, curr) => acc + curr, 0)
+                    const avg = this.performanceArray.length ? sum / this.performanceArray.length : 0
+                    console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
+                    this.performanceArray = []
+                    // console.log(`perf array reset`)
+
+                    if (avg > 1000) {
+                        rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+                    }
+                }
+
+            }
+
+        },
+        hideAnnouncement() {
+            this.canShow = false
+            localStorage.setItem('hiddenAnnoucementVersion', this.appVersion)
+            rollbar.info(`app: ${this.user.name} hid the announcement version ${this.appVersion}`)
+        },
         checkAllComplete() {
             if (this.panels.length > 0) {
                 const numPanels = this.panels.length
@@ -59,7 +92,7 @@ export const useStore = defineStore({
                 }
                 const congratsMsgs = [
                     "🔥 💪 😎",
-                    "🧘 🧘",
+                    "😎 😎 😎",
                     "🚀 🚀 🚀",
                 ]
 
@@ -102,7 +135,6 @@ export const useStore = defineStore({
             }
         },
         saveTheme(newTheme) {
-            // rollbar.info(this.Store.user.name + "set theme to " + newTheme)
             localStorage.setItem('theme', newTheme)
         },
         apiError(error) {
@@ -114,12 +146,10 @@ export const useStore = defineStore({
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Network error"
-                } else if (status === 422) {
-                    // handle a pydatic validation error
-                    errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail[0].msg : `Server is saying ${status}`
+                    rollbar.error(`app: network error for a user`)
                 } else {
-                    // handle other error responses from server
-                    errorMsg = error.response.data && error.response.data.detail ? error.response.data.detail : `Server is saying ${status}`
+                    console.log(error.response)
+                    errorMsg = error.response.data.data && error.response.data.is_error ? error.response.data.error_message : `Server is saying ${status}`
                 }
 
             } else if (error.request) {
@@ -143,12 +173,12 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getLoginToken(email, password)
-                VueCookies.set('9p_access_token', response.data.access_token, '30d', '', '', 'true')
+                VueCookies.set('9p_access_token', response.data.data.access_token, '30d', '', '', 'true')
                 await this.readUserAction()
                 if (this.user.name) {
-                    rollbar.info(this.user.name + " logged in. using PWA: " + this.isPWA + " on mobile: " + this.isMobile)
+                    rollbar.info(`app: ${this.user.name} logged in. using PWA: ${this.isPWA}  on mobile:  ${this.isMobile}`)
                 }
-                return response.data.access_token
+                return response.data.data.access_token
             } catch (error) {
                 this.apiError(error)
             } finally {
@@ -180,7 +210,7 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
-            // rollbar.info("New user " + name + " signed up on the app")
+            this.loadingBar = true
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
@@ -188,6 +218,8 @@ export const useStore = defineStore({
             } catch (error) {
                 this.apiError(error)
                 return false
+            } finally {
+                this.loadingBar = false
             }
         },
         async readUserAction() {
@@ -198,8 +230,8 @@ export const useStore = defineStore({
 
                 try {
                     const response = await requests.getUser(access_token)
-                    this.user = response.data
-                    return response.data
+                    this.user = response.data.data
+                    return response.data.data
                 } catch (error) {
                     this.apiError(error)
                 } finally {
@@ -219,6 +251,7 @@ export const useStore = defineStore({
         async updatePanelAction(panel_id, update) {
             const access_token = VueCookies.get("9p_access_token")
             try {
+
                 const response = await requests.patchPanel(access_token, panel_id, update)
                 await this.readPanelsAction()
                 return true
@@ -244,8 +277,8 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getPanels(access_token)
-                this.panels = response.data
-                return response.data
+                this.panels = response.data.data
+                return response.data.data
             } catch (error) {
                 this.apiError(error)
             } finally {
@@ -258,7 +291,7 @@ export const useStore = defineStore({
             try {
                 const response = await requests.postEntry(access_token, panel_id, is_complete)
                 await this.readPanelsAction()
-                return response.data
+                return response.data.data
             } catch (error) {
                 this.apiError(error)
             }
@@ -279,21 +312,34 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
+                performance.mark('panelConsistencyStart')
                 const response = await requests.getPanelConsistency(access_token)
-                this.consistency = response.data
+                this.consistency = response.data.data
             } catch (error) {
                 this.apiError(error)
+            }   finally {
+                performance.mark('panelConsistencyEnd')
+                performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
+
+                const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
+                // console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
             }
         },
         async toggleEntryOptimistically(panelId) {
+            performance.mark('panelTapStart')
+            performance.mark('panelFindStart')
             const panel = this.panels.find(panel => panel.id === panelId)
+            performance.mark('panelFindEnd')
 
             panel.is_complete = !panel.is_complete
             this.loadingBar = true
             this.panelIsDisabled = true
 
+
             try {
+                performance.mark('panelEntryStart')
                 await this.createEntryAction(panelId, panel.is_complete)
+                performance.mark('panelEntryEnd')
                 this.checkAllComplete()
                 this.readPanelConsistencyAction()
             } catch (error) {
@@ -304,6 +350,25 @@ export const useStore = defineStore({
             } finally {
                 this.panelIsDisabled = false
                 this.loadingBar = false
+                performance.mark('panelTapEnd')
+                performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
+                performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
+                performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
+
+                const findDuration = performance.getEntriesByName('panelFindDuration')
+                // console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
+
+                const entryDuration = performance.getEntriesByName('panelEntryDuration')
+                // console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
+
+                const tapDuration = performance.getEntriesByName('panelPanelDuration')
+                const tapDurationMs = tapDuration[tapDuration.length - 1].duration
+                // console.log(`panel tap duration ${tapDurationMs} ms`)
+                this.addPerfMetric(tapDurationMs)
+
+                if (tapDurationMs > 1500) {
+                    rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+                }
             }
         },
         async startPasswordResetFlow(email) {

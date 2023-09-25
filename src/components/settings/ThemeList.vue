@@ -55,7 +55,6 @@ export default {
     },
     watch: {
         currentTheme() {
-            rollbar.info(`theme change to ${this.Store.theme}`)
             this.Store.saveTheme(this.Store.theme)
         }
     },

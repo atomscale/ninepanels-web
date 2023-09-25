@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-np-accent p-2 rounded-lg flex justify-between items-center">
+    <div v-if="Store.announcementBarActive" class="bg-np-accent p-2 rounded-lg flex justify-between items-center">
 
-        <button class="mr-2" @click="hideAnnouncement">
+        <button class="mr-2" @click="dispatchHideAnnoucement">
             <XMarkIcon class="h-5 w-5 text-np-inverted " />
         </button>
         <router-link :to="{ name: 'Settings' }" class="text-xs text-np-inverted">Themes now available! <span class="ml-1"> 🎉</span>
@@ -12,7 +12,6 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import rollbar from '@/rollbarClient.js'
 
 import {
     XMarkIcon,
@@ -24,11 +23,10 @@ export default {
 
     },
     methods: {
-        hideAnnouncement() {
-            this.Store.canShow = false
-            localStorage.setItem('hiddenAnnoucementVersion', this.Store.currentAnnouncementVersion)
-            rollbar.info(`${this.Store.user.name} hid the announcement version ${this.Store.currentAnnouncementVersion}`)
+        dispatchHideAnnoucement() {
+            this.Store.hideAnnouncement()
         },
+
     },
 
 

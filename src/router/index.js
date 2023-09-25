@@ -27,7 +27,7 @@ function requireAccessToken(to, from, next) {
 }
 
 function monitorHome(to, from, next) {
-  rollbar.info('home route was visited')
+  rollbar.info(`app: home route was visited`)
   next('/')
 }
 
