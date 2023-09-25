@@ -210,6 +210,7 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
@@ -217,6 +218,8 @@ export const useStore = defineStore({
             } catch (error) {
                 this.apiError(error)
                 return false
+            } finally {
+                this.loadingBar = false
             }
         },
         async readUserAction() {
