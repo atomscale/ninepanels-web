@@ -1,14 +1,20 @@
 import axios from "axios"
-
+import { v4 as uuidv4} from "uuid"
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
+
 })
+
+apiClient.interceptors.request.use((config) => {
+    config.headers['X-Request-ID'] = uuidv4()
+    return config
+  });
 
 apiClient.interceptors.response.use(
     (response) => {
         localStorage.setItem('lastReload', new Date().toDateString())
-        return response;
+        return response
     },
     (error) => {
         return Promise.reject(error)
