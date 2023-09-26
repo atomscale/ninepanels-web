@@ -11,6 +11,7 @@ export const useStore = defineStore({
         user: null,
         panels: [],
         consistency: [],
+        routePerformance: null,
 
         messages: [],
 
@@ -70,7 +71,7 @@ export const useStore = defineStore({
                     // console.log(`perf array reset`)
 
                     if (avg > 1000) {
-                        rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+                        rollbar.warn(`app: individual tap for ${this.user.name} > 1000ms`)
                     }
                 }
 
@@ -403,6 +404,19 @@ export const useStore = defineStore({
                     setTimeout(() => this.messages.shift(), 5000)
                     return false
                 }
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
+            }
+        },
+        async readRoutePerformance() {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.getRoutePerformance(access_token)
+                this.routePerformance = response.data.data
+                // return response.data.data
             } catch (error) {
                 this.apiError(error)
             } finally {

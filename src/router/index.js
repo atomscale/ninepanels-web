@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import PanelsView from '@/views/SignedIn/PanelsView.vue'
+import PerformanceView from '@/views/SignedIn/PerformanceView.vue'
 import SettingsView from '@/views/SignedIn/SettingsView.vue'
+
 import LandingView from '@/views/SignedOut/LandingView.vue'
 import SignUpView from '@/views/SignedOut/SignUpView.vue'
 import SignInView from '@/views/SignedOut/SignInView.vue'
@@ -8,6 +11,7 @@ import AboutView from '@/views/SignedOut/AboutView.vue'
 import PrivacyView from '@/views/SignedOut/PrivacyView.vue'
 import NotFound from '@/views/SignedOut/NotFound.vue'
 import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
+
 import { useStore } from '@/stores/store.js'
 
 import VueCookies from 'vue-cookies'
@@ -80,6 +84,12 @@ const router = createRouter({
       path: '/settings',
       name: 'Settings',
       component: SettingsView,
+      beforeEnter: requireAccessToken
+    },
+    {
+      path: '/admin/performance',
+      name: 'Performance',
+      component: PerformanceView,
       beforeEnter: requireAccessToken
     },
     {

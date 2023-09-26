@@ -147,4 +147,13 @@ export default {
             form,
         )
     },
+    getRoutePerformance(access_token) {
+
+        return apiClient.get("/admin/performance/route", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+    },
 }
