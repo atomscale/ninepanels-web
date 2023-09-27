@@ -16,7 +16,7 @@
           Server
         </div>
         <table class="w-full">
-          <thead class="text-sm">
+          <thead class="text-xs">
             <tr>
               <th class="text-left font-extralight">avg</th>
               <th class="text-left font-extralight">last</th>
@@ -25,7 +25,7 @@
               <th class="text-left font-extralight">alert level</th>
             </tr>
           </thead>
-          <tbody class="text-sm">
+          <tbody class="text-xs">
             <td>{{ method_path.stats.avg.toFixed(2) }}ms</td>
             <td>{{ method_path.stats.last.toFixed(2) }}ms</td>
             <td>{{ method_path.stats.min.toFixed(2) }}ms</td>
