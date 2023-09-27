@@ -58,7 +58,7 @@ export default {
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRation: false,
+        maintainAspectRatio: false,
         scales: {
           x: {
             display: false
