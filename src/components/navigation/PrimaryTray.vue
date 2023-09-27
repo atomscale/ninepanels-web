@@ -48,13 +48,9 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import PanelTray from '@/components/panels/tray/PanelTray.vue'
-import HelpTray from '@/components/help/HelpTray.vue'
-import InstallPWATray from '@/components/help/InstallPWATray.vue'
-import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
 
+import RoutePerformanceTray from '@/components/admin/RoutePerformanceTray.vue'
 
-// const store = useStore()
 
 export default {
   computed: {
@@ -64,10 +60,6 @@ export default {
     closePrimaryTray() {
       this.Store.primaryComponentName = null
       this.Store.primaryComponentProps = {}
-      this.Store.panelTitleEditState = false
-      this.Store.panelDescEditState = false
-      this.Store.panelSortBoxIsOpen = false
-      this.Store.deleteResetBoxIsOpen = false
     }
   },
   components: {
@@ -77,10 +69,7 @@ export default {
     TransitionRoot,
     DialogTitle,
     XMarkIcon,
-    PanelTray,
-    HelpTray,
-    PanelCreateForm,
-    InstallPWATray
+    RoutePerformanceTray
   }
 }
 </script>

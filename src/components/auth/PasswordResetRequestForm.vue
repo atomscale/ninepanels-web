@@ -23,7 +23,7 @@
                 </div>
                 <div class="flex justify-between">
                     <div class="font-semibold text-xs text-np-base">
-                        <router-link :to=" { name: 'SignUp' }">Sign in instead</router-link>
+                        <router-link :to=" { name: 'SignIn' }">Sign in instead</router-link>
                     </div>
                     <div class="font-semibold text-xs text-np-base">
                         <router-link :to=" { name: 'SignUp' }">Need an account?</router-link>

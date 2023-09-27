@@ -24,8 +24,8 @@
                     <div>
                         <label for="password_first" class="block font-light text-xs text-np-base">Password</label>
                         <div class="mt-1 flex relative">
-                            <input v-model="password_first" id="password" name="password"
-                                :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
+                            <input v-model="password_first" id="password_first" name="password_first"
+                                :type="passwordVisible ? 'text' : 'password'"
                                 required="true"
                                 class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
@@ -39,8 +39,8 @@
                     <div>
                         <label for="password_second" class="block font-light text-xs text-np-base">Repeat password</label>
                         <div class="mt-1 flex relative">
-                            <input v-model="password_second" id="password" name="password"
-                                :type="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
+                            <input v-model="password_second" id="password_second" name="password_second"
+                                :type="passwordVisible ? 'text' : 'password'"
                                 required="true"
                                 class="block w-full text-np-base bg-np-base appearance-none rounded-md border border-np-base px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
                             <button tabindex="-1" class="text-xs absolute right-2 top-1 bg-np-base  h-5/6 flex items-center justify-center"
