@@ -412,10 +412,12 @@ export const useStore = defineStore({
         },
         async readRoutePerformance() {
             const access_token = VueCookies.get("9p_access_token")
+            const window = this.routePerformance ? this.routePerformance.meta.window : null
             this.loadingBar = true
             try {
-                const response = await requests.getRoutePerformance(access_token)
-                this.routePerformance = response.data.data
+
+                const response = await requests.getRoutePerformance(access_token, window)
+                this.routePerformance = response.data
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)

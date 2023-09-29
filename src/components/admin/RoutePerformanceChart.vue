@@ -49,10 +49,10 @@ export default {
   data() {
     return {
       chartData: {
-        labels: this.method_path.readings.timestamp,
+        labels: this.method_path.timestamps,
         datasets: [{
           label: "readings",
-          data: this.method_path.readings.reading,
+          data: this.method_path.readings,
           backgroundColor: '#4B5563'
         }],
       },

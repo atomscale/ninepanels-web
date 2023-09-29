@@ -1,5 +1,5 @@
 import axios from "axios"
-import { v4 as uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid"
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
@@ -9,7 +9,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use((config) => {
     config.headers['X-Request-ID'] = uuidv4()
     return config
-  });
+});
 
 apiClient.interceptors.response.use(
     (response) => {
@@ -147,9 +147,13 @@ export default {
             form,
         )
     },
-    getRoutePerformance(access_token) {
+    getRoutePerformance(access_token, window) {
 
         return apiClient.get("/admin/performance/route", {
+            params: {
+                window: window
+            }
+        }, {
             headers: {
                 Authorization: "Bearer " + access_token,
             }

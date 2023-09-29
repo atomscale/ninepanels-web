@@ -8,7 +8,7 @@
           {{ method_path.method }}
           {{ method_path.path }}
         </div>
-        <div v-if="method_path.stats.in_alert" class="bg-np-alert text-white rounded-md text-xs h-5 px-2 text-center pt-0.5">alert</div>
+        <div v-if="method_path.in_alert" class="bg-np-alert text-white rounded-md text-xs h-5 px-2 text-center pt-0.5">alert</div>
       </div>
 
       <div>
@@ -26,17 +26,17 @@
             </tr>
           </thead>
           <tbody class="text-xs">
-            <td>{{ method_path.stats.avg.toFixed(2) }}ms</td>
-            <td>{{ method_path.stats.last.toFixed(2) }}ms</td>
-            <td>{{ method_path.stats.min.toFixed(2) }}ms</td>
-            <td>{{ method_path.stats.max.toFixed(2) }}ms</td>
-            <td>{{ method_path.stats.alert_threshold.toFixed(2) }}ms</td>
+            <td>{{ method_path.avg.toFixed(2) }}ms</td>
+            <td>{{ method_path.last.toFixed(2) }}ms</td>
+            <td>{{ method_path.min.toFixed(2) }}ms</td>
+            <td>{{ method_path.max.toFixed(2) }}ms</td>
+            <td>{{ method_path.alert_threshold.toFixed(2) }}ms</td>
           </tbody>
 
         </table>
       </div>
 
-      <div>
+      <div v-if="this.Store.routePerformance">
         <RoutePerformanceChart :method_path="this.method_path" />
       </div>
 
@@ -77,10 +77,7 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-    }
-  }
+  
 
 }
 

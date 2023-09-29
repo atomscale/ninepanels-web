@@ -17,7 +17,7 @@
         </div>
       </div>
       <div>
-        <RoutePerformance class="  mb-5" v-if="routePerfBoxIsOpen" />
+        <RoutePerformance v-if="Store.routePerformance && routePerfBoxIsOpen" class="  mb-5" />
       </div>
     </div>
 
@@ -52,6 +52,9 @@ export default {
     ChevronLeftIcon,
     RoutePerformance,
     ArrowPathIcon
+  },
+  mounted() {
+    this.readRoutePerformance()
   },
   data() {
     return {
