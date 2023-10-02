@@ -36,9 +36,9 @@ export default {
       this.Store.visGridIsOpen = !this.Store.visGridIsOpen
     }
   },
-  mounted() {
-    this.Store.readUserAction()
-  },
+  // mounted() {
+  //   this.Store.readUserAction()
+  // },
   components: {
     PanelGridFrame,
     ConsistencyGrid,

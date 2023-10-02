@@ -13,6 +13,8 @@ export const useStore = defineStore({
         consistency: [],
         routePerformance: null,
 
+        window_size: null,
+
         messages: [],
 
         loadingBar: false,
@@ -249,6 +251,20 @@ export const useStore = defineStore({
                 this.apiError(error)
             }
         },
+        async readPanelsAction() {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.getPanels(access_token)
+                this.panels = response.data.data
+                console.log(this.panels)
+                return response.data.data
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
+            }
+        },
         async updatePanelAction(panel_id, update) {
             const access_token = VueCookies.get("9p_access_token")
             try {
@@ -273,19 +289,6 @@ export const useStore = defineStore({
                 this.loadingBar = false
             }
         },
-        async readPanelsAction() {
-            const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
-            try {
-                const response = await requests.getPanels(access_token)
-                this.panels = response.data.data
-                return response.data.data
-            } catch (error) {
-                this.apiError(error)
-            } finally {
-                this.loadingBar = false
-            }
-        },
         async createEntryAction(panel_id, is_complete) {
             const access_token = VueCookies.get("9p_access_token")
             // does not require loading bars becuase they are triggered in getPanelsActions()
@@ -295,6 +298,18 @@ export const useStore = defineStore({
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
+            }
+        },
+        async readEntriesAction(panel_id, limit) {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.getEntries(access_token, panel_id, limit)
+                return response.data.data
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
             }
         },
         async deleteEntriesAction(panel_id) {

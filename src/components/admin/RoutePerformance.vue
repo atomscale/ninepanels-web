@@ -77,9 +77,9 @@ export default {
         },
 
     },
-    mounted() {
-        this.getRoutePerformance()
-    },
+    // mounted() {
+    //     this.getRoutePerformance()
+    // },
     components: {
         ArrowPathIcon,
     },

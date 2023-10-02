@@ -113,6 +113,19 @@ export default {
 
             })
     },
+    getEntries(access_token, panel_id, limit) {
+
+        return apiClient.get(`/panels/${panel_id}/entries`, {
+            params: {
+                limit: limit
+            }
+        }, {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+    },
     deleteEntries(access_token, panel_id) {
         return apiClient.delete("/panels/" + panel_id + '/entries', {
             headers: {

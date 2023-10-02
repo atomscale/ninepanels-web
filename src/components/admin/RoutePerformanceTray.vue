@@ -12,8 +12,18 @@
       </div>
 
       <div>
-        <div class="mb-2">
-          Server
+        <div class="flex justify-between items-center mb-2">
+
+          <div class="">
+            Server
+          </div>
+          <!-- <div class="flex justify-end">
+            <div class="text-xs text-center  align-middle py-1 mr-3">window:</div>
+            <input class="border rounded-md w-14 text-sm text-center" v-model="Store.window_size" type="number" required="true" min="1" placeholder="avg"/>
+            <button @click="">
+              <CheckIcon class="h-4"/>
+            </button>
+          </div> -->
         </div>
         <table class="w-full">
           <thead class="text-xs">

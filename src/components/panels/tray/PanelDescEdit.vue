@@ -16,11 +16,6 @@
       class="block resize-none h-80 w-full text-np-base bg-np-base appearance-none text-sm rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
   </div>
 
-
-  <!-- <div class="text-xs mt-1" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-gray-400'"> {{
-    currentFieldLen }}/{{
-    maxFieldLen }}
-  </div> -->
 </template>
 
 <script>
