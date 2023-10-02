@@ -26,9 +26,13 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-7 gap-1 w-3/5 mx-auto mt-4">
-            <div v-for="entry in this.entries" :key="entry.id">
-                <div class="h-5 w-5 border rounded-md" :class="!entry.is_complete ? 'bg-green-200' : 'bg-white'"></div>
+        <div class="flex justify-center items-center">
+
+            <div class="grid grid-cols-7 gap-1 w-3/5  mt-4">
+                <div class="text-gray-300 font-extralight pl-2 text-xs" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+                <div v-for="entry in this.entries" :key="entry.id">
+                    <div class="h-6 w-6 border rounded-md" :class="!entry.is_complete ? 'bg-green-200' : 'bg-white'"></div>
+                </div>
             </div>
         </div>
 
@@ -76,7 +80,8 @@ export default {
             sort_direction: null,
             limit: null,
             offset: null,
-            selected: null
+            selected: null,
+            dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's']
         }
     }
 
