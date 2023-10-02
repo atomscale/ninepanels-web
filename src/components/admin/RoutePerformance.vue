@@ -1,22 +1,6 @@
 <template>
     <div v-if="Store.routePerformance" class="h-96 w-full inline-block overflow-scroll">
-        <div class="flex justify-between items-center mb-3">
-            <div class="text-xs text-np-base">Avg window</div>
-            <div class="flex">
 
-                <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                    <input
-                        class="block w-20 text-xs h-8 appearance-none text-np-base bg-np-base rounded-md border border-np-base px-3 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 "
-                        type="number"
-                        v-model="Store.routePerformance.meta.window"
-                        min="1"
-                        />
-                </form>
-                <button class="pl-4" @click="getPerf()">
-                    <CheckIcon class="h-5  text-np-base hover:text-np-base" />
-                </button>
-            </div>
-        </div>
 
         <table class="w-full ">
             <thead class="w-full ">
@@ -75,14 +59,15 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import { CheckIcon } from '@heroicons/vue/24/outline'
+import { ArrowPathIcon } from '@heroicons/vue/24/outline'
+
 
 export default {
     computed: {
         ...mapStores(useStore)
     },
     methods: {
-        async getPerf() {
+        async getRoutePerformance() {
             await this.Store.readRoutePerformance()
         },
         openPrimaryTray(method_path) {
@@ -93,11 +78,10 @@ export default {
 
     },
     mounted() {
-        this.getPerf()
+        this.getRoutePerformance()
     },
-
     components: {
-        CheckIcon
+        ArrowPathIcon,
     },
 
 }

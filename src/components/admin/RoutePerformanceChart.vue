@@ -1,6 +1,6 @@
 <template >
   <div class="flex flex-col justify-between text-np-base">
-    <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+    <Bar v-if="this.chartData.datasets[0].data" id="my-chart-id" :options="chartOptions" :data="chartData" />
 
   </div>
 </template>
@@ -33,12 +33,21 @@ export default {
 
   },
   methods: {
+    async getRouteTimings() {
 
+      const resp = await this.Store.readRouteTimings(this.method_path.method_path)
+
+      this.chartData.datasets[0].data = resp.readings.reverse()
+      this.chartData.labels =resp.timestamps.reverse()
+    }
   },
   components: {
     ChevronDownIcon,
     ChevronLeftIcon,
     Bar
+  },
+  mounted() {
+    this.getRouteTimings()
   },
   props: {
     method_path: {
@@ -49,10 +58,10 @@ export default {
   data() {
     return {
       chartData: {
-        labels: this.method_path.timestamps,
+        labels: null,
         datasets: [{
           label: "readings",
-          data: this.method_path.readings,
+          data: null,
           backgroundColor: '#4B5563'
         }],
       },

@@ -147,12 +147,23 @@ export default {
             form,
         )
     },
-    getRoutePerformance(access_token, window) {
+    getRoutePerformance(access_token) {
 
-        return apiClient.get("/admin/performance/route", {
-            params: {
-                window: window
+        return apiClient.get("/admin/routes", {
+            headers: {
+                Authorization: "Bearer " + access_token,
             }
+
+        })
+    },
+    getRouteTimings(access_token, method_path, window_size) {
+
+        return apiClient.get(`/admin/routes/timings`, {
+            params: {
+                method_path: method_path,
+                window_size: window_size
+            }
+
         }, {
             headers: {
                 Authorization: "Bearer " + access_token,

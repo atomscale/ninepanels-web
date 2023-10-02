@@ -30,7 +30,7 @@
             <td>{{ method_path.last.toFixed(2) }}ms</td>
             <td>{{ method_path.min.toFixed(2) }}ms</td>
             <td>{{ method_path.max.toFixed(2) }}ms</td>
-            <td>{{ method_path.alert_threshold.toFixed(2) }}ms</td>
+            <td>{{ method_path.alert_threshold_ms.toFixed(2) }}ms</td>
           </tbody>
 
         </table>
@@ -77,7 +77,7 @@ export default {
       required: true
     }
   },
-  
+
 
 }
 

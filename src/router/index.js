@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import PanelsView from '@/views/SignedIn/PanelsView.vue'
-import PerformanceView from '@/views/SignedIn/PerformanceView.vue'
+import AdminView from '@/views/SignedIn/AdminView.vue'
 import SettingsView from '@/views/SignedIn/SettingsView.vue'
 
 import LandingView from '@/views/SignedOut/LandingView.vue'
@@ -87,9 +87,9 @@ const router = createRouter({
       beforeEnter: requireAccessToken
     },
     {
-      path: '/admin/performance',
-      name: 'Performance',
-      component: PerformanceView,
+      path: '/admin',
+      name: 'Admin',
+      component: AdminView,
       beforeEnter: requireAccessToken
     },
     {

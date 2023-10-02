@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       prefsBoxIsOpen: true,
-      accountBoxIsOpen: false,
+      accountBoxIsOpen: true,
       policyBoxIsOpen: false,
       dangerBoxIsOpen: false,
 
