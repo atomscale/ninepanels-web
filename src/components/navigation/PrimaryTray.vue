@@ -16,17 +16,17 @@
               <DialogPanel class="pointer-events-auto w-screen max-w-md">
                 <div class="flex h-full flex-col  bg-np-base pt-3 shadow-xl">
 
-                  <div class="flex px-5 justify-between">
+                  <div class="flex pr-3 justify-between">
                     <div></div>
                     <button type="button" class="rounded-md text-np-base hover:text-np-base"
                       @click="this.closePrimaryTray(); this.Store.primaryTrayIsOpen = false">
                       <span class="sr-only">Close panel</span>
-                      <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                      <XMarkIcon class="h-6 w-6 text-gray-500 " aria-hidden="true" />
                     </button>
                   </div>
 
                   <div v-if="this.Store.primaryTrayIsOpen && this.Store.primaryComponentName"
-                    class="relative mt-4 flex-1 px-4 pt-1 mb-4 sm:px-6 overflow-auto">
+                    class="relative mt-4 flex-1 px-4  mb-4 sm:px-6 overflow-auto">
                     <component :is="this.Store.primaryComponentName" v-bind="this.Store.primaryComponentProps" />
                   </div>
 

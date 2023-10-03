@@ -1,19 +1,20 @@
 <template >
-  <div class="flex-col">
+  <div class="">
 
-    <div class="flex justify-between items-center mb-2">
-      <div   class="text-sm font-light h-5 text-np-base">About</div>
+    <div class="flex justify-between ">
+      <!-- <div   class="text-sm font-light h-5 text-np-base">About</div> -->
+      <VueShowdown v-if="this.panel.description" class="text-sm mr-2 max-h-64 font-light text-np-base w-auto whitespace-pre-line overflow-hidden overflow-y-auto" flavor="vanilla" :options="{ emoji: true }"
+        :markdown="this.panel.description">
+      </VueShowdown>
+      <div v-else class="italic font-extralight text-gray-400 text-sm">Why is this important to you?</div>
       <div>
-
         <button class="" @click="toggleEditState()">
-          <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-np-base" />
-          <PlusIcon v-else class="h-5 w-5 text-np-base hover:text-np-base" />
+          <PencilIcon v-if="this.panel.description" class="h-4 w-4 text-gray-400 hover:text-np-base" />
+          <PlusIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base" />
         </button>
       </div>
     </div>
 
-    <VueShowdown class="text-sm max-h-80 text-np-base w-auto whitespace-pre-line overflow-hidden overflow-y-auto" flavor="vanilla" :options="{ emoji: true }"
-      :markdown="this.panel.description"></VueShowdown>
 
   </div>
 </template>

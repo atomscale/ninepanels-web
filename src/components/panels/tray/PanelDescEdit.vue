@@ -1,12 +1,12 @@
 <template >
-  <div class="flex justify-between items-center mb-2 h-5">
-    <div   class="text-sm font-light h-5 text-np-base">About</div>
+  <div class="flex justify-end items-center mb-2 h-5">
+
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-np-base hover:text-np-base" />
+        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-np-base hover:text-np-base" />
+        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
       </button>
     </div>
   </div>

@@ -1,12 +1,12 @@
 <template >
-  <div class="flex justify-between items-center mb-2">
-    <div   class="text-sm font-light h-5 text-np-base">Panel</div>
+  <div class="flex justify-end items-center mb-2">
+
     <div class="flex ">
       <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-np-base hover:text-np-base " />
+        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-np-base " />
       </button>
       <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-np-base hover:text-np-base" />
+        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
       </button>
     </div>
   </div>
@@ -16,7 +16,7 @@
     class="block resize-none  h-auto w-full bg-np-base text-np-base appearance-none rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
 
 
-  <div class="text-xs mt-1 mb-4" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-np-base'"> {{
+  <div class="text-xs mt-1 mb-4 ml-2" :class="currentFieldLen === maxFieldLen ? 'text-red-900' : 'text-np-base'"> {{
     currentFieldLen }}/{{
     maxFieldLen }}</div>
 </template>
