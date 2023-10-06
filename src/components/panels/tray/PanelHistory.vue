@@ -1,5 +1,5 @@
 <template >
-    <div class="flex flex-col w-full  h-56 justify-start  items-center relative">
+    <div class="flex flex-col w-full  h-72 justify-start  items-center relative">
 
         <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
             <button
