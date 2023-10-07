@@ -28,7 +28,7 @@
 
           <component v-if="this.historyBoxIsOpen" :is="this.historyBoxIsOpen ? 'PanelHistory': null" :panel="this.panel">
           </component>
-          <div v-else class="font-light text-np-base text-sm">Graph</div>
+          <div v-else class="font-light text-np-base text-sm">Consistency Pattern</div>
 
           <div>
             <button @click="this.toggleHistoryBox()" class="flex w-full justify-between items-start">
@@ -151,7 +151,7 @@ export default {
       enabled: false,
       panelSortBoxIsOpen: false,
       deleteResetBoxIsOpen: false,
-      historyBoxIsOpen: true,
+      historyBoxIsOpen: false,
     }
   }
 

@@ -38,7 +38,7 @@ export const useStore = defineStore({
         panelDescEditState: false,
         deleteResetBoxIsOpen: false,
 
-        visGridIsOpen: false,
+        visGridIsOpen: true,
 
 
         shareBoxIsOpen: false,
@@ -48,7 +48,7 @@ export const useStore = defineStore({
         theme: '',
 
         appVersion: 3, // will come from api
-        announcementBarActive: true, // will come from api
+        announcementBarActive: false, // will come from api
 
         canShow: false,
 

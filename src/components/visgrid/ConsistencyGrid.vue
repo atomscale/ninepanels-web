@@ -1,25 +1,43 @@
 <template >
     <div :class="{ 'opacity-50': Store.theme === 'night' }">
         <transition name="fade" appear>
-            <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
-                <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
-                    <div class="aspect-content">
-                        <transition name="fade" appear>
-                            <button aria-label="Cycle through consistency stats" @click="cycleStats()"
-                                :class="panelStyle(i)" class="flex items-center justify-center rounded-lg ">
-                                <div class="flex text-xs flex-col"
-                                    v-if="this.Store.consistency[i - 1] && this.showFraction">
-                                    {{ this.Store.consistency[i - 1].days_complete }}
-                                    /
-                                    {{ this.Store.consistency[i - 1].panel_age }}
-                                </div>
-                                <div class="flex text-xs flex-col"
-                                    v-if="this.Store.consistency[i - 1] && this.showPercentage">
-                                    {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
-                                </div>
-                            </button>
-                        </transition>
+            <div class=" flex flex-col justify-center items-center">
+
+                <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
+                    <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
+                        <div class="aspect-content">
+                            <transition name="fade" appear>
+                                <button aria-label="Cycle through consistency stats"
+                                    :class="panelStyle(i)" class="flex items-center justify-center rounded-lg ">
+                                    <div class="flex text-xs flex-col"
+                                        v-if="this.Store.consistency[i - 1] && this.showFraction">
+                                        {{ this.Store.consistency[i - 1].days_complete }}
+                                        /
+                                        {{ this.Store.consistency[i - 1].panel_age }}
+                                    </div>
+                                    <div class="flex text-xs flex-col"
+                                        v-if="this.Store.consistency[i - 1] && this.showPercentage">
+                                        {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
+                                    </div>
+                                </button>
+                            </transition>
+                        </div>
+
                     </div>
+                </div>
+                <div class="flex justify-between mt-4 items-center w-40  text-xs text-np-base font-extralight">
+                    <button
+                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                        :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="selectBlank()"> </button>
+                    <button
+                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                        :class="this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="selectFraction">a / b</button>
+                    <button
+                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b border-r rounded-r-md w-full py-1"
+                        :class="!this.showFraction && this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="selectPercentage">%</button>
 
                 </div>
             </div>
@@ -62,6 +80,18 @@ export default {
                     return this.shading[ind].color_value
                 }
             }
+        },
+        selectBlank(){
+            this.showFraction = false
+            this.showPercentage = false
+        },
+        selectFraction() {
+            this.showFraction = true
+            this.showPercentage = false
+        },
+        selectPercentage() {
+            this.showFraction = false
+            this.showPercentage = true
         },
         cycleStats() {
             if (this.cycleCounter === 0) {
