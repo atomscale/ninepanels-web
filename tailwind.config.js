@@ -11,7 +11,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       scale: {
-        'vis': '0.15',
+        'vis': '0.20',
         '101': '1.01',
         '102': '1.02',
         '103': '1.03',
