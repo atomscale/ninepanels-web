@@ -1,22 +1,20 @@
 <template>
-  <div class="flex flex-col justify-between w-full h-full">
-    <div>
-      <PanelGridFrame />
-    </div>
-    <div :class="{'mb-8': this.Store.isPWA}">
+  <transition name="fade" appear>
+    <div class="flex flex-col justify-between w-full h-full">
+      <div>
+        <PanelGridFrame />
+      </div>
+      <div class="h-full flex flex-col justify-end" >
+        <div :class="!Store.visGridIsOpen ? 'scale-vis h-20 visgrid-bounce' : 'mb-4'">
+        <!-- <div class="flex flex-col w-full justify-end h-full " :class="{'mt-14': !Store.visGridIsOpen}" > -->
 
-      <button @click="this.toggleVisGrid()" class="animate-visgrid-bounce flex w-full justify-between items-center  pl-3 pr-2 pb-3">
-        <div class="h-5 text-np-base" :class="{ 'font-semibold text-np-base': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA} "  >Consistency</div>
-        <div>
-          <ChevronUpIcon v-if="!this.Store.visGridIsOpen" class="h-5 w-5 pr-1 text-np-base"></ChevronUpIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 pr-1 text-np-base"></ChevronDownIcon>
+          <ConsistencyGrid />
+
         </div>
-      </button>
-      <div v-if="this.Store.visGridIsOpen" class="pt-2 mb-6">
-        <ConsistencyGrid />
+
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -32,13 +30,8 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
-    toggleVisGrid() {
-      this.Store.visGridIsOpen = !this.Store.visGridIsOpen
-    }
+
   },
-  // mounted() {
-  //   this.Store.readUserAction()
-  // },
   components: {
     PanelGridFrame,
     ConsistencyGrid,
