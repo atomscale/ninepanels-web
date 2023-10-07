@@ -5,7 +5,7 @@
         <PanelGridFrame />
       </div>
       <div class="h-full flex flex-col justify-end mb-2" >
-        <div :class="!Store.visGridIsOpen ? 'scale-vis h-20 ' : 'mb-4'">
+        <div :class="!Store.visGridIsOpen ? 'scale-vis h-20 ' : 'mb-8'">
         <!-- <div class="flex flex-col w-full justify-end h-full " :class="{'mt-14': !Store.visGridIsOpen}" > -->
 
           <ConsistencyGrid :class="{'animate-visgrid-bounce' : !Store.visGridIsOpen}"/>
