@@ -305,6 +305,7 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getEntries(access_token, panel_id, limit)
+                console.log("raw api response", response.data)
                 return response.data.data
             } catch (error) {
                 this.apiError(error)

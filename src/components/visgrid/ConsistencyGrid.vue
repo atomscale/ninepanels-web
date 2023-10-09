@@ -1,54 +1,52 @@
 <template >
+    <div :class="{ 'opacity-50': Store.theme === 'night' }">
+        <div class=" flex flex-col justify-center items-center relative">
+            <button @click="toggleVisGrid">
+                <!-- class="animate-visgrid-bounce flex w-full justify-between items-center pt-6 pl-3 pr-2 pb-3"> -->
 
-        <div :class="{ 'opacity-50': Store.theme === 'night' }">
-            <div class=" flex flex-col justify-center items-center relative">
-                <button @click="toggleVisGrid">
-                    <!-- class="animate-visgrid-bounce flex w-full justify-between items-center pt-6 pl-3 pr-2 pb-3"> -->
-
-                    <!-- <div class="h-5 text-np-base" :class="{ 'font-semibold text-np-base': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA}">Consistency</div> -->
-                    <div class="absolute -top-2 right-0">
-                        <ChevronDownIcon v-if="Store.visGridIsOpen" class="h-6 w-6 pr-1 text-np-base"></ChevronDownIcon>
-                    </div>
-                </button>
-
-                <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
-                    <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
-                        <div class="aspect-content">
-                            <button @click="visGridTap(i)" :class="panelStyle(i)"
-                                class="flex items-center justify-center rounded-lg ">
-                                <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
-                                    v-if="this.Store.consistency[i - 1] && this.showFraction">
-                                    {{ this.Store.consistency[i - 1].days_complete }}
-                                    /
-                                    {{ this.Store.consistency[i - 1].panel_age }}
-                                </div>
-                                <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
-                                    v-if="this.Store.consistency[i - 1] && this.showPercentage">
-                                    {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
-                                </div>
-                            </button>
-                        </div>
-                    </div>
+                <!-- <div class="h-5 text-np-base" :class="{ 'font-semibold text-np-base': this.Store.isPWA, 'font-light text-sm': !this.Store.isPWA}">Consistency</div> -->
+                <div class="absolute -top-2 right-0">
+                    <ChevronDownIcon v-if="Store.visGridIsOpen" class="h-6 w-6 pr-1 text-np-base"></ChevronDownIcon>
                 </div>
+            </button>
 
-                <div class="flex justify-between mt-4 items-center w-40  text-xs text-np-base font-extralight"
-                    :class="!Store.visGridIsOpen ? 'hidden' : ''">
-                    <button
-                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                        :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                        @click="selectBlank"> </button>
-                    <button
-                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
-                        :class="this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                        @click="selectFraction">a / b</button>
-                    <button
-                        class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b border-r rounded-r-md w-full py-1"
-                        :class="!this.showFraction && this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                        @click="selectPercentage">%</button>
+            <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
+                <div v-for="i in 9" :key="i" class="rounded-lg">
+                    <div class="aspect-content">
+                        <button @click="visGridTap(i)" :class="panelStyle(i)"
+                            class="flex items-center justify-center rounded-lg ">
+                            <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
+                                v-if="this.Store.consistency[i - 1] && this.showFraction">
+                                {{ this.Store.consistency[i - 1].days_complete }}
+                                /
+                                {{ this.Store.consistency[i - 1].panel_age }}
+                            </div>
+                            <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
+                                v-if="this.Store.consistency[i - 1] && this.showPercentage">
+                                {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <div class="flex justify-between mt-4 items-center w-40  text-xs text-np-base font-extralight"
+                :class="!Store.visGridIsOpen ? 'hidden' : ''">
+                <button
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                    :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="selectBlank"> </button>
+                <button
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                    :class="this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="selectFraction">a / b</button>
+                <button
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b border-r rounded-r-md w-full py-1"
+                    :class="!this.showFraction && this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="selectPercentage">%</button>
+            </div>
         </div>
-   
+    </div>
 </template>
 
 <script>
@@ -109,7 +107,11 @@ export default {
             if (!this.Store.visGridIsOpen) {
                 this.toggleVisGrid()
             } else {
-                console.log("fire to visTray here", this.Store.consistency[i - 1])
+                const panelId = this.Store.consistency[i - 1].panel_id
+                console.log("fire to visTray here", panelId)
+                this.Store.primaryTrayIsOpen = true
+                this.Store.primaryComponentName = 'PatternTray'
+                this.Store.primaryComponentProps = { panelId: panelId }
 
             }
         }

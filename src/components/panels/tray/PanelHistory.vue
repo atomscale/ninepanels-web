@@ -1,5 +1,5 @@
 <template >
-    <div class="flex flex-col w-full  h-72 justify-start  items-center relative">
+    <div class="flex flex-col w-full  h-full justify-start  items-center relative">
 
         <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
             <button
@@ -21,17 +21,17 @@
         </div>
         <div class="grid grid-cols-7 gap-1 mt-2">
 
-            <div class="text-gray-300 font-extralight pl-2 text-xs w-6" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+            <div class="text-np-base font-light pl-2 text-xs w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
         </div>
-        <div ref="scrollableDiv" @scroll="checkScroll" class="flex flex-col justify-start items-center overflow-scroll ">
+        <div ref="scrollableDiv" @scroll="checkScroll" class="flex flex-col h-full pb-6 justify-start items-center overflow-scroll ">
 
             <div class="">
 
                 <div dir="rtl" class="grid grid-cols-7 gap-1 mt-1 ">
                     <div v-for="entry in this.entries" :key="entry.id">
-                        <div v-if="entry.id" class="h-6 w-6 border rounded-md"
+                        <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                             :class="entry.is_complete ? 'bg-green-200' : 'bg-np-base border-np-base'"></div>
-                        <div v-else class="h-6 w-6 "></div>
+                        <!-- <div v-else class="h-7 w-7 "></div> -->
                     </div>
                 </div>
             </div>
@@ -55,20 +55,27 @@ export default {
 
     },
     props: {
-        panel: {
-            type: Object,
+        panelId: {
+            type: Number,
             required: true
+        }
+    },
+    watch: {
+        panelId(new_val, old_val) {
+            this.getEntries()
         }
     },
     methods: {
         async getEntries() {
-            this.entries = await this.Store.readEntriesAction(this.panel.id, this.limit)
+            this.entries = await this.Store.readEntriesAction(this.panelId, this.limit)
             if (this.entries) {
+                console.log("entries pre pad", this.entries)
                 this.padEntries()
+                console.log("entries post pad", this.entries)
             }
-            this.$nextTick(() => {
-                this.checkScroll();
-            });
+            // this.$nextTick(() => {
+            //     this.checkScroll();
+            // });
 
         },
         setSelectedLimit(value) {
@@ -111,9 +118,9 @@ export default {
             entries: [],
             sort_key: null,
             sort_direction: null,
-            limit: 30,
+            limit: null,
             offset: null,
-            selected: 30,
+            selected: null,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
             showEllipsis: false
         }

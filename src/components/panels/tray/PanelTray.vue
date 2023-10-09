@@ -15,28 +15,27 @@
       <div class="mb-6">
 
         <component :is="this.Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="this.panel.id"
-        :description="this.panel.description">
-      </component>
-    </div>
+          :description="this.panel.description">
+        </component>
+      </div>
 
 
 
 
 
       <div :class="{ 'mb-4': this.Store.isPWA }">
-        <div class="flex w-full justify-between items-start mr-1">
+        <div class="flex w-full justify-between items-center">
 
-          <component v-if="this.historyBoxIsOpen" :is="this.historyBoxIsOpen ? 'PanelHistory': null" :panel="this.panel">
-          </component>
-          <div v-else class="font-light text-np-base text-sm">Consistency Pattern</div>
 
-          <div>
-            <button @click="this.toggleHistoryBox()" class="flex w-full justify-between items-start">
+          <button @click="this.togglePatternTray()" class="flex w-full justify-between items-start">
+            <div class="font-light text-np-base text-sm">Consistency Pattern</div>
 
-              <ChevronLeftIcon v-if="!this.historyBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronLeftIcon>
-              <ChevronDownIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronDownIcon>
-            </button>
-          </div>
+
+
+            <ChevronRightIcon class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronRightIcon>
+          </button>
+
+
         </div>
 
 
@@ -44,7 +43,8 @@
           <div class="text-sm font-light h-5 text-np-base">Order</div>
           <div>
 
-            <ChevronLeftIcon v-if="!this.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronLeftIcon>
+            <ChevronLeftIcon v-if="!this.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
+            </ChevronLeftIcon>
             <ChevronDownIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronDownIcon>
           </div>
         </button>
@@ -58,7 +58,8 @@
           <div class="text-sm font-light h-5 text-np-base">Danger Zone</div>
           <div>
 
-            <ChevronLeftIcon v-if="!this.deleteResetBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronLeftIcon>
+            <ChevronLeftIcon v-if="!this.deleteResetBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
+            </ChevronLeftIcon>
             <ChevronDownIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronDownIcon>
           </div>
         </button>
@@ -92,6 +93,7 @@ import PanelHistory from '@/components/panels/tray/PanelHistory.vue'
 import DynamicButton from '@/components/utilities/DynamicButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
+import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import PanelSort from '@/components/panels/tray/PanelSort.vue'
 import { Switch } from '@headlessui/vue'
 
@@ -124,8 +126,13 @@ export default {
     toggleDeleteResetBox() {
       this.deleteResetBoxIsOpen = !this.deleteResetBoxIsOpen
     },
-    toggleHistoryBox() {
-      this.historyBoxIsOpen = !this.historyBoxIsOpen
+    togglePatternTray() {
+      this.Store.primaryTrayIsOpen = false
+      this.Store.primaryComponentName = ''
+      this.Store.primaryComponentProps = ''
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'PatternTray'
+      this.Store.primaryComponentProps = { panelId: this.panel.id }
     }
   },
   components: {
@@ -136,6 +143,7 @@ export default {
     DynamicButton,
     ChevronDownIcon,
     ChevronLeftIcon,
+    ChevronRightIcon,
     PanelSort,
     PanelHistory,
     Switch

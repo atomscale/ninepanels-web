@@ -11,7 +11,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       scale: {
-        'vis': '0.20',
+        'vis': '0.25',
         '101': '1.01',
         '102': '1.02',
         '103': '1.03',
@@ -35,6 +35,7 @@ module.exports = {
       borderColor: {
         np: {
           base: 'var(--color-border-base)',
+          matchbgfill: 'var(--color-fill)',
           alert: 'var(--color-border-alert)'
         }
       }
