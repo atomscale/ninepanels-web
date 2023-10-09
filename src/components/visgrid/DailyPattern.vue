@@ -21,7 +21,7 @@
         </div>
         <div class="grid grid-cols-7 gap-1 mt-2">
 
-            <div class="text-np-base font-light pl-2 text-xs w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+            <div class="text-np-base font-light pl-2 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
         </div>
         <div ref="scrollableDiv" @scroll="checkScroll" class="flex flex-col h-full pb-6 justify-start items-center overflow-scroll ">
 
@@ -30,7 +30,7 @@
                 <div dir="rtl" class="grid grid-cols-7 gap-1 mt-1 ">
                     <div v-for="entry in this.entries" :key="entry.id">
                         <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
-                            :class="entry.is_complete ? 'bg-green-200' : 'bg-np-base border-np-base'"></div>
+                            :class="entry.is_complete ? 'bg-green-300 scale-105' : 'bg-np-base border-np-base border-2 scale-95' "></div>
                         <!-- <div v-else class="h-7 w-7 "></div> -->
                     </div>
                 </div>

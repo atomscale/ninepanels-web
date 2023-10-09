@@ -20,13 +20,22 @@ import rollbar from '@/rollbarClient.js'
 
 function requireAccessToken(to, from, next) {
   const access_token = VueCookies.get('9p_access_token')
-  const store = useStore()
   if (access_token) {
     next()
   } else {
-    // store.messages.push({ message: "Please sign in", error: true })
-    // setTimeout(() => store.messages.shift(), 5000)
     next('/signin')
+  }
+}
+
+function adminOnly(to, from, next) {
+  const store = useStore()
+  if (store.user) {
+    if (store.user.is_admin) {
+
+      next()
+    }
+  } else {
+    next('/panels')
   }
 }
 
@@ -90,7 +99,11 @@ const router = createRouter({
       path: '/admin',
       name: 'Admin',
       component: AdminView,
-      beforeEnter: requireAccessToken
+      beforeEnter: (to, from, next) => {
+        requireAccessToken(to, from, () => {
+          adminOnly(to, from, next)
+        })
+      }
     },
     {
       path: '/:pathMatch(.*)*',

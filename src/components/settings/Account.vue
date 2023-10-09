@@ -6,9 +6,12 @@
                 <div class="mb-2 font-light text-np-base">{{ Store.user.name }}</div>
                 <div class="text-sm  h-5 text-np-base">Email</div>
                 <div class="mb-2 font-light text-np-base">{{ Store.user.email }}</div>
+                <div v-if="Store.user.is_admin" class="text-sm  h-5 text-np-base">Admin?</div>
+                <div v-if="Store.user.is_admin" class="mb-2 font-light text-np-base">Yep</div>
+
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -30,6 +33,7 @@ export default {
         },
         async readUser() {
             await this.Store.readUserAction()
+            console.log(this.Store.user)
         }
     },
     mounted() {

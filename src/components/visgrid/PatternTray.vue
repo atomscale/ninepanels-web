@@ -24,7 +24,7 @@
       <div class="w-10"></div>
     </div>
 
-    <PanelHistory class="mt-4" :panelId="this.panel_id" />
+    <DailyPattern class="mt-4" :panelId="this.panel_id" />
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import { mapStores } from 'pinia'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 
-import PanelHistory from '@/components/panels/tray/PanelHistory.vue'
+import DailyPattern from '@/components/visgrid/DailyPattern.vue'
 
 export default {
   computed: {
@@ -49,10 +49,16 @@ export default {
         const shade = this.panelShading(i)
         const format = 'border border-gray-300 '
         if (this.Store.consistency[i - 1].panel_id === this.panel_id) {
-          return format + ' ' + shade + ' ' + 'border-4 border-np-matchbgfill scale-110'
+          if (this.Store.theme === 'night'){
+            return format + ' ' + shade + ' ' + 'border-4 border-white scale-110'
+
+          } else {
+
+            return format + ' ' + shade + ' ' + 'border-4 border-np-matchbgfill scale-110'
+          }
         } else {
 
-          return format + ' ' + shade + ' ' + 'opacity-50'
+          return format + ' ' + shade + ' ' + 'opacity-90'
         }
       } else {
         return 'border border-dashed border-gray-300'
@@ -81,7 +87,7 @@ export default {
 
   },
   components: {
-    PanelHistory,
+    DailyPattern,
     ChevronDownIcon,
     ChevronLeftIcon,
 

@@ -1,5 +1,5 @@
 <template >
-    <div :class="{ 'opacity-50': Store.theme === 'night' }">
+    <div :class="{ 'opacity-70': Store.theme === 'night' }">
         <div class=" flex flex-col justify-center items-center relative">
             <button @click="toggleVisGrid">
                 <!-- class="animate-visgrid-bounce flex w-full justify-between items-center pt-6 pl-3 pr-2 pb-3"> -->
@@ -10,7 +10,7 @@
                 </div>
             </button>
 
-            <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
+            <div v-if="Store.visGridIsOpen" class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
                 <div v-for="i in 9" :key="i" class="rounded-lg">
                     <div class="aspect-content">
                         <button @click="visGridTap(i)" :class="panelStyle(i)"
@@ -25,6 +25,17 @@
                                 v-if="this.Store.consistency[i - 1] && this.showPercentage">
                                 {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
                             </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
+                <div v-for="i in 9" :key="i" class="rounded-lg">
+                    <div class="aspect-content">
+                        <button @click="visGridTap(i)"
+                            class="flex items-center justify-center rounded-2xl opacity-90"
+                            :class=" Store.theme === 'night' ? 'bg-gray-100' : 'bg-np-fill' ">
+
                         </button>
                     </div>
                 </div>
@@ -76,7 +87,7 @@ export default {
                 const format = 'border border-1 border-gray-300 transition ease-in-out duration-700'
                 return format + ' ' + shade
             } else {
-                return 'border border-dashed border-gray-300'
+                return 'border-2 border-dashed border-gray-300'
             }
         },
         panelShading(i) {

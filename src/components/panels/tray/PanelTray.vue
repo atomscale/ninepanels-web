@@ -89,7 +89,7 @@ import PanelDescDisplay from '@/components/panels/tray/PanelDescDisplay.vue'
 import PanelDescEdit from '@/components/panels/tray/PanelDescEdit.vue'
 import PanelTitleDisplay from '@/components/panels/tray/PanelTitleDisplay.vue'
 import PanelTitleEdit from '@/components/panels/tray/PanelTitleEdit.vue'
-import PanelHistory from '@/components/panels/tray/PanelHistory.vue'
+import DailyPattern from '@/components/visgrid/DailyPattern.vue'
 import DynamicButton from '@/components/utilities/DynamicButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
@@ -145,7 +145,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     PanelSort,
-    PanelHistory,
+    DailyPattern,
     Switch
   },
   props: {
