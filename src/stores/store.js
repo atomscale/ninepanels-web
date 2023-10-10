@@ -50,7 +50,7 @@ export const useStore = defineStore({
         appVersion: 4, // will come from api
         announcementBarActive: true, // will come from api
 
-        canShow: true,
+        canShow: false, // do not change
 
         performanceArray: []
 
