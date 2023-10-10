@@ -28,7 +28,7 @@
 
             <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
         </div>
-        <div class="flex flex-col h-full pb-6 justify-start items-center overflow-scroll relative">
+        <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
 
 
 
