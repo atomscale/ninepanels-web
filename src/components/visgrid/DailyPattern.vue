@@ -29,7 +29,7 @@
 
             <div class="">
 
-                <div v-if="this.entries" dir="rtl" class="grid grid-cols-7 gap-1 mt-1 ">
+                <div v-if="this.entries_by_day" dir="rtl" class="grid grid-cols-7 gap-1 mt-1 ">
                     <div v-for="entry in this.entries_by_day.slice(0, this.limit)" :key="entry.id">
                         <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                             :class="entry.is_complete ? 'bg-green-300 scale-105' : 'bg-np-base border-np-base border-2 scale-95' "></div>
@@ -119,7 +119,7 @@ export default {
     },
     data() {
         return {
-            entries: [],
+            entries_by_day: [],
             sort_key: null,
             sort_direction: null,
             offset: null,
