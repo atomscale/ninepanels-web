@@ -43,11 +43,11 @@
             <div class="flex justify-between mt-4 items-center w-40  text-xs text-np-base font-extralight"
                 :class="!Store.visGridIsOpen ? 'hidden' : ''">
                 <button
-                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-l border-t border-b w-full py-1"
                     :class="this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="selectFraction">a / b</button>
                 <button
-                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-t border-b border-np-base w-full py-1 rounded-l-md"
                     :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="selectBlank"> </button>
                 <button
