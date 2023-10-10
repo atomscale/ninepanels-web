@@ -32,9 +32,8 @@
             <div v-else class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
                 <div v-for="i in 9" :key="i" class="rounded-lg">
                     <div class="aspect-content">
-                        <button @click="visGridTap(i)"
-                            class="flex items-center justify-center rounded-2xl opacity-90"
-                            :class=" Store.theme === 'night' ? 'bg-gray-100' : 'bg-np-fill' ">
+                        <button @click="visGridTap(i)" class="flex items-center justify-center rounded-2xl opacity-90"
+                            :class="Store.theme === 'night' ? 'bg-gray-100' : 'bg-np-fill'">
 
                         </button>
                     </div>
@@ -44,13 +43,13 @@
             <div class="flex justify-between mt-4 items-center w-40  text-xs text-np-base font-extralight"
                 :class="!Store.visGridIsOpen ? 'hidden' : ''">
                 <button
-                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                    :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                    @click="selectBlank"> </button>
-                <button
                     class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
                     :class="this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="selectFraction">a / b</button>
+                <button
+                    class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                    :class="!this.showFraction && !this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="selectBlank"> </button>
                 <button
                     class="hover:bg-np-accent h-7 hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b border-r rounded-r-md w-full py-1"
                     :class="!this.showFraction && this.showPercentage ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
