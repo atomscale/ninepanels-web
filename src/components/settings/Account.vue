@@ -33,7 +33,6 @@ export default {
         },
         async readUser() {
             await this.Store.readUserAction()
-            console.log(this.Store.user)
         }
     },
     mounted() {

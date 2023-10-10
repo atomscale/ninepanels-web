@@ -1,30 +1,34 @@
 <template >
-  <div class="flex flex-col justify-start h-full  ">
+  <div class="flex flex-col justify-start  h-full  relative">
 
 
-      <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto mt-1">
-        <div v-for="i in 9" :key="i" class="rounded-lg">
-          <div class="aspect-content">
-            <button @click="panelTap(i)" :class="panelStyle(i)" class="flex items-center justify-center rounded-lg ">
-            </button>
-          </div>
+    <div class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto mt-1">
+      <div v-for="i in 9" :key="i" class="rounded-lg">
+        <div class="aspect-content">
+          <button @click="panelTap(i)" :class="panelStyle(i)" class="flex items-center justify-center rounded-lg ">
+          </button>
         </div>
       </div>
-      <div class="flex justify-start items-start mt-6 h-20">
+    </div>
 
-        <button type="button" class="w-10 rounded-md  text-np-base hover:text-np-base"
-        @click="this.returnToPanelTray()">
+    <div class="flex justify-start items-start mt-6 mb-2 ">
+
+      <button type="button" class="w-10 rounded-md  text-np-base hover:text-np-base" @click="this.returnToPanelTray()">
         <span class="sr-only">Return to panel</span>
         <ChevronLeftIcon class="h-6 w-6 text-np-base " aria-hidden="true" />
       </button>
-      <div class="text-np-base  w-full text-center">
+      <div class="text-np-base w-full h-14 text-center">
         {{ Store.consistency.find(panel_consist =>
           panel_consist.panel_id === panel_id).title }}
       </div>
       <div class="w-10"></div>
     </div>
 
-    <DailyPattern class="mt-4" :panelId="this.panel_id" />
+
+
+      <DailyPattern class="relative  overflow-scroll" :panelId="this.panel_id" />
+
+
   </div>
 </template>
 
@@ -49,11 +53,9 @@ export default {
         const shade = this.panelShading(i)
         const format = 'border border-gray-300 '
         if (this.Store.consistency[i - 1].panel_id === this.panel_id) {
-          if (this.Store.theme === 'night'){
+          if (this.Store.theme === 'night') {
             return format + ' ' + shade + ' ' + 'border-4 border-white scale-110'
-
           } else {
-
             return format + ' ' + shade + ' ' + 'border-4 border-np-matchbgfill scale-110'
           }
         } else {
@@ -74,6 +76,7 @@ export default {
     },
     panelTap(i) {
       this.panel_id = this.Store.consistency[i - 1].panel_id
+
     },
     returnToPanelTray() {
 
@@ -83,7 +86,8 @@ export default {
       this.Store.primaryTrayIsOpen = true
       this.Store.primaryComponentName = 'PanelTray'
       this.Store.primaryComponentProps = { panel: this.Store.panels.find(panel => panel.id === this.panel_id) }
-    }
+    },
+
 
   },
   components: {
@@ -93,7 +97,6 @@ export default {
 
   },
   mounted() {
-    this.Store.readPanelConsistencyAction()
   },
   props: {
     panelId: {
@@ -119,7 +122,7 @@ export default {
       showPercentage: false,
       cycleCounter: 0,
       panel_id: this.panelId,
-      from_panel_id: this.fromPanelId
+      from_panel_id: this.fromPanelId,
     }
   }
 

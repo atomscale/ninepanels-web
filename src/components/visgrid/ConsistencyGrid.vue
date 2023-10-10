@@ -119,7 +119,6 @@ export default {
                 this.toggleVisGrid()
             } else {
                 const panelId = this.Store.consistency[i - 1].panel_id
-                console.log("fire to visTray here", panelId)
                 this.Store.primaryTrayIsOpen = true
                 this.Store.primaryComponentName = 'PatternTray'
                 this.Store.primaryComponentProps = { panelId: panelId }

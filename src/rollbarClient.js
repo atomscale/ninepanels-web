@@ -4,7 +4,6 @@ import Rollbar from 'rollbar';
 let rollbar
 
 if (import.meta.env.VITE_NINEPANELS_ENV !== 'FEATURE') {
-    console.log("rollbar active")
     rollbar = new Rollbar(
         {
             accessToken: import.meta.env.VITE_ROLLBAR_KEY,

@@ -257,7 +257,6 @@ export const useStore = defineStore({
             try {
                 const response = await requests.getPanels(access_token)
                 this.panels = response.data.data
-                console.log(this.panels)
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
@@ -305,7 +304,6 @@ export const useStore = defineStore({
             this.loadingBar = true
             try {
                 const response = await requests.getEntries(access_token, panel_id)
-                console.log("raw api response", response.data)
                 return response.data.data
             } catch (error) {
                 this.apiError(error)

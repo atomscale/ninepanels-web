@@ -28,7 +28,7 @@
 
 
           <button @click="this.togglePatternTray()" class="flex w-full justify-between items-start">
-            <div class="font-light text-np-base text-sm">Consistency Pattern</div>
+            <div class="font-light text-np-base text-sm">Pattern</div>
 
 
 
