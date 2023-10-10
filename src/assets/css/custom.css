@@ -50,10 +50,10 @@
 @keyframes visgrid-bounce {
   0%, 25%, 100% {
     transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.8, 1, 1, 1);
+    animation-timing-function: cubic-bezier(1, 1, 1, 1);
   }
   50% {
-    transform: translateY(-60%);  /* Change the bounce height here */
+    transform: translateY(-40%);  /* Change the bounce height here */
     animation-timing-function: cubic-bezier(0, 0, 0.2, 0.2);
   }
 }
@@ -76,7 +76,7 @@
 }
 
 .animate-visgrid-bounce {
-  animation: visgrid-bounce 1s 1;  /* Remove 'infinite' for a single bounce */
+  animation: visgrid-bounce 1.3s 2;  /* Remove 'infinite' for a single bounce */
 }
 
 .animate-install-bounce {
@@ -93,3 +93,7 @@ button:active {
 .viewport-height {
   height: calc(var(--vh, 1vh) * 100);
 }
+
+
+
+

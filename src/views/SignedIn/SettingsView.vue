@@ -2,19 +2,6 @@
   <div class="flex px-4 flex-col  justify-between h-full mt-5">
 
     <div>
-      <div class=" border-b border-np-base "></div>
-      <button @click="togglePrefsBox()" class="flex w-full justify-between items-center mb-5">
-        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Preferences</div>
-        <div>
-          <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
-        </div>
-      </button>
-      <div>
-        <Preferences class="m-2 mt-4 mb-5" v-if="prefsBoxIsOpen" />
-      </div>
-
-
       <div class=" border-b border-np-base"></div>
       <button @click="toggleAccountBox()" class="flex w-full justify-between items-center mb-5 ">
         <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Your Account</div>
@@ -29,6 +16,18 @@
       </div>
       <div class=" border-b border-np-base  "></div>
 
+
+      <button @click="togglePrefsBox()" class="flex w-full justify-between items-center mb-5">
+        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Preferences</div>
+        <div>
+          <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
+        </div>
+      </button>
+      <div>
+        <Preferences class="m-2 mt-4 mb-5" v-if="prefsBoxIsOpen" />
+      </div>
+      <div class=" border-b border-np-base "></div>
 
     </div>
 
@@ -116,8 +115,8 @@ export default {
   },
   data() {
     return {
-      prefsBoxIsOpen: true,
       accountBoxIsOpen: false,
+      prefsBoxIsOpen: false,
       policyBoxIsOpen: false,
       dangerBoxIsOpen: false,
 

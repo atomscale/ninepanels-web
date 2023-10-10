@@ -11,6 +11,9 @@ export const useStore = defineStore({
         user: null,
         panels: [],
         consistency: [],
+        routePerformance: null,
+
+        window_size: null,
 
         messages: [],
 
@@ -35,7 +38,7 @@ export const useStore = defineStore({
         panelDescEditState: false,
         deleteResetBoxIsOpen: false,
 
-        visGridIsOpen: false,
+        visGridIsOpen: true,
 
 
         shareBoxIsOpen: false,
@@ -44,10 +47,10 @@ export const useStore = defineStore({
 
         theme: '',
 
-        appVersion: 3, // will come from api
-        announcementBarActive: false, // will come from api
+        appVersion: 4, // will come from api
+        announcementBarActive: true, // will come from api
 
-        canShow: false,
+        canShow: true,
 
         performanceArray: []
 
@@ -70,7 +73,7 @@ export const useStore = defineStore({
                     // console.log(`perf array reset`)
 
                     if (avg > 1000) {
-                        rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+                        rollbar.warn(`app: individual tap for ${this.user.name} > 1000ms`)
                     }
                 }
 
@@ -248,6 +251,19 @@ export const useStore = defineStore({
                 this.apiError(error)
             }
         },
+        async readPanelsAction() {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.getPanels(access_token)
+                this.panels = response.data.data
+                return response.data.data
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
+            }
+        },
         async updatePanelAction(panel_id, update) {
             const access_token = VueCookies.get("9p_access_token")
             try {
@@ -272,19 +288,6 @@ export const useStore = defineStore({
                 this.loadingBar = false
             }
         },
-        async readPanelsAction() {
-            const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
-            try {
-                const response = await requests.getPanels(access_token)
-                this.panels = response.data.data
-                return response.data.data
-            } catch (error) {
-                this.apiError(error)
-            } finally {
-                this.loadingBar = false
-            }
-        },
         async createEntryAction(panel_id, is_complete) {
             const access_token = VueCookies.get("9p_access_token")
             // does not require loading bars becuase they are triggered in getPanelsActions()
@@ -294,6 +297,18 @@ export const useStore = defineStore({
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
+            }
+        },
+        async readEntriesAction(panel_id) {
+            const access_token = VueCookies.get("9p_access_token")
+            this.loadingBar = true
+            try {
+                const response = await requests.getEntries(access_token, panel_id)
+                return response.data.data
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
             }
         },
         async deleteEntriesAction(panel_id) {
@@ -403,6 +418,36 @@ export const useStore = defineStore({
                     setTimeout(() => this.messages.shift(), 5000)
                     return false
                 }
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
+            }
+        },
+        async readRoutePerformance() {
+            const access_token = VueCookies.get("9p_access_token")
+
+            this.loadingBar = true
+            try {
+
+                const response = await requests.getRoutePerformance(access_token)
+                this.routePerformance = response.data
+                // return response.data.data
+            } catch (error) {
+                this.apiError(error)
+            } finally {
+                this.loadingBar = false
+            }
+        },
+        async readRouteTimings(method_path, window_size) {
+            const access_token = VueCookies.get("9p_access_token")
+
+            this.loadingBar = true
+            try {
+
+                const response = await requests.getRouteTimings(access_token, method_path, window_size)
+                return response.data.data
+                // return response.data.data
             } catch (error) {
                 this.apiError(error)
             } finally {

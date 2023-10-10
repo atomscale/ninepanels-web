@@ -1,14 +1,20 @@
 import axios from "axios"
-
+import { v4 as uuidv4 } from "uuid"
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
+
 })
+
+apiClient.interceptors.request.use((config) => {
+    config.headers['X-Request-ID'] = uuidv4()
+    return config
+});
 
 apiClient.interceptors.response.use(
     (response) => {
         localStorage.setItem('lastReload', new Date().toDateString())
-        return response;
+        return response
     },
     (error) => {
         return Promise.reject(error)
@@ -107,6 +113,15 @@ export default {
 
             })
     },
+    getEntries(access_token, panel_id) {
+
+        return apiClient.get(`/panels/${panel_id}/entries`, {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+    },
     deleteEntries(access_token, panel_id) {
         return apiClient.delete("/panels/" + panel_id + '/entries', {
             headers: {
@@ -140,5 +155,29 @@ export default {
         return apiClient.post("/password_reset",
             form,
         )
+    },
+    getRoutePerformance(access_token) {
+
+        return apiClient.get("/admin/routes", {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
+    },
+    getRouteTimings(access_token, method_path, window_size) {
+
+        return apiClient.get(`/admin/routes/timings`, {
+            params: {
+                method_path: method_path,
+                window_size: window_size
+            }
+
+        }, {
+            headers: {
+                Authorization: "Bearer " + access_token,
+            }
+
+        })
     },
 }
