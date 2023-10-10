@@ -270,6 +270,7 @@ export const useStore = defineStore({
 
                 const response = await requests.patchPanel(access_token, panel_id, update)
                 await this.readPanelsAction()
+                await this.readPanelConsistencyAction()
                 return true
             } catch (error) {
                 this.apiError(error)
