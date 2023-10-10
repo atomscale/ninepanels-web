@@ -1,7 +1,7 @@
 <template >
     <div class="flex flex-col w-full  justify-start  items-center relative">
 
-        <div class="flex justify-evenly items-center mb-4 w-full font-bold">
+        <div v-if="entries_by_day" class="flex justify-evenly items-center mb-4 w-full font-bold">
 
             <div class="text-np-base ml-2">{{ daysCompleted() }} / {{ numDays() }}</div>
             <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) *100 ).toFixed(0) }}%</div>
