@@ -300,11 +300,11 @@ export const useStore = defineStore({
                 this.apiError(error)
             }
         },
-        async readEntriesAction(panel_id, limit) {
+        async readEntriesAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
             this.loadingBar = true
             try {
-                const response = await requests.getEntries(access_token, panel_id, limit)
+                const response = await requests.getEntries(access_token, panel_id)
                 console.log("raw api response", response.data)
                 return response.data.data
             } catch (error) {

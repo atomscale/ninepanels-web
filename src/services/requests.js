@@ -113,13 +113,9 @@ export default {
 
             })
     },
-    getEntries(access_token, panel_id, limit) {
+    getEntries(access_token, panel_id) {
 
         return apiClient.get(`/panels/${panel_id}/entries`, {
-            params: {
-                limit: limit
-            }
-        }, {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
