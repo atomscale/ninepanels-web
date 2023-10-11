@@ -33,7 +33,7 @@
 
 
             <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                class="grid grid-cols-7 gap-1 mt-1 ">
+                class="grid grid-cols-7 gap-1 mt-1 mx-1">
                 <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
                     <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                         :class="entry.is_complete ? 'bg-np-fill scale-105' : 'bg-np-base border-np-base border-2 scale-95'">
