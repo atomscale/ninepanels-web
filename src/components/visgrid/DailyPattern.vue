@@ -66,12 +66,14 @@ export default {
     },
     props: {
         panelId: {
-            type: Number,
             required: true
         }
     },
     watch: {
         panelId(new_val, old_val) {
+            this.getEntries()
+        },
+        'Store.panels': function(new_val, old_val) {
             this.getEntries()
         }
     },

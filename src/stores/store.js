@@ -52,7 +52,9 @@ export const useStore = defineStore({
 
         canShow: false, // do not change
 
-        performanceArray: []
+        performanceArray: [],
+
+        selectedPanel: null,
 
     }),
     actions: {
@@ -348,6 +350,7 @@ export const useStore = defineStore({
             performance.mark('panelFindEnd')
 
             panel.is_complete = !panel.is_complete
+            this.selectedPanel = panelId
             this.loadingBar = true
             this.panelIsDisabled = true
 
