@@ -13,17 +13,34 @@
             <div v-if="Store.visGridIsOpen" class="grid grid-cols-3 gap-1 w-5/12 sm:w-2/5  mx-auto">
                 <div v-for="i in 9" :key="i" class="rounded-lg">
                     <div class="aspect-content">
-                        <button @click="visGridTap(i)" :class="panelStyle(i)"
+                        <!-- <button @click="visGridTap(i)" :class="bgStyle(i)"
                             class="flex items-center justify-center rounded-lg ">
-                            <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
+                            <div class="flex text-xs text-opacity-100 flex-col"
+                                :class="!Store.visGridIsOpen ? 'hidden' : ''"
                                 v-if="this.Store.consistency[i - 1] && this.showFraction">
                                 {{ this.Store.consistency[i - 1].days_complete }}
                                 /
                                 {{ this.Store.consistency[i - 1].panel_age }}
                             </div>
-                            <div class="flex text-xs flex-col" :class="!Store.visGridIsOpen ? 'hidden' : ''"
+                            <div class="flex text-xs text-opacity-100 flex-col"
+                                :class="!Store.visGridIsOpen ? 'hidden' : ''"
                                 v-if="this.Store.consistency[i - 1] && this.showPercentage">
                                 {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
+                            </div>
+                        </button> -->
+                        <button @click="visGridTap(i)" class="relative flex items-center justify-center rounded-lg" :class="{ 'bg-gray-200': Store.theme === 'night' }">
+
+                            <div :class="bgStyle(i) + ' absolute inset-0 rounded-lg'"></div>
+
+
+                            <div class="relative z-10 text-xs " :class="Store.theme === 'night' ? textNight(i): textColor(i)" >
+                                <div v-if="this.Store.consistency[i - 1] && this.showFraction">
+                                    {{ this.Store.consistency[i - 1].days_complete }} / {{ this.Store.consistency[i -
+                                        1].panel_age }}
+                                </div>
+                                <div v-if="this.Store.consistency[i - 1] && this.showPercentage">
+                                    {{ (this.Store.consistency[i - 1].consistency.toFixed(3) * 100).toFixed() }}%
+                                </div>
                             </div>
                         </button>
                     </div>
@@ -33,7 +50,7 @@
                 <div v-for="i in 9" :key="i" class="rounded-lg">
                     <div class="aspect-content">
                         <button @click="visGridTap(i)" class="flex items-center justify-center rounded-2xl opacity-90"
-                            :class="Store.theme === 'night' ? 'bg-gray-100' : 'bg-np-fill'">
+                            :class="Store.theme === 'night' ? 'bg-gray-200' : 'bg-np-fill'">
 
                         </button>
                     </div>
@@ -80,20 +97,37 @@ export default {
         this.Store.readPanelConsistencyAction()
     },
     methods: {
-        panelStyle(i) {
+        bgStyle(i) {
             if (this.Store.consistency[i - 1]) {
-                const shade = this.panelShading(i)
+                const shade = this.bgShading(i)
                 const format = 'border border-1 border-gray-300 transition ease-in-out duration-700'
                 return format + ' ' + shade
             } else {
                 return 'border-2 border-dashed border-gray-300'
             }
         },
-        panelShading(i) {
+        bgShading(i) {
             const consistency_value = this.Store.consistency[i - 1].consistency
-            for (let ind = 0; ind < this.shading.length; ind++) {
-                if (consistency_value <= this.shading[ind].threshold) {
-                    return this.shading[ind].color_value
+            for (let ind = 0; ind < this.bgShade.length; ind++) {
+                if (consistency_value <= this.bgShade[ind].threshold) {
+                    return this.bgShade[ind].color_value
+                }
+            }
+        },
+
+        textColor(i) {
+            const consistency_value = this.Store.consistency[i - 1].consistency
+            for (let ind = 0; ind < this.textColors.length; ind++) {
+                if (consistency_value <= this.textColors[ind].threshold) {
+                    return this.textColors[ind].color_value
+                }
+            }
+        },
+        textNight(i) {
+            const consistency_value = this.Store.consistency[i - 1].consistency
+            for (let ind = 0; ind < this.textNights.length; ind++) {
+                if (consistency_value <= this.textNights[ind].threshold) {
+                    return this.textNights[ind].color_value
                 }
             }
         },
@@ -127,17 +161,53 @@ export default {
     },
     data() {
         return {
-            shading: [
-                { threshold: 0.1, color_value: 'bg-np-base text-gray-500' },
-                { threshold: 0.2, color_value: 'bg-green-50 text-gray-500' },
-                { threshold: 0.3, color_value: 'bg-green-100 text-gray-500' },
-                { threshold: 0.4, color_value: 'bg-green-200 text-gray-500' },
-                { threshold: 0.5, color_value: 'bg-green-300 text-gray-500' },
-                { threshold: 0.6, color_value: 'bg-green-400 text-gray-500' },
-                { threshold: 0.7, color_value: 'bg-green-500 text-gray-500' },
-                { threshold: 0.8, color_value: 'bg-green-600 text-white' },
-                { threshold: 0.9, color_value: 'bg-green-700 text-white' },
-                { threshold: 1.0, color_value: 'bg-green-700 text-white' },
+            // shading: [
+            //     { threshold: 0.1, color_value: 'bg-np-base text-gray-500' },
+            //     { threshold: 0.2, color_value: 'bg-green-50 text-gray-500' },
+            //     { threshold: 0.3, color_value: 'bg-green-100 text-gray-500' },
+            //     { threshold: 0.4, color_value: 'bg-green-200 text-gray-500' },
+            //     { threshold: 0.5, color_value: 'bg-green-300 text-gray-500' },
+            //     { threshold: 0.6, color_value: 'bg-green-400 text-gray-500' },
+            //     { threshold: 0.7, color_value: 'bg-green-500 text-gray-500' },
+            //     { threshold: 0.8, color_value: 'bg-green-600 text-white' },
+            //     { threshold: 0.9, color_value: 'bg-green-700 text-white' },
+            //     { threshold: 1.0, color_value: 'bg-green-700 text-white' },
+            // ],
+            bgShade: [
+                { threshold: 0.1, color_value: 'bg-np-fill opacity-10' },
+                { threshold: 0.2, color_value: 'bg-np-fill opacity-20' },
+                { threshold: 0.3, color_value: 'bg-np-fill opacity-30' },
+                { threshold: 0.4, color_value: 'bg-np-fill opacity-40' },
+                { threshold: 0.5, color_value: 'bg-np-fill opacity-50' },
+                { threshold: 0.6, color_value: 'bg-np-fill opacity-60' },
+                { threshold: 0.7, color_value: 'bg-np-fill opacity-70' },
+                { threshold: 0.8, color_value: 'bg-np-fill opacity-80' },
+                { threshold: 0.9, color_value: 'bg-np-fill opacity-90' },
+                { threshold: 1.0, color_value: 'bg-np-fill opacity-95' },
+            ],
+            textColors: [
+                { threshold: 0.1, color_value: 'text-np-base' },
+                { threshold: 0.2, color_value: 'text-np-base' },
+                { threshold: 0.3, color_value: 'text-np-base' },
+                { threshold: 0.4, color_value: 'text-np-base' },
+                { threshold: 0.5, color_value: 'text-np-base' },
+                { threshold: 0.6, color_value: 'text-np-base' },
+                { threshold: 0.7, color_value: 'text-np-inverted' },
+                { threshold: 0.8, color_value: 'text-np-inverted' },
+                { threshold: 0.9, color_value: 'text-np-inverted' },
+                { threshold: 1.0, color_value: 'text-np-inverted' },
+            ],
+            textNights: [
+                { threshold: 0.1, color_value: 'text-gray-900' },
+                { threshold: 0.2, color_value: 'text-gray-900' },
+                { threshold: 0.3, color_value: 'text-gray-900' },
+                { threshold: 0.4, color_value: 'text-gray-900' },
+                { threshold: 0.5, color_value: 'text-gray-900' },
+                { threshold: 0.6, color_value: 'text-gray-900' },
+                { threshold: 0.7, color_value: 'text-np-inverted' },
+                { threshold: 0.8, color_value: 'text-np-inverted' },
+                { threshold: 0.9, color_value: 'text-np-inverted' },
+                { threshold: 1.0, color_value: 'text-np-inverted' },
             ],
             showFraction: false,
             showPercentage: false,

@@ -21,6 +21,7 @@ module.exports = {
         np: {
           base: 'var(--color-bg-base)',
           fill: 'var(--color-fill)',
+          visbg: 'var(--color-text-inverted)',
           accent: 'var(--color-fill-hover)',
           alert: 'var(--color-bg-alert)'
         }

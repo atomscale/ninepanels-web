@@ -64,7 +64,8 @@ import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 
 export default {
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useStore),
+
     },
     methods: {
         async getRoutePerformance() {
@@ -75,14 +76,18 @@ export default {
             this.Store.primaryComponentName = 'RoutePerformanceTray'
             this.Store.primaryComponentProps = { method_path: method_path }
         },
-
     },
-    // mounted() {
-    //     this.getRoutePerformance()
-    // },
+    mounted() {
+        this.calcConsistencySize()
+    },
     components: {
         ArrowPathIcon,
     },
+    data() {
+        return {
+            consistencySize: ''
+        }
+    }
 
 }
 </script>
