@@ -24,10 +24,10 @@ apiClient.interceptors.response.use(
 export default {
 
     getLoginToken(email, password) {
-        const form = new URLSearchParams()
-        form.append('username', email) // username as email to comply with OAuth
-        form.append('password', password)
-        return apiClient.post("/token", form)
+        // const form = new URLSearchParams()
+        // form.append('username', email) // username as email to comply with OAuth
+        // form.append('password', password)
+        return apiClient.post("/token", {email:email, password:password})
     },
     postUser(access_token, email, name, password) {
         const form = new URLSearchParams()

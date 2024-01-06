@@ -1,10 +1,10 @@
 <template>
   <transition name="fade" appear>
-    <div class="flex flex-col justify-between w-full h-full">
-      <div>
+    <div class="flex flex-col justify-start w-full h-full">
+      <div class="mb-8">
         <PanelGridFrame />
       </div>
-      <DailyPattern :panelId="Store.selectedPanel" />
+      <DailyPattern v-if="Store.selectedPanel" :panelId="Store.selectedPanel" />
       <!-- <div class="h-full flex flex-col justify-end mb-2" >
         <div :class="!Store.visGridIsOpen ? 'scale-vis h-24 ' : 'mb-8'">
           <ConsistencyGrid :class="{'animate-visgrid-bounce' : !Store.visGridIsOpen}"/>

@@ -1,10 +1,8 @@
 <template >
     <div class="flex flex-col w-full  justify-start  items-center relative">
-
-        <div v-if="entries_by_day" class="flex justify-evenly items-center mb-4 w-full font-bold">
-
-            <div class="text-np-base ml-2">{{ daysCompleted() }} / {{ numDays() }}</div>
-            <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) *100 ).toFixed(0) }}%</div>
+        <div v-if="entries_by_day" class="flex justify-center items-center mb-4 w-full font-bold">
+            <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
+            <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
         </div>
         <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
             <button
@@ -22,25 +20,18 @@
             <button
                 class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
                 :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(1000)">∞</button>
+                @click="togglePatternTray()">∞</button>
         </div>
         <div class="grid grid-cols-7 gap-1 mt-4">
-
             <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
         </div>
         <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
-
-
-
             <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
                 class="grid grid-cols-7 gap-1 mt-1 mx-1">
                 <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
                     <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                         :class="entry.is_complete ? 'bg-np-fill scale-105' : 'bg-np-base border-np-base border-2 scale-95'">
                     </div>
-                    <!-- <div v-else class="h-7 w-7 ">
-
-                        </div> -->
                 </div>
             </div>
             <div v-if="showEllipsis" class="flex justify-center bg-np-base">
@@ -73,7 +64,7 @@ export default {
         panelId(new_val, old_val) {
             this.getEntries()
         },
-        'Store.panels': function(new_val, old_val) {
+        'Store.panels': function (new_val, old_val) {
             this.getEntries()
         }
     },
@@ -94,7 +85,7 @@ export default {
         daysCompleted() {
             if (this.entries_by_day) {
 
-                const trimmedEntriesByDay = this.entries_by_day.slice(0, this.limit  + this.missingDays() + 1)
+                const trimmedEntriesByDay = this.entries_by_day.slice(0, this.limit + this.missingDays() + 1)
 
                 const arrayOfCompleted = trimmedEntriesByDay.filter(completedEntry => completedEntry.is_complete === true)
                 return arrayOfCompleted.length
@@ -138,6 +129,14 @@ export default {
             } else {
                 this.showEllipsis = true
             }
+        },
+        togglePatternTray() {
+            this.Store.primaryTrayIsOpen = false
+            this.Store.primaryComponentName = ''
+            this.Store.primaryComponentProps = ''
+            this.Store.primaryTrayIsOpen = true
+            this.Store.primaryComponentName = 'PatternTray'
+            this.Store.primaryComponentProps = { panelId: this.panelId }
         }
 
     },
@@ -153,8 +152,8 @@ export default {
             sort_key: null,
             sort_direction: null,
             offset: null,
-            selected: 1000,
-            limit: 1000,
+            selected: 30,
+            limit: 30,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
             showEllipsis: false
         }
