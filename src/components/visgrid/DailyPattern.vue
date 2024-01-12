@@ -1,6 +1,6 @@
 <template >
     <div class="flex flex-col w-full  justify-start  items-center relative">
-        <div v-if="entries_by_day" class="flex justify-center items-center mb-4 w-full font-bold">
+        <div v-if="entries_by_day" class="flex justify-center items-center mb-2 w-full font-bold">
             <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
             <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
         </div>
@@ -22,12 +22,12 @@
                 :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
                 @click="togglePatternTray()">∞</button>
         </div>
-        <div class="grid grid-cols-7 gap-1 mt-4">
+        <div class="grid grid-cols-7 gap-0.5 mt-2">
             <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
         </div>
         <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
             <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                class="grid grid-cols-7 gap-1 mt-1 mx-1">
+                class="grid grid-cols-7 gap-0.5 ">
                 <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
                     <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                         :class="entry.is_complete ? 'bg-np-fill scale-105' : 'bg-np-base border-np-base border-2 scale-95'">
