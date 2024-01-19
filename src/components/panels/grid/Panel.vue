@@ -4,7 +4,7 @@
     <button type="submit" @click="handlePanelTap(panel.id)" :disabled="Store.panelIsDisabled"
       class="h-full w-full rounded-lg text-xs "
       :aria-label="panel.title"
-      :class="[isComplete ? 'bg-np-fill text-np-inverted  scale-100 shadow-none' : 'border-np-base border  scale-103 text-np-base', {'border-4 border-green-800 shadow-lg scale-105': Store.selectedPanel === panel.id && isComplete}, {'border-4 border-np-matchbgfill shadow-lg scale-105': Store.selectedPanel === panel.id && !isComplete}]">
+      :class="[isComplete ? 'bg-np-fill text-np-inverted  scale-100 shadow-none' : 'border-np-base border shadow-md scale-103 text-np-base', {'border-4 border-green-800 shadow-lg scale-105': Store.selectedPanel === panel.id && isComplete}, {'border-4 border-np-matchbgfill shadow-lg scale-105': Store.selectedPanel === panel.id && !isComplete}]">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
