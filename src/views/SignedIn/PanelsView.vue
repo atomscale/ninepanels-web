@@ -5,8 +5,9 @@
         <PanelGridFrame />
       </div>
       <div class="flex flex-col justify-center h-full items-center">
-
-        <DailyPattern v-if="Store.selectedPanel" :panelId="Store.selectedPanel" :onHome="true"/>
+        <div class="flex flex-col justify-start h-full items-center">
+          <DailyPattern v-if="Store.selectedPanel" :panelId="Store.selectedPanel" :onHome="true" />
+        </div>
       </div>
     </div>
   </transition>

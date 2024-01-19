@@ -4,7 +4,7 @@
     <button type="submit" @click="handlePanelTap(panel.id)" :disabled="Store.panelIsDisabled"
       class="h-full w-full rounded-lg text-xs "
       :aria-label="panel.title"
-      :class="[isComplete ? 'bg-np-fill text-np-inverted  scale-100 shadow-none' : 'border-np-base border shadow-lg scale-103 text-np-base', {'shadow-zinc-900': Store.theme === 'night'}, {'border-4 border-red-600': Store.selectedPanel === panel.id } ]">
+      :class="[isComplete ? 'bg-np-fill text-np-inverted  scale-100 shadow-none' : 'border-np-base border  scale-103 text-np-base', {'border-4 border-green-800 shadow-lg scale-105': Store.selectedPanel === panel.id && isComplete}, {'border-4 border-np-matchbgfill shadow-lg scale-105': Store.selectedPanel === panel.id && !isComplete}]">
       <div class="m-2">
         {{ this.panel.title }}
       </div>
@@ -54,10 +54,10 @@ export default {
     },
     handlePanelTap(panelId) {
       if (this.Store.selectedPanel === panelId) {
-        console.log(`toggel panel ${panelId}`)
+        console.log(`toggle panel ${panelId}`)
         this.Store.toggleEntryOptimistically(panelId)
       } else {
-        console.log(`set to panle ${panelId}`)
+        console.log(`focus to panel ${panelId}`)
         this.Store.selectedPanel = panelId
       }
     }
