@@ -27,7 +27,7 @@
 
 
 
-    <DailyPattern class="relative  overflow-scroll" :panelId="this.panel_id" />
+    <DailyPattern class="relative  overflow-scroll" :panelId="this.panel_id" :onHome="false"/>
 
 
   </div>

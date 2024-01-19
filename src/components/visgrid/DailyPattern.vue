@@ -20,7 +20,7 @@
             <button
                 class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
                 :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
-                @click="togglePatternTray()">∞</button>
+                @click="infinityToggle()">∞</button>
         </div>
         <div class="grid grid-cols-7 gap-0.5 mt-2">
             <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
@@ -58,6 +58,10 @@ export default {
     props: {
         panelId: {
             required: true
+        },
+        onHome: {
+            required: true,
+            type: Boolean
         }
     },
     watch: {
@@ -81,6 +85,9 @@ export default {
             });
 
 
+        },
+        async getConsistency() {
+            await this.Store.readPanelConsistencyAction()
         },
         daysCompleted() {
             if (this.entries_by_day) {
@@ -137,6 +144,24 @@ export default {
             this.Store.primaryTrayIsOpen = true
             this.Store.primaryComponentName = 'PatternTray'
             this.Store.primaryComponentProps = { panelId: this.panelId }
+        },
+        infinityToggle() {
+            if (this.onHome === true) {
+                console.log("at home not tray")
+                this.togglePatternTray()
+            } else {
+                console.log("not on home, must be tray")
+                this.setSelectedLimit(1000)
+            }
+        },
+        setLocationAwareLimit() {
+            if (this.onHome === true) {
+                console.log("at home not tray")
+                this.setSelectedLimit(30)
+            } else {
+                console.log("not on home, must be tray")
+                this.setSelectedLimit(1000)
+            }
         }
 
     },
@@ -145,6 +170,8 @@ export default {
     },
     mounted() {
         this.getEntries()
+        this.getConsistency()
+        this.setLocationAwareLimit()
     },
     data() {
         return {
