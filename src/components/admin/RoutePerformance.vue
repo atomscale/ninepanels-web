@@ -77,9 +77,9 @@ export default {
             this.Store.primaryComponentProps = { method_path: method_path }
         },
     },
-    mounted() {
-        this.calcConsistencySize()
-    },
+    // mounted() {
+    //     this.calcConsistencySize()
+    // },
     components: {
         ArrowPathIcon,
     },
