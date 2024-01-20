@@ -3,6 +3,16 @@ import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
+let router;
+
+async function getRouter() {
+    if (!router) {
+        const routerModule = await import('@/router');
+        router = routerModule.default;
+    }
+    return router;
+}
+
 const uniqueMessages = new Set()
 
 export const useStore = defineStore({
@@ -152,7 +162,11 @@ export const useStore = defineStore({
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Network error"
                     rollbar.error(`app: network error for a user`)
-                } else {
+                } else if (status === 401) {
+                    errorMsg = "Please sign back in."
+                    this.signUserOutAction()
+                }
+                else {
                     console.log(error.response)
                     errorMsg = error.response.data.data && error.response.data.is_error ? error.response.data.error_message : `Server is saying ${status}`
                 }
@@ -203,8 +217,11 @@ export const useStore = defineStore({
             }
         },
         signUserOutAction() {
+            console.log("sign user out action")
             try {
                 VueCookies.remove("9p_access_token")
+                console.log("removed acceess token"
+                )
             } catch (error) {
                 console.log("no cookie to remove")
             }
@@ -212,6 +229,15 @@ export const useStore = defineStore({
             this.panels = []
             this.consistency = []
             this.messages = []
+            this.primaryTrayIsOpen = false
+            this.primaryComponentName = null
+            this.primaryComponentProps = {}
+
+            this.secondaryTrayIsOpen = false
+
+            getRouter().then(router => {
+                router.push('/');
+            });
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
@@ -335,7 +361,7 @@ export const useStore = defineStore({
                 this.consistency = response.data.data
             } catch (error) {
                 this.apiError(error)
-            }   finally {
+            } finally {
                 performance.mark('panelConsistencyEnd')
                 performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
 

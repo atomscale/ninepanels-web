@@ -1,6 +1,20 @@
 import axios from "axios"
 import { v4 as uuidv4 } from "uuid"
 
+// let router;
+
+// function getRouter() {
+//     if (!router) {
+//         router = require('@/router/index.js').default;
+//     }
+//     return router;
+// }
+
+// function getStore() {
+//     const { useStore } = require('@/store/store.js');
+//     return useStore();
+// }
+
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
 
@@ -12,14 +26,29 @@ apiClient.interceptors.request.use((config) => {
 });
 
 apiClient.interceptors.response.use(
-    (response) => {
+    response => {
         localStorage.setItem('lastReload', new Date().toDateString())
         return response
     },
-    (error) => {
+    error => {
         return Promise.reject(error)
     }
 )
+
+// apiClient.interceptors.response.use(
+//     response => {
+//         return response
+//     }, error => {
+//         if (error.response && error.response.status === 401) {
+//             console.log("401...")
+//             const router = getRouter()
+//             const store = getStore()
+//             store.signUserOutAction()
+//             router.push('/signin')
+//         }
+//         return Promise.reject(error)
+//     }
+// )
 
 export default {
 
