@@ -19,7 +19,7 @@ export const useStore = defineStore({
     id: '',
     state: () => ({
         user: null,
-        panels: [],
+        panels: null,
         consistency: [],
         routePerformance: null,
 

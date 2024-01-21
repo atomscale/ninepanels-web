@@ -1,46 +1,69 @@
 <template >
-    <div class="flex flex-col w-full  justify-start  items-center relative">
-        <div v-if="entries_by_day" class="flex justify-center items-center mb-2 w-full font-bold">
-            <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
-            <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
-        </div>
-        <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                :class="selected === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(7)">7</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
-                :class="selected === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(14)">14</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
-                :class="selected === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(30)">30</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
-                :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
-                @click="infinityToggle()">∞</button>
-        </div>
-        <div class="grid grid-cols-7 gap-0.5 mt-2">
-            <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
-        </div>
-        <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
-            <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                class="grid grid-cols-7 gap-0.5 ">
-                <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
-                    <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
-                        :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+    <transition name="fade" appear>
+
+
+
+        <div class="flex flex-col w-full  justify-start  items-center relative">
+
+
+
+            <div v-if="entries_by_day" class="flex justify-center items-center mb-2 w-full font-bold">
+                <transition name="fade" appear>
+
+                    <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
+                </transition>
+                <transition name="fade" appear>
+
+                    <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
+                </transition>
+
+            </div>
+            <div v-else>
+                <LoaderSpin />
+            </div>
+
+            <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
+                <button
+                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                    :class="selected === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="setSelectedLimit(7)">7</button>
+                <button
+                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                    :class="selected === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="setSelectedLimit(14)">14</button>
+                <button
+                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
+                    :class="selected === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    @click="setSelectedLimit(30)">30</button>
+                <button
+                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
+                    :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
+                    @click="infinityToggle()">∞</button>
+            </div>
+            <div class="grid grid-cols-7 gap-0.5 mt-2">
+                <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+            </div>
+            <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
+                <transition name="fade" appear>
+                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
+                        class="grid grid-cols-7 gap-0.5 ">
+                        <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
+                            <transition name="fade" appear>
+                                <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
+                                    :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+                                </div>
+                            </transition>
+                        </div>
                     </div>
+                </transition>
+                <div v-if="showEllipsis" class="flex justify-center bg-np-base">
+                    <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
                 </div>
-            </div>
-            <div v-if="showEllipsis" class="flex justify-center bg-np-base">
-                <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
-            </div>
 
 
+            </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -48,7 +71,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-
+import LoaderSpin from '@/components/utilities/LoaderSpin.vue'
 
 export default {
     computed: {
@@ -166,7 +189,7 @@ export default {
 
     },
     components: {
-
+        LoaderSpin
     },
     mounted() {
         this.getEntries()
@@ -175,7 +198,7 @@ export default {
     },
     data() {
         return {
-            entries_by_day: [],
+            entries_by_day: null,
             sort_key: null,
             sort_direction: null,
             offset: null,
