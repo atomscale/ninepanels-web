@@ -25,19 +25,19 @@
             <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
                 <button
                     class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                    :class="selected === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    :class="selectedFilterValue === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="setSelectedLimit(7)">7</button>
                 <button
                     class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
-                    :class="selected === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    :class="selectedFilterValue === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="setSelectedLimit(14)">14</button>
                 <button
                     class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
-                    :class="selected === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                    :class="selectedFilterValue === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
                     @click="setSelectedLimit(30)">30</button>
                 <button
                     class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
-                    :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
+                    :class="selectedFilterValue === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
                     @click="infinityToggle()">∞</button>
             </div>
             <div class="grid grid-cols-7 gap-0.5 mt-2">
@@ -93,15 +93,16 @@ export default {
         },
         'Store.panels': function (new_val, old_val) {
             this.getEntries()
+        },
+        'Store.selectedPanel': function (new_val, old_val) {
+            this.readLocalFilterMRU(new_val)
         }
     },
     methods: {
         async getEntries() {
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
-                // console.log("entries pre pad", this.entries_by_day)
                 this.padEntries()
-                // console.log("entries post pad", this.entries_by_day)
             }
             this.$nextTick(() => {
                 this.checkScroll();
@@ -128,11 +129,7 @@ export default {
 
             return actualLen
         },
-        setSelectedLimit(value) {
-            this.selected = value
-            this.limit = value
-            // this.getEntries()
-        },
+
         missingDays() {
             const today = new Date()
             const currentDayOfWeek = today.getDay()
@@ -178,12 +175,55 @@ export default {
             }
         },
         setLocationAwareLimit() {
-            if (this.onHome === true) {
-                console.log("at home not tray")
-                this.setSelectedLimit(30)
-            } else {
+            if (!this.onHome)  {
+
                 console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
+            }
+        },
+        setSelectedLimit(filterValue) {
+            this.selectedFilterValue = filterValue
+            this.limit = filterValue
+
+
+            if (this.onHome) {
+
+                this.persistFilterMRULocal(this.panelId, filterValue)
+            }
+
+        },
+        readLocalFilterMRU(panelId) {
+            if (this.onHome) {
+
+                const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
+
+                if (!localFilterMRU) {
+                    this.selectedFilterValue = 30
+                    this.limit = 30
+                }
+                if (localFilterMRU && localFilterMRU[panelId]) {
+
+
+
+
+                    this.selectedFilterValue = localFilterMRU[panelId]
+                    this.limit = localFilterMRU[panelId]
+
+                } else {
+                    this.selectedFilterValue = 30
+                    this.limit = 30
+                }
+            }
+        },
+        persistFilterMRULocal(panelId, filterValue) {
+            const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
+
+            if (localFilterMRU) {
+                localFilterMRU[panelId] = filterValue
+                localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
+            } else {
+                const localFilterMRU = { [panelId]: filterValue }
+                localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
             }
         }
 
@@ -195,6 +235,7 @@ export default {
         this.getEntries()
         this.getConsistency()
         this.setLocationAwareLimit()
+        this.readLocalFilterMRU(this.panelId)
     },
     data() {
         return {
@@ -202,8 +243,8 @@ export default {
             sort_key: null,
             sort_direction: null,
             offset: null,
-            selected: 30,
-            limit: 30,
+            selectedFilterValue: null,
+            limit: null,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
             showEllipsis: false
         }
