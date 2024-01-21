@@ -287,6 +287,7 @@ export const useStore = defineStore({
                 this.panels = response.data.data
                 return response.data.data
             } catch (error) {
+                console.log("thrown here")
                 this.apiError(error)
             } finally {
                 this.loadingBar = false

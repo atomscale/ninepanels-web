@@ -5,9 +5,10 @@
         <PanelGridFrame />
       </div>
       <div class="flex flex-col justify-center h-full items-center">
-        <div class="flex flex-col justify-start h-full items-center">
-          <DailyPattern v-if="Store.selectedPanel" :panelId="Store.selectedPanel" :onHome="true" />
+        <div v-if="Store.panels && Store.panels.length > 0" class="flex flex-col justify-start h-full items-center">
+          <DailyPattern v-if="Store.selectedPanel && Store.panels && Store.panels.length > 0" :panelId="Store.selectedPanel" :onHome="true" />
         </div>
+        <div v-else class="text-sm text-np-base">create a panel to start</div>
       </div>
     </div>
   </transition>

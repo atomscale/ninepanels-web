@@ -16,7 +16,7 @@
 
       </div>
     </div>
-    <div class="text-np-base">FYI: You'll need to sign in again, just like you would if you installed the app via your
+    <div class="text-np-base">FYI: You'll maybe need to sign in again, just like you might if you installed the app via your
       App or
       Play Store.</div>
     <div class="text-lg text-np-base font-bold">Chrome on Android:</div>

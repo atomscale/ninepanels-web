@@ -3,11 +3,11 @@
 
 
 
-        <div class="flex flex-col w-full  justify-start  items-center relative">
+        <div v-if="Store.panels && Store.selectedPanel" class="flex flex-col w-full  justify-start  items-center relative">
 
 
 
-            <div v-if="entries_by_day" class="flex justify-center items-center mb-2 w-full font-bold">
+            <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
                 <transition name="fade" appear>
 
                     <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
@@ -103,6 +103,8 @@ export default {
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
                 this.padEntries()
+            } else {
+                this.entries_by_day = null
             }
             this.$nextTick(() => {
                 this.checkScroll();
@@ -148,7 +150,7 @@ export default {
         checkScroll() {
             const element = this.$refs.scrollableDiv
             if (!element) {
-                console.error("Element not found")
+                console.log("Element not found")
                 return
             }
             if (element.scrollTop + element.clientHeight >= element.scrollHeight) {

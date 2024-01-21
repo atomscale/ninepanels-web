@@ -66,6 +66,7 @@ export default {
 
           this.Store.primaryComponentName = null
           this.Store.primaryComponentProps = {}
+          this.Store.selectedPanel = null
         }
       }
     },
