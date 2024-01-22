@@ -169,13 +169,11 @@ export default {
     },
     getRouteTimings(access_token, method_path, window_size) {
 
-        return apiClient.get(`/admin/routes/timings`, {
+        return apiClient.get("/admin/routes/timings", {
             params: {
                 method_path: method_path,
                 window_size: window_size
-            }
-
-        }, {
+            },
             headers: {
                 Authorization: "Bearer " + access_token,
             }

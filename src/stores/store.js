@@ -489,7 +489,10 @@ export const useStore = defineStore({
             try {
 
                 const response = await requests.getRouteTimings(access_token, method_path, window_size)
-                return response.data.data
+                if (response) {
+                    console.log(response.data.data)
+                    return response.data.data
+                }
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)
