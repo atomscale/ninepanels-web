@@ -163,7 +163,8 @@ export const useStore = defineStore({
                     errorMsg = "Network error"
                     rollbar.error(`app: network error for a user`)
                 } else if (status === 401) {
-                    errorMsg = "Please sign back in."
+                    errorMsg = error.response.data.error_message
+                    console.log(error.response.data.error_message)
                     this.signUserOutAction()
                 }
                 else {
@@ -226,18 +227,28 @@ export const useStore = defineStore({
                 console.log("no cookie to remove")
             }
             this.user = null
-            this.panels = []
+            this.panels = null
             this.consistency = []
-            this.messages = []
+            // this.messages = []
             this.primaryTrayIsOpen = false
             this.primaryComponentName = null
             this.primaryComponentProps = {}
-
+            this.leftNavIsOpen = false
+            this.shareBoxIsOpen = false
             this.secondaryTrayIsOpen = false
-
             getRouter().then(router => {
+                console.log("router push on sign out action")
                 router.push('/');
+
             });
+            this.messages.push({ message: "signed out", error: false })
+            setTimeout(() => {
+                this.messages.shift()
+            }, 5000)
+            this.reloadApp()
+        },
+        reloadApp() {
+            window.location.reload()
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
@@ -287,7 +298,6 @@ export const useStore = defineStore({
                 this.panels = response.data.data
                 return response.data.data
             } catch (error) {
-                console.log("thrown here")
                 this.apiError(error)
             } finally {
                 this.loadingBar = false
@@ -391,8 +401,10 @@ export const useStore = defineStore({
             } catch (error) {
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
                 setTimeout(() => this.messages.shift(), 5000)
-                const panel = this.panels.find(panel => panel.id === panelId)
-                panel.is_complete = !panel.is_complete
+                if (this.panels) {
+                    const panel = this.panels.find(panel => panel.id === panelId)
+                    panel.is_complete = !panel.is_complete
+                }
             } finally {
                 this.panelIsDisabled = false
                 this.loadingBar = false

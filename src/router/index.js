@@ -23,7 +23,7 @@ function requireAccessToken(to, from, next) {
   if (access_token) {
     next()
   } else {
-    next('/signin')
+    next('/')
   }
 }
 

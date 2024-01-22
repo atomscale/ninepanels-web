@@ -21,7 +21,7 @@
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <CogIcon class="h-6 w-6" /><span class="ml-3">Settings</span>
       </router-link>
-      <router-link v-if="Store.user" @click="signUserOut" :to="{ name: 'Landing' }"
+      <router-link v-if="Store.user" @click="Store.signUserOutAction()" :to="{ name: 'Landing' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
       </router-link>
@@ -63,12 +63,6 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
-    signUserOut() {
-      this.Store.signUserOutAction()
-      this.Store.leftNavIsOpen = false
-      this.Store.shareBoxIsOpen = false
-      this.$router.push({ name: "Landing" })
-    },
 
     async shareApp() {
       if (navigator.share) {

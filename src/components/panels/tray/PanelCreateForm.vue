@@ -6,7 +6,7 @@
 
   <div v-if="title.length > 0">
     <transition name="fade" appear>
-      <DynamicButton :parentMethod="sendCreatePanel" :buttonText="'Create panel'" :confirmRequired="false" />
+      <DynamicButton class="mb-0.5" :parentMethod="sendCreatePanel" :buttonText="'Create panel'" :confirmRequired="false" />
     </transition>
   </div>
   <div v-else class="h-12 mb-1"></div>
