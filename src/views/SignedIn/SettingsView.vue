@@ -62,7 +62,7 @@
           :confirmText="'Are you sure?'" />
           <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete All Panels'"
           :confirmText="'Are you sure?'" /> -->
-        <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mt-4" :class="Store.isPWA ? 'mb-6' : 'mb-6'" :parentMethod="sendUserDelete" :confirmRequired="true"
+        <DynamicButton v-if="dangerBoxIsOpen" class="w-full mt-4" :class="Store.isPWA ? 'mb-6' : 'mb-6'" :parentMethod="sendUserDelete" :confirmRequired="true"
           :buttonText="'Delete Your Account'" :confirmText="'Are you sure?'" />
       </div>
 

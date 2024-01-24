@@ -3,7 +3,7 @@
 
 
 
-        <div v-if="Store.panels && Store.selectedPanel" class="flex flex-col w-full  justify-start  items-center relative">
+        <div v-if="Store.panels && Store.selectedPanel" class="flex flex-col w-full justify-start  items-center relative">
 
 
 
@@ -43,19 +43,19 @@
             <div class="grid grid-cols-7 gap-0.5 mt-2">
                 <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
             </div>
-            <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
-                <transition name="fade" appear>
+            <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
+
                     <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
                         class="grid grid-cols-7 gap-0.5 ">
                         <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
-                            
+
                                 <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
                                     :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
                                 </div>
 
                         </div>
                     </div>
-                </transition>
+
                 <div v-if="showEllipsis" class="flex justify-center bg-np-base">
                     <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
                 </div>

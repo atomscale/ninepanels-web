@@ -28,7 +28,7 @@
 
 
           <button @click="this.togglePatternTray()" class="flex w-full justify-between items-start">
-            <div class="font-light text-np-base text-sm">Consistency Graph</div>
+            <div class="font-light text-np-base text-sm">Consistency Pattern</div>
 
 
 
@@ -67,11 +67,11 @@
           <div class="text-xs text-np-base font-light mt-2 w-full">Need a fresh start on this panel? Reset the completion
             history
             and clear all your stats:</div>
-          <DynamicButton class="mt-2 mb-2 w-4/5" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
+          <DynamicButton class="mt-2 mb-2 w-full" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
             :confirmRequired="true" :confirmText="'Reset all stats?'" />
           <div class="text-xs text-np-base font-light  w-full">Delete the entire panel, including all completion history:
           </div>
-          <DynamicButton class="mt-2 mb-4 w-4/5 " :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
+          <DynamicButton class="mt-2 mb-4 w-full " :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
             :confirmRequired="true" :confirmText="'Delete forever?'" />
         </div>
 
