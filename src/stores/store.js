@@ -160,10 +160,12 @@ export const useStore = defineStore({
                 const status = error.response.status
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
-                    errorMsg = "Network error"
+                    errorMsg = "Having trouble reaching the servers... ☹️"
+
                     rollbar.error(`app: network error for a user`)
+                    this.signUserOutAction()
                 } else if (status === 401) {
-                    errorMsg = error.response.data.error_message
+                    errorMsg = "Signing out..."
                     console.log(error.response.data.error_message)
                     this.signUserOutAction()
                 }
@@ -241,14 +243,11 @@ export const useStore = defineStore({
                 router.push('/');
 
             });
-            this.messages.push({ message: "signed out", error: false })
+            // this.messages.push({ message: "Signed out", error: false })
             setTimeout(() => {
                 this.messages.shift()
             }, 5000)
-            this.reloadApp()
-        },
-        reloadApp() {
-            window.location.reload()
+            // this.reloadApp()
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
