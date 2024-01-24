@@ -16,12 +16,12 @@
 
             <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
               leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
-              <div class="absolute top-0 right-0 -mr-12 pt-2">
+              <div class="absolute bottom-1 right-0 -mr-12 pt-2">
                 <button aria-label="Close sidebar" type="button"
                   class="ml-1 flex h-10 w-10 items-center justify-center rounded-full"
                   @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false">
                   <span class="sr-only">Close sidebar</span>
-                  <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                  <XMarkIcon class="h-8 w-8 text-white" aria-hidden="true" />
                 </button>
               </div>
             </TransitionChild>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex px-4 flex-col  justify-between h-full mt-5">
+  <div class="flex px-4 flex-col pl-12 justify-between h-full mt-5">
 
     <div>
       <div class=" border-b border-np-base"></div>

@@ -165,7 +165,7 @@ export const useStore = defineStore({
                     rollbar.error(`app: network error for a user`)
                     this.signUserOutAction()
                 } else if (status === 401) {
-                    errorMsg = "Signing out..."
+                    errorMsg = "Signed out"
                     console.log(error.response.data.error_message)
                     this.signUserOutAction()
                 }

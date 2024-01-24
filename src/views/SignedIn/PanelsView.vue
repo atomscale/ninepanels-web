@@ -1,27 +1,34 @@
 <template>
   <transition name="fade" appear>
-    <div  class="flex flex-col justify-start w-full h-full">
+    <div class="flex flex-col justify-start w-full h-full pt-1">
       <div class="mb-4">
-        <PanelGridFrame @click.stop/>
+        <PanelGridFrame @click.stop />
       </div>
       <div class="flex flex-col justify-center h-full items-center">
-        <div v-if="Store.panels && Store.panels.length > 0" class="flex flex-col justify-start h-full items-center">
-          <DailyPattern v-if="Store.selectedPanel && Store.panels && Store.panels.length > 0"
-            :panelId="Store.selectedPanel" :onHome="true" @click.stop/>
-        </div>
-        <div v-else class="flex justify-center items-center">
 
-          <button aria-label="add a new panel" type="submit" @click="this.openCreatePanelTray()" class="
-          text-xs text-np-base">
-          <div class="flex items-center justify-center">
-              <div class="text-sm text-np-base mr-4">create a panel to start</div>
-              <PlusIcon class="h-6 w-6 text-np-base opacity-60 " />
 
-            </div>
-          </button>
+
+
+
+          <div v-if="Store.panels && Store.panels.length > 0" class="flex flex-col justify-start h-full items-center">
+            <DailyPattern v-if="Store.selectedPanel && Store.panels && Store.panels.length > 0"
+              :panelId="Store.selectedPanel" :onHome="true" @click.stop />
+          </div>
+          <div v-else class="flex justify-center items-center">
+
+            <button aria-label="add a new panel" type="submit" @click="this.openCreatePanelTray()" class="
+              text-xs text-np-base">
+              <div class="flex items-center justify-center">
+                <div class="text-sm text-np-base mr-4">create a panel to start</div>
+                <PlusIcon class="h-6 w-6 text-np-base opacity-60 " />
+
+              </div>
+            </button>
+
+          </div>
         </div>
       </div>
-    </div>
+
   </transition>
 </template>
 
