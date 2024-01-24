@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <button @click="clearFocus"  class="flex flex-col justify-start w-full h-full">
+    <div  class="flex flex-col justify-start w-full h-full">
       <div class="mb-4">
         <PanelGridFrame @click.stop/>
       </div>
@@ -21,7 +21,7 @@
           </button>
         </div>
       </div>
-    </button>
+    </div>
   </transition>
 </template>
 
