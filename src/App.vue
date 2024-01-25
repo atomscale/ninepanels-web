@@ -41,15 +41,15 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  watch: {
-    'Store.loadingBar'(newVal) {
-      if (newVal) {
-        NProgress.start();
-      } else {
-        NProgress.done();
-      }
-    },
-  },
+  // watch: {
+  //   'Store.loadingBar'(newVal) {
+  //     if (newVal) {
+  //       NProgress.start();
+  //     } else {
+  //       NProgress.done();
+  //     }
+  //   },
+  // },
   mounted() {
     this.Store.readUserAction(),
     this.Store.readTheme()

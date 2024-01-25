@@ -14,7 +14,7 @@
               leave="transform transition ease-in-out duration-300 sm:duration-300" leave-from="translate-x-0"
               leave-to="translate-x-full">
               <DialogPanel class="pointer-events-auto w-screen max-w-md">
-                <div class="flex h-full flex-col  bg-np-base pt-3 shadow-xl">
+                <div class="flex h-full flex-col  bg-np-base pt-3 shadow-xl rounded-l-xl">
 
                   <div class="flex pr-3 justify-end">
 
