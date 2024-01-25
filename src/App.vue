@@ -11,7 +11,7 @@
         <button type="button" aria-label="Open sidebar"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
             @click="Store.leftNavIsOpen = true">
-            <Bars3Icon class=" text-np-base ml-2" :class="Store.isPWA ? 'h-9 w-9':'h-9 w-9'"/>
+            <Bars3Icon class=" text-np-base ml-4" :class="Store.isPWA ? 'h-9 w-9':'h-9 w-9'"/>
           </button>
       </div>
     </div>
