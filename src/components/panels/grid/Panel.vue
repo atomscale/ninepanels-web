@@ -5,9 +5,11 @@
       :aria-label="panel.title"
       :class="[
         isComplete ? 'bg-np-fill text-np-inverted  scale-100 shadow-none' : 'border-np-base border shadow-md scale-100 text-np-base',
-        Store.selectedPanel === panel.id ? '': 'p-1',
+        // Store.selectedPanel === panel.id ? 'p-0': 'p-1',
         {'border-4 border-green-600 shadow-lg scale-110': Store.selectedPanel === panel.id && isComplete},
         {'border-4 border-np-matchbgfill shadow-lg scale-110': Store.selectedPanel === panel.id && !isComplete},
+        {'p-0.5': Store.selectedPanel != panel.id },
+        {'p-x-1': Store.selectedPanel === panel.id },
         ]">
       <div class="m-2">
         {{ this.panel.title }}
