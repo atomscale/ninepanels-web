@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full flex-col mx-auto justify-between ">
+  <div class="flex h-full flex-col mx-auto justify-between overflow-scroll">
 
     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-np-base   sm:rounded-lg  mt-2">

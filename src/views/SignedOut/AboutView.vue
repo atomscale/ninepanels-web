@@ -1,18 +1,20 @@
 <template>
-  <div class="flex h-full flex-col mx-auto justify-between">
+  <div class="flex h-5/6 flex-col mx-auto justify-start overflow-scroll">
 
-    <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md h-5/6">
       <div class="bg-np-base pb-4  sm:rounded-lg  mt-2">
         <div class="text-np-base  text-sm space-y-3 mx-4 font-light">
           <div class="text-2xl text-np-base font-bold">Daily balance meets long term consistency.</div>
-          <div class="">I've always found being consistent at one thing quite hard.
+          <div class="">I've always found being long-term consistent at one thing quite hard.
           </div>
-          <div class="">Being consistent at all the things
+          <div class="">Being consistent at all the things over a long period of time
             seems impossible!
           </div>
           <div class="">For me, if consistency is attained in one thing, sight is lost of all the other things.
           </div>
           <div class="">This can cause problems.
+          </div>
+          <div class="">Additionally, my perception and memory of my consistency was not very accruate.
           </div>
           <div class="">So, I built a simple app to help keep all my important things visible and keep an eye on my consistency. (well, up to nine
             of them...)
