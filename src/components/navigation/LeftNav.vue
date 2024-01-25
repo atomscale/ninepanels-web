@@ -16,7 +16,7 @@
 
             <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
               leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
-              <div class="absolute right-0 -mr-12 pt-2" :class="Store.isPWA ? 'bottom-3': 'bottom-1 '">
+              <div class="absolute right-0 -mr-12 pt-2" :class="Store.isPWA ? 'bottom-6': 'bottom-1 '">
                 <button aria-label="Close sidebar" type="button"
                   class="ml-1 flex h-10 w-10 items-center justify-center rounded-full"
                   @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false">
