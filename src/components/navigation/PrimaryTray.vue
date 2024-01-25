@@ -55,6 +55,7 @@ import RoutePerformanceTray from '@/components/admin/RoutePerformanceTray.vue'
 import HelpTray from '@/components/help/HelpTray.vue'
 import InstallPWATray from '@/components/help/InstallPWATray.vue'
 import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
+import ReleasesTray from '@/components/help/ReleasesTray.vue'
 
 
 // const store = useStore()
@@ -82,7 +83,8 @@ export default {
     InstallPWATray,
     RoutePerformanceTray,
     PatternTray,
-    ChevronLeftIcon
+    ChevronLeftIcon,
+    ReleasesTray
   },
 }
 </script>

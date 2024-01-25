@@ -44,6 +44,18 @@
         <Policies class="m-2 mt-4 mb-5" v-if="policyBoxIsOpen" />
       </div>
 
+      <button @click="toggleAppInfoBox()" class="flex w-full justify-between items-center mb-5 ">
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">App Info</div>
+        <div>
+
+          <ChevronLeftIcon v-if="!appInfoBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
+        </div>
+      </button>
+      <div>
+        <AppInfo class="m-2 mt-4 mb-5" v-if="appInfoBoxIsOpen" />
+      </div>
+
 
       <!-- <div class=" border-b border-np-base"></div> -->
       <button @click="toggleDangerBox()" class="flex w-full justify-between items-center mb-4 ">
@@ -64,7 +76,6 @@
           :buttonText="'Delete Your Account'" :confirmText="'Are you sure?'" />
       </div>
 
-
     </div>
   </div>
 </template>
@@ -78,6 +89,7 @@ import DynamicButton from '@/components/utilities/DynamicButton.vue'
 import Account from '@/components/settings/Account.vue'
 import Policies from '@/components/settings/Policies.vue'
 import Preferences from '@/components/settings/Preferences.vue'
+import AppInfo from '@/components/settings/AppInfo.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 
@@ -95,6 +107,9 @@ export default {
     togglePolicyBox() {
       this.policyBoxIsOpen = !this.policyBoxIsOpen
     },
+    toggleAppInfoBox() {
+      this.appInfoBoxIsOpen = !this.appInfoBoxIsOpen
+    },
     toggleDangerBox() {
       this.dangerBoxIsOpen = !this.dangerBoxIsOpen
     },
@@ -109,13 +124,15 @@ export default {
     ChevronLeftIcon,
     Account,
     Policies,
-    Preferences
+    Preferences,
+    AppInfo
   },
   data() {
     return {
       accountBoxIsOpen: false,
       prefsBoxIsOpen: false,
       policyBoxIsOpen: false,
+      appInfoBoxIsOpen: false,
       dangerBoxIsOpen: false,
 
     }

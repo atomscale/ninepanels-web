@@ -5,10 +5,16 @@
       <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Landing' }"><img
           class="h-8 ml-5 w-auto" src="/9p-logo-empty-filled-sq.png" alt="the nine panels logo" />
       </router-link>
-      <button @click="Store.reloadApp">
 
-        <ArrowPathIcon class="h-5 w-5 text-np-inverted mr-4 mb-1" />
-      </button>
+      <div>
+
+        <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class=" pr-3">
+          <QuestionMarkCircleIcon class="text-np-inverted h-6" />
+        </button>
+        <button @click="Store.reloadApp">
+          <ArrowPathIcon class="h-5 w-5 text-np-inverted mr-4 mb-0.5" />
+        </button>
+      </div>
     </div>
     <div class="m-2 mt-3 space-y-1" aria-labelledby="projects-headline">
       <router-link v-if="Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
@@ -23,10 +29,12 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import HelpTray from '@/components/help/HelpTray.vue'
 
 import {
   GlobeAltIcon,
   ArrowPathIcon,
+  QuestionMarkCircleIcon
 } from '@heroicons/vue/24/outline'
 
 
@@ -34,9 +42,20 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
+  methods: {
+
+    openHelpTray() {
+      this.Store.leftNavIsOpen = false
+      this.Store.primaryTrayIsOpen = true
+      this.Store.primaryComponentName = 'HelpTray'
+      this.Store.primaryComponentProps = null
+    },
+  },
   components: {
     GlobeAltIcon,
     ArrowPathIcon,
+    HelpTray,
+    QuestionMarkCircleIcon
   }
 }
 
