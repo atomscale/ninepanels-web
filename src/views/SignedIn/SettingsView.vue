@@ -1,10 +1,10 @@
 <template>
-  <div class="flex px-4 flex-col pl-12 justify-between h-full mt-5">
+  <div class="flex px-4 flex-col  justify-between h-full mt-5">
 
     <div>
-      <div class=" border-b border-np-base"></div>
+      <!-- <div class=" border-b border-np-base"></div> -->
       <button @click="toggleAccountBox()" class="flex w-full justify-between items-center mb-5 ">
-        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Your Account</div>
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Your Account</div>
         <div>
 
           <ChevronLeftIcon v-if="!accountBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
@@ -14,11 +14,11 @@
       <div>
         <Account class="m-2 mt-4 mb-5" v-if="accountBoxIsOpen" />
       </div>
-      <div class=" border-b border-np-base  "></div>
+      <!-- <div class=" border-b border-np-base  "></div> -->
 
 
       <button @click="togglePrefsBox()" class="flex w-full justify-between items-center mb-5">
-        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Preferences</div>
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Preferences</div>
         <div>
           <ChevronLeftIcon v-if="!prefsBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
           <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
@@ -27,15 +27,13 @@
       <div>
         <Preferences class="m-2 mt-4 mb-5" v-if="prefsBoxIsOpen" />
       </div>
-      <div class=" border-b border-np-base "></div>
+      <!-- <div class=" border-b border-np-base "></div> -->
 
-    </div>
 
-    <div>
-      <div class=" border-b border-np-base  "></div>
+      <!-- <div class=" border-b border-np-base  "></div> -->
 
       <button @click="togglePolicyBox()" class="flex w-full justify-between items-center mb-5 ">
-        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Policies</div>
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Policies</div>
         <div>
 
           <ChevronLeftIcon v-if="!policyBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
@@ -47,9 +45,9 @@
       </div>
 
 
-      <div class=" border-b border-np-base"></div>
+      <!-- <div class=" border-b border-np-base"></div> -->
       <button @click="toggleDangerBox()" class="flex w-full justify-between items-center mb-4 ">
-        <div class="text-base sm:text-sm font-semibold h-5 text-np-base mt-4">Danger Zone</div>
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Danger Zone</div>
         <div>
           <ChevronLeftIcon v-if="!dangerBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
           <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
