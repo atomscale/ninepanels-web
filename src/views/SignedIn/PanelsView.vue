@@ -1,6 +1,6 @@
 <template>
   <transition name="fade" appear>
-    <div class="flex flex-col justify-start w-full h-full pt-1">
+    <div class="flex flex-col justify-start w-full h-full">
       <div class="mb-4">
         <PanelGridFrame @click.stop />
       </div>
