@@ -2,7 +2,7 @@
   <div class="viewport-height" :class="Store.theme">
     <LeftNav :class="Store.user ? Store.theme : null" />
     <PrimaryTray :class="Store.user ? Store.theme : null" />
-    <div id="mainbody" class="h-full flex flex-col " >
+    <div id="mainbody" class="h-full flex flex-col bg-np-base" >
       <!-- <TopNav /> -->
       <div class="flex flex-col h-full justify-center items-center w-full overflow-y-hidden">
         <RouterView class="max-w-md w-full"/>
