@@ -95,5 +95,8 @@ button:active {
 }
 
 
+* {
+  -webkit-tap-highlight-color: transparent; /* Make tap highlight color transparent */
+}
 
 
