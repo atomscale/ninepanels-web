@@ -27,8 +27,6 @@ export const useStore = defineStore({
 
         messages: [],
 
-        loadingBar: false,
-
         isPWA: false,
         isMobile: false,
 
@@ -50,7 +48,6 @@ export const useStore = defineStore({
 
         visGridIsOpen: true,
 
-
         shareBoxIsOpen: false,
 
         passwordResetRequested: false,
@@ -58,9 +55,6 @@ export const useStore = defineStore({
         theme: '',
 
         appVersion: 4, // will come from api
-        announcementBarActive: true, // will come from api
-
-        canShow: false, // do not change
 
         performanceArray: [],
 
@@ -92,10 +86,23 @@ export const useStore = defineStore({
             }
 
         },
-        hideAnnouncement() {
-            this.canShow = false
-            localStorage.setItem('hiddenAnnoucementVersion', this.appVersion)
-            rollbar.info(`app: ${this.user.name} hid the announcement version ${this.appVersion}`)
+        openReleasesTray() {
+            this.leftNavIsOpen = false
+            this.primaryTrayIsOpen = true
+            this.primaryComponentName = 'ReleasesTray'
+            this.primaryComponentProps = null
+        },
+        openAboutTray() {
+            this.leftNavIsOpen = false
+            this.primaryTrayIsOpen = true
+            this.primaryComponentName = 'AboutTray'
+            this.primaryComponentProps = null
+        },
+        openHelpTray() {
+            this.leftNavIsOpen = false
+            this.primaryTrayIsOpen = true
+            this.primaryComponentName = 'HelpTray'
+            this.primaryComponentProps = null
         },
         checkAllComplete() {
             if (this.panels.length > 0) {
@@ -133,9 +140,9 @@ export const useStore = defineStore({
             this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
         },
         reloadApp() {
-            this.loadingBar = true
+
             window.location.reload()
-            this.loadingBar = true
+
 
         },
         openTray() {
@@ -192,7 +199,7 @@ export const useStore = defineStore({
             }
         },
         async getLoginTokenAction(email, password) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.data.access_token, '30d', '', '', 'true')
@@ -204,19 +211,20 @@ export const useStore = defineStore({
             } catch (error) {
                 this.apiError(error)
             } finally {
-                this.loadingBar = false
+
             }
         },
         async deleteUserAction() {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deleteUser(access_token)
+                this.user = null
+                this.panels = null
                 this.signUserOutAction()
+                localStorage.clear()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         signUserOutAction() {
@@ -251,7 +259,7 @@ export const useStore = defineStore({
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
@@ -259,15 +267,13 @@ export const useStore = defineStore({
             } catch (error) {
                 this.apiError(error)
                 return false
-            } finally {
-                this.loadingBar = false
             }
         },
         async readUserAction() {
 
             const access_token = VueCookies.get("9p_access_token")
             if (access_token) {
-                this.loadingBar = true
+
 
                 try {
                     const response = await requests.getUser(access_token)
@@ -275,8 +281,6 @@ export const useStore = defineStore({
                     return response.data.data
                 } catch (error) {
                     this.apiError(error)
-                } finally {
-                    this.loadingBar = false
                 }
             }
         },
@@ -291,15 +295,13 @@ export const useStore = defineStore({
         },
         async readPanelsAction() {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.getPanels(access_token)
                 this.panels = response.data.data
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async updatePanelAction(panel_id, update) {
@@ -317,14 +319,12 @@ export const useStore = defineStore({
         },
         async deletePanelAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async createEntryAction(panel_id, is_complete) {
@@ -340,26 +340,22 @@ export const useStore = defineStore({
         },
         async readEntriesAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.getEntries(access_token, panel_id)
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async deleteEntriesAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deleteEntries(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readPanelConsistencyAction() {
@@ -387,7 +383,7 @@ export const useStore = defineStore({
 
             panel.is_complete = !panel.is_complete
             this.selectedPanel = panelId
-            this.loadingBar = true
+
             this.panelIsDisabled = true
 
 
@@ -406,7 +402,7 @@ export const useStore = defineStore({
                 }
             } finally {
                 this.panelIsDisabled = false
-                this.loadingBar = false
+
                 performance.mark('panelTapEnd')
                 performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
                 performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
@@ -429,7 +425,7 @@ export const useStore = defineStore({
             }
         },
         async startPasswordResetFlow(email) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.postPasswordResetRequest(email)
                 if (response.status == 200) {
@@ -443,12 +439,10 @@ export const useStore = defineStore({
                 }
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.postPasswordReset(password, email, password_reset_token)
                 if (response.status == 200) {
@@ -462,14 +456,12 @@ export const useStore = defineStore({
                 }
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readRoutePerformance() {
             const access_token = VueCookies.get("9p_access_token")
 
-            this.loadingBar = true
+
             try {
 
                 const response = await requests.getRoutePerformance(access_token)
@@ -477,14 +469,12 @@ export const useStore = defineStore({
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readRouteTimings(method_path, window_size) {
             const access_token = VueCookies.get("9p_access_token")
 
-            this.loadingBar = true
+
             try {
 
                 const response = await requests.getRouteTimings(access_token, method_path, window_size)
@@ -495,8 +485,6 @@ export const useStore = defineStore({
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
     }

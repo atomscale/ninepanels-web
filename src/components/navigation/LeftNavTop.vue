@@ -8,9 +8,7 @@
 
       <div>
 
-        <button v-if="Store.user" @click="openHelpTray" type="button" aria-label="Open help" class=" pr-3">
-          <QuestionMarkCircleIcon class="text-np-inverted h-6" />
-        </button>
+        
         <button @click="Store.reloadApp">
           <ArrowPathIcon class="h-5 w-5 text-np-inverted mr-4 mb-0.5" />
         </button>

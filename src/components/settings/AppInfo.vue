@@ -6,9 +6,9 @@
             <div>Version</div>
             <div>1.6.2</div>
         </div>
-        <button @click="toggleReleasesTray" class="flex justify-between w-full">
+        <button @click="Store.openReleasesTray()" class="flex justify-between w-full">
 
-            <div >Release Notes</div>
+            <div>Release Notes</div>
             <ChevronRightIcon class="h-4" />
         </button>
 
@@ -17,6 +17,11 @@
             <div>GitHub</div>
             <ArrowTopRightOnSquareIcon class="h-4" />
         </a>
+        <button @click="Store.openAboutTray()" class="flex justify-between w-full">
+
+            <div>About</div>
+            <ChevronRightIcon class="h-4" />
+        </button>
 
 
     </div>
@@ -28,7 +33,6 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { ChevronRightIcon, ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline'
 import DynamicButton from '@/components/utilities/DynamicButton.vue'
-import ReleasesTray from '@/components/help/ReleasesTray.vue'
 
 export default {
     computed: {
@@ -42,12 +46,7 @@ export default {
         async readUser() {
             await this.Store.readUserAction()
         },
-        toggleReleasesTray() {
-            this.Store.leftNavIsOpen = false
-            this.Store.primaryTrayIsOpen = true
-            this.Store.primaryComponentName = 'ReleasesTray'
-            this.Store.primaryComponentProps = null
-        }
+
     },
     mounted() {
         this.readUser()
@@ -57,7 +56,6 @@ export default {
         DynamicButton,
         ChevronRightIcon,
         ArrowTopRightOnSquareIcon,
-        ReleasesTray
     },
 
 }

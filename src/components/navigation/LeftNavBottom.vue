@@ -2,7 +2,8 @@
   <div class="" :class="{ 'mb-4': Store.isPWA }">
     <div class="m-2 space-y-1" aria-labelledby="projects-headline">
 
-      <router-link v-if="Store.user && Store.user.is_admin" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Admin' }"
+      <router-link v-if="Store.user && Store.user.is_admin"
+        @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Admin' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <BoltIcon class="h-6 w-6" /><span class="ml-3">Admin</span>
       </router-link>
@@ -12,10 +13,10 @@
       </button>
       <ShareBox v-if="Store.shareBoxIsOpen">
       </ShareBox>
-      <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'About' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">About</span>
-      </router-link>
+      <button @click="Store.openHelpTray()"
+        class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
+        <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">Guide</span>
+      </button>
       <router-link v-if="Store.user" @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
         :to="{ name: 'Settings' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">

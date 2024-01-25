@@ -2,17 +2,17 @@
   <div class="viewport-height" :class="Store.theme">
     <LeftNav :class="Store.user ? Store.theme : null" />
     <PrimaryTray :class="Store.user ? Store.theme : null" />
-    <div id="mainbody" class="h-full flex flex-col bg-np-base" >
-      <!-- <TopNav /> -->
+    <div id="mainbody" class="h-full flex flex-col bg-np-base">
+
       <div class="flex flex-col h-full justify-center items-center w-full overflow-y-hidden">
-        <RouterView class="max-w-md w-full"/>
+        <RouterView class="max-w-md w-full" />
       </div>
-      <div v-if="Store.user" class="fixed w-12 " :class="Store.isPWA ? 'bottom-7 left-1': 'bottom-1'">
+      <div v-if="Store.user" class="fixed w-12 " :class="Store.isPWA ? 'bottom-7 left-1' : 'bottom-1'">
         <button type="button" aria-label="Open sidebar"
-            class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
-            @click="Store.leftNavIsOpen = true">
-            <Bars3Icon class=" text-np-base ml-4" :class="Store.isPWA ? 'h-9 w-9':'h-9 w-9'"/>
-          </button>
+          class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
+          @click="Store.leftNavIsOpen = true">
+          <Bars3Icon class=" text-np-base ml-4" :class="Store.isPWA ? 'h-9 w-9' : 'h-9 w-9'" />
+        </button>
       </div>
     </div>
 
@@ -30,34 +30,44 @@ import { mapStores } from 'pinia'
 
 import FlashMessage from '@/components/utilities/FlashMessage.vue'
 import LeftNav from '@/components/navigation/LeftNav.vue'
-import TopNav from '@/components/navigation/TopNav.vue'
 import PrimaryTray from '@/components/navigation/PrimaryTray.vue'
 
 import { Bars3Icon } from '@heroicons/vue/24/outline'
-
-import NProgress from 'nprogress'
 
 export default {
   computed: {
     ...mapStores(useStore),
   },
-  // watch: {
-  //   'Store.loadingBar'(newVal) {
-  //     if (newVal) {
-  //       NProgress.start();
-  //     } else {
-  //       NProgress.done();
-  //     }
-  //   },
-  // },
+  watch: {
+    'Store.user': function (newVal, oldVal) {
+      this.checkAppVersion()
+    }
+  },
+  methods: {
+    checkAppVersion() {
+      const oldVersion = localStorage.getItem('hiddenAnnouncementVersion')
+
+      if (oldVersion) {
+        localStorage.clear()
+      }
+
+      const verInStorage = localStorage.getItem('localAppVersion')
+
+      if (!verInStorage) {
+        this.Store.openHelpTray()
+      } else if (verInStorage < Store.appVersion) {
+        this.Store.openReleasesTray()
+      }
+
+    }
+  },
   mounted() {
     this.Store.readUserAction(),
-    this.Store.readTheme()
+      this.Store.readTheme()
   },
   components: {
     FlashMessage,
     LeftNav,
-    TopNav,
     PrimaryTray,
     Bars3Icon
   }

@@ -56,9 +56,7 @@ import HelpTray from '@/components/help/HelpTray.vue'
 import InstallPWATray from '@/components/help/InstallPWATray.vue'
 import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
 import ReleasesTray from '@/components/help/ReleasesTray.vue'
-
-
-// const store = useStore()
+import AboutTray from '@/components/help/AboutTray.vue'
 
 export default {
   computed: {
@@ -68,6 +66,7 @@ export default {
     closePrimaryTray() {
       this.Store.primaryComponentName = null
       this.Store.primaryComponentProps = {}
+      localStorage.setItem('localAppVersion', this.Store.appVersion)
     }
   },
   components: {
@@ -84,7 +83,8 @@ export default {
     RoutePerformanceTray,
     PatternTray,
     ChevronLeftIcon,
-    ReleasesTray
+    ReleasesTray,
+    AboutTray
   },
 }
 </script>
