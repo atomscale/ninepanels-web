@@ -57,7 +57,7 @@
       </button>
 
 
-      <div class="flex flex-col justify-between items-center" :class="Store.isPWA ? 'mb-10' : 'mb-6'">
+      <div class="flex flex-col justify-between items-center" :class="Store.isPWA ? 'mb-16' : 'mb-6'">
         <!-- <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Reset All Panels'"
           :confirmText="'Are you sure?'" />
           <DynamicButton v-if="dangerBoxIsOpen" class="w-4/5 mb-3" :parentMethod="sendUserDelete" :confirmRequired="true" :buttonText="'Delete All Panels'"
