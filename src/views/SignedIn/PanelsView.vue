@@ -20,7 +20,7 @@
               text-xs text-np-base">
             <div class="flex items-center justify-center">
               <div class="text-sm text-np-base mr-4">create a panel to start</div>
-              <PlusIcon class="h-6 w-6 text-np-base opacity-60 " />
+              <PlusIcon class="h-8 w-8 text-np-base opacity-60 " />
 
             </div>
           </button>

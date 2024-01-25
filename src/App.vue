@@ -7,7 +7,7 @@
       <div class="flex flex-col h-full justify-center items-center w-full overflow-y-hidden">
         <RouterView class="max-w-md w-full"/>
       </div>
-      <div v-if="Store.user" class="fixed  bottom-0 w-12 ">
+      <div v-if="Store.user" class="fixed   w-12 " :class="Store.isPWA ? 'bottom-5': 'bottom-1'">
         <button type="button" aria-label="Open sidebar"
             class="-ml-0.5 -mt-0.5 flex h-12 items-center   justify-center rounded-md text-np-base hover:text-gray-900 focus:outline-none "
             @click="Store.leftNavIsOpen = true">
