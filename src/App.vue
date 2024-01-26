@@ -38,11 +38,11 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  // watch: {
-  //   'Store.user': function (newVal, oldVal) {
-  //     this.checkAppVersion()
-  //   }
-  // },
+  watch: {
+    'Store.user': function (newVal, oldVal) {
+      this.checkAppVersion()
+    }
+  },
   methods: {
     checkAppVersion() {
       const oldVersion = localStorage.getItem('hiddenAnnouncementVersion')
