@@ -46,6 +46,22 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
+    checkAppVersion() {
+      const oldVersion = localStorage.getItem('hiddenAnnouncementVersion')
+
+      if (oldVersion) {
+        localStorage.clear()
+      }
+
+      const verInStorage = localStorage.getItem('localAppVersion')
+
+      if (!verInStorage) {
+        this.Store.openHelpTray()
+      } else if (verInStorage < this.Store.appVersion) {
+        this.Store.openReleasesTray()
+      }
+
+    },
     openCreatePanelTray() {
       this.Store.primaryTrayIsOpen = true
       this.Store.primaryComponentName = 'PanelCreateForm'
@@ -55,6 +71,9 @@ export default {
       this.Store.selectedPanel = null
       console.log("clear focus")
     }
+  },
+  mounted() {
+    this.checkAppVersion()
   },
   components: {
     PanelGridFrame,

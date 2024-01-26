@@ -38,28 +38,9 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  watch: {
-    'Store.user': function (newVal, oldVal) {
-      this.checkAppVersion()
-    }
-  },
+  
   methods: {
-    checkAppVersion() {
-      const oldVersion = localStorage.getItem('hiddenAnnouncementVersion')
 
-      if (oldVersion) {
-        localStorage.clear()
-      }
-
-      const verInStorage = localStorage.getItem('localAppVersion')
-
-      if (!verInStorage) {
-        this.Store.openHelpTray()
-      } else if (verInStorage < Store.appVersion) {
-        this.Store.openReleasesTray()
-      }
-
-    }
   },
   mounted() {
     this.Store.readUserAction(),
