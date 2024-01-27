@@ -1,18 +1,18 @@
 <template >
-    <transition name="fade" appear>
+    <transition name="fade" appear :duration="1800">
 
 
 
-        <div v-if="Store.panels && Store.selectedPanel" class="flex flex-col w-full justify-start  items-center relative">
+        <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day" class="flex flex-col w-full justify-start  items-center relative">
 
 
 
             <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
-                <transition name="fade" appear>
+                <transition name="fade" appear :duration="1800">
 
                     <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
                 </transition>
-                <transition name="fade" appear>
+                <transition name="fade" appear :duration="1800">
 
                     <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
                 </transition>
@@ -100,6 +100,7 @@ export default {
     },
     methods: {
         async getEntries() {
+            this.entries_by_day = null
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
                 this.padEntries()
