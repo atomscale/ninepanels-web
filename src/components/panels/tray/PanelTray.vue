@@ -113,7 +113,11 @@ export default {
       this.Store.selectedPanel = null
       const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
 
-      delete localFilterMRU[this.panel.id]
+
+      if (localFilterMRU) {
+
+        delete localFilterMRU[this.panel.id]
+      }
       localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
     },
     async sendEntriesDelete() {
