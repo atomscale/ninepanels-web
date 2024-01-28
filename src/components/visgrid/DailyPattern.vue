@@ -1,26 +1,27 @@
 <template >
-    <transition name="fade" appear :duration="1800">
+    <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day && this.show"
+        class="flex flex-col w-full justify-start  items-center relative">
 
 
+        <transition name="fade" appear>
 
-        <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day" class="flex flex-col w-full justify-start  items-center relative">
-
+            <div>
 
 
             <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
-                <transition name="fade" appear :duration="1800">
+                <!-- <transition name="fade" appear> -->
 
-                    <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
-                </transition>
-                <transition name="fade" appear :duration="1800">
+                <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
+                <!-- </transition> -->
+                <!-- <transition name="fade" appear > -->
 
-                    <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
-                </transition>
+                <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
+                <!-- </transition> -->
 
             </div>
-            <div v-else>
+            <!-- <div v-else>
                 <LoaderSpin />
-            </div>
+            </div> -->
 
             <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
                 <button
@@ -43,18 +44,19 @@
             <div class="grid grid-cols-7 gap-0.5 mt-2">
                 <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
             </div>
-            <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
+            <div
+                class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
 
-                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                        class="grid grid-cols-7 gap-0.5 ">
-                        <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
+                <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
+                    class="grid grid-cols-7 gap-0.5 ">
+                    <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
 
-                                <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
-                                    :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
-                                </div>
-
+                        <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
+                            :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
                         </div>
+
                     </div>
+                </div>
 
                 <div v-if="showEllipsis" class="flex justify-center bg-np-base">
                     <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
@@ -63,7 +65,12 @@
 
             </div>
         </div>
-    </transition>
+        </transition>
+    </div>
+
+    <div v-else>
+        <LoaderSpin />
+    </div>
 </template>
 
 <script>
@@ -89,18 +96,22 @@ export default {
     },
     watch: {
         panelId(new_val, old_val) {
+            this.entries_by_day = null
             this.getEntries()
         },
         'Store.panels': function (new_val, old_val) {
             this.getEntries()
         },
         'Store.selectedPanel': function (new_val, old_val) {
-            this.entries_by_day = null
             this.readLocalFilterMRU(new_val)
         }
     },
     methods: {
         async getEntries() {
+            if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
+                console.log("flip the last array entry")
+                console.log(this.findLatest(this.entries_by_day))
+            }
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
                 this.padEntries()
@@ -112,6 +123,16 @@ export default {
             });
 
 
+        },
+        findLatest(array) {
+            let latestObject = array.reduce((latest, obj) => {
+                return (new Date(latest.timestamp) > new Date(obj.timestamp)) ? latest : obj;
+            }, array[0]);
+
+            console.log("previous was", latestObject.is_complete)
+            console.log("so this shoudl be", !latestObject.is_complete)
+            latestObject.is_complete = !latestObject.is_complete
+            return latestObject
         },
         async getConsistency() {
             await this.Store.readPanelConsistencyAction()
@@ -178,7 +199,7 @@ export default {
             }
         },
         setLocationAwareLimit() {
-            if (!this.onHome)  {
+            if (!this.onHome) {
 
                 console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
@@ -249,7 +270,8 @@ export default {
             selectedFilterValue: null,
             limit: null,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
-            showEllipsis: false
+            showEllipsis: false,
+            show: true,
         }
     }
 
@@ -257,3 +279,14 @@ export default {
 
 </script>
 
+<style>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
