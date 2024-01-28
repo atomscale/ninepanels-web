@@ -95,12 +95,12 @@ export default {
             this.getEntries()
         },
         'Store.selectedPanel': function (new_val, old_val) {
+            this.entries_by_day = null
             this.readLocalFilterMRU(new_val)
         }
     },
     methods: {
         async getEntries() {
-            this.entries_by_day = null
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
                 this.padEntries()
