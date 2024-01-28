@@ -110,7 +110,8 @@ export default {
         async getEntries() {
             if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
                 console.log("flip the last array entry")
-                console.log(this.findLatest(this.entries_by_day))
+                this.entries_by_day = this.findLatest(this.entries_by_day)
+                console.log(this.entries_by_day)
             }
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
@@ -132,7 +133,7 @@ export default {
             console.log("previous was", latestObject.is_complete)
             console.log("so this shoudl be", !latestObject.is_complete)
             latestObject.is_complete = !latestObject.is_complete
-            return latestObject
+            return array
         },
         async getConsistency() {
             await this.Store.readPanelConsistencyAction()
