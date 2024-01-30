@@ -1,73 +1,75 @@
 <template >
-    <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day && this.show"
-        class="flex flex-col w-full justify-start  items-center relative">
+    <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day && this.show">
+
 
 
         <transition name="fade" appear>
+                <div class="flex flex-col w-full justify-start  items-center relative">
 
-            <div>
 
 
-            <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
-                <!-- <transition name="fade" appear> -->
 
-                <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
-                <!-- </transition> -->
-                <!-- <transition name="fade" appear > -->
+                <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
+                    <!-- <transition name="fade" appear> -->
 
-                <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
-                <!-- </transition> -->
+                    <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
+                    <!-- </transition> -->
+                    <!-- <transition name="fade" appear > -->
 
-            </div>
-            <!-- <div v-else>
+                    <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
+                    <!-- </transition> -->
+
+                </div>
+                <!-- <div v-else>
                 <LoaderSpin />
             </div> -->
 
-            <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
-                <button
-                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                    :class="selectedFilterValue === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                    @click="setSelectedLimit(7)">7</button>
-                <button
-                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
-                    :class="selectedFilterValue === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                    @click="setSelectedLimit(14)">14</button>
-                <button
-                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
-                    :class="selectedFilterValue === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                    @click="setSelectedLimit(30)">30</button>
-                <button
-                    class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
-                    :class="selectedFilterValue === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
-                    @click="infinityToggle()">∞</button>
-            </div>
-            <div class="grid grid-cols-7 gap-0.5 mt-2">
-                <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
-            </div>
-            <div
-                class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
+                <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                        :class="selectedFilterValue === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(7)">7</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                        :class="selectedFilterValue === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(14)">14</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
+                        :class="selectedFilterValue === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(30)">30</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
+                        :class="selectedFilterValue === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
+                        @click="infinityToggle()">∞</button>
+                </div>
+                <div class="grid grid-cols-7 gap-0.5 mt-2">
+                    <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+                </div>
+                <div
+                    class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
 
-                <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                    class="grid grid-cols-7 gap-0.5 ">
-                    <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
+                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
+                        class="grid grid-cols-7 gap-0.5 ">
+                        <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
 
-                        <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
-                            :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+                            <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
+                                :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+                            </div>
+
                         </div>
-
                     </div>
-                </div>
 
-                <div v-if="showEllipsis" class="flex justify-center bg-np-base">
-                    <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
-                </div>
+                    <div v-if="showEllipsis" class="flex justify-center bg-np-base">
+                        <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
+                    </div>
 
+
+                </div>
 
             </div>
-        </div>
-        </transition>
-    </div>
+            </transition>
 
+    </div>
     <div v-else>
         <LoaderSpin />
     </div>
