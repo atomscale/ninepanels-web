@@ -1,9 +1,9 @@
 <template >
-  <div class="flex h-5/6 flex-col mx-auto justify-start overflow-scroll">
+  <div class="flex h-full flex-col mx-auto justify-between overflow-scroll">
 
     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md h-5/6">
-      <div class="bg-np-base pb-4  sm:rounded-lg  mt-2">
-        <div class="text-np-base  text-sm space-y-3 mx-4 font-light">
+      <div class="bg-np-base  sm:rounded-lg  mt-2">
+        <div class="text-np-base pb-3 text-sm space-y-3 mx-4 font-light">
           <div class="text-2xl text-np-base font-bold">Daily balance meets long term consistency.</div>
           <div class="">I've always found being long-term consistent at one thing quite hard.
           </div>

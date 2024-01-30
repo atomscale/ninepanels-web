@@ -4,7 +4,7 @@
         <div class="w-full flex justify-between ">
 
             <div>Version</div>
-            <div>1.6.2</div>
+            <div>5.0</div>
         </div>
         <button @click="Store.openReleasesTray()" class="flex justify-between w-full">
 
@@ -37,19 +37,6 @@ import DynamicButton from '@/components/utilities/DynamicButton.vue'
 export default {
     computed: {
         ...mapStores(useStore)
-    },
-    methods: {
-        async sendUserDelete() {
-            await this.Store.deleteUserAction()
-            this.$router.push('/')
-        },
-        async readUser() {
-            await this.Store.readUserAction()
-        },
-
-    },
-    mounted() {
-        this.readUser()
     },
 
     components: {

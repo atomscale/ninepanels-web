@@ -57,6 +57,7 @@ import InstallPWATray from '@/components/help/InstallPWATray.vue'
 import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
 import ReleasesTray from '@/components/help/ReleasesTray.vue'
 import AboutTray from '@/components/help/AboutTray.vue'
+import PrivacyTray from '@/components/help/PrivacyTray.vue'
 
 export default {
   computed: {
@@ -84,7 +85,8 @@ export default {
     PatternTray,
     ChevronLeftIcon,
     ReleasesTray,
-    AboutTray
+    AboutTray,
+    PrivacyTray
   },
 }
 </script>

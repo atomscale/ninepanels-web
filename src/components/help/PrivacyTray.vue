@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="flex h-full flex-col mx-auto justify-between overflow-scroll">
 
     <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
@@ -50,13 +50,14 @@
 
 
 
-            <li class="ml-4">Operational Emails: These include account creation confirmations, password reset notifications, and
-              service
-              updates. You'll receive these as part of using Ninepanels.</li>
+          <li class="ml-4">Operational Emails: These include account creation confirmations, password reset notifications,
+            and
+            service
+            updates. You'll receive these as part of using Ninepanels.</li>
 
-            <li class="ml-4">Feature Announcements: Occasionally, we might send out emails about new features or other
-              news
-              related to Ninepanels. These are optional.</li>
+          <li class="ml-4">Feature Announcements: Occasionally, we might send out emails about new features or other
+            news
+            related to Ninepanels. These are optional.</li>
 
 
           <div>For non-essential communications like feature announcements and newsletters, you will have the option to
@@ -69,9 +70,32 @@
             receive.</div>
 
           <div class="text-xl font-semibold">Contact Us</div>
-          <div>For any questions, concerns, or to exercise your GDPR rights, please email Nine Panels at ben@ninepanels.com.</div>
+          <div>For any questions, concerns, or to exercise your GDPR rights, please email Nine Panels at
+            ben@ninepanels.com.</div>
 
         </div>
+      </div>
     </div>
   </div>
-</div></template>
+</template>
+
+<script>
+
+import { useStore } from '@/stores/store.js'
+import { mapStores } from 'pinia'
+
+export default {
+  computed: {
+    ...mapStores(useStore),
+  },
+  methods: {
+  },
+  components: {
+  },
+  data() {
+    return {
+    }
+  }
+}
+
+</script>

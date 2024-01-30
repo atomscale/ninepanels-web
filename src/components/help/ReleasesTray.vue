@@ -1,10 +1,24 @@
 <template >
-  <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-np-base font-light mb-4">
+  <div class="flex h-full flex-col mx-auto justify-between overflow-scroll">
 
-    <div class="text-xl text-np-base font-bold">Latest release:</div>
-    <div class="">Refreshed UI: surfacing your consistency </div>
+<div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
+  <div class="bg-np-base   sm:rounded-lg  mt-2">
+    <div class="text-np-base pb-3 text-sm space-y-3 mx-4 font-light">
+      <div class="text-2xl font-bold">Latest Features </div>
+      <div class="text-xl font-semibold">
+        Version 5.1: refresh UI and passwordless!
+      </div>
+      <div>
 
+        Exciting stuff
+      </div>
+
+
+
+    </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>

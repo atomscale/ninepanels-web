@@ -8,7 +8,7 @@
 
       <div>
 
-        
+
         <button @click="Store.reloadApp">
           <ArrowPathIcon class="h-5 w-5 text-np-inverted mr-4 mb-0.5" />
         </button>
@@ -18,7 +18,7 @@
       <router-link v-if="Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
         :to="{ name: 'Panels' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <GlobeAltIcon class="h-6 w-6" /><span class="ml-3">Your panels</span>
+        <GlobeAltIcon class="h-6 w-6" /><span class="ml-3">My panels</span>
       </router-link>
     </div>
   </div>

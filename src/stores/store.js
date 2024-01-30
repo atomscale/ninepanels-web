@@ -98,6 +98,12 @@ export const useStore = defineStore({
             this.primaryComponentName = 'AboutTray'
             this.primaryComponentProps = null
         },
+        openPrivacyTray() {
+            this.leftNavIsOpen = false
+            this.primaryTrayIsOpen = true
+            this.primaryComponentName = 'PrivacyTray'
+            this.primaryComponentProps = null
+        },
         openHelpTray() {
             this.leftNavIsOpen = false
             this.primaryTrayIsOpen = true
