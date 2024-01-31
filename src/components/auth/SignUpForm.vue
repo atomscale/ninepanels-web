@@ -1,9 +1,9 @@
 <template>
-    <div class="flex min-h-full flex-col justify-between px-4   ">
+    <div class="flex min-h-full flex-col justify-between  ">
 
-            <div class="bg-np-base py-4 sm:rounded-lg px-10 ">
+            <div class="bg-np-base  sm:rounded-lg  ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                    <div class="font-bold text-xl text-np-base ">Consistent balance awaits...</div>
+                    <div class="font-bold text-xl text-np-base ">Sign up to unlock long-term consistency</div>
                     <div>
                         <label for="email" class="block font-light text-xs text-np-base">Email address</label>
                         <div class="mt-1">
@@ -53,24 +53,23 @@
 
 
 
-                    <div>
-                        <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
-                            :confirmRequired="false" />
-                    </div>
-                    <div class="font-light text-xs text-np-base">Free forever. No funny business or tracking. No ads, ever.
+                    <div class="font-light text-xs text-np-base">Free for basic user forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
                         your data and you agree to our <button @click="Store.openRightTray('PrivacyTray')"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
 
-                    <div class="font-light text-xs text-np-base">By signing up you also agree to a single, lonely
-                        little cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
-                </form>
+                        <div class="font-light text-xs text-np-base">By signing up you also agree to a single cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
+                        <div>
+                            <DynamicButton :parentMethod="signUserUp" :buttonText="'Create your account'"
+                                :confirmRequired="false" />
+                        </div>
+                    </form>
                 <div class="flex justify-between mt-6">
                     <div class="font-semibold text-xs text-np-base">
-                        <router-link :to=" { name: 'SignIn' }">Sign in instead</router-link>
+                        <button @click="Store.openRightTray('SignInForm', null, 'SignUpForm')">Sign in</button>
                     </div>
                     <div class="font-semibold text-xs text-np-base">
-                        <router-link :to=" { name: 'PasswordReset' }">Forgot your password?</router-link>
+                        <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignUpForm')">Forgot your password?</button>
                     </div>
                 </div>
             </div>
@@ -116,6 +115,7 @@ export default {
             const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
 
             if (resp) {
+                this.Store.closeRightTray()
                 this.$router.push({ name: 'Panels' })
             }
         },

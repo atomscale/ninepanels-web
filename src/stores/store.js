@@ -52,8 +52,6 @@ export const useStore = defineStore({
 
         shareBoxIsOpen: false,
 
-        passwordResetRequested: false,
-
         theme: '',
 
         appVersion: 4, // will come from api

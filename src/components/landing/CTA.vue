@@ -29,10 +29,10 @@
         </div>
         <div class="flex justify-between w-4/5 mt-8 mb-4 ">
             <div class=" text-np-base font-semibold">
-                <button @click="Store.openRightTray('SignInForm', null, 'ReleasesTray')">Sign in</button>
+                <button @click="Store.openRightTray('SignInForm')">Sign in</button>
             </div>
             <div class="font-semibold text-np-base">
-                <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
+                <button @click="Store.openRightTray('SignUpForm')">Sign up</button>
             </div>
         </div>
 

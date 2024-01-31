@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-full flex-col justify-between pt-6">
+    <div class="flex h-full flex-col justify-between">
 
 
         <div class="bg-np-base   sm:rounded-lg ">
@@ -35,10 +35,10 @@
             </form>
             <div class="flex justify-between">
                 <div class="font-semibold text-xs text-np-base">
-                    <router-link :to="{ name: 'SignUp' }">Need an account?</router-link>
+                    <button @click="Store.openRightTray('SignUpForm', null, 'SignInForm', null)">Need an account?</button>
                 </div>
                 <div class="font-semibold text-xs text-np-base">
-                    <router-link :to="{ name: 'PasswordReset' }">Forgot your password?</router-link>
+                    <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignInForm', null)">Forgot password?</button>
                 </div>
             </div>
         </div>

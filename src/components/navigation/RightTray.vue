@@ -65,6 +65,10 @@ import ReleasesTray from '@/components/help/ReleasesTray.vue'
 import AboutTray from '@/components/help/AboutTray.vue'
 import PrivacyTray from '@/components/help/PrivacyTray.vue'
 import SignInForm from '@/components/auth/SignInForm.vue'
+import SignUpForm from '@/components/auth/SignUpForm.vue'
+import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
+import PasswordResetRequestConfirm from '@/components/auth/PasswordResetRequestConfirm.vue'
+
 
 export default {
   computed: {
@@ -97,7 +101,10 @@ export default {
     ReleasesTray,
     AboutTray,
     PrivacyTray,
-    SignInForm
+    SignInForm,
+    SignUpForm,
+    PasswordResetRequestForm,
+    PasswordResetRequestConfirm
   },
 }
 </script>

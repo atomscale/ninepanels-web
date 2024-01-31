@@ -5,8 +5,6 @@ import AdminView from '@/views/SignedIn/AdminView.vue'
 import SettingsView from '@/views/SignedIn/SettingsView.vue'
 
 import LandingView from '@/views/SignedOut/LandingView.vue'
-import SignUpView from '@/views/SignedOut/SignUpView.vue'
-import SignInView from '@/views/SignedOut/SignInView.vue'
 import NotFound from '@/views/SignedOut/NotFound.vue'
 import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
 
@@ -55,16 +53,8 @@ const router = createRouter({
       name: 'Home',
       beforeEnter: monitorHome
     },
-    {
-      path: '/signup',
-      name: 'SignUp',
-      component: SignUpView
-    },
-    {
-      path: '/signin',
-      name: 'SignIn',
-      component: SignInView,
-    },
+
+
     {
       path: '/password_reset',
       name: 'PasswordReset',
