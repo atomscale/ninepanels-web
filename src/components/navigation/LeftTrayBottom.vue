@@ -13,7 +13,7 @@
       </button>
       <ShareBox v-if="Store.shareBoxIsOpen">
       </ShareBox>
-      <button @click="Store.openHelpTray()"
+      <button @click="Store.openRightTray('HelpTray')"
         class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">Guide</span>
       </button>

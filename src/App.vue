@@ -1,7 +1,7 @@
 <template>
   <div class="viewport-height" :class="Store.theme">
-    <LeftNav :class="Store.user ? Store.theme : null" />
-    <PrimaryTray :class="Store.user ? Store.theme : null" />
+    <LeftTray :class="Store.theme" />
+    <RightTray :class="Store.theme" />
     <div id="mainbody" class="h-full flex flex-col bg-np-base">
 
       <div class="flex flex-col h-full justify-center items-center w-full overflow-y-hidden">
@@ -29,8 +29,8 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import FlashMessage from '@/components/utilities/FlashMessage.vue'
-import LeftNav from '@/components/navigation/LeftNav.vue'
-import PrimaryTray from '@/components/navigation/PrimaryTray.vue'
+import LeftTray from '@/components/navigation/LeftTray.vue'
+import RightTray from '@/components/navigation/RightTray.vue'
 
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 
@@ -38,18 +38,19 @@ export default {
   computed: {
     ...mapStores(useStore),
   },
-  
+
   methods: {
 
   },
   mounted() {
     this.Store.readUserAction(),
     this.Store.readTheme()
+    console.log('app reads theme:', this.Store.theme)
   },
   components: {
     FlashMessage,
-    LeftNav,
-    PrimaryTray,
+    LeftTray,
+    RightTray,
     Bars3Icon
   }
 }

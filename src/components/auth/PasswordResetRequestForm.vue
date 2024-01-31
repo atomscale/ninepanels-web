@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4 ">
 
-        <div class="bg-np-base py-4 sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base py-4 sm:rounded-lg px-10 ">
             <form v-if="!this.Store.passwordResetRequested"  @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-lg text-np-base">Let's reset your password:
                 </div>

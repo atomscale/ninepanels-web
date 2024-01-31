@@ -27,8 +27,8 @@
             </TransitionChild>
 
             <div class="flex flex-col justify-between h-full bg-np-fill rounded-r-xl">
-              <LeftNavTop />
-              <LeftNavBottom />
+              <LeftTrayTop />
+              <LeftTrayBottom />
             </div>
 
           </DialogPanel>
@@ -46,8 +46,8 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import LeftNavBottom from '@/components/navigation/LeftNavBottom.vue'
-import LeftNavTop from '@/components/navigation/LeftNavTop.vue'
+import LeftTrayBottom from '@/components/navigation/LeftTrayBottom.vue'
+import LeftTrayTop from '@/components/navigation/LeftTrayTop.vue'
 
 import {
   Dialog,
@@ -65,8 +65,8 @@ export default {
     ...mapStores(useStore),
   },
   components: {
-    LeftNavBottom,
-    LeftNavTop,
+    LeftTrayBottom,
+    LeftTrayTop,
     XMarkIcon,
     Dialog,
     DialogPanel,

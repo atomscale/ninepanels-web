@@ -32,9 +32,11 @@ export const useStore = defineStore({
 
         leftNavIsOpen: false,
 
-        primaryTrayIsOpen: false,
-        primaryComponentName: null,
-        primaryComponentProps: {},
+        rightTrayIsOpen: false,
+        rightTrayComponentName: null,
+        rightTrayComponentProps: null,
+        rightTrayBackNavComponent: null,
+        rightTrayBackNavProps: null,
 
         secondaryTrayIsOpen: false,
 
@@ -86,29 +88,25 @@ export const useStore = defineStore({
             }
 
         },
-        openReleasesTray() {
+        openRightTray(component, props, backNavComponent, backNavProps) {
             this.leftNavIsOpen = false
-            this.primaryTrayIsOpen = true
-            this.primaryComponentName = 'ReleasesTray'
-            this.primaryComponentProps = null
+            this.rightTrayIsOpen = true
+            this.rightTrayComponentName = component
+            this.rightTrayComponentProps = props
+            console.log(`comp: ${component}`)
+            console.log(`props: ${JSON.stringify(props)}`)
+            console.log(`backNavComp: ${backNavComponent}`)
+            console.log(`backProps: ${JSON.stringify(backNavProps)}`)
+            this.rightTrayBackNavComponent = backNavComponent
+            this.rightTrayBackNavProps = backNavProps
         },
-        openAboutTray() {
-            this.leftNavIsOpen = false
-            this.primaryTrayIsOpen = true
-            this.primaryComponentName = 'AboutTray'
-            this.primaryComponentProps = null
-        },
-        openPrivacyTray() {
-            this.leftNavIsOpen = false
-            this.primaryTrayIsOpen = true
-            this.primaryComponentName = 'PrivacyTray'
-            this.primaryComponentProps = null
-        },
-        openHelpTray() {
-            this.leftNavIsOpen = false
-            this.primaryTrayIsOpen = true
-            this.primaryComponentName = 'HelpTray'
-            this.primaryComponentProps = null
+        closeRightTray() {
+            this.rightTrayIsOpen = false
+            this.rightTrayComponentName = null
+            this.rightTrayComponentProps = null
+            this.rightTrayBackNavComponent = null
+            this.rightTrayBackNavProps = null
+            localStorage.setItem('localAppVersion', this.appVersion)
         },
         checkAllComplete() {
             if (this.panels.length > 0) {
@@ -151,13 +149,10 @@ export const useStore = defineStore({
 
 
         },
-        openTray() {
-            this.primaryTrayIsOpen = true
-        },
         readTheme() {
-            const theme = localStorage.getItem('theme')
-            if (theme) {
-                this.theme = theme
+            const localTheme = localStorage.getItem('theme')
+            if (localTheme) {
+                this.theme = localTheme
             } else {
                 this.theme = 'dusk'
             }
@@ -246,9 +241,9 @@ export const useStore = defineStore({
             this.panels = null
             this.consistency = []
             // this.messages = []
-            this.primaryTrayIsOpen = false
-            this.primaryComponentName = null
-            this.primaryComponentProps = {}
+            this.rightTrayIsOpen = false
+            this.rightTrayComponentName = null
+            this.rightTrayComponentProps = {}
             this.leftNavIsOpen = false
             this.shareBoxIsOpen = false
             this.secondaryTrayIsOpen = false

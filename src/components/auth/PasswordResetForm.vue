@@ -4,7 +4,7 @@
 
 
 
-        <div class="bg-np-base py-4 sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base py-4 sm:rounded-lg px-10 ">
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-lg text-np-base">Choose a new password:</div>
                     <div>

@@ -47,7 +47,7 @@ export default {
                     setTimeout(() => this.Store.messages.shift(), 5000)
                 } else {
 
-                    this.Store.primaryTrayIsOpen = false
+                    this.Store.rightTrayIsOpen = false
                     this.Store.panelSortBoxIsOpen = false
                     this.Store.deleteResetBoxIsOpen = false
 

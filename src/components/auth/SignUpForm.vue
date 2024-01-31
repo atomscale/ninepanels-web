@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-full flex-col justify-between px-4   ">
 
-            <div class="bg-np-base py-4 sm:rounded-lg sm:px-10 ">
+            <div class="bg-np-base py-4 sm:rounded-lg px-10 ">
                 <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                     <div class="font-bold text-xl text-np-base ">Consistent balance awaits...</div>
                     <div>
@@ -60,7 +60,7 @@
                     <div class="font-light text-xs text-np-base">Free forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
-                        your data and you agree to our <router-link class="underline" :to="{name: 'Privacy'}">Privacy Policy</router-link>. Your data will never, ever be sold.</div>
+                        your data and you agree to our <button @click="Store.openRightTray('PrivacyTray')"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
 
                     <div class="font-light text-xs text-np-base">By signing up you also agree to a single, lonely
                         little cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
@@ -121,7 +121,6 @@ export default {
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible
-            setTimeout(() => this.passwordVisible = false, 5000)
         }
     },
     components: {

@@ -79,15 +79,15 @@ export default {
     //   this.panel_id = this.Store.consistency[i - 1].panel_id
 
     // },
-    returnToPanelTray() {
+    // returnToPanelTray() {
 
-      this.Store.primaryTrayIsOpen = false
-      this.Store.primaryComponentName = ''
-      this.Store.primaryComponentProps = ''
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PanelTray'
-      this.Store.primaryComponentProps = { panel: this.Store.panels.find(panel => panel.id === this.panel_id) }
-    },
+    //   this.Store.rightTrayIsOpen = false
+    //   this.Store.rightTrayComponentName = ''
+    //   this.Store.rightTrayComponentProps = ''
+    //   this.Store.rightTrayIsOpen = true
+    //   this.Store.rightTrayComponentName = 'PanelTray'
+    //   this.Store.rightTrayComponentProps = { panel: this.Store.panels.find(panel => panel.id === this.panel_id) }
+    // },
 
 
   },

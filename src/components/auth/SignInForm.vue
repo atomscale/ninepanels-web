@@ -1,8 +1,8 @@
 <template>
-    <div class="flex h-full flex-col mt-4 justify-between pt-6 px-4">
+    <div class="flex h-full flex-col justify-between pt-6">
 
 
-        <div class="bg-np-base pt-4  sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base   sm:rounded-lg ">
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-xl text-np-base ">Welcome back! Sign in...</div>
                 <div>
@@ -71,19 +71,24 @@ export default {
     methods: {
         async sendLogIn() {
             const token = await this.Store.getLoginTokenAction(this.username, this.password)
+            this.Store.rightTrayIsOpen = false
             if (token) {
                 this.$router.push({ name: 'Panels' })
             }
+
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible
-            setTimeout(() => this.passwordVisible = false, 5000)
         },
         preventEnter(event) {
             if (event.code === 'Enter' || event.key === 'Enter') {
                 event.preventDefault()
             }
         }
+
+    },
+    mounted() {
+        console.log('signin reads theme:', this.Store.theme)
 
     },
     components: {

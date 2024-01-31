@@ -1,5 +1,5 @@
 <template >
-    <div v-if="Store.panels && Store.selectedPanel && this.entries_by_day && this.show">
+    <div v-if="Store.panels && Store.selectedPanel && entries_by_day && show">
 
 
 
@@ -185,17 +185,17 @@ export default {
             }
         },
         togglePatternTray() {
-            this.Store.primaryTrayIsOpen = false
-            this.Store.primaryComponentName = ''
-            this.Store.primaryComponentProps = ''
-            this.Store.primaryTrayIsOpen = true
-            this.Store.primaryComponentName = 'PatternTray'
-            this.Store.primaryComponentProps = { panelId: this.panelId }
+            this.Store.rightTrayIsOpen = false
+            this.Store.rightTrayComponentName = ''
+            this.Store.rightTrayComponentProps = ''
+            this.Store.rightTrayIsOpen = true
+            this.Store.rightTrayComponentName = 'PatternTray'
+            this.Store.rightTrayComponentProps = { panelId: this.panelId }
         },
         infinityToggle() {
             if (this.onHome === true) {
                 console.log("at home not tray")
-                this.togglePatternTray()
+                this.Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
             } else {
                 console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
@@ -263,6 +263,11 @@ export default {
         this.getConsistency()
         this.setLocationAwareLimit()
         this.readLocalFilterMRU(this.panelId)
+
+        if (!this.onHome) {
+            this.Store.selectedPanel = this.panelId
+
+        }
     },
     data() {
         return {

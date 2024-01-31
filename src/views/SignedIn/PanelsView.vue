@@ -56,16 +56,16 @@ export default {
       const verInStorage = localStorage.getItem('localAppVersion')
 
       if (!verInStorage) {
-        this.Store.openHelpTray()
+        this.Store.openRightTray('HelpTray')
       } else if (verInStorage < this.Store.appVersion) {
-        this.Store.openReleasesTray()
+        this.Store.openRightTray('ReleasesTray')
       }
 
     },
     openCreatePanelTray() {
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PanelCreateForm'
-      this.Store.primaryComponentProps = { emptySlotIndex: 0 }
+      this.Store.rightTrayIsOpen = true
+      this.Store.rightTrayComponentName = 'PanelCreateForm'
+      this.Store.rightTrayComponentProps = { emptySlotIndex: 0 }
     },
     clearFocus() {
       this.Store.selectedPanel = null

@@ -27,7 +27,7 @@
         <div class="flex w-full justify-between items-center">
 
 
-          <button @click="this.togglePatternTray()" class="flex w-full justify-between items-start">
+          <button @click="Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})" class="flex w-full justify-between items-start">
             <div class="font-light text-np-base text-sm">Consistency Pattern</div>
 
 
@@ -100,15 +100,18 @@ import { Switch } from '@headlessui/vue'
 export default {
   computed: {
     ...mapStores(useStore),
+    panel() {
+      return this.Store.panels.find(panel => panel.id === this.panelId)
+    }
   },
   methods: {
     async sendPanelDelete() {
 
-      this.Store.primaryTrayIsOpen = false
+      this.Store.rightTrayIsOpen = false
       this.deleteResetBoxIsOpen = false
       await this.Store.deletePanelAction(this.panel.id)
-      this.Store.primaryComponentName = null
-      this.Store.primaryComponentProps = {}
+      this.Store.rightTrayComponentName = null
+      this.Store.rightTrayComponentProps = {}
       this.Store.readPanelConsistencyAction()
       this.Store.selectedPanel = null
       const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
@@ -122,11 +125,9 @@ export default {
     },
     async sendEntriesDelete() {
 
-      this.Store.primaryTrayIsOpen = false
+      this.Store.closeRightTray()
       this.deleteResetBoxIsOpen = false
       await this.Store.deleteEntriesAction(this.panel.id)
-      this.Store.primaryComponentName = null
-      this.Store.primaryComponentProps = {}
       this.Store.readPanelConsistencyAction()
     },
     togglePanelSortBox() {
@@ -135,14 +136,7 @@ export default {
     toggleDeleteResetBox() {
       this.deleteResetBoxIsOpen = !this.deleteResetBoxIsOpen
     },
-    togglePatternTray() {
-      this.Store.primaryTrayIsOpen = false
-      this.Store.primaryComponentName = ''
-      this.Store.primaryComponentProps = ''
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PatternTray'
-      this.Store.primaryComponentProps = { panelId: this.panel.id }
-    }
+
   },
   components: {
     PanelDescDisplay,
@@ -158,8 +152,8 @@ export default {
     Switch
   },
   props: {
-    panel: {
-      type: Object,
+    panelId: {
+      type: Number,
       required: true
     }
   },

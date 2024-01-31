@@ -6,7 +6,7 @@
             <div>Version</div>
             <div>5.0</div>
         </div>
-        <button @click="Store.openReleasesTray()" class="flex justify-between w-full">
+        <button @click="Store.openRightTray('ReleasesTray')" class="flex justify-between w-full">
 
             <div>Release Notes</div>
             <ChevronRightIcon class="h-4" />
@@ -17,7 +17,7 @@
             <div>GitHub</div>
             <ArrowTopRightOnSquareIcon class="h-4" />
         </a>
-        <button @click="Store.openAboutTray()" class="flex justify-between w-full">
+        <button @click="Store.openRightTray('AboutTray')" class="flex justify-between w-full">
 
             <div>About</div>
             <ChevronRightIcon class="h-4" />

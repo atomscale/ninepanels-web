@@ -65,14 +65,14 @@ export default {
       if (this.title.length === 0) {
         return
       } else {
-        this.Store.primaryTrayIsOpen = false
+        this.Store.rightTrayIsOpen = false
         try {
           await this.Store.createPanelAction(this.emptySlotIndex, this.title, this.description)
           this.Store.readPanelConsistencyAction()
         } finally {
 
-          this.Store.primaryComponentName = null
-          this.Store.primaryComponentProps = {}
+          this.Store.rightTrayComponentName = null
+          this.Store.rightTrayComponentProps = {}
           this.Store.selectedPanel = null
         }
       }

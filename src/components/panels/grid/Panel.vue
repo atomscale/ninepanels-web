@@ -15,7 +15,7 @@
         {{ this.panel.title }}
       </div>
     </button>
-    <button aria-label="open panel detail" @click="openPrimaryTray" class="absolute  p-6 rounded-bl-full"
+    <button aria-label="open panel detail" @click="Store.openRightTray('PanelTray', {panelId: panel.id})" class="absolute  p-6 rounded-bl-full"
       :class="[
         isComplete ? 'text-np-inverted opacity-70' : 'text-np-base opacity-60',
         Store.selectedPanel === panel.id ? 'top-0 right-0': 'top-0.5 right-0.5'
@@ -55,11 +55,11 @@ export default {
     panel: { type: Object }
   },
   methods: {
-    openPrimaryTray() {
+    openRightTray() {
       this.Store.readPanelsAction()
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PanelTray'
-      this.Store.primaryComponentProps = { panel: this.panel }
+      this.Store.rightTrayIsOpen = true
+      this.Store.rightTrayComponentName = 'PanelTray'
+      this.Store.rightTrayComponentProps = { panel: this.panel }
     },
     handlePanelTap(panelId) {
       if (this.Store.selectedPanel === panelId) {

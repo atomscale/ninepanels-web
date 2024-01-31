@@ -3,7 +3,7 @@
     <div class="flex justify-between">
 
       <router-link @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Landing' }"><img
-          class="h-8 ml-5 w-auto" src="/9p-logo-empty-filled-sq.png" alt="the nine panels logo" />
+          class="h-8 ml-5 w-auto" src="/9p-logo-empty-filled-sq.png" alt="the nine panels logo" loading="eager"/>
       </router-link>
 
       <div>
@@ -41,13 +41,6 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
-
-    openHelpTray() {
-      this.Store.leftNavIsOpen = false
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'HelpTray'
-      this.Store.primaryComponentProps = null
-    },
   },
   components: {
     GlobeAltIcon,
