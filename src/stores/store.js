@@ -158,7 +158,19 @@ export const useStore = defineStore({
         saveTheme(newTheme) {
             localStorage.setItem('theme', newTheme)
         },
-        apiError(error) {
+        showMessage(message, error) {
+            if (!uniqueMessages.has(message)) {
+                uniqueMessages.add(message)
+
+                this.messages.push({ message: message })
+
+                setTimeout(() => {
+                    uniqueMessages.delete(message)
+                    this.messages.shift()
+                }, 5000)
+            }
+        },
+        async apiError(error) {
             let errorMsg = "Unknown error...  😬"
 
             if (error.response) {
@@ -171,9 +183,11 @@ export const useStore = defineStore({
                     rollbar.error(`app: network error for a user`)
                     this.signUserOutAction()
                 } else if (status === 401) {
-                    errorMsg = "Signed out"
-                    console.log(error.response.data.error_message)
-                    this.signUserOutAction()
+                    errorMsg = "Please sign back in."
+                    console.log("401", error.response.data.error_message)
+                    await this.signUserOutAction()
+                    setTimeout(() => {}, 1000)
+
                 }
                 else {
                     console.log(error.response)
@@ -186,16 +200,7 @@ export const useStore = defineStore({
                 errorMsg = "Unable to reach the 9P servers?"
             }
 
-            if (!uniqueMessages.has(errorMsg)) {
-                uniqueMessages.add(errorMsg)
-
-                this.messages.push({ message: errorMsg, error: true })
-
-                setTimeout(() => {
-                    uniqueMessages.delete(errorMsg)
-                    this.messages.shift()
-                }, 5000)
-            }
+            this.showMessage(errorMsg)
         },
         async getLoginTokenAction(email, password) {
 
@@ -208,7 +213,13 @@ export const useStore = defineStore({
                 }
                 return response.data.data.access_token
             } catch (error) {
-                this.apiError(error)
+                if (error.response.status === 401) {
+                    console.log("401 in sign up comp")
+                    this.showMessage('Incorrect email or password.')
+                } else {
+
+                    this.apiError(error)
+                }
             } finally {
 
             }
@@ -226,7 +237,7 @@ export const useStore = defineStore({
                 this.apiError(error)
             }
         },
-        signUserOutAction() {
+        async signUserOutAction() {
             console.log("sign user out action")
             try {
                 VueCookies.remove("9p_access_token")
@@ -238,7 +249,6 @@ export const useStore = defineStore({
             this.user = null
             this.panels = null
             this.consistency = []
-            // this.messages = []
             this.rightTrayIsOpen = false
             this.rightTrayComponentName = null
             this.rightTrayComponentProps = {}
@@ -250,11 +260,7 @@ export const useStore = defineStore({
                 router.push('/');
 
             });
-            // this.messages.push({ message: "Signed out", error: false })
-            setTimeout(() => {
-                this.messages.shift()
-            }, 5000)
-            // this.reloadApp()
+           
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
@@ -428,7 +434,7 @@ export const useStore = defineStore({
             try {
                 const response = await requests.postPasswordResetRequest(email)
                 if (response.status == 200) {
-                    this.messages.push({ message: 'Sent you the password reset email...', error: false })
+                    this.messages.push({ message: 'Sent you the link by email...', error: false })
                     setTimeout(() => this.messages.shift(), 7000)
                     return true
                 } else {

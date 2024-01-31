@@ -3,7 +3,14 @@
 
         <div class="bg-np-base sm:rounded-lg ">
             <form   @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                <div class="font-bold text-xl text-np-base">Let's reset your password:
+                <div v-if="!Store.user" class="font-bold text-xl text-np-base">Let's reset your password:
+                </div>
+                <div v-else class="font-bold text-xl text-np-base">Let's change your password:
+                </div>
+                <div class="font-light text-xs text-np-base">You will receive an email with a secure single-use link. Click the
+                    link in the email to set a new password. The link
+                    is valid for ten minutes.<br /><br />The email will come from
+                    <span class="">ben@ninepanels.com.</span> <br /> <br />Feel free to email me if you need any help. 👍
                 </div>
                 <div>
                     <label for="email" class="block font-light text-xs text-np-base">Email address</label>
@@ -13,19 +20,14 @@
                     </div>
                 </div>
                 <div>
-                    <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="'Get a reset link'"
+                    <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="Store.user ? 'Change your password': 'Get a reset link'"
                         :confirmRequired="false" />
-                </div>
-                <div class="font-light text-xs text-np-base">You will receive an email with a reset link. Click the reset
-                    link in the email to set a new password. The link
-                    is valid for ten minutes.<br /><br />The email will come from
-                    <span class="">ben@ninepanels.com.</span> <br /> <br />Feel free to email me if you need any help. 👍
                 </div>
                 <div class="flex justify-between">
                     <div class="font-semibold text-xs text-np-base">
 
                     </div>
-                    <div class="font-semibold text-xs text-np-base">
+                    <div v-if="!Store.user" class="font-semibold text-xs text-np-base">
                         <button @click="Store.openRightTray('SignUpForm', null, 'PasswordResetRequestForm', null)">Need an account?</button>
                     </div>
                 </div>

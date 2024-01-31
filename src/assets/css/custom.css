@@ -102,3 +102,27 @@ button:active {
 html, body {
   touch-action: manipulation;
 }
+
+.fade-l-to-r {
+  @apply relative;
+  @apply before:content-[''];
+  @apply before:absolute;
+  @apply before:inset-0;
+  @apply before:bg-gradient-to-r;
+  @apply before:from-transparent;
+  @apply before:via-transparent;
+  @apply before:to-white; /* or any color you want the fade to */
+  @apply before:bg-[linear-gradient(to_right,_rgba(255,255,255,0)_50%,_rgba(255,255,255,1)_90%)];
+}
+
+.fade-r-to-l {
+  @apply relative;
+  @apply before:content-[''];
+  @apply before:absolute;
+  @apply before:inset-0;
+  @apply before:bg-gradient-to-l;
+  @apply before:from-transparent;
+  @apply before:via-transparent;
+  @apply before:to-white; /* or any color you want the fade to */
+  @apply before:bg-[linear-gradient(to_left,_rgba(255,255,255,0)_50%,_rgba(255,255,255,1)_90%)];
+}

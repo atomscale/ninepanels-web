@@ -71,9 +71,11 @@ export default {
     methods: {
         async sendLogIn() {
             const token = await this.Store.getLoginTokenAction(this.username, this.password)
-            this.Store.rightTrayIsOpen = false
             if (token) {
+                this.Store.rightTrayIsOpen = false
                 this.$router.push({ name: 'Panels' })
+            } else {
+                this.password = ''
             }
 
         },

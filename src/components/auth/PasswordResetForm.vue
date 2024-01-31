@@ -94,8 +94,13 @@ export default {
             this.password_first = ''
             this.password_second = ''
             if (resp) {
-                this.$router.push({ name: 'Panels' })
                 this.Store.openRightTray('SignInForm')
+                if (this.Store.user) {
+                    this.Store.signUserOutAction()
+                } else {
+                    this.$router.push({ name: 'Panels' })
+
+                }
             }
         },
         togglePasswordVisibility() {

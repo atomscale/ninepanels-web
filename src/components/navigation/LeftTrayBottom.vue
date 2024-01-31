@@ -22,20 +22,11 @@
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <CogIcon class="h-6 w-6" /><span class="ml-3">Settings</span>
       </router-link>
-      <router-link v-if="Store.user" @click="Store.signUserOutAction()" :to="{ name: 'Landing' }"
+      <router-link v-if="Store.user" @click="signOut()" :to="{ name: 'Landing' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
       </router-link>
-      <router-link v-if="!Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
-        :to="{ name: 'SignIn' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <UserCircleIcon class="h-6 w-6" /><span class="ml-3">Sign In</span>
-      </router-link>
-      <router-link v-if="!Store.user" @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
-        :to="{ name: 'SignUp' }"
-        class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <UserPlusIcon class="h-6 w-6" /><span class="ml-3">Sign Up</span>
-      </router-link>
+
 
     </div>
   </div>
@@ -86,6 +77,10 @@ export default {
       } else {
         this.toggleShareBox()
       }
+    },
+    signOut() {
+      this.Store.signUserOutAction()
+      this.Store.showMessage('Signed out.')
     },
     toggleShareBox() {
       this.Store.shareBoxIsOpen = !this.Store.shareBoxIsOpen

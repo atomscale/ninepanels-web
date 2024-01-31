@@ -8,6 +8,11 @@
             <div>Email</div>
             <div>{{ Store.user.email }}</div>
         </div>
+        <button @click="Store.openRightTray('PasswordResetRequestForm')" class="flex justify-between w-full">
+
+            <div>Change password</div>
+            <ChevronRightIcon class="h-4" />
+        </button>
         <div v-if="Store.user.is_admin" class="w-full flex justify-between">
             <div>Admin?</div>
             <div>Yep</div>
@@ -21,6 +26,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
+import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import DynamicButton from '@/components/utilities/DynamicButton.vue'
 
 export default {
@@ -41,7 +47,8 @@ export default {
     },
 
     components: {
-        DynamicButton
+        DynamicButton,
+        ChevronRightIcon
     },
 
 }

@@ -1,5 +1,5 @@
 <template >
-  <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-np-base font-light mb-4">
+  <div class="flex flex-col justify-start  space-y-4 h-full text-sm text-np-base font-light">
     <div class="text-2xl font-bold">Welcome to NinePanels </div>
     <div class="text-xl font-semibold">
             Let's get you on your way to long term consistency
@@ -16,7 +16,7 @@
     <div class=" font-semibold">Panel Order - tap the new location</div>
     <video class="h-80" src="@/assets/panel_ordering_slower.mp4" type="video/mp4" autoplay muted loop playsinline></video>
     <div class=" font-semibold">Resetting a panel's history</div>
-    <div class="mb-4">You can reset the panels history or delete the panel (😱) in the <span class="italic">danger
+    <div class="mb-4">You can reset the panels history or delete the panel in the <span class="italic">danger
         zone:</span></div>
 
     <video class="h-80" src="@/assets/reset_panel.mp4" type="video/mp4" autoplay muted loop playsinline></video>
