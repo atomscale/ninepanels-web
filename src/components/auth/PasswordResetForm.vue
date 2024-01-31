@@ -1,10 +1,10 @@
 <template>
-    <div class="flex min-h-full flex-col justify-between px-4 py-6 mt-4">
+    <div class="flex min-h-full flex-col justify-between ">
 
 
 
 
-        <div class="bg-np-base py-4 sm:rounded-lg px-10 ">
+        <div class="bg-np-base sm:rounded-lg ">
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-lg text-np-base">Choose a new password:</div>
                     <div>
@@ -66,8 +66,16 @@ export default {
             password_first: '',
             password_second: '',
             passwordVisible: false,
-            email: this.$route.query.email,
-            password_reset_token: this.$route.query.password_reset_token
+            // email: this.$route.query.email,
+            // password_reset_token: this.$route.query.password_reset_token
+        }
+    },
+    props: {
+        email: {
+            required: true
+        },
+        password_reset_token: {
+            required: true
         }
     },
     computed: {
@@ -86,12 +94,12 @@ export default {
             this.password_first = ''
             this.password_second = ''
             if (resp) {
-                this.$router.push({ name: 'SignIn' })
+                this.$router.push({ name: 'Panels' })
+                this.Store.openRightTray('SignInForm')
             }
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible
-            setTimeout(() => this.passwordVisible = false, 5000)
         }
     },
     components: {

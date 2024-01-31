@@ -67,6 +67,7 @@ import PrivacyTray from '@/components/help/PrivacyTray.vue'
 import SignInForm from '@/components/auth/SignInForm.vue'
 import SignUpForm from '@/components/auth/SignUpForm.vue'
 import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
+import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import PasswordResetRequestConfirm from '@/components/auth/PasswordResetRequestConfirm.vue'
 
 
@@ -104,6 +105,7 @@ export default {
     SignInForm,
     SignUpForm,
     PasswordResetRequestForm,
+    PasswordResetForm,
     PasswordResetRequestConfirm
   },
 }

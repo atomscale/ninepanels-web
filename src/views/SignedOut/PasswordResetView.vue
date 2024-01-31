@@ -1,21 +1,20 @@
 <template >
-
-  <PasswordResetForm v-if="this.$route.query.email && this.$route.query.password_reset_token" />
-  <PasswordResetRequestForm v-else />
-
+  <!-- <PasswordResetForm v-if="this.$route.query.email && this.$route.query.password_reset_token" /> -->
 </template>
 
 <script>
-
-import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
-import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
-
+import { mapStores } from 'pinia'
+import { useStore } from '@/stores/store.js'
 
 export default {
-  components: {
-      PasswordResetRequestForm,
-      PasswordResetForm
-  }
+  computed: {
+    ...mapStores(useStore)
+  },
+  mounted() {
+    this.Store.openRightTray('PasswordResetForm', {email: this.$route.query.email, password_reset_token: this.$route.query.password_reset_token})
+    this.$router.push({ name: 'Panels' })
+  },
+
 }
 
 
