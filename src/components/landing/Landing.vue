@@ -13,85 +13,117 @@
                         <button class="px-2 pt-0.5 pb-1 " @click="Store.openRightTray('SignInForm')">Sign in</button>
                     </div>
                     <div class=" ">
-                        <button class="border-np-base text-np-base border px-2 pt-0.5 pb-1 bg-np-base rounded-lg"
+                        <button
+                            class="border-np-base font-extrabold text-np-base border px-2 pt-0.5 pb-1 bg-np-base rounded-lg"
                             @click="Store.openRightTray('SignUpForm')">Sign up</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mt-20">
+        <div class="mt-12 ">
 
-            <div class="flex flex-col h-full justify-between items-center overflow-auto">
+            <div class="flex flex-col h-full justify-between items-center overflow-y-scroll">
 
                 <div>
-                    <h1 class="text-center mb-6 sm:text-5xl md:text-6xl">
-                        <div class="flex justify-center space-x-2">
+                    <div class="text-center  text-4xl md:text-6xl md:max-w-xl">
 
-                            <span class="block text-np-base text-xl font-light">Welcome to Ninepanels 👋</span>
+                        <div class="flex justify-center  space-x-2 mt-24">
 
-                        </div>
-                        <div class="flex justify-center space-x-2 mt-6">
-
-                            <span class="block text-np-base text-3xl font-light">Daily</span>
-                            <span class="block text-np-base text-3xl font-bold">balance,</span>
-                        </div>
-                        <div class="flex justify-center space-x-2 mt-2">
-
-                            <span class="block text-np-base text-xl font-light italic">meet</span>
-
+                            <span class="block text-np-base font-light">Daily</span>
+                            <span class="block text-np-base  font-bold">balance,</span>
                         </div>
 
-                        <div class="flex justify-center space-x-2 mt-1">
 
-                            <span class="block text-np-base text-3xl font-light">long-term</span>
-                            <span class="block text-np-base text-3xl font-bold">consistency.</span>
-                        </div>
-                    </h1>
-                </div>
-                <div class="flex flex-col justify-start items-center h-full w-full px-3">
-                    <div class="flex  mt-20 relative">
-                        <div class="fade-l-to-r w-5/6">
-                           <img  class='' src="@/assets/v5/grid.jpg" />
-                        </div>
-                        <div>
+                        <div class="flex justify-center  space-x-2">
 
-                            <div class="my-auto h-full align-middle text-np-base font-bold text-right text-xl absolute right-0 top-1/3 w-2/5">
-                                Create panels representing areas of your life that matter to you
-                            </div>
+                            <span class="block text-np-base font-light">long-term <span
+                                    class="font-bold">consistency</span></span>
+
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col justify-start items-center h-full w-full px-3">
-                    <div class="flex  mt-20 relative">
-                        <div class="fade-r-to-l w-5/6 ml-auto">
-                            <img  class='' src="@/assets/v5/completed.jpg" />
-                        </div>
-                        <div>
+                <div class="w-3/5 md:w-1/3 mt-4 text-center text-np-base">A simple consistency and balance visbility tool
+                    for the intrinsically motivated. </div>
 
-                            <div class="my-auto h-full align-middle text-np-base font-bold text-left text-xl absolute left-0 top-10 mr-5 w-2/5">
-                                Simply tap your panel when you engage.
-                            </div>
+
+                <div class="flex flex-col justify-start items-center h-full w-full mt-12 ">
+                    <div class="flex items-center w-full justify-center flex-col relative">
+                        <div class="fade-t-to-b-soft">
+                            <img class='' src="@/assets/v5/grid.jpg" />
+                        </div>
+                        <div class="   w-full h-full absolute bg-white opacity-20">
+                        </div>
+                        <div class="absolute top-2/3 w-2/3 text-4xl text-np-base font-bold text-center align-middle">
+
+                            1. Define your balance
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col justify-start items-center h-full w-full px-3">
-                    <div class="flex  mt-20 relative">
-                        <div class="fade-l-to-r w-5/6">
-                           <img  class='' src="@/assets/v5/graph.jpg" />
-                        </div>
-                        <div>
 
-                            <div class="my-auto h-full align-middle text-np-base font-bold text-right text-xl absolute right-0 top-20 w-3/5">
-                                Visualise your consistency and understand positive patterns
-                            </div>
+                <div class="flex flex-col justify-start items-center h-full w-full mt-6 ">
+                    <div class="flex items-center w-full justify-center flex-col relative">
+                        <div class="fade-t-to-b-hard w-full">
+                            <img class='' src="@/assets/v5/completed.jpg" />
+                        </div>
+                        <div class="   w-full h-full absolute bg-white opacity-20">
+                        </div>
+                        <div class="absolute top-2/3 w-2/3 text-4xl text-np-base font-bold text-center align-middle">
+
+                            2. Tap when you engage.
                         </div>
                     </div>
                 </div>
+
+                <div class="flex flex-col justify-start items-center h-full w-full mt-6 ">
+                    <div class="flex items-center w-full justify-center flex-col relative">
+                        <div class="fade-t-to-b-hard w-full">
+                            <img class='' src="@/assets/v5/graph.jpg" />
+                        </div>
+                        <div class="   w-full h-full absolute bg-white opacity-20">
+                        </div>
+                        <div class="absolute top-3/4 w-2/3 text-4xl text-np-base font-bold text-center align-middle">
+
+                            3. Understand your patterns.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-start text-np-inverted items-center h-full w-full mt-12 bg-np-fill pb-12 px-4">
+
+
+                    <div class="text-4xl font-bold text-center  mt-12 ">
+
+                        Who it's for
+                    </div>
+                    <div class="text-center space-y-4 mt-8">
+
+                        <div>For those who get so in to one thing, sight is lost of all the other things.</div>
+                        <div>For those who see every day as a fresh start, and appreciate the upsides of failing small and fast.</div>
+                        <div>For those who sense that daily(ish) balance and long term consistency are the keys to success.
+                        </div>
+                        <div>For those who choose to define their own success.</div>
+                        <div>For the intrinsically motivated, curious and grown-up folk, who dont need a barrage of 'nudge
+                            notifications' or 'gamification'.</div>
+                        <div>For those who want the essential parts of an app they use to be free forever, with no ads, and no
+                            creepy big-tech bs.</div>
+                    </div>
+                    <div class="flex text-sm justify-end mt-12 font-extrabold text-np-inverted mr-4">
+
+                        <div class=" ">
+                            <button class="border-np-base text-np-base border px-2 pt-0.5 pb-1 bg-np-base rounded-lg"
+                                @click="Store.openRightTray('SignUpForm')">Sign up</button>
+                        </div>
+                    </div>
+
+                </div>
+
 
 
 
             </div>
+
         </div>
+        
     </div>
 </template>
 
@@ -99,10 +131,17 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
+import {
+    ArrowDownCircleIcon
+} from '@heroicons/vue/24/outline'
+
 export default {
     computed: {
         ...mapStores(useStore)
     },
+    components: {
+        ArrowDownCircleIcon
+    }
 
 }
 </script>

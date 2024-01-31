@@ -5,7 +5,7 @@
     <div id="mainbody" class="h-full flex flex-col bg-np-base ">
 
       <div class="flex flex-col h-full justify-center items-center w-full ">
-        <RouterView class="max-w-md w-full " />
+        <RouterView class=" w-full " />
       </div>
       <div v-if="Store.user" class="fixed w-12 " :class="Store.isPWA ? 'bottom-7 left-1' : 'bottom-1'">
         <button type="button" aria-label="Open sidebar"

@@ -103,26 +103,26 @@ html, body {
   touch-action: manipulation;
 }
 
-.fade-l-to-r {
+.fade-t-to-b-hard {
   @apply relative;
   @apply before:content-[''];
   @apply before:absolute;
   @apply before:inset-0;
-  @apply before:bg-gradient-to-r;
+  @apply before:bg-gradient-to-b;
   @apply before:from-transparent;
   @apply before:via-transparent;
   @apply before:to-white; /* or any color you want the fade to */
-  @apply before:bg-[linear-gradient(to_right,_rgba(255,255,255,0)_50%,_rgba(255,255,255,1)_90%)];
+  @apply before:bg-[linear-gradient(to_bottom,_rgba(255,255,255,0)_20%,_rgba(255,255,255,1)_70%)];
+}
+.fade-t-to-b-soft {
+  @apply relative;
+  @apply before:content-[''];
+  @apply before:absolute;
+  @apply before:inset-0;
+  @apply before:bg-gradient-to-b;
+  @apply before:from-transparent;
+  @apply before:via-transparent;
+  @apply before:to-white; /* or any color you want the fade to */
+  @apply before:bg-[linear-gradient(to_bottom,_rgba(255,255,255,0)_40%,_rgba(255,255,255,1)_80%)];
 }
 
-.fade-r-to-l {
-  @apply relative;
-  @apply before:content-[''];
-  @apply before:absolute;
-  @apply before:inset-0;
-  @apply before:bg-gradient-to-l;
-  @apply before:from-transparent;
-  @apply before:via-transparent;
-  @apply before:to-white; /* or any color you want the fade to */
-  @apply before:bg-[linear-gradient(to_left,_rgba(255,255,255,0)_50%,_rgba(255,255,255,1)_90%)];
-}
