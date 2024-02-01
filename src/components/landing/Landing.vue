@@ -57,7 +57,7 @@
                             </div>
                             <div class="absolute bottom-24 w-2/3 text-4xl text-np-base font-bold text-center align-middle">
 
-                                1. Define your balance
+                                1. Define your daily balance
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="absolute bottom-24 w-2/3 text-4xl text-np-base font-bold text-center align-middle">
 
-                                2. Tap when you engage.
+                                2. Tap when you complete.
                             </div>
                         </div>
                     </div>
