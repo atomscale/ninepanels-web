@@ -74,7 +74,7 @@ export const useStore = defineStore({
 
                     const sum = this.performanceArray.reduce((acc, curr) => acc + curr, 0)
                     const avg = this.performanceArray.length ? sum / this.performanceArray.length : 0
-                    console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
+                    // console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
                     this.performanceArray = []
                     // console.log(`perf array reset`)
 
@@ -91,10 +91,10 @@ export const useStore = defineStore({
             this.rightTrayIsOpen = true
             this.rightTrayComponentName = component
             this.rightTrayComponentProps = props
-            console.log(`comp: ${component}`)
-            console.log(`props: ${JSON.stringify(props)}`)
-            console.log(`backNavComp: ${backNavComponent}`)
-            console.log(`backProps: ${JSON.stringify(backNavProps)}`)
+            // console.log(`comp: ${component}`)
+            // console.log(`props: ${JSON.stringify(props)}`)
+            // console.log(`backNavComp: ${backNavComponent}`)
+            // console.log(`backProps: ${JSON.stringify(backNavProps)}`)
             this.rightTrayBackNavComponent = backNavComponent
             this.rightTrayBackNavProps = backNavProps
         },
@@ -184,13 +184,13 @@ export const useStore = defineStore({
                     this.signUserOutAction()
                 } else if (status === 401) {
                     errorMsg = "Please sign back in."
-                    console.log("401", error.response.data.error_message)
+                    // console.log("401", error.response.data.error_message)
                     await this.signUserOutAction()
                     setTimeout(() => {}, 1000)
 
                 }
                 else {
-                    console.log(error.response)
+                    // console.log(error.response)
                     errorMsg = error.response.data.data && error.response.data.is_error ? error.response.data.error_message : `Server is saying ${status}`
                 }
 
@@ -214,7 +214,7 @@ export const useStore = defineStore({
                 return response.data.data.access_token
             } catch (error) {
                 if (error.response.status === 401) {
-                    console.log("401 in sign up comp")
+                    // console.log("401 in sign up comp")
                     this.showMessage('Incorrect email or password.')
                 } else {
 
@@ -238,13 +238,12 @@ export const useStore = defineStore({
             }
         },
         async signUserOutAction() {
-            console.log("sign user out action")
+            // console.log("sign user out action")
             try {
                 VueCookies.remove("9p_access_token")
-                console.log("removed acceess token"
-                )
+                // console.log("removed acceess token")
             } catch (error) {
-                console.log("no cookie to remove")
+                // console.log("no cookie to remove")
             }
             this.user = null
             this.panels = null
@@ -256,7 +255,7 @@ export const useStore = defineStore({
             this.shareBoxIsOpen = false
             this.secondaryTrayIsOpen = false
             getRouter().then(router => {
-                console.log("router push on sign out action")
+                // console.log("router push on sign out action")
                 router.push('/');
 
             });
@@ -484,7 +483,7 @@ export const useStore = defineStore({
 
                 const response = await requests.getRouteTimings(access_token, method_path, window_size)
                 if (response) {
-                    console.log(response.data.data)
+                    // console.log(response.data.data)
                     return response.data.data
                 }
                 // return response.data.data
