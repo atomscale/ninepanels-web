@@ -54,7 +54,7 @@ export const useStore = defineStore({
 
         theme: '',
 
-        appVersion: 5.0, // will come from api
+        appVersion: 5.1, // will come from api
 
         performanceArray: [],
 
