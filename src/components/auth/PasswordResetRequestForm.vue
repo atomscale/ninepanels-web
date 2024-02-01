@@ -48,7 +48,7 @@ import DynamicButton from '@/components/utilities/DynamicButton.vue'
 export default {
     data() {
         return {
-            email: 'bwdyer@gmail.com',
+            email: '',
         }
     },
     computed: {
