@@ -90,7 +90,7 @@ export default {
 
     },
     mounted() {
-        console.log('signin reads theme:', this.Store.theme)
+        // console.log('signin reads theme:', this.Store.theme)
 
     },
     components: {

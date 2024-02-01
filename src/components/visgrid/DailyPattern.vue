@@ -111,9 +111,9 @@ export default {
     methods: {
         async getEntries() {
             if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
-                console.log("flip the last array entry")
+                // console.log("flip the last array entry")
                 this.entries_by_day = this.findLatest(this.entries_by_day)
-                console.log(this.entries_by_day)
+                // console.log(this.entries_by_day)
             }
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
@@ -132,8 +132,8 @@ export default {
                 return (new Date(latest.timestamp) > new Date(obj.timestamp)) ? latest : obj;
             }, array[0]);
 
-            console.log("previous was", latestObject.is_complete)
-            console.log("so this shoudl be", !latestObject.is_complete)
+            // console.log("previous was", latestObject.is_complete)
+            // console.log("so this shoudl be", !latestObject.is_complete)
             latestObject.is_complete = !latestObject.is_complete
             return array
         },
@@ -175,7 +175,7 @@ export default {
         checkScroll() {
             const element = this.$refs.scrollableDiv
             if (!element) {
-                console.log("Element not found")
+                // console.log("Element not found")
                 return
             }
             if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
@@ -194,17 +194,17 @@ export default {
         },
         infinityToggle() {
             if (this.onHome === true) {
-                console.log("at home not tray")
+                // console.log("at home not tray")
                 this.Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
             } else {
-                console.log("not on home, must be tray")
+                // console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
             }
         },
         setLocationAwareLimit() {
             if (!this.onHome) {
 
-                console.log("not on home, must be tray")
+                // console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
             }
         },

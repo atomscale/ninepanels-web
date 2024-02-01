@@ -72,7 +72,7 @@ export default {
           }
 
         } catch (error) {
-          console.log(`web share error`)
+          // console.log(`web share error`)
         }
       } else {
         this.toggleShareBox()
