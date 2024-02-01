@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     checkAppVersion() {
-      const oldVersion = localStorage.getItem('hiddenAnnouncementVersion')
+      const oldVersion = localStorage.getItem('hiddenAnnoucementVersion')
 
       if (oldVersion) {
         localStorage.clear()
