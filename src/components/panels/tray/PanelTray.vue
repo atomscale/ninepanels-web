@@ -27,8 +27,8 @@
         <div class="flex w-full justify-between items-center">
 
 
-          <button @click="this.togglePatternTray()" class="flex w-full justify-between items-start">
-            <div class="font-light text-np-base text-sm">Pattern</div>
+          <button @click="Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})" class="flex w-full justify-between items-start">
+            <div class="font-light text-np-base text-sm">Consistency Pattern</div>
 
 
 
@@ -67,11 +67,11 @@
           <div class="text-xs text-np-base font-light mt-2 w-full">Need a fresh start on this panel? Reset the completion
             history
             and clear all your stats:</div>
-          <DynamicButton class="mt-2 mb-2 w-4/5" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
+          <DynamicButton class="mt-2 mb-2 w-full" :parentMethod="sendEntriesDelete" :buttonText="'Reset stats history'"
             :confirmRequired="true" :confirmText="'Reset all stats?'" />
           <div class="text-xs text-np-base font-light  w-full">Delete the entire panel, including all completion history:
           </div>
-          <DynamicButton class="mt-2 mb-4 w-4/5 " :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
+          <DynamicButton class="mt-2 mb-4 w-full " :parentMethod="sendPanelDelete" :buttonText="'Delete panel'"
             :confirmRequired="true" :confirmText="'Delete forever?'" />
         </div>
 
@@ -100,24 +100,34 @@ import { Switch } from '@headlessui/vue'
 export default {
   computed: {
     ...mapStores(useStore),
+    panel() {
+      return this.Store.panels.find(panel => panel.id === this.panelId)
+    }
   },
   methods: {
     async sendPanelDelete() {
 
-      this.Store.primaryTrayIsOpen = false
+      this.Store.rightTrayIsOpen = false
       this.deleteResetBoxIsOpen = false
       await this.Store.deletePanelAction(this.panel.id)
-      this.Store.primaryComponentName = null
-      this.Store.primaryComponentProps = {}
+      this.Store.rightTrayComponentName = null
+      this.Store.rightTrayComponentProps = {}
       this.Store.readPanelConsistencyAction()
+      this.Store.selectedPanel = null
+      const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
+
+
+      if (localFilterMRU) {
+
+        delete localFilterMRU[this.panel.id]
+      }
+      localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
     },
     async sendEntriesDelete() {
 
-      this.Store.primaryTrayIsOpen = false
+      this.Store.closeRightTray()
       this.deleteResetBoxIsOpen = false
       await this.Store.deleteEntriesAction(this.panel.id)
-      this.Store.primaryComponentName = null
-      this.Store.primaryComponentProps = {}
       this.Store.readPanelConsistencyAction()
     },
     togglePanelSortBox() {
@@ -126,14 +136,7 @@ export default {
     toggleDeleteResetBox() {
       this.deleteResetBoxIsOpen = !this.deleteResetBoxIsOpen
     },
-    togglePatternTray() {
-      this.Store.primaryTrayIsOpen = false
-      this.Store.primaryComponentName = ''
-      this.Store.primaryComponentProps = ''
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PatternTray'
-      this.Store.primaryComponentProps = { panelId: this.panel.id }
-    }
+
   },
   components: {
     PanelDescDisplay,
@@ -149,8 +152,8 @@ export default {
     Switch
   },
   props: {
-    panel: {
-      type: Object,
+    panelId: {
+      type: Number,
       required: true
     }
   },

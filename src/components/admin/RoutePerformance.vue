@@ -26,7 +26,7 @@
             <tbody class="text-np-base text-xs ">
 
                 <tr v-for="method_path in Store.routePerformance.data" :key="method_path.id"
-                    @click="openPrimaryTray(method_path)" class="cursor-pointer">
+                    @click="openRightTray(method_path)" class="cursor-pointer">
 
 
                     <td class="py-2">
@@ -64,25 +64,30 @@ import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 
 export default {
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useStore),
+
     },
     methods: {
         async getRoutePerformance() {
             await this.Store.readRoutePerformance()
         },
-        openPrimaryTray(method_path) {
-            this.Store.primaryTrayIsOpen = true
-            this.Store.primaryComponentName = 'RoutePerformanceTray'
-            this.Store.primaryComponentProps = { method_path: method_path }
+        openRightTray(method_path) {
+            this.Store.rightTrayIsOpen = true
+            this.Store.rightTrayComponentName = 'RoutePerformanceTray'
+            this.Store.rightTrayComponentProps = { method_path: method_path }
         },
-
     },
     // mounted() {
-    //     this.getRoutePerformance()
+    //     this.calcConsistencySize()
     // },
     components: {
         ArrowPathIcon,
     },
+    data() {
+        return {
+            consistencySize: ''
+        }
+    }
 
 }
 </script>

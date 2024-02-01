@@ -1,15 +1,21 @@
 <template>
-    <div class="flex flex-col h-full mt-2">
-        <div class="w-full">
-            <div v-if="Store.user">
-                <div class="text-sm  h-5 text-np-base">Name</div>
-                <div class="mb-2 font-light text-np-base">{{ Store.user.name }}</div>
-                <div class="text-sm  h-5 text-np-base">Email</div>
-                <div class="mb-2 font-light text-np-base">{{ Store.user.email }}</div>
-                <div v-if="Store.user.is_admin" class="text-sm  h-5 text-np-base">Admin?</div>
-                <div v-if="Store.user.is_admin" class="mb-2 font-light text-np-base">Yep</div>
+    <div v-if="Store.user" class="flex flex-col h-full mt-2 space-y-4 mr-4 text-np-base text-sm">
+        <div class="w-full flex justify-between">
+            <div>Name</div>
+            <div>{{ Store.user.name }}</div>
+        </div>
+        <div class="w-full flex justify-between">
+            <div>Email</div>
+            <div>{{ Store.user.email }}</div>
+        </div>
+        <button @click="Store.openRightTray('PasswordResetRequestForm')" class="flex justify-between w-full">
 
-            </div>
+            <div>Change password</div>
+            <ChevronRightIcon class="h-4" />
+        </button>
+        <div v-if="Store.user.is_admin" class="w-full flex justify-between">
+            <div>Admin?</div>
+            <div>Yep</div>
         </div>
 
     </div>
@@ -20,6 +26,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
+import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import DynamicButton from '@/components/utilities/DynamicButton.vue'
 
 export default {
@@ -40,7 +47,8 @@ export default {
     },
 
     components: {
-        DynamicButton
+        DynamicButton,
+        ChevronRightIcon
     },
 
 }

@@ -1,8 +1,8 @@
 <template>
-    <div class="flex h-full flex-col mt-4 justify-between pt-6 px-4">
+    <div class="flex h-full flex-col justify-between">
 
 
-        <div class="bg-np-base pt-4  sm:rounded-lg sm:px-10 ">
+        <div class="bg-np-base   sm:rounded-lg ">
             <form @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
                 <div class="font-bold text-xl text-np-base ">Welcome back! Sign in...</div>
                 <div>
@@ -35,10 +35,10 @@
             </form>
             <div class="flex justify-between">
                 <div class="font-semibold text-xs text-np-base">
-                    <router-link :to="{ name: 'SignUp' }">Need an account?</router-link>
+                    <button @click="Store.openRightTray('SignUpForm', null, 'SignInForm', null)">Need an account?</button>
                 </div>
                 <div class="font-semibold text-xs text-np-base">
-                    <router-link :to="{ name: 'PasswordReset' }">Forgot your password?</router-link>
+                    <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignInForm', null)">Forgot password?</button>
                 </div>
             </div>
         </div>
@@ -72,18 +72,25 @@ export default {
         async sendLogIn() {
             const token = await this.Store.getLoginTokenAction(this.username, this.password)
             if (token) {
+                this.Store.rightTrayIsOpen = false
                 this.$router.push({ name: 'Panels' })
+            } else {
+                this.password = ''
             }
+
         },
         togglePasswordVisibility() {
             this.passwordVisible = !this.passwordVisible
-            setTimeout(() => this.passwordVisible = false, 5000)
         },
         preventEnter(event) {
             if (event.code === 'Enter' || event.key === 'Enter') {
                 event.preventDefault()
             }
         }
+
+    },
+    mounted() {
+        // console.log('signin reads theme:', this.Store.theme)
 
     },
     components: {

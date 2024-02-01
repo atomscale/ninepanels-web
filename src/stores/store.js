@@ -3,13 +3,23 @@ import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
+let router;
+
+async function getRouter() {
+    if (!router) {
+        const routerModule = await import('@/router');
+        router = routerModule.default;
+    }
+    return router;
+}
+
 const uniqueMessages = new Set()
 
 export const useStore = defineStore({
     id: '',
     state: () => ({
         user: null,
-        panels: [],
+        panels: null,
         consistency: [],
         routePerformance: null,
 
@@ -17,16 +27,16 @@ export const useStore = defineStore({
 
         messages: [],
 
-        loadingBar: false,
-
         isPWA: false,
         isMobile: false,
 
         leftNavIsOpen: false,
 
-        primaryTrayIsOpen: false,
-        primaryComponentName: null,
-        primaryComponentProps: {},
+        rightTrayIsOpen: false,
+        rightTrayComponentName: null,
+        rightTrayComponentProps: null,
+        rightTrayBackNavComponent: null,
+        rightTrayBackNavProps: null,
 
         secondaryTrayIsOpen: false,
 
@@ -40,19 +50,15 @@ export const useStore = defineStore({
 
         visGridIsOpen: true,
 
-
         shareBoxIsOpen: false,
-
-        passwordResetRequested: false,
 
         theme: '',
 
         appVersion: 4, // will come from api
-        announcementBarActive: true, // will come from api
 
-        canShow: false, // do not change
+        performanceArray: [],
 
-        performanceArray: []
+        selectedPanel: null,
 
     }),
     actions: {
@@ -68,7 +74,7 @@ export const useStore = defineStore({
 
                     const sum = this.performanceArray.reduce((acc, curr) => acc + curr, 0)
                     const avg = this.performanceArray.length ? sum / this.performanceArray.length : 0
-                    console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
+                    // console.log(`avg resp times for ${this.user.name} across ${perfWindow} calls is ${avg}ms`)
                     this.performanceArray = []
                     // console.log(`perf array reset`)
 
@@ -80,10 +86,25 @@ export const useStore = defineStore({
             }
 
         },
-        hideAnnouncement() {
-            this.canShow = false
-            localStorage.setItem('hiddenAnnoucementVersion', this.appVersion)
-            rollbar.info(`app: ${this.user.name} hid the announcement version ${this.appVersion}`)
+        openRightTray(component, props, backNavComponent, backNavProps) {
+            this.leftNavIsOpen = false
+            this.rightTrayIsOpen = true
+            this.rightTrayComponentName = component
+            this.rightTrayComponentProps = props
+            // console.log(`comp: ${component}`)
+            // console.log(`props: ${JSON.stringify(props)}`)
+            // console.log(`backNavComp: ${backNavComponent}`)
+            // console.log(`backProps: ${JSON.stringify(backNavProps)}`)
+            this.rightTrayBackNavComponent = backNavComponent
+            this.rightTrayBackNavProps = backNavProps
+        },
+        closeRightTray() {
+            this.rightTrayIsOpen = false
+            this.rightTrayComponentName = null
+            this.rightTrayComponentProps = null
+            this.rightTrayBackNavComponent = null
+            this.rightTrayBackNavProps = null
+            localStorage.setItem('localAppVersion', this.appVersion)
         },
         checkAllComplete() {
             if (this.panels.length > 0) {
@@ -121,18 +142,15 @@ export const useStore = defineStore({
             this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
         },
         reloadApp() {
-            this.loadingBar = true
+
             window.location.reload()
-            this.loadingBar = true
+
 
         },
-        openTray() {
-            this.primaryTrayIsOpen = true
-        },
         readTheme() {
-            const theme = localStorage.getItem('theme')
-            if (theme) {
-                this.theme = theme
+            const localTheme = localStorage.getItem('theme')
+            if (localTheme) {
+                this.theme = localTheme
             } else {
                 this.theme = 'dusk'
             }
@@ -140,7 +158,19 @@ export const useStore = defineStore({
         saveTheme(newTheme) {
             localStorage.setItem('theme', newTheme)
         },
-        apiError(error) {
+        showMessage(message) {
+            if (!uniqueMessages.has(message)) {
+                uniqueMessages.add(message)
+
+                this.messages.push({ message: message })
+
+                setTimeout(() => {
+                    uniqueMessages.delete(message)
+                    this.messages.shift()
+                }, 5000)
+            }
+        },
+        async apiError(error) {
             let errorMsg = "Unknown error...  😬"
 
             if (error.response) {
@@ -148,10 +178,19 @@ export const useStore = defineStore({
                 const status = error.response.status
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
-                    errorMsg = "Network error"
+                    errorMsg = "Having trouble reaching the servers... ☹️"
+
                     rollbar.error(`app: network error for a user`)
-                } else {
-                    console.log(error.response)
+                    this.signUserOutAction()
+                } else if (status === 401) {
+                    errorMsg = "Please sign back in."
+                    // console.log("401", error.response.data.error_message)
+                    await this.signUserOutAction()
+                    setTimeout(() => {}, 1000)
+
+                }
+                else {
+                    // console.log(error.response)
                     errorMsg = error.response.data.data && error.response.data.is_error ? error.response.data.error_message : `Server is saying ${status}`
                 }
 
@@ -161,19 +200,10 @@ export const useStore = defineStore({
                 errorMsg = "Unable to reach the 9P servers?"
             }
 
-            if (!uniqueMessages.has(errorMsg)) {
-                uniqueMessages.add(errorMsg)
-
-                this.messages.push({ message: errorMsg, error: true })
-
-                setTimeout(() => {
-                    uniqueMessages.delete(errorMsg)
-                    this.messages.shift()
-                }, 5000)
-            }
+            this.showMessage(errorMsg)
         },
         async getLoginTokenAction(email, password) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.data.access_token, '30d', '', '', 'true')
@@ -183,37 +213,57 @@ export const useStore = defineStore({
                 }
                 return response.data.data.access_token
             } catch (error) {
-                this.apiError(error)
+                if (error.response.status === 401) {
+                    // console.log("401 in sign up comp")
+                    this.showMessage('Incorrect email or password.')
+                } else {
+
+                    this.apiError(error)
+                }
             } finally {
-                this.loadingBar = false
+
             }
         },
         async deleteUserAction() {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deleteUser(access_token)
+                this.user = null
+                this.panels = null
                 this.signUserOutAction()
+                localStorage.clear()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
-        signUserOutAction() {
+        async signUserOutAction() {
+            // console.log("sign user out action")
             try {
                 VueCookies.remove("9p_access_token")
+                // console.log("removed acceess token")
             } catch (error) {
-                console.log("no cookie to remove")
+                // console.log("no cookie to remove")
             }
             this.user = null
-            this.panels = []
+            this.panels = null
             this.consistency = []
-            this.messages = []
+            this.rightTrayIsOpen = false
+            this.rightTrayComponentName = null
+            this.rightTrayComponentProps = {}
+            this.leftNavIsOpen = false
+            this.shareBoxIsOpen = false
+            this.secondaryTrayIsOpen = false
+            getRouter().then(router => {
+                // console.log("router push on sign out action")
+                router.push('/');
+
+            });
+
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
@@ -221,15 +271,13 @@ export const useStore = defineStore({
             } catch (error) {
                 this.apiError(error)
                 return false
-            } finally {
-                this.loadingBar = false
             }
         },
         async readUserAction() {
 
             const access_token = VueCookies.get("9p_access_token")
             if (access_token) {
-                this.loadingBar = true
+
 
                 try {
                     const response = await requests.getUser(access_token)
@@ -237,8 +285,6 @@ export const useStore = defineStore({
                     return response.data.data
                 } catch (error) {
                     this.apiError(error)
-                } finally {
-                    this.loadingBar = false
                 }
             }
         },
@@ -253,15 +299,13 @@ export const useStore = defineStore({
         },
         async readPanelsAction() {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.getPanels(access_token)
                 this.panels = response.data.data
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async updatePanelAction(panel_id, update) {
@@ -279,14 +323,12 @@ export const useStore = defineStore({
         },
         async deletePanelAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deletePanel(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async createEntryAction(panel_id, is_complete) {
@@ -302,26 +344,22 @@ export const useStore = defineStore({
         },
         async readEntriesAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.getEntries(access_token, panel_id)
                 return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async deleteEntriesAction(panel_id) {
             const access_token = VueCookies.get("9p_access_token")
-            this.loadingBar = true
+
             try {
                 const response = await requests.deleteEntries(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readPanelConsistencyAction() {
@@ -333,7 +371,7 @@ export const useStore = defineStore({
                 this.consistency = response.data.data
             } catch (error) {
                 this.apiError(error)
-            }   finally {
+            } finally {
                 performance.mark('panelConsistencyEnd')
                 performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
 
@@ -348,7 +386,8 @@ export const useStore = defineStore({
             performance.mark('panelFindEnd')
 
             panel.is_complete = !panel.is_complete
-            this.loadingBar = true
+            this.selectedPanel = panelId
+
             this.panelIsDisabled = true
 
 
@@ -361,11 +400,13 @@ export const useStore = defineStore({
             } catch (error) {
                 this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
                 setTimeout(() => this.messages.shift(), 5000)
-                const panel = this.panels.find(panel => panel.id === panelId)
-                panel.is_complete = !panel.is_complete
+                if (this.panels) {
+                    const panel = this.panels.find(panel => panel.id === panelId)
+                    panel.is_complete = !panel.is_complete
+                }
             } finally {
                 this.panelIsDisabled = false
-                this.loadingBar = false
+
                 performance.mark('panelTapEnd')
                 performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
                 performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
@@ -388,11 +429,11 @@ export const useStore = defineStore({
             }
         },
         async startPasswordResetFlow(email) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.postPasswordResetRequest(email)
                 if (response.status == 200) {
-                    this.messages.push({ message: 'Sent you the password reset email...', error: false })
+                    this.messages.push({ message: 'Sent you the link by email...', error: false })
                     setTimeout(() => this.messages.shift(), 7000)
                     return true
                 } else {
@@ -402,12 +443,10 @@ export const useStore = defineStore({
                 }
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
-            this.loadingBar = true
+
             try {
                 const response = await requests.postPasswordReset(password, email, password_reset_token)
                 if (response.status == 200) {
@@ -421,14 +460,12 @@ export const useStore = defineStore({
                 }
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readRoutePerformance() {
             const access_token = VueCookies.get("9p_access_token")
 
-            this.loadingBar = true
+
             try {
 
                 const response = await requests.getRoutePerformance(access_token)
@@ -436,23 +473,22 @@ export const useStore = defineStore({
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
         async readRouteTimings(method_path, window_size) {
             const access_token = VueCookies.get("9p_access_token")
 
-            this.loadingBar = true
+
             try {
 
                 const response = await requests.getRouteTimings(access_token, method_path, window_size)
-                return response.data.data
+                if (response) {
+                    // console.log(response.data.data)
+                    return response.data.data
+                }
                 // return response.data.data
             } catch (error) {
                 this.apiError(error)
-            } finally {
-                this.loadingBar = false
             }
         },
     }

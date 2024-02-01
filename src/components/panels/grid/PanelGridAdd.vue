@@ -22,9 +22,9 @@ export default {
 
   methods: {
     openCreatePanelTray() {
-      this.Store.primaryTrayIsOpen = true
-      this.Store.primaryComponentName = 'PanelCreateForm'
-      this.Store.primaryComponentProps = {emptySlotIndex: this.slotIndex}
+      this.Store.rightTrayIsOpen = true
+      this.Store.rightTrayComponentName = 'PanelCreateForm'
+      this.Store.rightTrayComponentProps = {emptySlotIndex: this.slotIndex}
     }
   },
   components: {

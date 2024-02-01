@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between items-center ">
+    <div class="flex justify-between items-center mr-4">
         <div class="text-np-base text-sm">
             Theme
         </div>

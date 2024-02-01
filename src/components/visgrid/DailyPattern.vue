@@ -1,54 +1,77 @@
 <template >
-    <div class="flex flex-col w-full  justify-start  items-center relative">
-
-        <div v-if="entries_by_day" class="flex justify-evenly items-center mb-4 w-full font-bold">
-
-            <div class="text-np-base ml-2">{{ daysCompleted() }} / {{ numDays() }}</div>
-            <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) *100 ).toFixed(0) }}%</div>
-        </div>
-        <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
-                :class="selected === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(7)">7</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
-                :class="selected === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(14)">14</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
-                :class="selected === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(30)">30</button>
-            <button
-                class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
-                :class="selected === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
-                @click="setSelectedLimit(1000)">∞</button>
-        </div>
-        <div class="grid grid-cols-7 gap-1 mt-4">
-
-            <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
-        </div>
-        <div class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative">
+    <div v-if="Store.panels && Store.selectedPanel && entries_by_day && show">
 
 
 
-            <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
-                class="grid grid-cols-7 gap-1 mt-1 mx-1">
-                <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
-                    <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
-                        :class="entry.is_complete ? 'bg-np-fill scale-105' : 'bg-np-base border-np-base border-2 scale-95'">
-                    </div>
-                    <!-- <div v-else class="h-7 w-7 ">
+        <transition name="fade" appear>
+                <div class="flex flex-col w-full justify-start  items-center relative">
 
-                        </div> -->
+
+
+
+                <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
+                    <!-- <transition name="fade" appear> -->
+
+                    <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
+                    <!-- </transition> -->
+                    <!-- <transition name="fade" appear > -->
+
+                    <div class="text-np-base mr-2">{{ ((daysCompleted() / numDays()) * 100).toFixed(0) }}%</div>
+                    <!-- </transition> -->
+
                 </div>
-            </div>
-            <div v-if="showEllipsis" class="flex justify-center bg-np-base">
-                <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
-            </div>
+                <!-- <div v-else>
+                <LoaderSpin />
+            </div> -->
+
+                <div class="flex justify-between items-center w-40  text-xs text-np-base font-extralight">
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border border-np-base w-full py-1 rounded-l-md"
+                        :class="selectedFilterValue === 7 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(7)">7</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-r border-t border-b w-full py-1"
+                        :class="selectedFilterValue === 14 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(14)">14</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border-t border-b w-full py-1"
+                        :class="selectedFilterValue === 30 ? 'bg-np-accent border-gray-300 border text-np-inverted shadow-none scale-95' : ''"
+                        @click="setSelectedLimit(30)">30</button>
+                    <button
+                        class="hover:bg-np-accent hover:text-np-inverted transition shadow-sm duration-200 border-np-base border rounded-r-md w-full py-0.5 text-sm"
+                        :class="selectedFilterValue === 1000 ? 'bg-np-accent  border text-np-inverted shadow-none scale-95' : ''"
+                        @click="infinityToggle()">∞</button>
+                </div>
+                <div class="grid grid-cols-7 gap-0.5 mt-2">
+                    <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+                </div>
+                <div
+                    class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
+
+                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
+                        class="grid grid-cols-7 gap-0.5 ">
+                        <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
+
+                            <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
+                                :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div v-if="showEllipsis" class="flex justify-center bg-np-base">
+                        <div class=" absolute -bottom-4 z-50 text-2xl text-gray-200 ">. . .</div>
+                    </div>
 
 
-        </div>
+                </div>
+
+            </div>
+            </transition>
+
+    </div>
+    <div v-else>
+        <LoaderSpin />
     </div>
 </template>
 
@@ -57,7 +80,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-
+import LoaderSpin from '@/components/utilities/LoaderSpin.vue'
 
 export default {
     computed: {
@@ -66,22 +89,37 @@ export default {
     },
     props: {
         panelId: {
-            type: Number,
             required: true
+        },
+        onHome: {
+            required: true,
+            type: Boolean
         }
     },
     watch: {
         panelId(new_val, old_val) {
+            this.entries_by_day = null
             this.getEntries()
+        },
+        'Store.panels': function (new_val, old_val) {
+            this.getEntries()
+        },
+        'Store.selectedPanel': function (new_val, old_val) {
+            this.readLocalFilterMRU(new_val)
         }
     },
     methods: {
         async getEntries() {
+            if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
+                // console.log("flip the last array entry")
+                this.entries_by_day = this.findLatest(this.entries_by_day)
+                // console.log(this.entries_by_day)
+            }
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
             if (this.entries_by_day) {
-                // console.log("entries pre pad", this.entries_by_day)
                 this.padEntries()
-                // console.log("entries post pad", this.entries_by_day)
+            } else {
+                this.entries_by_day = null
             }
             this.$nextTick(() => {
                 this.checkScroll();
@@ -89,10 +127,23 @@ export default {
 
 
         },
+        findLatest(array) {
+            let latestObject = array.reduce((latest, obj) => {
+                return (new Date(latest.timestamp) > new Date(obj.timestamp)) ? latest : obj;
+            }, array[0]);
+
+            // console.log("previous was", latestObject.is_complete)
+            // console.log("so this shoudl be", !latestObject.is_complete)
+            latestObject.is_complete = !latestObject.is_complete
+            return array
+        },
+        async getConsistency() {
+            await this.Store.readPanelConsistencyAction()
+        },
         daysCompleted() {
             if (this.entries_by_day) {
 
-                const trimmedEntriesByDay = this.entries_by_day.slice(0, this.limit  + this.missingDays() + 1)
+                const trimmedEntriesByDay = this.entries_by_day.slice(0, this.limit + this.missingDays() + 1)
 
                 const arrayOfCompleted = trimmedEntriesByDay.filter(completedEntry => completedEntry.is_complete === true)
                 return arrayOfCompleted.length
@@ -105,11 +156,7 @@ export default {
 
             return actualLen
         },
-        setSelectedLimit(value) {
-            this.selected = value
-            this.limit = value
-            // this.getEntries()
-        },
+
         missingDays() {
             const today = new Date()
             const currentDayOfWeek = today.getDay()
@@ -128,7 +175,7 @@ export default {
         checkScroll() {
             const element = this.$refs.scrollableDiv
             if (!element) {
-                console.error("Element not found")
+                // console.log("Element not found")
                 return
             }
             if (element.scrollTop + element.clientHeight >= element.scrollHeight) {
@@ -136,25 +183,103 @@ export default {
             } else {
                 this.showEllipsis = true
             }
+        },
+        togglePatternTray() {
+            this.Store.rightTrayIsOpen = false
+            this.Store.rightTrayComponentName = ''
+            this.Store.rightTrayComponentProps = ''
+            this.Store.rightTrayIsOpen = true
+            this.Store.rightTrayComponentName = 'PatternTray'
+            this.Store.rightTrayComponentProps = { panelId: this.panelId }
+        },
+        infinityToggle() {
+            if (this.onHome === true) {
+                // console.log("at home not tray")
+                this.Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
+            } else {
+                // console.log("not on home, must be tray")
+                this.setSelectedLimit(1000)
+            }
+        },
+        setLocationAwareLimit() {
+            if (!this.onHome) {
+
+                // console.log("not on home, must be tray")
+                this.setSelectedLimit(1000)
+            }
+        },
+        setSelectedLimit(filterValue) {
+            this.selectedFilterValue = filterValue
+            this.limit = filterValue
+
+
+            if (this.onHome) {
+
+                this.persistFilterMRULocal(this.panelId, filterValue)
+            }
+
+        },
+        readLocalFilterMRU(panelId) {
+            if (this.onHome) {
+
+                const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
+
+                if (!localFilterMRU) {
+                    this.selectedFilterValue = 30
+                    this.limit = 30
+                }
+                if (localFilterMRU && localFilterMRU[panelId]) {
+
+
+
+
+                    this.selectedFilterValue = localFilterMRU[panelId]
+                    this.limit = localFilterMRU[panelId]
+
+                } else {
+                    this.selectedFilterValue = 30
+                    this.limit = 30
+                }
+            }
+        },
+        persistFilterMRULocal(panelId, filterValue) {
+            const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
+
+            if (localFilterMRU) {
+                localFilterMRU[panelId] = filterValue
+                localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
+            } else {
+                const localFilterMRU = { [panelId]: filterValue }
+                localStorage.setItem('localFilterMRU', JSON.stringify(localFilterMRU))
+            }
         }
 
     },
     components: {
-
+        LoaderSpin
     },
     mounted() {
         this.getEntries()
+        this.getConsistency()
+        this.setLocationAwareLimit()
+        this.readLocalFilterMRU(this.panelId)
+
+        if (!this.onHome) {
+            this.Store.selectedPanel = this.panelId
+
+        }
     },
     data() {
         return {
-            entries_by_day: [],
+            entries_by_day: null,
             sort_key: null,
             sort_direction: null,
             offset: null,
-            selected: 1000,
-            limit: 1000,
+            selectedFilterValue: null,
+            limit: null,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
-            showEllipsis: false
+            showEllipsis: false,
+            show: true,
         }
     }
 
@@ -162,3 +287,14 @@ export default {
 
 </script>
 
+<style>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

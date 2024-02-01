@@ -24,8 +24,9 @@
     <div v-else>
 
         <button type="submit" @click="dispatchParentMethod()" :aria-label="this.buttonText"
-            class="flex justify-center mb-4 border border-np-base rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-np-base text-np-base  transition ease-in-out duration-200 shadow-sm">
-            {{ this.buttonText }}
+            class="h-10 flex justify-center mb-4 border border-np-base rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-np-base text-np-base  transition ease-in-out duration-200 shadow-sm">
+            <span v-if="!this.isLoading">{{ this.buttonText }}</span>
+            <LoaderSpin v-else />
         </button>
     </div>
 </template>
@@ -37,10 +38,13 @@ import {
     CheckIcon
 } from '@heroicons/vue/24/outline'
 
+import LoaderSpin from '@/components/utilities/LoaderSpin.vue'
+
 export default {
     data() {
         return {
-            buttonConfirmState: false
+            buttonConfirmState: false,
+            isLoading: false
         }
     },
     props: {
@@ -63,8 +67,10 @@ export default {
         },
     },
     methods: {
-        dispatchParentMethod() {
-            this.parentMethod()
+        async dispatchParentMethod() {
+            this.isLoading = true
+            await this.parentMethod()
+            this.isLoading = false
         },
         toggleConfirmState() {
             this.buttonConfirmState = !this.buttonConfirmState
@@ -72,7 +78,8 @@ export default {
     },
     components: {
         XMarkIcon,
-        CheckIcon
+        CheckIcon,
+        LoaderSpin
     }
 
 }

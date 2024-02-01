@@ -1,6 +1,7 @@
 import axios from "axios"
 import { v4 as uuidv4 } from "uuid"
 
+
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
 
@@ -12,14 +13,15 @@ apiClient.interceptors.request.use((config) => {
 });
 
 apiClient.interceptors.response.use(
-    (response) => {
+    response => {
         localStorage.setItem('lastReload', new Date().toDateString())
         return response
     },
-    (error) => {
+    error => {
         return Promise.reject(error)
     }
 )
+
 
 export default {
 
@@ -167,13 +169,11 @@ export default {
     },
     getRouteTimings(access_token, method_path, window_size) {
 
-        return apiClient.get(`/admin/routes/timings`, {
+        return apiClient.get("/admin/routes/timings", {
             params: {
                 method_path: method_path,
                 window_size: window_size
-            }
-
-        }, {
+            },
             headers: {
                 Authorization: "Bearer " + access_token,
             }

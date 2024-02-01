@@ -37,8 +37,11 @@ export default {
 
       const resp = await this.Store.readRouteTimings(this.method_path.method_path)
 
-      this.chartData.datasets[0].data = resp.readings.reverse()
-      this.chartData.labels =resp.timestamps.reverse()
+      if (resp) {
+
+        this.chartData.datasets[0].data = resp.readings.reverse()
+        this.chartData.labels =resp.timestamps.reverse()
+      }
     }
   },
   components: {

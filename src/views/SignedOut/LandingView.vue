@@ -1,17 +1,19 @@
 <template>
-  <div class="flex flex-col ">
-    <div class="flex-grow">
-      <transition name="fade" appear>
-        <CTA />
-      </transition>
+  <div class="h-full w-full flex flex-col align-middle items-center overflow-y-scroll overflow-x-hidden">
+    <div class="w-full bg-np-fill">
+
+        <Landing :class="Store.theme" />
+
     </div>
   </div>
 </template>
 
 <script>
-import CTA from '@/components/landing/CTA.vue'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import CTA from '@/components/landing/CTA.vue'
+import Landing from '@/components/landing/Landing.vue'
+import Landing2 from '@/components/landing/Landing2.vue'
 
 export default {
   computed: {
@@ -19,6 +21,8 @@ export default {
   },
   components: {
     CTA,
+    Landing,
+    Landing2
   },
 }
 

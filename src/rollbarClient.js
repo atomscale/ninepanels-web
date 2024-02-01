@@ -15,7 +15,7 @@ if (import.meta.env.VITE_NINEPANELS_ENV !== 'FEATURE') {
         }
     );
 } else {
-    console.log("rollbar deactivated for feature")
+    // console.log("rollbar deactivated for feature")
     rollbar =
         {
             log: ()  => {},
