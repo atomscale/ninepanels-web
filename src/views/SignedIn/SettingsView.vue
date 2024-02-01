@@ -1,5 +1,5 @@
 <template>
-  <div class="flex px-4 flex-col  justify-between h-full ">
+  <div class="flex px-4 flex-col w-full sm:w-2/3 md:w-2/3 lg:w-1/3 justify-between h-full ">
 
     <div>
       <!-- <div class=" border-b border-np-base"></div> -->
@@ -43,7 +43,7 @@
       <div>
         <AppInfo class="m-2 mt-4 mb-5" v-if="appInfoBoxIsOpen" />
       </div>
-      
+
       <button @click="togglePolicyBox()" class="flex w-full justify-between items-center mb-5 ">
         <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Policies</div>
         <div>
