@@ -51,7 +51,7 @@
                     <div class="flex flex-col justify-start items-center h-full w-full md:w-1/3 mt-4  ">
                         <div class="flex items-center w-full justify-center flex-col relative">
                             <div class="fade-t-to-b-soft">
-                                <img class='' src="@/assets/v5/grid.jpg" />
+                                <img class='' src="@/assets/v5/grid.jpg" loading="eager" />
                             </div>
                             <div class="   w-full h-full absolute bg-white opacity-20">
                             </div>
@@ -65,7 +65,7 @@
                     <div class="flex flex-col justify-start items-center h-full   w-full md:w-1/3">
                         <div class="flex items-center w-full justify-center flex-col relative">
                             <div class="fade-t-to-b-hard w-full">
-                                <img class='' src="@/assets/v5/completed.jpg" />
+                                <img class='' src="@/assets/v5/completed.jpg"  loading="eager"/>
                             </div>
                             <div class="   w-full h-full absolute bg-white opacity-20">
                             </div>
@@ -79,7 +79,7 @@
                     <div class="flex flex-col justify-start items-center h-full  w-full md:w-1/3 ">
                         <div class="flex items-center w-full justify-center flex-col relative">
                             <div class="fade-t-to-b-hard w-full">
-                                <img class='' src="@/assets/v5/graph.jpg" />
+                                <img class='' src="@/assets/v5/graph.jpg"  loading="eager"/>
                             </div>
                             <div class="   w-full h-full absolute bg-white opacity-20">
                             </div>
