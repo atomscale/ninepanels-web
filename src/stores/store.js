@@ -158,7 +158,7 @@ export const useStore = defineStore({
         saveTheme(newTheme) {
             localStorage.setItem('theme', newTheme)
         },
-        showMessage(message, error) {
+        showMessage(message) {
             if (!uniqueMessages.has(message)) {
                 uniqueMessages.add(message)
 
@@ -260,7 +260,7 @@ export const useStore = defineStore({
                 router.push('/');
 
             });
-           
+
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")

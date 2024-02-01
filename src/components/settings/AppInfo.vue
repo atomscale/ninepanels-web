@@ -11,6 +11,11 @@
             <div>Release Notes</div>
             <ChevronRightIcon class="h-4" />
         </button>
+        <button @click="Store.openRightTray('InstallPWATray')" class="flex justify-between w-full">
+
+            <div>Install as PWA</div>
+            <ChevronRightIcon class="h-4" />
+        </button>
 
         <a href="https://github.com/atomscale/ninepanels" target="_blank" class="flex justify-between w-full">
 

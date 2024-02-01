@@ -32,6 +32,18 @@
 
       <!-- <div class=" border-b border-np-base  "></div> -->
 
+      <button @click="toggleAppInfoBox()" class="flex w-full justify-between items-center mb-5 ">
+        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">App Info</div>
+        <div>
+
+          <ChevronLeftIcon v-if="!appInfoBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
+          <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
+        </div>
+      </button>
+      <div>
+        <AppInfo class="m-2 mt-4 mb-5" v-if="appInfoBoxIsOpen" />
+      </div>
+      
       <button @click="togglePolicyBox()" class="flex w-full justify-between items-center mb-5 ">
         <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">Policies</div>
         <div>
@@ -44,17 +56,6 @@
         <Policies class="m-2 mt-4 mb-5" v-if="policyBoxIsOpen" />
       </div>
 
-      <button @click="toggleAppInfoBox()" class="flex w-full justify-between items-center mb-5 ">
-        <div class="text-sm sm:text-sm font-semibold h-5 text-np-base mt-4">App Info</div>
-        <div>
-
-          <ChevronLeftIcon v-if="!appInfoBoxIsOpen" class="h-5 w-5 text-np-base mt-4"></ChevronLeftIcon>
-          <ChevronDownIcon v-else class="h-5 w-5 text-np-base mt-4"></ChevronDownIcon>
-        </div>
-      </button>
-      <div>
-        <AppInfo class="m-2 mt-4 mb-5" v-if="appInfoBoxIsOpen" />
-      </div>
 
 
       <!-- <div class=" border-b border-np-base"></div> -->

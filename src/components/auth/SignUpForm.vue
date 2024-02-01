@@ -66,7 +66,7 @@
                     </form>
                 <div class="flex justify-between mt-6">
                     <div class="font-semibold text-xs text-np-base">
-                        <button @click="Store.openRightTray('SignInForm', null, 'SignUpForm')">Sign in</button>
+                        <button @click="Store.openRightTray('SignInForm', null, 'SignUpForm')">Sign in instead</button>
                     </div>
                     <div class="font-semibold text-xs text-np-base">
                         <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignUpForm')">Forgot your password?</button>

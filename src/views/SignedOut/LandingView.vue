@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col align-middle items-center overflow-y-scroll overflow-x-hidden">
-    <div class="w-full md:w-2/3">
+    <div class="w-full bg-np-fill">
 
         <Landing :class="Store.theme" />
 

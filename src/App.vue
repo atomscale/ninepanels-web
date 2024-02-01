@@ -1,7 +1,7 @@
 <template>
   <div class="viewport-height" :class="Store.theme">
     <LeftTray :class="Store.theme" />
-    <RightTray :class="Store.theme" class="z-50" />
+    <RightTray :class="Store.theme" class="z-40" />
     <div id="mainbody" class="h-full flex flex-col bg-np-base ">
 
       <div class="flex flex-col h-full justify-center items-center w-full ">
