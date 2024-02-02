@@ -12,7 +12,7 @@
     <div class="flex flex-col justify-between h-full">
 
 
-      <div class="mb-6">
+      <div class="mb-6 h-full">
 
         <component :is="this.Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="this.panel.id"
           :description="this.panel.description">
@@ -27,7 +27,9 @@
         <div class="flex w-full justify-between items-center">
 
 
-          <button @click="Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})" class="flex w-full justify-between items-start">
+          <button
+            @click="Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId })"
+            class="flex w-full justify-between items-start">
             <div class="font-light text-np-base text-sm">Consistency Pattern</div>
 
 
@@ -102,6 +104,11 @@ export default {
     ...mapStores(useStore),
     panel() {
       return this.Store.panels.find(panel => panel.id === this.panelId)
+    }
+  },
+  watch: {
+    'Store.panelDescEditState': function (newVal, oldVal) {
+      console.log(`panelDescEditState = ${newVal}, was ${oldVal}`)
     }
   },
   methods: {

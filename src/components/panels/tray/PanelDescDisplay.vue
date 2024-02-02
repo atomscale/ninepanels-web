@@ -1,11 +1,11 @@
 <template >
-  <div class="relative">
+  <div class="relative h-full">
 
-    <div class="flex justify-between w-full">
+    <div class="flex justify-between w-full h-full">
       <div ref="scrollableDiv" class="overflow-scroll w-full" @scroll="checkScroll">
 
         <VueShowdown v-if="this.panel.description"
-          class="text-sm mr-2 max-h-64 font-light text-np-base w-full whitespace-pre-line " flavor="vanilla"
+          class="text-sm mr-2 max-h-24 font-light text-np-base w-full whitespace-pre-line " flavor="vanilla"
           :options="{ emoji: true }" :markdown="this.panel.description">
         </VueShowdown>
         <div v-else class="italic font-extralight text-gray-400 text-sm">Why is this important to you?</div>

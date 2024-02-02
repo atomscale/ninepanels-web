@@ -1,21 +1,23 @@
 <template >
-  <div class="flex justify-end items-center mb-2 h-5">
+  <div class="realtive h-full">
 
-    <div class="flex ">
-      <button class="px-2" @click="dispatchUpdatePanelAction()">
-        <CheckIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
-      </button>
-      <button class="ml-2" @click="toggleEditState()">
-        <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
-      </button>
+    <div class="flex justify-end items-center mb-2">
+
+      <div class="flex">
+        <button class="px-2" @click="dispatchUpdatePanelAction()">
+          <CheckIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
+        </button>
+        <button class="ml-2" @click="toggleEditState()">
+          <XMarkIcon class="h-5 w-5 text-gray-400 hover:text-np-base" />
+        </button>
+      </div>
+    </div>
+
+    <div class="flex h-full pb-6">
+      <textarea @input="updateLen()" v-model="localDescription" type="text" required="true"
+        class="block resize-none  w-full h-full text-np-base bg-np-base appearance-none text-sm rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
     </div>
   </div>
-
-  <div class="flex h-auto">
-    <textarea @input="updateLen()" v-model="localDescription" type="text" required="true"
-      class="block resize-none h-80 w-full text-np-base bg-np-base appearance-none text-sm rounded-md border border-np-base px-2 py-1 placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-gray-500 " />
-  </div>
-
 </template>
 
 <script>

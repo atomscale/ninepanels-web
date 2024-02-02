@@ -66,7 +66,7 @@ export const useStore = defineStore({
 
             const elem = semver.split(".")
 
-            const majorMinor = elem.slice(0,2)
+            const majorMinor = elem.slice(0, 2)
 
             const versionNumStr = majorMinor.join('.')
 
@@ -132,10 +132,6 @@ export const useStore = defineStore({
             this.rightTrayIsOpen = true
             this.rightTrayComponentName = component
             this.rightTrayComponentProps = props
-            // console.log(`comp: ${component}`)
-            // console.log(`props: ${JSON.stringify(props)}`)
-            // console.log(`backNavComp: ${backNavComponent}`)
-            // console.log(`backProps: ${JSON.stringify(backNavProps)}`)
             this.rightTrayBackNavComponent = backNavComponent
             this.rightTrayBackNavProps = backNavProps
         },
@@ -145,6 +141,9 @@ export const useStore = defineStore({
             this.rightTrayComponentProps = null
             this.rightTrayBackNavComponent = null
             this.rightTrayBackNavProps = null
+            this.panelTitleEditState = false
+            this.panelDescEditState = false
+            this.deleteResetBoxIsOpen = false
             localStorage.setItem('localAppVersion', this.appVersion)
         },
         checkAllComplete() {
@@ -168,13 +167,10 @@ export const useStore = defineStore({
                 }
 
                 if (numComplete === numPanels) {
-                    this.messages.push({ message: getRandomElement(congratsMsgs), error: false })
+                    this.showMessage(getRandomElement(congratsMsgs))
 
-                    setTimeout(() => {
-                        this.messages.shift()
-                    }, 5000)
-                }
             }
+        }
         },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;

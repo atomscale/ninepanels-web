@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="Store.rightTrayIsOpen">
-    <Dialog as="div" class="relative z-40" @close="this.closeRightTray(); Store.rightTrayIsOpen = false">
+    <Dialog as="div" class="relative z-40" @close="Store.closeRightTray(); Store.rightTrayIsOpen = false">
       <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-600 bg-opacity-75 " />
@@ -18,7 +18,8 @@
 
                   <div class="flex pr-3 justify-between ml-2">
 
-                    <button v-if="Store.rightTrayBackNavComponent" type="button" class="rounded-md text-np-base hover:text-np-base"
+                    <button v-if="Store.rightTrayBackNavComponent" type="button"
+                      class="rounded-md text-np-base hover:text-np-base"
                       @click="Store.openRightTray(Store.rightTrayBackNavComponent, Store.rightTrayBackNavProps)">
                       <span class="sr-only">Close panel</span>
                       <ChevronLeftIcon class="h-6 w-6 text-np-base " aria-hidden="true" />
@@ -74,16 +75,6 @@ import PasswordResetRequestConfirm from '@/components/auth/PasswordResetRequestC
 export default {
   computed: {
     ...mapStores(useStore)
-  },
-  methods: {
-    closeRightTray() {
-      this.Store.rightTrayComponentName = null
-      this.Store.rightTrayComponentProps = {}
-      localStorage.setItem('localAppVersion', this.Store.appVersion)
-    }
-  },
-  mounted() {
-    this.Store.readTheme()
   },
   components: {
     Dialog,

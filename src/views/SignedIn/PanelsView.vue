@@ -54,7 +54,6 @@ export default {
     },
     clearFocus() {
       this.Store.selectedPanel = null
-      // console.log("clear focus")
     }
   },
   mounted() {
