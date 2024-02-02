@@ -54,7 +54,7 @@ export const useStore = defineStore({
 
         theme: '',
 
-        appVersion: "5.1.1",
+        appVersion: "5.1.2",
 
         performanceArray: [],
 
@@ -84,7 +84,7 @@ export const useStore = defineStore({
             const verInStorage = localStorage.getItem('localAppVersion')
             // the ui logic is that a Releases Tray is shown if the major or minor number bumps
             // the major must stay in sync with the api major.
-            // backend and front end sync and agree on major version number
+            // backend and front end sync and agree on major version number only
             // front end diplays relases tray on major or minor bump.
             // frotn end will not dsiplay releases tray on patch bump
 
