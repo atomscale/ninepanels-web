@@ -4,7 +4,7 @@
         <div class="w-full flex justify-between ">
 
             <div>Version</div>
-            <div>5.0</div>
+            <div>{{Store.appVersion}}</div>
         </div>
         <button @click="Store.openRightTray('ReleasesTray')" class="flex justify-between w-full">
 

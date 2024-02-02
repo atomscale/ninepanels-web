@@ -2,17 +2,22 @@ import axios from "axios"
 import { v4 as uuidv4 } from "uuid"
 
 
-const apiClient = axios.create({
+const tokenApi = axios.create({
     baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT,
 
 })
 
-apiClient.interceptors.request.use((config) => {
+const apiV5 = axios.create({
+    baseURL: import.meta.env.VITE_NINEPANELS_SERVER_ROOT + '/v5',
+
+})
+
+apiV5.interceptors.request.use((config) => {
     config.headers['X-Request-ID'] = uuidv4()
     return config
 });
 
-apiClient.interceptors.response.use(
+apiV5.interceptors.response.use(
     response => {
         localStorage.setItem('lastReload', new Date().toDateString())
         return response
@@ -29,14 +34,14 @@ export default {
         const form = new URLSearchParams()
         form.append('username', email) // username as email to comply with OAuth
         form.append('password', password)
-        return apiClient.post("/token", form)
+        return tokenApi.post("/token", form)
     },
     postUser(access_token, email, name, password) {
         const form = new URLSearchParams()
         form.append('email', email) // not related to OAuth so using 'email'
         form.append('name', name)
         form.append('password', password)
-        return apiClient.post(
+        return apiV5.post(
             "/users",
             form,
             {
@@ -47,21 +52,21 @@ export default {
         )
     },
     getUser(access_token) {
-        return apiClient.get("/users", {
+        return apiV5.get("/users", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
     deleteUser(access_token) {
-        return apiClient.delete("/users", {
+        return apiV5.delete("/users", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
     getPanels(access_token) {
-        return apiClient.get("/panels", {
+        return apiV5.get("/panels", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -74,7 +79,7 @@ export default {
         form.append('position', position)
         form.append('title', title)
         form.append('description', description)
-        return apiClient.post("/panels",
+        return apiV5.post("/panels",
             form,
             {
                 headers: {
@@ -86,7 +91,7 @@ export default {
     },
     patchPanel(access_token, panel_id, update) {
 
-        return apiClient.patch("/panels/" + panel_id,
+        return apiV5.patch("/panels/" + panel_id,
             update,
             {
                 headers: {
@@ -96,7 +101,7 @@ export default {
             })
     },
     deletePanel(access_token, panel_id) {
-        return apiClient.delete("/panels/" + panel_id, {
+        return apiV5.delete("/panels/" + panel_id, {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -104,7 +109,7 @@ export default {
     },
     postEntry(access_token, panel_id, is_complete) {
 
-        return apiClient.post(`/panels/${panel_id}/entries`,
+        return apiV5.post(`/panels/${panel_id}/entries`,
             {
                 is_complete: is_complete
             },
@@ -117,7 +122,7 @@ export default {
     },
     getEntries(access_token, panel_id) {
 
-        return apiClient.get(`/panels/${panel_id}/entries`, {
+        return apiV5.get(`/panels/${panel_id}/entries`, {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -125,7 +130,7 @@ export default {
         })
     },
     deleteEntries(access_token, panel_id) {
-        return apiClient.delete("/panels/" + panel_id + '/entries', {
+        return apiV5.delete("/panels/" + panel_id + '/entries', {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -133,7 +138,7 @@ export default {
     },
     getPanelConsistency(access_token) {
 
-        return apiClient.get("/metrics/panels/consistency", {
+        return apiV5.get("/metrics/panels/consistency", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -144,7 +149,7 @@ export default {
         const form = new URLSearchParams()
         form.append('email', email)
 
-        return apiClient.post("/request_password_reset",
+        return apiV5.post("/auth/request_password_reset",
             form,
         )
     },
@@ -154,13 +159,13 @@ export default {
         form.append('email', email)
         form.append('password_reset_token', password_reset_token)
 
-        return apiClient.post("/password_reset",
+        return apiV5.post("/auth/password_reset",
             form,
         )
     },
     getRoutePerformance(access_token) {
 
-        return apiClient.get("/admin/routes", {
+        return apiV5.get("/admin/routes", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
@@ -169,7 +174,7 @@ export default {
     },
     getRouteTimings(access_token, method_path, window_size) {
 
-        return apiClient.get("/admin/routes/timings", {
+        return apiV5.get("/admin/routes/timings", {
             params: {
                 method_path: method_path,
                 window_size: window_size

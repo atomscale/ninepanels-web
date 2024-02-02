@@ -46,22 +46,7 @@ export default {
     ...mapStores(useStore),
   },
   methods: {
-    checkAppVersion() {
-      const oldVersion = localStorage.getItem('hiddenAnnoucementVersion')
 
-      if (oldVersion) {
-        localStorage.clear()
-      }
-
-      const verInStorage = localStorage.getItem('localAppVersion')
-
-      if (!verInStorage) {
-        this.Store.openRightTray('HelpTray')
-      } else if (verInStorage < this.Store.appVersion) {
-        this.Store.openRightTray('ReleasesTray')
-      }
-
-    },
     openCreatePanelTray() {
       this.Store.rightTrayIsOpen = true
       this.Store.rightTrayComponentName = 'PanelCreateForm'
@@ -73,7 +58,7 @@ export default {
     }
   },
   mounted() {
-    this.checkAppVersion()
+    this.Store.checkAppVersion()
   },
   components: {
     PanelGridFrame,

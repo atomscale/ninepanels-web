@@ -1,12 +1,12 @@
 <template>
     <div  v-if="this.confirmRequired">
         <button   v-if="!this.buttonConfirmState" type="submit" @click="toggleConfirmState()" :aria-label="this.buttonText"
-            class="flex justify-center border text-np-alert border-np-alert rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-np-base   transition ease-in-out duration-200 shadow-sm">
+            class="flex justify-center border text-np-alert border-np-alert rounded-md w-full  py-2 px-4 text-sm bg-np-base   transition ease-in-out duration-200 shadow-sm">
             {{ this.buttonText }}
         </button>
 
         <div v-else
-            class="flex justify-center  border border-np-alert bg-np-alert rounded-md w-full  max-w-sm  py-2 px-4 text-sm  text-white  shadow-sm">
+            class="flex justify-center  border border-np-alert bg-np-alert rounded-md w-full  py-2 px-4 text-sm  text-white  shadow-sm">
             <button aria-label="Confirm button action"
                 class="px-2 mr-5 hover:scale-125 transition ease-in-out duration-200 " @click="dispatchParentMethod()">
 
@@ -24,7 +24,7 @@
     <div v-else>
 
         <button type="submit" @click="dispatchParentMethod()" :aria-label="this.buttonText"
-            class="h-10 flex justify-center mb-4 border border-np-base rounded-md w-full  max-w-sm  py-2 px-4 text-sm bg-np-base text-np-base  transition ease-in-out duration-200 shadow-sm">
+            class="h-10 flex justify-center mb-4 border border-np-base rounded-md w-full  py-2 px-4 text-sm bg-np-base text-np-base  transition ease-in-out duration-200 shadow-sm">
             <span v-if="!this.isLoading">{{ this.buttonText }}</span>
             <LoaderSpin v-else />
         </button>

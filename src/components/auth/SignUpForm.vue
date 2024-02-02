@@ -53,7 +53,7 @@
 
 
 
-                    <div class="font-light text-xs text-np-base">Free for basic user forever. No funny business or tracking. No ads, ever.
+                    <div class="font-light text-xs text-np-base">Free for basic use forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
                         your data and you agree to our <button @click="Store.openRightTray('PrivacyTray')"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
