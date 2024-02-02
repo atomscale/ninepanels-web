@@ -54,7 +54,7 @@ export const useStore = defineStore({
 
         theme: '',
 
-        appVersion: 5.1, // will come from api
+        appVersion: "5.1.1",
 
         performanceArray: [],
 
@@ -62,6 +62,47 @@ export const useStore = defineStore({
 
     }),
     actions: {
+        splitSemVer(semver) {
+
+            const elem = semver.split(".")
+
+            const majorMinor = elem.slice(0,2)
+
+            const versionNumStr = majorMinor.join('.')
+
+            let versionNum = parseFloat(versionNumStr)
+
+            return versionNum
+        },
+        checkAppVersion() {
+            const oldVersion = localStorage.getItem('hiddenAnnoucementVersion')
+
+            if (oldVersion) {
+                localStorage.clear()
+            }
+
+            const verInStorage = localStorage.getItem('localAppVersion')
+            // the ui logic is that a Releases Tray is shown if the major or minor number bumps
+            // the major must stay in sync with the api major.
+            // backend and front end sync and agree on major version number
+            // front end diplays relases tray on major or minor bump.
+            // frotn end will not dsiplay releases tray on patch bump
+
+            if (!verInStorage) {
+                this.openRightTray('HelpTray')
+                localStorage.setItem('localAppVersion', this.appVersion)
+                return
+            }
+            const localVersionNum = this.splitSemVer(verInStorage)
+            const currentVersionNum = this.splitSemVer(this.appVersion)
+
+
+            if (currentVersionNum > localVersionNum) {
+                this.openRightTray('ReleasesTray')
+            }
+            localStorage.setItem('localAppVersion', this.appVersion)
+
+        },
         addPerfMetric(perfMeasure) {
             this.performanceArray.push(perfMeasure)
             // console.log(`perfmeasure of ${perfMeasure} added`)
@@ -186,7 +227,7 @@ export const useStore = defineStore({
                     errorMsg = "Please sign back in."
                     // console.log("401", error.response.data.error_message)
                     await this.signUserOutAction()
-                    setTimeout(() => {}, 1000)
+                    setTimeout(() => { }, 1000)
 
                 }
                 else {

@@ -6,7 +6,7 @@
         <div class="text-np-base pb-3 text-sm space-y-3 mx-4 font-light">
 
           <div class="text-2xl font-extrabold">
-            Version 5.0 - A refreshed UI for better consistency visibility
+            Version 5 - A refreshed UI for better consistency visibility
           </div>
           <div>
 
