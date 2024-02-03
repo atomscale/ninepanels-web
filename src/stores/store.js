@@ -3,15 +3,6 @@ import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
-let router;
-
-async function getRouter() {
-    if (!router) {
-        const routerModule = await import('@/router');
-        router = routerModule.default;
-    }
-    return router;
-}
 
 const uniqueMessages = new Set()
 
@@ -169,8 +160,8 @@ export const useStore = defineStore({
                 if (numComplete === numPanels) {
                     this.showMessage(getRandomElement(congratsMsgs))
 
+                }
             }
-        }
         },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
@@ -291,12 +282,6 @@ export const useStore = defineStore({
             this.leftNavIsOpen = false
             this.shareBoxIsOpen = false
             this.secondaryTrayIsOpen = false
-            getRouter().then(router => {
-                // console.log("router push on sign out action")
-                router.push('/');
-
-            });
-
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
@@ -483,21 +468,11 @@ export const useStore = defineStore({
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
-
-            try {
-                const response = await requests.postPasswordReset(password, email, password_reset_token)
-                if (response.status == 200) {
-                    this.messages.push({ message: 'Password successfully reset. Please sign in', error: false })
-                    setTimeout(() => this.messages.shift(), 5000)
-                    return true
-                } else {
-                    this.messages.push({ message: 'Something went wrong... email me!', error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                    return false
-                }
-            } catch (error) {
-                this.apiError(error)
+            const response = await requests.postPasswordReset(password, email, password_reset_token)
+            if (response.status == 200) {
+                return
             }
+            throw new Error('error in postPasswordReset')
         },
         async readRoutePerformance() {
             const access_token = VueCookies.get("9p_access_token")

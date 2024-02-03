@@ -153,15 +153,15 @@ export default {
             form,
         )
     },
-    postPasswordReset(new_password, email, password_reset_token) {
+    async postPasswordReset(new_password, email, password_reset_token) {
         const form = new URLSearchParams()
         form.append('new_password', new_password)
         form.append('email', email)
         form.append('password_reset_token', password_reset_token)
 
-        return apiV5.post("/auth/password_reset",
-            form,
-        )
+        const resp = await apiV5.post("/auth/password_reset", form)
+        return resp
+
     },
     getRoutePerformance(access_token) {
 

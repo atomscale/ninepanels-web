@@ -83,24 +83,28 @@ export default {
     },
     methods: {
         async dispatchPasswordReset() {
-
             if (this.password_first !== this.password_second) {
-                this.Store.messages.push({ message: "New passwords do not match" })
-                setTimeout(() => this.Store.messages.shift(), 5000)
+                this.Store.showMessage("New passwords do not match")
                 return // stop function
             }
 
-            const resp = await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
-            this.password_first = ''
-            this.password_second = ''
-            if (resp) {
-                this.Store.openRightTray('SignInForm')
+            try {
+                await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
+
                 if (this.Store.user) {
                     this.Store.signUserOutAction()
+                    this.$router.push({ name: 'Landing'})
+                    this.Store.showMessage('Password successfully changed, please sign in.')
+                    this.Store.openRightTray('SignInForm')
                 } else {
-                    this.$router.push({ name: 'Panels' })
-
+                    this.$router.push({ name: 'Landing' })
+                    this.Store.showMessage('Password successfully reset, please sign in.')
                 }
+            } catch (error) {
+                this.Store.showMessage('Something went wrong, email me!')
+            } finally {
+                this.password_first = ''
+                this.password_second = ''
             }
         },
         togglePasswordVisibility() {
