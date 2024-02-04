@@ -102,7 +102,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = useStore()
-  store.visGridIsOpen = false
   store.shareBoxIsOpen = false
   store.checkMobile()
   store.checkPWA()

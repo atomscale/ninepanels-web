@@ -158,7 +158,7 @@ export default {
         form.append('new_password', new_password)
         form.append('email', email)
         form.append('password_reset_token', password_reset_token)
-
+        
         const resp = await apiV5.post("/auth/password_reset", form)
         return resp
 

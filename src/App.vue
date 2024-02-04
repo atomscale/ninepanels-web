@@ -45,7 +45,6 @@ export default {
   mounted() {
     this.Store.readUserAction(),
     this.Store.readTheme()
-    // console.log('app reads theme:', this.Store.theme)
   },
   components: {
     FlashMessage,

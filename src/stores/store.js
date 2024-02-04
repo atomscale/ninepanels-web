@@ -9,47 +9,40 @@ const uniqueMessages = new Set()
 export const useStore = defineStore({
     id: '',
     state: () => ({
+        // userStore
         user: null,
+
+        // panelStore
         panels: null,
         consistency: [],
-        routePerformance: null,
 
+        // uiStore
         window_size: null,
-
         messages: [],
-
         isPWA: false,
         isMobile: false,
-
         leftNavIsOpen: false,
-
         rightTrayIsOpen: false,
         rightTrayComponentName: null,
         rightTrayComponentProps: null,
         rightTrayBackNavComponent: null,
         rightTrayBackNavProps: null,
-
-        secondaryTrayIsOpen: false,
-
         panelIsDisabled: false,
-
         panelSortBoxIsOpen: false,
-
         panelTitleEditState: false,
         panelDescEditState: false,
         deleteResetBoxIsOpen: false,
-
-        visGridIsOpen: true,
-
         shareBoxIsOpen: false,
-
         theme: '',
-
+        selectedPanel: null,
         appVersion: "5.2.0",
 
-        performanceArray: [],
+        // authStore?
+        // getloging, sign user out etc?
 
-        selectedPanel: null,
+        // monitorStore
+        routePerformance: null,
+        performanceArray: [],
 
     }),
     actions: {
@@ -281,7 +274,6 @@ export const useStore = defineStore({
             this.rightTrayComponentProps = {}
             this.leftNavIsOpen = false
             this.shareBoxIsOpen = false
-            this.secondaryTrayIsOpen = false
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
