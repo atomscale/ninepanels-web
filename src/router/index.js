@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import PanelsView from '@/views/PanelsView.vue'
 import AdminView from '@/views/AdminView.vue'
 import SettingsView from '@/views/SettingsView.vue'
-
 import LandingView from '@/views/LandingView.vue'
 import NotFound from '@/views/NotFound.vue'
 import PasswordResetView from '@/views/PasswordResetView.vue'
@@ -36,7 +35,7 @@ function adminOnly(to, from, next) {
 }
 
 function monitorHome(to, from, next) {
-  rollbar.info(`app: home route was visited`)
+  rollbar.info(`app: home route was visited`) // make a call to a logging endpoint on api here?
   next('/')
 }
 

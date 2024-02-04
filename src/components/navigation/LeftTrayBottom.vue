@@ -36,7 +36,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import ShareBox from '@/components/navigation/ShareBox.vue'
+import ShareBox from '@/components/utilities/ShareBox.vue'
 
 import {
   CogIcon,

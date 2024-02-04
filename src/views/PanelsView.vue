@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import PanelGridFrame from '@/components/panels/grid/PanelGridFrame.vue'
+import PanelGridFrame from '@/components/panels/PanelGridFrame.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useStore } from '@/stores/store.js'
