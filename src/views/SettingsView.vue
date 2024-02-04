@@ -86,7 +86,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import DynamicButton from '@/components/utilities/DynamicButton.vue'
+import DynamicButton from '@/components/general/DynamicButton.vue'
 import Account from '@/components/settings/Account.vue'
 import Policies from '@/components/settings/Policies.vue'
 import Preferences from '@/components/settings/Preferences.vue'

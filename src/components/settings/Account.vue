@@ -27,7 +27,7 @@ import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import { ChevronRightIcon } from '@heroicons/vue/24/outline'
-import DynamicButton from '@/components/utilities/DynamicButton.vue'
+import DynamicButton from '@/components/general/DynamicButton.vue'
 
 export default {
     computed: {

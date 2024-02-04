@@ -27,7 +27,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import HowToGuide from '@/components/utilities/HowToGuide.vue'
+import HowToGuide from '@/components/general/HowToGuide.vue'
 
 import {
   GlobeAltIcon,

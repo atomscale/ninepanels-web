@@ -43,7 +43,7 @@ import { useStore } from '@/stores/store.js'
 
 import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
 
-import DynamicButton from '@/components/utilities/DynamicButton.vue'
+import DynamicButton from '@/components/general/DynamicButton.vue'
 
 export default {
     data() {

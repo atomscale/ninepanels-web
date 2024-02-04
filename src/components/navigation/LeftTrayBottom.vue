@@ -1,7 +1,6 @@
 <template>
   <div class="" :class="{ 'mb-4': Store.isPWA }">
     <div class="m-2 space-y-1" aria-labelledby="projects-headline">
-
       <router-link v-if="Store.user && Store.user.is_admin"
         @click="Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false" :to="{ name: 'Admin' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
@@ -15,7 +14,7 @@
       </ShareBox>
       <button @click="Store.openRightTray('HowToGuide')"
         class="group flex w-full items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">HowToGuide</span>
+        <QuestionMarkCircleIcon class="h-6 w-6" /><span class="ml-3">Guide</span>
       </button>
       <router-link v-if="Store.user" @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false"
         :to="{ name: 'Settings' }"
@@ -26,8 +25,6 @@
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
         <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
       </router-link>
-
-
     </div>
   </div>
 </template>
@@ -36,7 +33,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import ShareBox from '@/components/utilities/ShareBox.vue'
+import ShareBox from '@/components/general/ShareBox.vue'
 
 import {
   CogIcon,
