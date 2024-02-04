@@ -2,7 +2,7 @@
     <div class="flex flex-col h-full mt-2 space-y-4 mr-4 text-np-base text-sm">
         <div class="w-full">
 
-            <button @click="Store.openRightTray('PrivacyTray')" class="flex justify-between w-full">
+            <button @click="Store.openRightTray('PrivacyPolicy')" class="flex justify-between w-full">
 
                 <div>Privacy and Data Policy</div>
                 <ChevronRightIcon class="h-4" />

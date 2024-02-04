@@ -39,7 +39,7 @@ import { ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { PlusIcon } from '@heroicons/vue/24/outline'
-import DailyPattern from '@/components/visgrid/DailyPattern.vue'
+import DailyPattern from '@/components/panels/DailyPattern.vue'
 
 export default {
   computed: {

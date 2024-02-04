@@ -73,7 +73,7 @@ export const useStore = defineStore({
             // frotn end will not dsiplay releases tray on patch bump
 
             if (!verInStorage) {
-                this.openRightTray('HelpTray')
+                this.openRightTray('HowToGuide')
                 localStorage.setItem('localAppVersion', this.appVersion)
                 return
             }
@@ -82,7 +82,7 @@ export const useStore = defineStore({
 
 
             if (currentVersionNum > localVersionNum) {
-                this.openRightTray('ReleasesTray')
+                this.openRightTray('Releases')
             }
             localStorage.setItem('localAppVersion', this.appVersion)
 

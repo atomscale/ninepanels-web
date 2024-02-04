@@ -57,14 +57,14 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import PanelTray from '@/components/panels/PanelDetails.vue'
-import DailyPattern from '@/components/visgrid/DailyPattern.vue'
+import DailyPattern from '@/components/panels/DailyPattern.vue'
 import RoutePerformanceTray from '@/components/admin/RoutePerformanceTray.vue'
-import HelpTray from '@/components/utilities/HelpTray.vue'
-import InstallPWATray from '@/components/utilities/InstallPWATray.vue'
+import HowToGuide from '@/components/utilities/HowToGuide.vue'
+import InstallGuide from '@/components/utilities/InstallGuide.vue'
 import PanelCreateForm from '@/components/panels/PanelCreateForm.vue'
-import ReleasesTray from '@/components/utilities/ReleasesTray.vue'
-import AboutTray from '@/components/utilities/AboutTray.vue'
-import PrivacyTray from '@/components/utilities/PrivacyTray.vue'
+import Releases from '@/components/utilities/Releases.vue'
+import About from '@/components/utilities/About.vue'
+import PrivacyPolicy from '@/components/utilities/PrivacyPolicy.vue'
 import SignInForm from '@/components/auth/SignInForm.vue'
 import SignUpForm from '@/components/auth/SignUpForm.vue'
 import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
@@ -84,15 +84,15 @@ export default {
     DialogTitle,
     XMarkIcon,
     PanelTray,
-    HelpTray,
+    HowToGuide,
     PanelCreateForm,
-    InstallPWATray,
+    InstallGuide,
     RoutePerformanceTray,
     DailyPattern,
     ChevronLeftIcon,
-    ReleasesTray,
-    AboutTray,
-    PrivacyTray,
+    Releases,
+    About,
+    PrivacyPolicy,
     SignInForm,
     SignUpForm,
     PasswordResetRequestForm,
