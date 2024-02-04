@@ -184,14 +184,6 @@ export default {
                 this.showEllipsis = true
             }
         },
-        togglePatternTray() {
-            this.Store.rightTrayIsOpen = false
-            this.Store.rightTrayComponentName = ''
-            this.Store.rightTrayComponentProps = ''
-            this.Store.rightTrayIsOpen = true
-            this.Store.rightTrayComponentName = 'PatternTray'
-            this.Store.rightTrayComponentProps = { panelId: this.panelId }
-        },
         infinityToggle() {
             if (this.onHome === true) {
                 // console.log("at home not tray")

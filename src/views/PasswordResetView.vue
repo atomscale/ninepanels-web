@@ -1,5 +1,4 @@
 <template >
-  <!-- <PasswordResetForm v-if="this.$route.query.email && this.$route.query.password_reset_token" /> -->
 </template>
 
 <script>

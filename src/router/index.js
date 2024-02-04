@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import PanelsView from '@/views/SignedIn/PanelsView.vue'
-import AdminView from '@/views/SignedIn/AdminView.vue'
-import SettingsView from '@/views/SignedIn/SettingsView.vue'
+import PanelsView from '@/views/PanelsView.vue'
+import AdminView from '@/views/AdminView.vue'
+import SettingsView from '@/views/SettingsView.vue'
 
-import LandingView from '@/views/SignedOut/LandingView.vue'
-import NotFound from '@/views/SignedOut/NotFound.vue'
-import PasswordResetView from '@/views/SignedOut/PasswordResetView.vue'
+import LandingView from '@/views/LandingView.vue'
+import NotFound from '@/views/NotFound.vue'
+import PasswordResetView from '@/views/PasswordResetView.vue'
 
 import { useStore } from '@/stores/store.js'
 
