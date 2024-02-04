@@ -71,6 +71,8 @@
 
     </div>
     <div v-else>
+        // TODO this is endlessly spinning on network error
+
         <LoaderSpin />
     </div>
 </template>
@@ -115,7 +117,14 @@ export default {
                 this.entries_by_day = this.findLatest(this.entries_by_day)
                 // console.log(this.entries_by_day)
             }
+
+
+            // here
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
+
+
+
+
             if (this.entries_by_day) {
                 this.padEntries()
             } else {

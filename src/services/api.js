@@ -30,13 +30,13 @@ apiV5.interceptors.response.use(
 
 export default {
 
-    getLoginToken(email, password) {
+    async getLoginToken(email, password) {
         const form = new URLSearchParams()
         form.append('username', email) // username as email to comply with OAuth
         form.append('password', password)
         return tokenApi.post("/token", form)
     },
-    postUser(access_token, email, name, password) {
+    async postUser(access_token, email, name, password) {
         const form = new URLSearchParams()
         form.append('email', email) // not related to OAuth so using 'email'
         form.append('name', name)
@@ -51,21 +51,21 @@ export default {
             }
         )
     },
-    getUser(access_token) {
+    async getUser(access_token) {
         return apiV5.get("/users", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
-    deleteUser(access_token) {
+    async deleteUser(access_token) {
         return apiV5.delete("/users", {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
-    getPanels(access_token) {
+    async getPanels(access_token) {
         return apiV5.get("/panels", {
             headers: {
                 Authorization: "Bearer " + access_token,
@@ -74,7 +74,7 @@ export default {
         })
 
     },
-    postPanel(access_token, position, title, description) {
+    async postPanel(access_token, position, title, description) {
         const form = new URLSearchParams()
         form.append('position', position)
         form.append('title', title)
@@ -89,7 +89,7 @@ export default {
 
         )
     },
-    patchPanel(access_token, panel_id, update) {
+    async patchPanel(access_token, panel_id, update) {
 
         return apiV5.patch("/panels/" + panel_id,
             update,
@@ -100,14 +100,14 @@ export default {
 
             })
     },
-    deletePanel(access_token, panel_id) {
+    async deletePanel(access_token, panel_id) {
         return apiV5.delete("/panels/" + panel_id, {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
-    postEntry(access_token, panel_id, is_complete) {
+    async postEntry(access_token, panel_id, is_complete) {
 
         return apiV5.post(`/panels/${panel_id}/entries`,
             {
@@ -120,7 +120,7 @@ export default {
 
             })
     },
-    getEntries(access_token, panel_id) {
+    async getEntries(access_token, panel_id) {
 
         return apiV5.get(`/panels/${panel_id}/entries`, {
             headers: {
@@ -129,14 +129,16 @@ export default {
 
         })
     },
-    deleteEntries(access_token, panel_id) {
+    async deleteEntries(access_token, panel_id) {
         return apiV5.delete("/panels/" + panel_id + '/entries', {
             headers: {
                 Authorization: "Bearer " + access_token,
             }
         })
     },
-    getPanelConsistency(access_token) {
+
+    // DEPR
+    async getPanelConsistency(access_token) {
 
         return apiV5.get("/metrics/panels/consistency", {
             headers: {
@@ -145,7 +147,7 @@ export default {
 
         })
     },
-    postPasswordResetRequest(email) {
+    async postPasswordResetRequest(email) {
         const form = new URLSearchParams()
         form.append('email', email)
 
@@ -153,17 +155,19 @@ export default {
             form,
         )
     },
+
+    // EXAMPLE OF BEST PRACTICE
     async postPasswordReset(new_password, email, password_reset_token) {
         const form = new URLSearchParams()
         form.append('new_password', new_password)
         form.append('email', email)
         form.append('password_reset_token', password_reset_token)
-        
+
         const resp = await apiV5.post("/auth/password_reset", form)
         return resp
 
     },
-    getRoutePerformance(access_token) {
+    async getRoutePerformance(access_token) {
 
         return apiV5.get("/admin/routes", {
             headers: {
@@ -172,7 +176,7 @@ export default {
 
         })
     },
-    getRouteTimings(access_token, method_path, window_size) {
+    async getRouteTimings(access_token, method_path, window_size) {
 
         return apiV5.get("/admin/routes/timings", {
             params: {

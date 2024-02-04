@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import requests from '@/services/requests.js'
+import api from '@/services/api.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
@@ -199,16 +199,12 @@ export const useStore = defineStore({
                 const status = error.response.status
                 if (status === 0) {
                     // this handles rollbar clients errors on network unavailability
-                    errorMsg = "Having trouble reaching the servers... ☹️"
-
+                    errorMsg = "Offline."
                     rollbar.error(`app: network error for a user`)
-                    this.signUserOutAction()
+                    await this.signUserOutAction()
                 } else if (status === 401) {
                     errorMsg = "Please sign back in."
-                    // console.log("401", error.response.data.error_message)
                     await this.signUserOutAction()
-                    setTimeout(() => { }, 1000)
-
                 }
                 else {
                     // console.log(error.response)
@@ -218,15 +214,16 @@ export const useStore = defineStore({
             } else if (error.request) {
                 // capture request errors like when network not available
                 // if this block fires it's becuase no response object was recvd
-                errorMsg = "Unable to reach the 9P servers?"
+                errorMsg = "Offline."
             }
 
+            // TODO woudl be good to have long live offline messagae if offline, until connection available
             this.showMessage(errorMsg)
         },
         async getLoginTokenAction(email, password) {
 
             try {
-                const response = await requests.getLoginToken(email, password)
+                const response = await api.getLoginToken(email, password)
                 VueCookies.set('9p_access_token', response.data.data.access_token, '30d', '', '', 'true')
                 await this.readUserAction()
                 if (this.user.name) {
@@ -249,7 +246,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.deleteUser(access_token)
+                const response = await api.deleteUser(access_token)
                 this.user = null
                 this.panels = null
                 this.signUserOutAction()
@@ -279,7 +276,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.postUser(access_token, email, name, password)
+                const response = await api.postUser(access_token, email, name, password)
                 await this.getLoginTokenAction(email, password)
                 return true
             } catch (error) {
@@ -294,7 +291,7 @@ export const useStore = defineStore({
 
 
                 try {
-                    const response = await requests.getUser(access_token)
+                    const response = await api.getUser(access_token)
                     this.user = response.data.data
                     return response.data.data
                 } catch (error) {
@@ -305,7 +302,7 @@ export const useStore = defineStore({
         async createPanelAction(position, title, description) {
             const access_token = VueCookies.get("9p_access_token")
             try {
-                const response = await requests.postPanel(access_token, position, title, description)
+                const response = await api.postPanel(access_token, position, title, description)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
@@ -315,7 +312,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.getPanels(access_token)
+                const response = await api.getPanels(access_token)
                 this.panels = response.data.data
                 return response.data.data
             } catch (error) {
@@ -326,7 +323,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
             try {
 
-                const response = await requests.patchPanel(access_token, panel_id, update)
+                const response = await api.patchPanel(access_token, panel_id, update)
                 await this.readPanelsAction()
                 await this.readPanelConsistencyAction()
                 return true
@@ -339,7 +336,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.deletePanel(access_token, panel_id)
+                const response = await api.deletePanel(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
@@ -349,7 +346,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
             // does not require loading bars becuase they are triggered in getPanelsActions()
             try {
-                const response = await requests.postEntry(access_token, panel_id, is_complete)
+                const response = await api.postEntry(access_token, panel_id, is_complete)
                 await this.readPanelsAction()
                 return response.data.data
             } catch (error) {
@@ -360,9 +357,10 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.getEntries(access_token, panel_id)
+                const response = await api.getEntries(access_token, panel_id)
                 return response.data.data
             } catch (error) {
+                console.log(error.message)
                 this.apiError(error)
             }
         },
@@ -370,7 +368,7 @@ export const useStore = defineStore({
             const access_token = VueCookies.get("9p_access_token")
 
             try {
-                const response = await requests.deleteEntries(access_token, panel_id)
+                const response = await api.deleteEntries(access_token, panel_id)
                 await this.readPanelsAction()
             } catch (error) {
                 this.apiError(error)
@@ -381,7 +379,7 @@ export const useStore = defineStore({
 
             try {
                 performance.mark('panelConsistencyStart')
-                const response = await requests.getPanelConsistency(access_token)
+                const response = await api.getPanelConsistency(access_token)
                 this.consistency = response.data.data
             } catch (error) {
                 this.apiError(error)
@@ -445,7 +443,7 @@ export const useStore = defineStore({
         async startPasswordResetFlow(email) {
 
             try {
-                const response = await requests.postPasswordResetRequest(email)
+                const response = await api.postPasswordResetRequest(email)
                 if (response.status == 200) {
                     this.messages.push({ message: 'Sent you the link by email...', error: false })
                     setTimeout(() => this.messages.shift(), 7000)
@@ -460,7 +458,7 @@ export const useStore = defineStore({
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
-            const response = await requests.postPasswordReset(password, email, password_reset_token)
+            const response = await api.postPasswordReset(password, email, password_reset_token)
             if (response.status == 200) {
                 return
             }
@@ -472,7 +470,7 @@ export const useStore = defineStore({
 
             try {
 
-                const response = await requests.getRoutePerformance(access_token)
+                const response = await api.getRoutePerformance(access_token)
                 this.routePerformance = response.data
                 // return response.data.data
             } catch (error) {
@@ -485,7 +483,7 @@ export const useStore = defineStore({
 
             try {
 
-                const response = await requests.getRouteTimings(access_token, method_path, window_size)
+                const response = await api.getRouteTimings(access_token, method_path, window_size)
                 if (response) {
                     // console.log(response.data.data)
                     return response.data.data
