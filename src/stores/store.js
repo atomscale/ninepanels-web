@@ -35,7 +35,7 @@ export const useStore = defineStore({
         shareBoxIsOpen: false,
         theme: '',
         selectedPanel: null,
-        appVersion: "5.2.0",
+        appVersion: "5.2.2",
 
         // authStore?
         // getloging, sign user out etc?
