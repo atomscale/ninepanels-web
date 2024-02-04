@@ -27,7 +27,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
-import HelpTray from '@/components/help/HelpTray.vue'
+import HelpTray from '@/components/utilities/HelpTray.vue'
 
 import {
   GlobeAltIcon,
