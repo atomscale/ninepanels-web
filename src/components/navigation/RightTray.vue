@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="Store.rightTrayIsOpen">
-    <Dialog as="div" class="relative z-40" @close="this.closeRightTray(); Store.rightTrayIsOpen = false">
+    <Dialog as="div" class="relative z-40" @close="Store.closeRightTray(); Store.rightTrayIsOpen = false">
       <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-600 bg-opacity-75 " />
@@ -18,7 +18,8 @@
 
                   <div class="flex pr-3 justify-between ml-2">
 
-                    <button v-if="Store.rightTrayBackNavComponent" type="button" class="rounded-md text-np-base hover:text-np-base"
+                    <button v-if="Store.rightTrayBackNavComponent" type="button"
+                      class="rounded-md text-np-base hover:text-np-base"
                       @click="Store.openRightTray(Store.rightTrayBackNavComponent, Store.rightTrayBackNavProps)">
                       <span class="sr-only">Close panel</span>
                       <ChevronLeftIcon class="h-6 w-6 text-np-base " aria-hidden="true" />
@@ -55,15 +56,15 @@ import { mapStores } from 'pinia'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
-import PanelTray from '@/components/panels/tray/PanelTray.vue'
-import DailyPattern from '@/components/visgrid/DailyPattern.vue'
+import PanelTray from '@/components/panels/PanelDetails.vue'
+import DailyPattern from '@/components/panels/DailyPattern.vue'
 import RoutePerformanceTray from '@/components/admin/RoutePerformanceTray.vue'
-import HelpTray from '@/components/help/HelpTray.vue'
-import InstallPWATray from '@/components/help/InstallPWATray.vue'
-import PanelCreateForm from '@/components/panels/tray/PanelCreateForm.vue'
-import ReleasesTray from '@/components/help/ReleasesTray.vue'
-import AboutTray from '@/components/help/AboutTray.vue'
-import PrivacyTray from '@/components/help/PrivacyTray.vue'
+import HowToGuide from '@/components/general/HowToGuide.vue'
+import InstallGuide from '@/components/general/InstallGuide.vue'
+import PanelCreateForm from '@/components/panels/PanelCreateForm.vue'
+import Releases from '@/components/general/Releases.vue'
+import About from '@/components/general/About.vue'
+import PrivacyPolicy from '@/components/general/PrivacyPolicy.vue'
 import SignInForm from '@/components/auth/SignInForm.vue'
 import SignUpForm from '@/components/auth/SignUpForm.vue'
 import PasswordResetRequestForm from '@/components/auth/PasswordResetRequestForm.vue'
@@ -75,16 +76,6 @@ export default {
   computed: {
     ...mapStores(useStore)
   },
-  methods: {
-    closeRightTray() {
-      this.Store.rightTrayComponentName = null
-      this.Store.rightTrayComponentProps = {}
-      localStorage.setItem('localAppVersion', this.Store.appVersion)
-    }
-  },
-  mounted() {
-    this.Store.readTheme()
-  },
   components: {
     Dialog,
     DialogPanel,
@@ -93,15 +84,15 @@ export default {
     DialogTitle,
     XMarkIcon,
     PanelTray,
-    HelpTray,
+    HowToGuide,
     PanelCreateForm,
-    InstallPWATray,
+    InstallGuide,
     RoutePerformanceTray,
     DailyPattern,
     ChevronLeftIcon,
-    ReleasesTray,
-    AboutTray,
-    PrivacyTray,
+    Releases,
+    About,
+    PrivacyPolicy,
     SignInForm,
     SignUpForm,
     PasswordResetRequestForm,

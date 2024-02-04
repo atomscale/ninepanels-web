@@ -6,12 +6,12 @@
             <div>Version</div>
             <div>{{Store.appVersion}}</div>
         </div>
-        <button @click="Store.openRightTray('ReleasesTray')" class="flex justify-between w-full">
+        <button @click="Store.openRightTray('Releases')" class="flex justify-between w-full">
 
             <div>Release Notes</div>
             <ChevronRightIcon class="h-4" />
         </button>
-        <button @click="Store.openRightTray('InstallPWATray')" class="flex justify-between w-full">
+        <button @click="Store.openRightTray('InstallGuide')" class="flex justify-between w-full">
 
             <div>Install as PWA</div>
             <ChevronRightIcon class="h-4" />
@@ -22,7 +22,7 @@
             <div>GitHub</div>
             <ArrowTopRightOnSquareIcon class="h-4" />
         </a>
-        <button @click="Store.openRightTray('AboutTray')" class="flex justify-between w-full">
+        <button @click="Store.openRightTray('About')" class="flex justify-between w-full">
 
             <div>About</div>
             <ChevronRightIcon class="h-4" />
@@ -37,7 +37,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { ChevronRightIcon, ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/outline'
-import DynamicButton from '@/components/utilities/DynamicButton.vue'
+import DynamicButton from '@/components/general/DynamicButton.vue'
 
 export default {
     computed: {

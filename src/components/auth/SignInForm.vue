@@ -49,7 +49,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import DynamicButton from '@/components/utilities/DynamicButton.vue'
+import DynamicButton from '@/components/general/DynamicButton.vue'
 import {
     EyeIcon,
     EyeSlashIcon

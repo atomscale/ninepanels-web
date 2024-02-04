@@ -43,7 +43,7 @@
                         @click="infinityToggle()">∞</button>
                 </div>
                 <div class="grid grid-cols-7 gap-0.5 mt-2">
-                    <div class="text-np-base  pl-3 text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
+                    <div class="text-np-base text-center  text-sm w-8" v-for="d in dayHeadings" :key="d">{{ d }}</div>
                 </div>
                 <div
                     class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
@@ -80,7 +80,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import LoaderSpin from '@/components/utilities/LoaderSpin.vue'
+import LoaderSpin from '@/components/general/LoaderSpin.vue'
 
 export default {
     computed: {
@@ -183,14 +183,6 @@ export default {
             } else {
                 this.showEllipsis = true
             }
-        },
-        togglePatternTray() {
-            this.Store.rightTrayIsOpen = false
-            this.Store.rightTrayComponentName = ''
-            this.Store.rightTrayComponentProps = ''
-            this.Store.rightTrayIsOpen = true
-            this.Store.rightTrayComponentName = 'PatternTray'
-            this.Store.rightTrayComponentProps = { panelId: this.panelId }
         },
         infinityToggle() {
             if (this.onHome === true) {

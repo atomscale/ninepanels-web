@@ -3,62 +3,46 @@ import requests from '@/services/requests.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
-let router;
-
-async function getRouter() {
-    if (!router) {
-        const routerModule = await import('@/router');
-        router = routerModule.default;
-    }
-    return router;
-}
 
 const uniqueMessages = new Set()
 
 export const useStore = defineStore({
     id: '',
     state: () => ({
+        // userStore
         user: null,
+
+        // panelStore
         panels: null,
         consistency: [],
-        routePerformance: null,
 
+        // uiStore
         window_size: null,
-
         messages: [],
-
         isPWA: false,
         isMobile: false,
-
         leftNavIsOpen: false,
-
         rightTrayIsOpen: false,
         rightTrayComponentName: null,
         rightTrayComponentProps: null,
         rightTrayBackNavComponent: null,
         rightTrayBackNavProps: null,
-
-        secondaryTrayIsOpen: false,
-
         panelIsDisabled: false,
-
         panelSortBoxIsOpen: false,
-
         panelTitleEditState: false,
         panelDescEditState: false,
         deleteResetBoxIsOpen: false,
-
-        visGridIsOpen: true,
-
         shareBoxIsOpen: false,
-
         theme: '',
-
-        appVersion: "5.2.0",
-
-        performanceArray: [],
-
         selectedPanel: null,
+        appVersion: "5.2.2",
+
+        // authStore?
+        // getloging, sign user out etc?
+
+        // monitorStore
+        routePerformance: null,
+        performanceArray: [],
 
     }),
     actions: {
@@ -66,7 +50,7 @@ export const useStore = defineStore({
 
             const elem = semver.split(".")
 
-            const majorMinor = elem.slice(0,2)
+            const majorMinor = elem.slice(0, 2)
 
             const versionNumStr = majorMinor.join('.')
 
@@ -89,7 +73,7 @@ export const useStore = defineStore({
             // frotn end will not dsiplay releases tray on patch bump
 
             if (!verInStorage) {
-                this.openRightTray('HelpTray')
+                this.openRightTray('HowToGuide')
                 localStorage.setItem('localAppVersion', this.appVersion)
                 return
             }
@@ -98,7 +82,7 @@ export const useStore = defineStore({
 
 
             if (currentVersionNum > localVersionNum) {
-                this.openRightTray('ReleasesTray')
+                this.openRightTray('Releases')
             }
             localStorage.setItem('localAppVersion', this.appVersion)
 
@@ -132,10 +116,6 @@ export const useStore = defineStore({
             this.rightTrayIsOpen = true
             this.rightTrayComponentName = component
             this.rightTrayComponentProps = props
-            // console.log(`comp: ${component}`)
-            // console.log(`props: ${JSON.stringify(props)}`)
-            // console.log(`backNavComp: ${backNavComponent}`)
-            // console.log(`backProps: ${JSON.stringify(backNavProps)}`)
             this.rightTrayBackNavComponent = backNavComponent
             this.rightTrayBackNavProps = backNavProps
         },
@@ -145,6 +125,9 @@ export const useStore = defineStore({
             this.rightTrayComponentProps = null
             this.rightTrayBackNavComponent = null
             this.rightTrayBackNavProps = null
+            this.panelTitleEditState = false
+            this.panelDescEditState = false
+            this.deleteResetBoxIsOpen = false
             localStorage.setItem('localAppVersion', this.appVersion)
         },
         checkAllComplete() {
@@ -168,11 +151,8 @@ export const useStore = defineStore({
                 }
 
                 if (numComplete === numPanels) {
-                    this.messages.push({ message: getRandomElement(congratsMsgs), error: false })
+                    this.showMessage(getRandomElement(congratsMsgs))
 
-                    setTimeout(() => {
-                        this.messages.shift()
-                    }, 5000)
                 }
             }
         },
@@ -294,13 +274,6 @@ export const useStore = defineStore({
             this.rightTrayComponentProps = {}
             this.leftNavIsOpen = false
             this.shareBoxIsOpen = false
-            this.secondaryTrayIsOpen = false
-            getRouter().then(router => {
-                // console.log("router push on sign out action")
-                router.push('/');
-
-            });
-
         },
         async createUserAction(email, name, password) {
             const access_token = VueCookies.get("9p_access_token")
@@ -487,21 +460,11 @@ export const useStore = defineStore({
             }
         },
         async sendPasswordReset(password, email, password_reset_token) {
-
-            try {
-                const response = await requests.postPasswordReset(password, email, password_reset_token)
-                if (response.status == 200) {
-                    this.messages.push({ message: 'Password successfully reset. Please sign in', error: false })
-                    setTimeout(() => this.messages.shift(), 5000)
-                    return true
-                } else {
-                    this.messages.push({ message: 'Something went wrong... email me!', error: true })
-                    setTimeout(() => this.messages.shift(), 5000)
-                    return false
-                }
-            } catch (error) {
-                this.apiError(error)
+            const response = await requests.postPasswordReset(password, email, password_reset_token)
+            if (response.status == 200) {
+                return
             }
+            throw new Error('error in postPasswordReset')
         },
         async readRoutePerformance() {
             const access_token = VueCookies.get("9p_access_token")

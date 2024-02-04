@@ -38,7 +38,7 @@ import {
     CheckIcon
 } from '@heroicons/vue/24/outline'
 
-import LoaderSpin from '@/components/utilities/LoaderSpin.vue'
+import LoaderSpin from '@/components/general/LoaderSpin.vue'
 
 export default {
     data() {

@@ -28,7 +28,7 @@
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
-import FlashMessage from '@/components/utilities/FlashMessage.vue'
+import FlashMessage from '@/components/general/FlashMessage.vue'
 import LeftTray from '@/components/navigation/LeftTray.vue'
 import RightTray from '@/components/navigation/RightTray.vue'
 
@@ -45,7 +45,6 @@ export default {
   mounted() {
     this.Store.readUserAction(),
     this.Store.readTheme()
-    // console.log('app reads theme:', this.Store.theme)
   },
   components: {
     FlashMessage,
