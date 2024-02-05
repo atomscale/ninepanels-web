@@ -17,7 +17,7 @@
       <div :class="{ 'mb-4': this.Store.isPWA }">
         <div class="flex w-full justify-between items-center">
           <button
-            @click="Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId })"
+            @click="Store.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId })"
             class="flex w-full justify-between items-start">
             <div class="font-light text-np-base text-sm">Consistency Pattern</div>
             <ChevronRightIcon class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronRightIcon>
@@ -71,7 +71,7 @@ import PanelDescDisplay from '@/components/panels/PanelDescDisplay.vue'
 import PanelDescEdit from '@/components/panels/PanelDescEdit.vue'
 import PanelTitleDisplay from '@/components/panels/PanelTitleDisplay.vue'
 import PanelTitleEdit from '@/components/panels/PanelTitleEdit.vue'
-import DailyPattern from '@/components/panels/DailyPattern.vue'
+import Graph from '@/components/panels/Graph.vue'
 import DynamicButton from '@/components/general/DynamicButton.vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
@@ -138,7 +138,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     PanelSort,
-    DailyPattern,
+    Graph,
     Switch
   },
   props: {

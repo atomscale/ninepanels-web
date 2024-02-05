@@ -308,6 +308,8 @@ export const useStore = defineStore({
                 this.apiError(error)
             }
         },
+
+        
         async readPanelsAction() {
             const access_token = VueCookies.get("9p_access_token")
 
