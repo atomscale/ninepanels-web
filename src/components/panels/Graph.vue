@@ -1,15 +1,16 @@
 <template >
-    <div v-if="panelStore.panels && mainStore.selectedPanel && entries_by_day && show">
+    <div v-if="panelStore.panels && mainStore.selectedPanel === panelId">
 
 
 
         <transition name="fade" appear>
-                <div class="flex flex-col w-full justify-start  items-center relative">
+            <div class="flex flex-col w-full justify-start  items-center relative">
 
 
 
 
-                <div v-if="entries_by_day && panelStore.panels" class="flex justify-center items-center mb-2 w-full font-bold">
+                <div v-if="panelStore.panels.entries && panelStore.panels"
+                    class="flex justify-center items-center mb-2 w-full font-bold">
                     <!-- <transition name="fade" appear> -->
 
                     <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
@@ -48,7 +49,7 @@
                 <div
                     class="flex flex-col h-full pb-6 justify-start items-center overflow-y-scroll overflow-x-hidden relative mt-1">
 
-                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.entries_by_day" dir="rtl"
+                    <div ref="scrollableDiv" @scroll="checkScroll" v-if="this.panelStore.entries" dir="rtl"
                         class="grid grid-cols-7 gap-0.5 ">
                         <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
 
@@ -68,7 +69,7 @@
                 </div>
 
             </div>
-            </transition>
+        </transition>
 
     </div>
     <div v-else>
@@ -103,7 +104,7 @@ export default {
     },
     watch: {
         panelId(new_val, old_val) {
-            this.entries_by_day = null
+            // this.panelStore.entries = null
             this.getEntries()
         },
         'panelStore.panels': function (new_val, old_val) {
@@ -115,21 +116,19 @@ export default {
     },
     methods: {
         async getEntries() {
-            if (this.panelId === this.mainStore.selectedPanel && this.entries_by_day) {
-                this.entries_by_day = this.findLatest(this.entries_by_day)
+            if (this.panelId === this.mainStore.selectedPanel && this.panelStore.entries) {
+                this.panelStore.entries = this.findLatest(this.panelStore.entries)
             }
 
 
             // TODO here - this will actually not be needed. will be get graph action
-            this.entries_by_day = await this.panelStore.readEntriesAction(this.panelId)
+            await this.panelStore.readEntriesAction(this.panelId)
 
 
 
 
-            if (this.entries_by_day) {
+            if (this.panelStore.entries) {
                 this.padEntries()
-            } else {
-                this.entries_by_day = null
             }
             this.$nextTick(() => {
                 this.checkScroll();
@@ -151,9 +150,9 @@ export default {
             await this.panelStore.readPanelConsistencyAction()
         },
         daysCompleted() {
-            if (this.entries_by_day) {
+            if (this.panelStore.entries) {
 
-                const trimmedEntriesByDay = this.entries_by_day.slice(0, this.limit + this.missingDays() + 1)
+                const trimmedEntriesByDay = this.panelStore.entries.slice(0, this.limit + this.missingDays() + 1)
 
                 const arrayOfCompleted = trimmedEntriesByDay.filter(completedEntry => completedEntry.is_complete === true)
                 return arrayOfCompleted.length
@@ -161,10 +160,12 @@ export default {
             }
         },
         numDays() {
-            const paddedLen = this.entries_by_day.slice(0, this.limit + this.missingDays() + 1)
-            const actualLen = paddedLen.filter(actualEntry => actualEntry.id != null).length
+            if (this.panelStore.entries) {
+                const paddedLen = this.panelStore.entries.slice(0, this.limit + this.missingDays() + 1)
+                const actualLen = paddedLen.filter(actualEntry => actualEntry.id != null).length
 
-            return actualLen
+                return actualLen
+            }
         },
 
         missingDays() {
@@ -177,7 +178,7 @@ export default {
 
             const missingDays = this.missingDays()
             for (let i = 0; i <= missingDays; i++) {
-                this.entries_by_day.unshift({ id: null, is_complete: false, timestamp: null, panel_id: null })
+                this.panelStore.entries.unshift({ id: null, is_complete: false, timestamp: null, panel_id: null })
             }
 
             return missingDays
@@ -197,7 +198,7 @@ export default {
         infinityToggle() {
             if (this.onHome === true) {
                 // console.log("at home not tray")
-                this.mainStore.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
+                this.mainStore.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId })
             } else {
                 // console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
@@ -273,7 +274,7 @@ export default {
     },
     data() {
         return {
-            entries_by_day: null,
+            // entries_by_day: null,
             sort_key: null,
             sort_direction: null,
             offset: null,
@@ -281,7 +282,7 @@ export default {
             limit: null,
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
             showEllipsis: false,
-            show: true,
+
             isLoading: false
         }
     }

@@ -17,7 +17,7 @@ import { getRandomElement, getAccessToken, apiError } from "@/utils/utils.js"
 export const usePanelStore = defineStore({
     id: 'panel',
     state: () => ({
-        panels: null,
+        panels: [],
         consistency: [],
         panelIsDisabled: false
     }),
@@ -113,7 +113,17 @@ export const usePanelStore = defineStore({
             const access_token = getAccessToken()
 
             try {
+
                 const response = await api.getEntries(access_token, panel_id)
+
+                const panel = this.panels.find(p => p.id === panel_id)
+
+                panel.entries = response.data.data
+
+
+
+                // will nto need to return to compenent after refator
+
                 return response.data.data
             } catch (error) {
                 apiError(error)
