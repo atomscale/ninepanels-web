@@ -24,6 +24,8 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
+
 import { mapStores } from 'pinia'
 
 import {
@@ -33,9 +35,9 @@ import {
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useStore, usePanelStore),
     panel() {
-      const panelFromStore = this.Store.panels.find(panel => panel.id === this.panelId)
+      const panelFromStore = this.panelStore.panels.find(panel => panel.id === this.panelId)
       if (panelFromStore.title) {
         this.currentFieldLen = panelFromStore.title.length
       } else {
@@ -50,11 +52,10 @@ export default {
     },
     async dispatchUpdatePanelAction() {
       if (this.localTitle.length === 0) {
-        this.Store.messages.push({ message: "Please make sure your panel has a title.", error: true })
-        setTimeout(() => this.Store.messages.shift(), 5000)
+        this.Store.showMessage("Please make sure your panel has a title.")
         return
       } else {
-        await this.Store.updatePanelAction(this.panelId, { title: this.localTitle })
+        await this.panelStore.updatePanelAction(this.panelId, { title: this.localTitle })
         this.Store.panelTitleEditState = false
       }
     },

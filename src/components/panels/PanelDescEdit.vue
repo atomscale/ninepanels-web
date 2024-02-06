@@ -23,6 +23,8 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
+
 import { mapStores } from 'pinia'
 
 import {
@@ -32,9 +34,9 @@ import {
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useStore, usePanelStore),
     panel() {
-      const panelFromStore = this.Store.panels.find(panel => panel.id === this.panelId)
+      const panelFromStore = this.panelStore.panels.find(panel => panel.id === this.panelId)
       if (panelFromStore.description) {
         this.currentFieldLen = panelFromStore.description.length
       } else {
@@ -50,7 +52,7 @@ export default {
     },
     async dispatchUpdatePanelAction() {
       try {
-        await this.Store.updatePanelAction(this.panelId, { description: this.localDescription })
+        await this.panelStore.updatePanelAction(this.panelId, { description: this.localDescription })
         this.Store.panelDescEditState = false
       } catch (error) {
         this.Store.panelDescEditState = false

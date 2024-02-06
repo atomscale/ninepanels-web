@@ -28,6 +28,8 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
+
 import { mapStores } from 'pinia'
 import { VueShowdown } from 'vue-showdown'
 
@@ -39,9 +41,9 @@ import {
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useStore, usePanelStore),
     panel() {
-      return this.Store.panels.find(panel => panel.id === this.panelId)
+      return this.panelStore.panels.find(panel => panel.id === this.panelId)
     }
   },
   methods: {

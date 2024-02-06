@@ -1,5 +1,5 @@
 <template >
-    <div v-if="Store.panels && Store.selectedPanel && entries_by_day && show">
+    <div v-if="panelStore.panels && Store.selectedPanel && entries_by_day && show">
 
 
 
@@ -9,7 +9,7 @@
 
 
 
-                <div v-if="entries_by_day && Store.panels" class="flex justify-center items-center mb-2 w-full font-bold">
+                <div v-if="entries_by_day && panelStore.panels" class="flex justify-center items-center mb-2 w-full font-bold">
                     <!-- <transition name="fade" appear> -->
 
                     <div class="text-np-base ml-2 mr-6">{{ daysCompleted() }} / {{ numDays() }}</div>
@@ -81,13 +81,15 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
+
 import { mapStores } from 'pinia'
 
 import LoaderSpin from '@/components/general/LoaderSpin.vue'
 
 export default {
     computed: {
-        ...mapStores(useStore),
+        ...mapStores(useStore, usePanelStore),
 
     },
     props: {
@@ -104,7 +106,7 @@ export default {
             this.entries_by_day = null
             this.getEntries()
         },
-        'Store.panels': function (new_val, old_val) {
+        'panelStore.panels': function (new_val, old_val) {
             this.getEntries()
         },
         'Store.selectedPanel': function (new_val, old_val) {
@@ -118,8 +120,8 @@ export default {
             }
 
 
-            // here - this will actually not be needed.
-            this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
+            // TODO here - this will actually not be needed. will be get graph action
+            this.entries_by_day = await this.panelStore.readEntriesAction(this.panelId)
 
 
 
@@ -146,7 +148,7 @@ export default {
             return array
         },
         async getConsistency() {
-            await this.Store.readPanelConsistencyAction()
+            await this.panelStore.readPanelConsistencyAction()
         },
         daysCompleted() {
             if (this.entries_by_day) {

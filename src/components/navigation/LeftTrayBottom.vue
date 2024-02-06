@@ -23,7 +23,7 @@
       </router-link>
       <router-link v-if="Store.user" @click="signOut()" :to="{ name: 'Landing' }"
         class="group flex items-center text-sm rounded-md px-3 py-2 font-medium text-np-inverted  hover:bg-np-accent hover:text-white">
-        <ArrowLeftOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
+        <ArrowLeftEndOnRectangleIcon class="h-6 w-6" /><span class="ml-3">Sign Out</span>
       </router-link>
     </div>
   </div>
@@ -32,6 +32,7 @@
 <script>
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
+import { signOutAllStores } from '@/utils/utils.js'
 
 import ShareBox from '@/components/general/ShareBox.vue'
 
@@ -39,8 +40,8 @@ import {
   CogIcon,
   UserPlusIcon,
   UserCircleIcon,
-  ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
+  ArrowLeftEndOnRectangleIcon,
   ShareIcon,
   BoltIcon
 } from '@heroicons/vue/24/outline'
@@ -75,8 +76,8 @@ export default {
         this.toggleShareBox()
       }
     },
-    signOut() {
-      this.Store.signUserOutAction()
+    async signOut() {
+      await signOutAllStores()
       this.Store.showMessage('Signed out.')
     },
     toggleShareBox() {
@@ -87,8 +88,8 @@ export default {
   },
   components: {
     CogIcon,
-    ArrowLeftOnRectangleIcon,
     QuestionMarkCircleIcon,
+    ArrowLeftEndOnRectangleIcon,
     UserPlusIcon,
     ShareIcon,
     ShareBox,

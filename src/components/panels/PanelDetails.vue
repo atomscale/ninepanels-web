@@ -2,22 +2,22 @@
   <div class="flex flex-col justify-between h-full">
 
     <div class="sticky z-10 top-0 bg-np-base opacity-95">
-      <component :is="this.Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="this.panel.id"
-        :title="this.panel.title">
+      <component :is="Store.panelTitleEditState ? 'PanelTitleEdit' : 'PanelTitleDisplay'" :panelId="panel.id"
+        :title="panel.title">
       </component>
     </div>
 
     <div class="flex flex-col justify-between h-full">
       <div class="mb-6 h-full">
-        <component :is="this.Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="this.panel.id"
-          :description="this.panel.description">
+        <component :is="Store.panelDescEditState ? 'PanelDescEdit' : 'PanelDescDisplay'" :panelId="panel.id"
+          :description="panel.description">
         </component>
       </div>
 
-      <div :class="{ 'mb-4': this.Store.isPWA }">
+      <div :class="{ 'mb-4': Store.isPWA }">
         <div class="flex w-full justify-between items-center">
           <button
-            @click="Store.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId })"
+            @click="Store.openRightTray('Graph', { panelId: panel.id, onHome: false }, 'PanelTray', { panelId: panel.id })"
             class="flex w-full justify-between items-start">
             <div class="font-light text-np-base text-sm">Consistency Pattern</div>
             <ChevronRightIcon class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronRightIcon>
@@ -26,26 +26,26 @@
         <button @click="this.togglePanelSortBox()" class="flex w-full justify-between items-center mt-5">
           <div class="text-sm font-light h-5 text-np-base">Order</div>
           <div>
-            <ChevronLeftIcon v-if="!this.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
+            <ChevronLeftIcon v-if="!Store.panelSortBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
             </ChevronLeftIcon>
             <ChevronDownIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronDownIcon>
           </div>
         </button>
 
         <component class="overflow-hidden transition-all ease-in-out duration-300"
-          :is="this.panelSortBoxIsOpen ? 'PanelSort' : null " :panel="this.panel">
+          :is="Store.panelSortBoxIsOpen ? 'PanelSort' : null " :panel="this.panel">
         </component>
 
         <button @click="this.toggleDeleteResetBox()" class="flex w-full justify-between items-center mt-5 ">
           <div class="text-sm font-light h-5 text-np-base">Danger Zone</div>
           <div>
 
-            <ChevronLeftIcon v-if="!this.deleteResetBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
+            <ChevronLeftIcon v-if="!Store.deleteResetBoxIsOpen" class="h-5 w-5 text-gray-400 hover:text-np-base">
             </ChevronLeftIcon>
             <ChevronDownIcon v-else class="h-5 w-5 text-gray-400 hover:text-np-base"></ChevronDownIcon>
           </div>
         </button>
-        <div v-if="this.deleteResetBoxIsOpen" class="flex flex-col items-center">
+        <div v-if="Store.deleteResetBoxIsOpen" class="flex flex-col items-center">
           <div class="text-xs text-np-base font-light mt-2 w-full">Need a fresh start on this panel? Reset the completion
             history
             and clear all your stats:</div>
@@ -66,6 +66,7 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
 import { mapStores } from 'pinia'
 import PanelDescDisplay from '@/components/panels/PanelDescDisplay.vue'
 import PanelDescEdit from '@/components/panels/PanelDescEdit.vue'
@@ -81,9 +82,9 @@ import { Switch } from '@headlessui/vue'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useStore, usePanelStore),
     panel() {
-      return this.Store.panels.find(panel => panel.id === this.panelId)
+      return this.usePanelStore.panels.find(panel => panel.id === this.panelId)
     }
   },
   watch: {
@@ -95,12 +96,12 @@ export default {
     async sendPanelDelete() {
 
       this.Store.closeRightTray()
-      this.deleteResetBoxIsOpen = false
-      await this.Store.deletePanelAction(this.panel.id)
+      await this.panelStore.deletePanelAction(this.panel.id)
 
-      this.Store.readPanelConsistencyAction()
+      await this.panelStore.readPanelConsistencyAction()
 
       this.Store.selectedPanel = null
+
       const localFilterMRU = JSON.parse(localStorage.getItem('localFilterMRU'))
 
 
@@ -113,18 +114,15 @@ export default {
     async sendEntriesDelete() {
 
       this.Store.closeRightTray()
-      this.deleteResetBoxIsOpen = false
-      await this.Store.deleteEntriesAction(this.panel.id)
+      await this.panelStore.deleteEntriesAction(this.panel.id)
 
-      // TODO this will be refactoed out but is a state action that should be
-      // in Store if it were to remain or change to getPanels
-      this.Store.readPanelConsistencyAction()
+      await this.panelStore.readPanelConsistencyAction()
     },
     togglePanelSortBox() {
-      this.panelSortBoxIsOpen = !this.panelSortBoxIsOpen
+      this.Store.panelSortBoxIsOpen = !this.Store.panelSortBoxIsOpen
     },
     toggleDeleteResetBox() {
-      this.deleteResetBoxIsOpen = !this.deleteResetBoxIsOpen
+      this.Store.deleteResetBoxIsOpen = !this.Store.deleteResetBoxIsOpen
     },
 
   },
@@ -146,16 +144,7 @@ export default {
       type: Number,
       required: true
     }
-  },
-  data() {
-    return {
-      enabled: false,
-      panelSortBoxIsOpen: false,
-      deleteResetBoxIsOpen: false,
-      historyBoxIsOpen: false,
-    }
   }
-
 }
 
 </script>

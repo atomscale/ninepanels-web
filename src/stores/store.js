@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
-import api from '@/services/api.js'
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
 
+import api from '@/services/api.js'
+import { signOutAllStores } from "@/utils/utils.js"
+import { splitSemVer } from "@/utils/utils.js"
 
 const uniqueMessages = new Set()
 
@@ -13,8 +15,8 @@ export const useStore = defineStore({
         user: null,
 
         // panelStore
-        panels: null,
-        consistency: [],
+        // panels: null,
+        // consistency: [],
 
         // uiStore
         window_size: null,
@@ -46,18 +48,7 @@ export const useStore = defineStore({
 
     }),
     actions: {
-        splitSemVer(semver) {
 
-            const elem = semver.split(".")
-
-            const majorMinor = elem.slice(0, 2)
-
-            const versionNumStr = majorMinor.join('.')
-
-            let versionNum = parseFloat(versionNumStr)
-
-            return versionNum
-        },
         checkAppVersion() {
             const oldVersion = localStorage.getItem('hiddenAnnoucementVersion')
 
@@ -77,8 +68,8 @@ export const useStore = defineStore({
                 localStorage.setItem('localAppVersion', this.appVersion)
                 return
             }
-            const localVersionNum = this.splitSemVer(verInStorage)
-            const currentVersionNum = this.splitSemVer(this.appVersion)
+            const localVersionNum = splitSemVer(verInStorage)
+            const currentVersionNum = splitSemVer(this.appVersion)
 
 
             if (currentVersionNum > localVersionNum) {
@@ -127,35 +118,37 @@ export const useStore = defineStore({
             this.rightTrayBackNavProps = null
             this.panelTitleEditState = false
             this.panelDescEditState = false
+            this.panelSortBoxIsOpen = false,
             this.deleteResetBoxIsOpen = false
             localStorage.setItem('localAppVersion', this.appVersion)
         },
-        checkAllComplete() {
-            if (this.panels.length > 0) {
-                const numPanels = this.panels.length
-                let numComplete = 0
-                const getRandomElement = (arr) => {
-                    const randomIndex = Math.floor(Math.random() * arr.length);
-                    return arr[randomIndex];
-                }
-                const congratsMsgs = [
-                    "🔥 💪 😎",
-                    "😎 😎 😎",
-                    "🚀 🚀 🚀",
-                ]
+        // // move
+        // checkAllComplete() {
+        //     if (this.panels.length > 0) {
+        //         const numPanels = this.panels.length
+        //         let numComplete = 0
+        //         const getRandomElement = (arr) => {
+        //             const randomIndex = Math.floor(Math.random() * arr.length);
+        //             return arr[randomIndex];
+        //         }
+        //         const congratsMsgs = [
+        //             "🔥 💪 😎",
+        //             "😎 😎 😎",
+        //             "🚀 🚀 🚀",
+        //         ]
 
-                for (let i = 0; i < numPanels; i++) {
-                    if (this.panels[i].is_complete) {
-                        numComplete++
-                    }
-                }
+        //         for (let i = 0; i < numPanels; i++) {
+        //             if (this.panels[i].is_complete) {
+        //                 numComplete++
+        //             }
+        //         }
 
-                if (numComplete === numPanels) {
-                    this.showMessage(getRandomElement(congratsMsgs))
+        //         if (numComplete === numPanels) {
+        //             this.showMessage(getRandomElement(congratsMsgs))
 
-                }
-            }
-        },
+        //         }
+        //     }
+        // },
         checkPWA() {
             this.isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
         },
@@ -201,10 +194,10 @@ export const useStore = defineStore({
                     // this handles rollbar clients errors on network unavailability
                     errorMsg = "Offline."
                     rollbar.error(`app: network error for a user`)
-                    await this.signUserOutAction()
+                    await signOutAllStores()
                 } else if (status === 401) {
                     errorMsg = "Please sign back in."
-                    await this.signUserOutAction()
+                    await signOutAllStores()
                 }
                 else {
                     // console.log(error.response)
@@ -264,8 +257,8 @@ export const useStore = defineStore({
                 // console.log("no cookie to remove")
             }
             this.user = null
-            this.panels = null
-            this.consistency = []
+            // this.panels = null
+            // this.consistency = []
             this.rightTrayIsOpen = false
             this.rightTrayComponentName = null
             this.rightTrayComponentProps = {}
@@ -299,149 +292,149 @@ export const useStore = defineStore({
                 }
             }
         },
-        async createPanelAction(position, title, description) {
-            const access_token = VueCookies.get("9p_access_token")
-            try {
-                const response = await api.postPanel(access_token, position, title, description)
-                await this.readPanelsAction()
-            } catch (error) {
-                this.apiError(error)
-            }
-        },
-
-        
-        async readPanelsAction() {
-            const access_token = VueCookies.get("9p_access_token")
-
-            try {
-                const response = await api.getPanels(access_token)
-                this.panels = response.data.data
-                return response.data.data
-            } catch (error) {
-                this.apiError(error)
-            }
-        },
-        async updatePanelAction(panel_id, update) {
-            const access_token = VueCookies.get("9p_access_token")
-            try {
-
-                const response = await api.patchPanel(access_token, panel_id, update)
-                await this.readPanelsAction()
-                await this.readPanelConsistencyAction()
-                return true
-            } catch (error) {
-                this.apiError(error)
-                return false
-            }
-        },
-        async deletePanelAction(panel_id) {
-            const access_token = VueCookies.get("9p_access_token")
-
-            try {
-                const response = await api.deletePanel(access_token, panel_id)
-                await this.readPanelsAction()
-            } catch (error) {
-                this.apiError(error)
-            }
-        },
-        async createEntryAction(panel_id, is_complete) {
-            const access_token = VueCookies.get("9p_access_token")
-            // does not require loading bars becuase they are triggered in getPanelsActions()
-            try {
-                const response = await api.postEntry(access_token, panel_id, is_complete)
-                await this.readPanelsAction()
-                return response.data.data
-            } catch (error) {
-                this.apiError(error)
-            }
-        },
-        async readEntriesAction(panel_id) {
-            const access_token = VueCookies.get("9p_access_token")
-
-            try {
-                const response = await api.getEntries(access_token, panel_id)
-                return response.data.data
-            } catch (error) {
-                console.log(error.message)
-                this.apiError(error)
-            }
-        },
-        async deleteEntriesAction(panel_id) {
-            const access_token = VueCookies.get("9p_access_token")
-
-            try {
-                const response = await api.deleteEntries(access_token, panel_id)
-                await this.readPanelsAction()
-            } catch (error) {
-                this.apiError(error)
-            }
-        },
-        async readPanelConsistencyAction() {
-            const access_token = VueCookies.get("9p_access_token")
-
-            try {
-                performance.mark('panelConsistencyStart')
-                const response = await api.getPanelConsistency(access_token)
-                this.consistency = response.data.data
-            } catch (error) {
-                this.apiError(error)
-            } finally {
-                performance.mark('panelConsistencyEnd')
-                performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
-
-                const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
-                // console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
-            }
-        },
-        async toggleEntryOptimistically(panelId) {
-            performance.mark('panelTapStart')
-            performance.mark('panelFindStart')
-            const panel = this.panels.find(panel => panel.id === panelId)
-            performance.mark('panelFindEnd')
-
-            panel.is_complete = !panel.is_complete
-            this.selectedPanel = panelId
-
-            this.panelIsDisabled = true
+        // async createPanelAction(position, title, description) {
+        //     const access_token = VueCookies.get("9p_access_token")
+        //     try {
+        //         const response = await api.postPanel(access_token, position, title, description)
+        //         await this.readPanelsAction()
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     }
+        // },
 
 
-            try {
-                performance.mark('panelEntryStart')
-                await this.createEntryAction(panelId, panel.is_complete)
-                performance.mark('panelEntryEnd')
-                this.checkAllComplete()
-                this.readPanelConsistencyAction()
-            } catch (error) {
-                this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
-                setTimeout(() => this.messages.shift(), 5000)
-                if (this.panels) {
-                    const panel = this.panels.find(panel => panel.id === panelId)
-                    panel.is_complete = !panel.is_complete
-                }
-            } finally {
-                this.panelIsDisabled = false
+        // async readPanelsAction() {
+        //     const access_token = VueCookies.get("9p_access_token")
 
-                performance.mark('panelTapEnd')
-                performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
-                performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
-                performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
+        //     try {
+        //         const response = await api.getPanels(access_token)
+        //         this.panels = response.data.data
+        //         return response.data.data
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     }
+        // },
+        // async updatePanelAction(panel_id, update) {
+        //     const access_token = VueCookies.get("9p_access_token")
+        //     try {
 
-                const findDuration = performance.getEntriesByName('panelFindDuration')
-                // console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
+        //         const response = await api.patchPanel(access_token, panel_id, update)
+        //         await this.readPanelsAction()
+        //         await this.readPanelConsistencyAction()
+        //         return true
+        //     } catch (error) {
+        //         this.apiError(error)
+        //         return false
+        //     }
+        // },
+        // async deletePanelAction(panel_id) {
+        //     const access_token = VueCookies.get("9p_access_token")
 
-                const entryDuration = performance.getEntriesByName('panelEntryDuration')
-                // console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
+        //     try {
+        //         const response = await api.deletePanel(access_token, panel_id)
+        //         await this.readPanelsAction()
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     }
+        // },
+        // async createEntryAction(panel_id, is_complete) {
+        //     const access_token = VueCookies.get("9p_access_token")
+        //     // does not require loading bars becuase they are triggered in getPanelsActions()
+        //     try {
+        //         const response = await api.postEntry(access_token, panel_id, is_complete)
+        //         await this.readPanelsAction()
+        //         return response.data.data
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     }
+        // },
+        // async readEntriesAction(panel_id) {
+        //     const access_token = VueCookies.get("9p_access_token")
 
-                const tapDuration = performance.getEntriesByName('panelPanelDuration')
-                const tapDurationMs = tapDuration[tapDuration.length - 1].duration
-                // console.log(`panel tap duration ${tapDurationMs} ms`)
-                this.addPerfMetric(tapDurationMs)
+        //     try {
+        //         const response = await api.getEntries(access_token, panel_id)
+        //         return response.data.data
+        //     } catch (error) {
+        //         console.log(error.message)
+        //         this.apiError(error)
+        //     }
+        // },
+        // async deleteEntriesAction(panel_id) {
+        //     const access_token = VueCookies.get("9p_access_token")
 
-                if (tapDurationMs > 1500) {
-                    rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
-                }
-            }
-        },
+        //     try {
+        //         const response = await api.deleteEntries(access_token, panel_id)
+        //         await this.readPanelsAction()
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     }
+        // },
+        // async readPanelConsistencyAction() {
+        //     const access_token = VueCookies.get("9p_access_token")
+
+        //     try {
+        //         performance.mark('panelConsistencyStart')
+        //         const response = await api.getPanelConsistency(access_token)
+        //         this.consistency = response.data.data
+        //     } catch (error) {
+        //         this.apiError(error)
+        //     } finally {
+        //         performance.mark('panelConsistencyEnd')
+        //         performance.measure('panelConsistencyDuration', 'panelConsistencyStart', 'panelConsistencyEnd')
+
+        //         const consistencyDuration = performance.getEntriesByName('panelConsistencyDuration')
+        //         // console.log(`panel consistency duration ${consistencyDuration[consistencyDuration.length - 1].duration} ms`)
+        //     }
+        // },
+        // async toggleEntryOptimistically(panelId) {
+        //     performance.mark('panelTapStart')
+        //     performance.mark('panelFindStart')
+        //     const panel = this.panels.find(panel => panel.id === panelId)
+        //     performance.mark('panelFindEnd')
+
+        //     panel.is_complete = !panel.is_complete
+        //     this.selectedPanel = panelId
+
+        //     this.panelIsDisabled = true
+
+
+        //     try {
+        //         performance.mark('panelEntryStart')
+        //         await this.createEntryAction(panelId, panel.is_complete)
+        //         performance.mark('panelEntryEnd')
+        //         this.checkAllComplete()
+        //         this.readPanelConsistencyAction()
+        //     } catch (error) {
+        //         this.messages.push({ message: 'Having trouble updating that panel... 😬', error: true })
+        //         setTimeout(() => this.messages.shift(), 5000)
+        //         if (this.panels) {
+        //             const panel = this.panels.find(panel => panel.id === panelId)
+        //             panel.is_complete = !panel.is_complete
+        //         }
+        //     } finally {
+        //         this.panelIsDisabled = false
+
+        //         performance.mark('panelTapEnd')
+        //         performance.measure('panelFindDuration', 'panelFindStart', 'panelFindEnd')
+        //         performance.measure('panelEntryDuration', 'panelEntryStart', 'panelEntryEnd')
+        //         performance.measure('panelPanelDuration', 'panelTapStart', 'panelTapEnd')
+
+        //         const findDuration = performance.getEntriesByName('panelFindDuration')
+        //         // console.log(`panel find duration ${findDuration[findDuration.length - 1].duration} ms`)
+
+        //         const entryDuration = performance.getEntriesByName('panelEntryDuration')
+        //         // console.log(`panel entry duration ${entryDuration[entryDuration.length - 1].duration} ms`)
+
+        //         const tapDuration = performance.getEntriesByName('panelPanelDuration')
+        //         const tapDurationMs = tapDuration[tapDuration.length - 1].duration
+        //         // console.log(`panel tap duration ${tapDurationMs} ms`)
+        //         this.addPerfMetric(tapDurationMs)
+
+        //         if (tapDurationMs > 1500) {
+        //             rollbar.warn(`app: individual tap for ${this.user.name} > 1500ms`)
+        //         }
+        //     }
+        // },
         async startPasswordResetFlow(email) {
 
             try {

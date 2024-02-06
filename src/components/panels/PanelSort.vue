@@ -4,7 +4,7 @@
             <div v-for="i in 9" :key="i" class="aspect-w-1 aspect-h-1 rounded-lg">
                 <div class="aspect-content">
                     <button @click="dispatchUpdatePanelAction(i - 1)"
-                        :class="[this.Store.panels[i - 1] ? 'border-2 border-np-base' : 'border-dashed border-np-base', this.Store.panels[i - 1] && this.Store.panels[i - 1].id === this.panel.id ? 'bg-np-fill border-0' : null]"
+                        :class="[this.panelStore.panels[i - 1] ? 'border-2 border-np-base' : 'border-dashed border-np-base', this.panelStore.panels[i - 1] && this.panelStore.panels[i - 1].id === this.panel.id ? 'bg-np-fill border-0' : null]"
                         class="flex items-center justify-center border  border-np-base rounded-lg hover:scale-105">
                     </button>
                 </div>
@@ -17,15 +17,17 @@
 <script>
 
 import { useStore } from '@/stores/store.js'
+import { usePanelStore } from "@/stores/panelStore.js"
+
 import { mapStores } from 'pinia'
 
 
 
 export default {
     computed: {
-        ...mapStores(useStore),
+        ...mapStores(useStore, usePanelStore),
         panelFromStore() {
-            const panelFromStore = this.Store.panels.find(panel => panel.id === this.panel.id)
+            const panelFromStore = this.panelStore.panels.find(panel => panel.id === this.panel.id)
             return { ...panelFromStore }
         }
 
@@ -41,31 +43,25 @@ export default {
     },
     methods: {
         async dispatchUpdatePanelAction(i) {
-            if ((i + 1) <= this.Store.panels.length) {
+            if ((i + 1) <= this.panelStore.panels.length) {
                 if (i === this.panelFromStore.position) {
-                    this.Store.messages.push({ message: "That's where the panel already is 🙂", error: true })
-                    setTimeout(() => this.Store.messages.shift(), 5000)
+                    this.Store.showMessage("That's where the panel already is 🙂")
                 } else {
 
-                    this.Store.rightTrayIsOpen = false
-                    this.Store.panelSortBoxIsOpen = false
-                    this.Store.deleteResetBoxIsOpen = false
+                    this.Store.closeRightTray()
 
-
-                    await this.Store.updatePanelAction(
+                    await this.panelStore.updatePanelAction(
                         this.panel.id,
                         { 'position': i }
                     )
-                    this.Store.readPanelConsistencyAction()
+                    await this.panelStore.readPanelConsistencyAction()
                 }
             }
             else {
-                this.Store.messages.push({ message: "Please move panel within existing panels 🙏", error: true })
-                setTimeout(() => this.Store.messages.shift(), 5000)
+                this.Store.showMessage("Please move panel within existing panels 🙏")
             }
         }
     }
-
 }
 
 </script>
