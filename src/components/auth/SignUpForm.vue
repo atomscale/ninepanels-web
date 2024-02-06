@@ -56,7 +56,7 @@
                     <div class="font-light text-xs text-np-base">Free for basic use forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
-                        your data and you agree to our <button @click="Store.openRightTray('PrivacyPolicy')"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
+                        your data and you agree to our <button @click="Store.openRightTray('PrivacyPolicy', null, 'SignUpForm', null)"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
 
                         <div class="font-light text-xs text-np-base">By signing up you also agree to a single cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
                         <div>
