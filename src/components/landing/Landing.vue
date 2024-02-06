@@ -161,7 +161,7 @@
                                 that openness and built global-scale paywalls around content. The price you pay is your
                                 attention and personal data.</div>
                             <div>Ninepanels doesn't track you after you leave, doesn't sell your data, and is by design
-                                anti-attention seeking.</div>
+                                anti-attention seeking. A simple tool for grown ups.</div>
                             <div>The only reason an email is needed at all is to verify you're not a bot, and to communicate
                                 with you if we need to.</div>
                         </div>
