@@ -1,9 +1,10 @@
-import { useStore } from "@/stores/store.js"
+import { useMainStore } from "@/stores/store.js"
 import { usePanelStore } from "@/stores/panelStore.js"
+import VueCookies from 'vue-cookies'
 
 export async function signOutAllStores() {
 
-    const mainStore = useStore()
+    const mainStore = useMainStore()
     const panelStore = usePanelStore()
 
     await mainStore.signUserOutAction()
@@ -35,7 +36,7 @@ export function getAccessToken() {
 }
 
 export function apiError(error) {
-    const mainStore = useStore()
+    const mainStore = useMainStore()
     console.log(error)
     mainStore.apiError(error)
 }

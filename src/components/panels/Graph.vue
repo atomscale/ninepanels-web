@@ -1,5 +1,5 @@
 <template >
-    <div v-if="panelStore.panels && Store.selectedPanel && entries_by_day && show">
+    <div v-if="panelStore.panels && mainStore.selectedPanel && entries_by_day && show">
 
 
 
@@ -80,7 +80,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -89,7 +89,7 @@ import LoaderSpin from '@/components/general/LoaderSpin.vue'
 
 export default {
     computed: {
-        ...mapStores(useStore, usePanelStore),
+        ...mapStores(useMainStore, usePanelStore),
 
     },
     props: {
@@ -109,13 +109,13 @@ export default {
         'panelStore.panels': function (new_val, old_val) {
             this.getEntries()
         },
-        'Store.selectedPanel': function (new_val, old_val) {
+        'mainStore.selectedPanel': function (new_val, old_val) {
             this.readLocalFilterMRU(new_val)
         }
     },
     methods: {
         async getEntries() {
-            if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
+            if (this.panelId === this.mainStore.selectedPanel && this.entries_by_day) {
                 this.entries_by_day = this.findLatest(this.entries_by_day)
             }
 
@@ -197,7 +197,7 @@ export default {
         infinityToggle() {
             if (this.onHome === true) {
                 // console.log("at home not tray")
-                this.Store.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
+                this.mainStore.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
             } else {
                 // console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
@@ -267,7 +267,7 @@ export default {
         this.readLocalFilterMRU(this.panelId)
 
         if (!this.onHome) {
-            this.Store.selectedPanel = this.panelId
+            this.mainStore.selectedPanel = this.panelId
 
         }
     },

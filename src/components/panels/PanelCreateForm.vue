@@ -43,7 +43,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -53,7 +53,7 @@ import DynamicButton from '@/components/general/DynamicButton.vue'
 
 export default {
   computed: {
-    ...mapStores(useStore, usePanelStore),
+    ...mapStores(useMainStore, usePanelStore),
   },
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
           this.panelStore.readPanelConsistencyAction()
         } finally {
 
-          this.Store.closeRightTray()
+          this.mainStore.closeRightTray()
         }
       }
     },

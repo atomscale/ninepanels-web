@@ -17,7 +17,7 @@
         </div>
       </div>
       <div>
-        <RoutePerformance v-if="Store.routePerformance && routePerfBoxIsOpen" class="  mb-5" />
+        <RoutePerformance v-if="mainStore.routePerformance && routePerfBoxIsOpen" class="  mb-5" />
       </div>
     </div>
 
@@ -26,7 +26,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import RoutePerformance from '@/components/admin/RoutePerformance.vue'
@@ -37,14 +37,14 @@ import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 
 export default {
   computed: {
-    ...mapStores(useStore)
+    ...mapStores(useMainStore)
   },
   methods: {
     toggleRoutePerfBox() {
       this.routePerfBoxIsOpen = !this.routePerfBoxIsOpen
     },
     async readRoutePerformance() {
-      await this.Store.readRoutePerformance()
+      await this.mainStore.readRoutePerformance()
     },
   },
   components: {

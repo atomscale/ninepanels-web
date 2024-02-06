@@ -1,5 +1,5 @@
 <template >
-  <button aria-label="add a new panel" type="submit" @click="Store.openRightTray('PanelCreateForm', {emptySlotIndex: slotIndex})" class="h-full w-full rounded-lg  border-np-base border-dashed border text-xs text-np-base">
+  <button aria-label="add a new panel" type="submit" @click="mainStore.openRightTray('PanelCreateForm', {emptySlotIndex: slotIndex})" class="h-full w-full rounded-lg  border-np-base border-dashed border text-xs text-np-base">
     <div class="flex items-center justify-center">
       <PlusIcon class="h-6 w-6 text-np-base opacity-60 " />
 
@@ -9,13 +9,13 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { PlusIcon } from '@heroicons/vue/24/outline'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
 
   },
 

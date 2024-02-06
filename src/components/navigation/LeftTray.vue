@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="Store.leftNavIsOpen">
-    <Dialog as="div" class="relative z-50 " @close="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false">
+  <TransitionRoot as="template" :show="mainStore.leftNavIsOpen">
+    <Dialog as="div" class="relative z-50 " @close="this.mainStore.leftNavIsOpen = false; mainStore.shareBoxIsOpen = false">
       <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"
         enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100"
         leave-to="opacity-0">
@@ -11,15 +11,15 @@
         <TransitionChild as="template" enter="transition ease-in-out duration-300 transform"
           enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform"
           leave-from="translate-x-0" leave-to="-translate-x-full">
-          <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col " :class="Store.theme">
+          <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col " :class="mainStore.theme">
 
 
             <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
               leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
-              <div class="absolute right-0 -mr-12 pt-2" :class="Store.isPWA ? 'bottom-6': 'bottom-1 '">
+              <div class="absolute right-0 -mr-12 pt-2" :class="mainStore.isPWA ? 'bottom-6': 'bottom-1 '">
                 <button aria-label="Close sidebar" type="button"
                   class="ml-1 flex h-10 w-10 items-center justify-center rounded-full"
-                  @click="this.Store.leftNavIsOpen = false; Store.shareBoxIsOpen = false">
+                  @click="this.mainStore.leftNavIsOpen = false; mainStore.shareBoxIsOpen = false">
                   <span class="sr-only">Close sidebar</span>
                   <XMarkIcon class="h-8 w-8 text-white" aria-hidden="true" />
                 </button>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import LeftTrayBottom from '@/components/navigation/LeftTrayBottom.vue'
@@ -62,7 +62,7 @@ import {
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   components: {
     LeftTrayBottom,

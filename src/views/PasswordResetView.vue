@@ -3,14 +3,14 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 export default {
   computed: {
-    ...mapStores(useStore)
+    ...mapStores(useMainStore)
   },
   mounted() {
-    this.Store.openRightTray('PasswordResetForm', {email: this.$route.query.email, password_reset_token: this.$route.query.password_reset_token})
+    this.mainStore.openRightTray('PasswordResetForm', {email: this.$route.query.email, password_reset_token: this.$route.query.password_reset_token})
     this.$router.push({ name: 'Panels' })
   },
 

@@ -11,7 +11,7 @@
         <div class="mt-10  h-full">
 
           <div class="flex flex-col items-center space-y-3 w-full">
-            <div v-if="Store.user" class="font-semibold  text-np-base">
+            <div v-if="mainStore.user" class="font-semibold  text-np-base">
               <router-link :to="{ name: 'Panels' }">Back to your panels...</router-link>
             </div>
             <div v-else class="flex flex-col items-center space-y-3 w-full">
@@ -37,13 +37,13 @@
 
 <script>
 import rollbar from '@/rollbarClient.js'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 
 export default {
   computed: {
-    ...mapStores(useStore)
+    ...mapStores(useMainStore)
   },
   mounted() {
     rollbar.info(`app: 404 loaded for requested route: ${this.$route.path}`)

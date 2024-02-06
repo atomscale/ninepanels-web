@@ -5,12 +5,12 @@
         </div>
 
 
-            <Listbox as="div" v-model="Store.theme">
+            <Listbox as="div" v-model="mainStore.theme">
                 <div class="relative border border-np-base rounded-md">
 
                     <ListboxButton
                         class="relative w-full cursor-default  py-1.5 pl-3 pr-10 text-left text-np-base text-sm ">
-                        <span class="block truncate">{{ Store.theme }}</span>
+                        <span class="block truncate">{{ mainStore.theme }}</span>
                         <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon class="h-5 w-5 text-np-base" aria-hidden="true" />
                         </span>
@@ -38,7 +38,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import rollbar from '@/rollbarClient.js'
 
@@ -48,14 +48,14 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 
 export default {
     computed: {
-        ...mapStores(useStore),
+        ...mapStores(useMainStore),
         currentTheme() {
-            return this.Store.theme
+            return this.mainStore.theme
         }
     },
     watch: {
         currentTheme() {
-            this.Store.saveTheme(this.Store.theme)
+            this.mainStore.saveTheme(this.mainStore.theme)
         }
     },
 

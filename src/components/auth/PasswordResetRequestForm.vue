@@ -3,7 +3,7 @@
 
         <div class="bg-np-base sm:rounded-lg ">
             <form   @submit.prevent="onSubmit" class="space-y-4" action="#" method="POST">
-                <div v-if="!Store.user" class="font-bold text-xl text-np-base">Let's reset your password:
+                <div v-if="!mainStore.user" class="font-bold text-xl text-np-base">Let's reset your password:
                 </div>
                 <div v-else class="font-bold text-xl text-np-base">Let's change your password:
                 </div>
@@ -20,15 +20,15 @@
                     </div>
                 </div>
                 <div>
-                    <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="Store.user ? 'Change your password': 'Get a reset link'"
+                    <DynamicButton :parentMethod="dispatchStartPasswordResetFlow" :buttonText="mainStore.user ? 'Change your password': 'Get a reset link'"
                         :confirmRequired="false" />
                 </div>
                 <div class="flex justify-between">
                     <div class="font-semibold text-xs text-np-base">
 
                     </div>
-                    <div v-if="!Store.user" class="font-semibold text-xs text-np-base">
-                        <button @click="Store.openRightTray('SignUpForm', null, 'PasswordResetRequestForm', null)">Need an account?</button>
+                    <div v-if="!mainStore.user" class="font-semibold text-xs text-np-base">
+                        <button @click="mainStore.openRightTray('SignUpForm', null, 'PasswordResetRequestForm', null)">Need an account?</button>
                     </div>
                 </div>
             </form>
@@ -39,7 +39,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
 
@@ -52,14 +52,14 @@ export default {
         }
     },
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     methods: {
         async dispatchStartPasswordResetFlow() {
-            const resp = await this.Store.startPasswordResetFlow(this.email)
+            const resp = await this.mainStore.startPasswordResetFlow(this.email)
             this.email = ''
             if (resp) {
-                this.Store.openRightTray('PasswordResetRequestConfirm')
+                this.mainStore.openRightTray('PasswordResetRequestConfirm')
             }
         }
     },

@@ -35,10 +35,10 @@
             </form>
             <div class="flex justify-between">
                 <div class="font-semibold text-xs text-np-base">
-                    <button @click="Store.openRightTray('SignUpForm', null, 'SignInForm', null)">Need an account?</button>
+                    <button @click="mainStore.openRightTray('SignUpForm', null, 'SignInForm', null)">Need an account?</button>
                 </div>
                 <div class="font-semibold text-xs text-np-base">
-                    <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignInForm', null)">Forgot password?</button>
+                    <button @click="mainStore.openRightTray('PasswordResetRequestForm', null, 'SignInForm', null)">Forgot password?</button>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import DynamicButton from '@/components/general/DynamicButton.vue'
@@ -59,7 +59,7 @@ import {
 export default {
 
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     data() {
         return {
@@ -70,9 +70,9 @@ export default {
     },
     methods: {
         async sendLogIn() {
-            const token = await this.Store.getLoginTokenAction(this.username, this.password)
+            const token = await this.mainStore.getLoginTokenAction(this.username, this.password)
             if (token) {
-                this.Store.rightTrayIsOpen = false
+                this.mainStore.rightTrayIsOpen = false
                 this.$router.push({ name: 'Panels' })
             } else {
                 this.password = ''
@@ -90,7 +90,7 @@ export default {
 
     },
     mounted() {
-        // console.log('signin reads theme:', this.Store.theme)
+        // console.log('signin reads theme:', this.mainStore.theme)
 
     },
     components: {

@@ -7,7 +7,7 @@ import LandingView from '@/views/LandingView.vue'
 import NotFound from '@/views/NotFound.vue'
 import PasswordResetView from '@/views/PasswordResetView.vue'
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 import VueCookies from 'vue-cookies'
 import rollbar from '@/rollbarClient.js'
@@ -23,7 +23,7 @@ function requireAccessToken(to, from, next) {
 }
 
 function adminOnly(to, from, next) {
-  const store = useStore()
+  const store = useMainStore()
   if (store.user) {
     if (store.user.is_admin) {
 
@@ -100,7 +100,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const store = useStore()
+  const store = useMainStore()
   store.shareBoxIsOpen = false
   store.checkMobile()
   store.checkPWA()

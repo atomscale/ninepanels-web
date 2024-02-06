@@ -22,7 +22,7 @@
             account
             creation and last active dates.</div>
 
-          <div class="text-xl font-semibold">How We Store Your Data</div>
+          <div class="text-xl font-semibold">How We mainStore Your Data</div>
           <div>Your data is securely stored in dedicated database instances hosted by Supabase, with locations in London
             and
             Frankfurt. Data is encrypted during transit over HTTPS and is accessible only by authorized personnel.</div>
@@ -81,12 +81,12 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   methods: {
   },

@@ -56,7 +56,7 @@
                     <div class="font-light text-xs text-np-base">Free for basic use forever. No funny business or tracking. No ads, ever.
                     </div>
                     <div class="font-light text-xs text-np-base">By signing up you agree for ninepanels.com to store
-                        your data and you agree to our <button @click="Store.openRightTray('PrivacyPolicy', null, 'SignUpForm', null)"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
+                        your data and you agree to our <button @click="mainStore.openRightTray('PrivacyPolicy', null, 'SignUpForm', null)"><b>Privacy Policy</b></button>. Your data will never, ever be sold.</div>
 
                         <div class="font-light text-xs text-np-base">By signing up you also agree to a single cookie being stored on your device (so you can be kept logged in between visits) along with some non-sensitive items in local device storage for things like theme settings.</div>
                         <div>
@@ -66,10 +66,10 @@
                     </form>
                 <div class="flex justify-between mt-6">
                     <div class="font-semibold text-xs text-np-base">
-                        <button @click="Store.openRightTray('SignInForm', null, 'SignUpForm')">Sign in instead</button>
+                        <button @click="mainStore.openRightTray('SignInForm', null, 'SignUpForm')">Sign in instead</button>
                     </div>
                     <div class="font-semibold text-xs text-np-base">
-                        <button @click="Store.openRightTray('PasswordResetRequestForm', null, 'SignUpForm')">Forgot your password?</button>
+                        <button @click="mainStore.openRightTray('PasswordResetRequestForm', null, 'SignUpForm')">Forgot your password?</button>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 import {
     EyeIcon,
@@ -99,23 +99,23 @@ export default {
         }
     },
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     methods: {
         async signUserUp() {
 
             if (this.password_first !== this.password_second) {
                 this.passwordMismatch = true
-                this.Store.messages.push({ message: "Passwords do not match" })
-                setTimeout(() => this.Store.messages.shift(), 5000)
+                this.mainStore.messages.push({ message: "Passwords do not match" })
+                setTimeout(() => this.mainStore.messages.shift(), 5000)
                 return // stop function
             }
 
 
-            const resp = await this.Store.createUserAction(this.email, this.name, this.password_second)
+            const resp = await this.mainStore.createUserAction(this.email, this.name, this.password_second)
 
             if (resp) {
-                this.Store.closeRightTray()
+                this.mainStore.closeRightTray()
                 this.$router.push({ name: 'Panels' })
             }
         },

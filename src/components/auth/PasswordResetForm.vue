@@ -47,7 +47,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 import {
     EyeIcon,
@@ -74,29 +74,29 @@ export default {
         }
     },
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     methods: {
         async dispatchPasswordReset() {
             if (this.password_first !== this.password_second) {
-                this.Store.showMessage("New passwords do not match")
+                this.mainStore.showMessage("New passwords do not match")
                 return // stop function
             }
 
             try {
-                await this.Store.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
+                await this.mainStore.sendPasswordReset(this.password_second, this.email, this.password_reset_token)
 
-                if (this.Store.user) {
-                    this.Store.signUserOutAction()
+                if (this.mainStore.user) {
+                    this.mainStore.signUserOutAction()
                     this.$router.push({ name: 'Landing' })
-                    this.Store.showMessage('Password successfully changed, please sign in.')
-                    this.Store.openRightTray('SignInForm')
+                    this.mainStore.showMessage('Password successfully changed, please sign in.')
+                    this.mainStore.openRightTray('SignInForm')
                 } else {
                     this.$router.push({ name: 'Landing' })
-                    this.Store.showMessage('Password successfully reset, please sign in.')
+                    this.mainStore.showMessage('Password successfully reset, please sign in.')
                 }
             } catch (error) {
-                this.Store.showMessage('Something went wrong, email me!')
+                this.mainStore.showMessage('Something went wrong, email me!')
             } finally {
                 this.password_first = ''
                 this.password_second = ''

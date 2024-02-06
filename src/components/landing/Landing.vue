@@ -10,12 +10,12 @@
                 </div>
                 <div class="flex text-sm justify-end mt-2.5 text-np-inverted mr-4">
                     <div class=" mt-0.5  mr-2">
-                        <button class="px-2 pt-0.5 pb-1 " @click="Store.openRightTray('SignInForm')">Sign in</button>
+                        <button class="px-2 pt-0.5 pb-1 " @click="mainStore.openRightTray('SignInForm')">Sign in</button>
                     </div>
                     <div class=" ">
                         <button
                             class="border-np-base font-extrabold text-np-base border px-2 pt-0.5 pb-1 bg-np-base rounded-md"
-                            @click="Store.openRightTray('SignUpForm')">Sign up</button>
+                            @click="mainStore.openRightTray('SignUpForm')">Sign up</button>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                             <div class=" ">
                                 <button
                                     class="border-np-base h-10 w-24 text-np-base border px-2 pt-0.5 pb-1 bg-np-base rounded-lg"
-                                    @click="Store.openRightTray('SignUpForm')">Sign up</button>
+                                    @click="mainStore.openRightTray('SignUpForm')">Sign up</button>
                             </div>
                         </div>
 
@@ -133,7 +133,7 @@
 
                         <div class="text-4xl font-bold text-center h-full ">
 
-                            Why is Ninepanels not in the App or Play Store?
+                            Why is Ninepanels not in the App or Play mainStore?
                         </div>
                         <div class="flex flex-col justify-center items-center text-center space-y-4 mt-8 h-full">
                             <div>Instead of being in the app stores we are proudly web based and offer a Progressive Web App
@@ -143,7 +143,7 @@
                             </div>
                             <div>As a PWA, Ninepanels is installable onto your mobile device and looks and feels just like
                                 an app from your
-                                store. The <button class="font-bold underline" @click="Store.openRightTray('InstallGuide')">way to install it </button> might not be what you are used to, but it's equally easy.</div>
+                                store. The <button class="font-bold underline" @click="mainStore.openRightTray('InstallGuide')">way to install it </button> might not be what you are used to, but it's equally easy.</div>
 
                             <div class="text-lg font font-extrabold">Your experience and security matters</div>
                             <div>Not being in the app stores mean that app updates can be pushed to you in around <i>2
@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import {
@@ -192,7 +192,7 @@ import {
 
 export default {
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     components: {
         ArrowDownCircleIcon

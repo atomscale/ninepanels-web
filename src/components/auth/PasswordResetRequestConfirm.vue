@@ -14,7 +14,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 
 import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
 
@@ -23,7 +23,7 @@ import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
 export default {
 
     computed: {
-        ...mapStores(useStore)
+        ...mapStores(useMainStore)
     },
     methods: {
 

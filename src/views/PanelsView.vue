@@ -7,12 +7,12 @@
       <button @click="clearFocus" class="flex flex-col justify-center h-full items-center">
         <div v-if="panelStore.panels && panelStore.panels.length > 0"
           class="flex flex-col justify-start h-full items-center">
-          <Graph v-if="Store.selectedPanel && panelStore.panels && panelStore.panels.length > 0"
-            :panelId="Store.selectedPanel" :onHome="true" @click.stop />
+          <Graph v-if="mainStore.selectedPanel && panelStore.panels && panelStore.panels.length > 0"
+            :panelId="mainStore.selectedPanel" :onHome="true" @click.stop />
         </div>
         <div v-else class="flex justify-center items-center">
           <button aria-label="add a new panel" type="submit"
-            @click="Store.openRightTray('PanelCreateForm', { emptySlotIndex: 0 })" class="
+            @click="mainStore.openRightTray('PanelCreateForm', { emptySlotIndex: 0 })" class="
               text-xs text-np-base">
             <div class="flex items-center justify-center">
               <div class="text-sm text-np-base mr-4">create a panel to start</div>
@@ -23,12 +23,11 @@
         </div>
       </button>
     </div>
-
   </transition>
 </template>
 
 <script>
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -40,15 +39,15 @@ import Graph from '@/components/panels/Graph.vue'
 
 export default {
   computed: {
-    ...mapStores(useStore, usePanelStore),
+    ...mapStores(useMainStore, usePanelStore),
   },
   methods: {
     clearFocus() {
-      this.Store.selectedPanel = null
+      this.mainStore.selectedPanel = null
     }
   },
   mounted() {
-    this.Store.checkAppVersion()
+    this.mainStore.checkAppVersion()
   },
   components: {
     PanelGridFrame,

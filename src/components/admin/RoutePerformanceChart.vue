@@ -7,7 +7,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
@@ -29,13 +29,13 @@ ChartJS.register(Title, Tooltip, BarElement, CategoryScale, LinearScale)
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
 
   },
   methods: {
     async getRouteTimings() {
 
-      const resp = await this.Store.readRouteTimings(this.method_path.method_path)
+      const resp = await this.mainStore.readRouteTimings(this.method_path.method_path)
 
       if (resp) {
 

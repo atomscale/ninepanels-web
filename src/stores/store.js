@@ -8,8 +8,8 @@ import { splitSemVer } from "@/utils/utils.js"
 
 const uniqueMessages = new Set()
 
-export const useStore = defineStore({
-    id: '',
+export const useMainStore = defineStore({
+    id: 'main',
     state: () => ({
         // userStore
         user: null,

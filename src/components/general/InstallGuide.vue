@@ -18,7 +18,7 @@
     </div>
     <div class="text-np-base">FYI: You'll maybe need to sign in again, just like you might if you installed the app via your
       App or
-      Play Store.</div>
+      Play mainStore.</div>
     <div class="text-lg text-np-base font-bold">Chrome on Android:</div>
     <div class="">Tap the ellipis top-right, find the 'Install app' button. Install the app. *Requires latest Chrome (v115
       +) and Android 13</div>
@@ -52,12 +52,12 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   methods: {
   },

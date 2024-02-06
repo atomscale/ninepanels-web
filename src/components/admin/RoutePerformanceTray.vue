@@ -19,7 +19,7 @@
           </div>
           <!-- <div class="flex justify-end">
             <div class="text-xs text-center  align-middle py-1 mr-3">window:</div>
-            <input class="border rounded-md w-14 text-sm text-center" v-model="Store.window_size" type="number" required="true" min="1" placeholder="avg"/>
+            <input class="border rounded-md w-14 text-sm text-center" v-model="mainStore.window_size" type="number" required="true" min="1" placeholder="avg"/>
             <button @click="">
               <CheckIcon class="h-4"/>
             </button>
@@ -46,13 +46,13 @@
         </table>
       </div>
 
-      <div v-if="this.Store.routePerformance">
+      <div v-if="this.mainStore.routePerformance">
         <RoutePerformanceChart :method_path="this.method_path" />
       </div>
 
     </div>
 
-    <div :class="{ 'mb-4': this.Store.isPWA }">
+    <div :class="{ 'mb-4': this.mainStore.isPWA }">
       <!-- keep here for bottom stuff -->
     </div>
 
@@ -61,7 +61,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
@@ -71,7 +71,7 @@ import RoutePerformanceChart from '@/components/admin/RoutePerformanceChart.vue'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   methods: {
 

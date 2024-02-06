@@ -5,7 +5,7 @@
 import { defineStore } from 'pinia'
 
 import api from '@/services/api.js'
-import { useStore } from "@/stores/store.js"
+import { useMainStore } from "@/stores/store.js"
 
 import { getRandomElement, getAccessToken, apiError } from "@/utils/utils.js"
 
@@ -15,7 +15,7 @@ import { getRandomElement, getAccessToken, apiError } from "@/utils/utils.js"
 
 
 export const usePanelStore = defineStore({
-    id: '',
+    id: 'panel',
     state: () => ({
         panels: null,
         consistency: [],
@@ -40,7 +40,7 @@ export const usePanelStore = defineStore({
                 }
 
                 if (numComplete === numPanels) {
-                    const mainStore = useStore()
+                    const mainStore = useMainStore()
                     const congratsMsgs = [
                         "🔥 💪 😎",
                         "😎 😎 😎",
@@ -161,7 +161,7 @@ export const usePanelStore = defineStore({
                 await this.readPanelConsistencyAction()
             } catch (error) {
                 // TODO this error message maybe should be trigggered in another layer, check, think
-                mainStore = useStore()
+                mainStore = useMainStore()
                 mainStore.showMessage("Having trouble updating that panel")
 
                 // toggle panel complete status back again if call fails.

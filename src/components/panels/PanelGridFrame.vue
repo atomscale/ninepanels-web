@@ -24,7 +24,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -35,7 +35,7 @@ import LoaderSpin from '@/components/general/LoaderSpin.vue'
 
 export default {
   computed: {
-    ...mapStores(useStore, usePanelStore),
+    ...mapStores(useMainStore, usePanelStore),
   },
   mounted() {
     this.panelStore.readPanelsAction()

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="Store.routePerformance" class="h-96 w-full inline-block overflow-scroll">
+    <div v-if="mainStore.routePerformance" class="h-96 w-full inline-block overflow-scroll">
 
 
         <table class="w-full ">
@@ -25,7 +25,7 @@
             </thead>
             <tbody class="text-np-base text-xs ">
 
-                <tr v-for="method_path in Store.routePerformance.data" :key="method_path.id"
+                <tr v-for="method_path in mainStore.routePerformance.data" :key="method_path.id"
                     @click="openRightTray(method_path)" class="cursor-pointer">
 
 
@@ -56,7 +56,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 import { ArrowPathIcon } from '@heroicons/vue/24/outline'
@@ -64,17 +64,17 @@ import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 
 export default {
     computed: {
-        ...mapStores(useStore),
+        ...mapStores(useMainStore),
 
     },
     methods: {
         async getRoutePerformance() {
-            await this.Store.readRoutePerformance()
+            await this.mainStore.readRoutePerformance()
         },
         openRightTray(method_path) {
-            this.Store.rightTrayIsOpen = true
-            this.Store.rightTrayComponentName = 'RoutePerformanceTray'
-            this.Store.rightTrayComponentProps = { method_path: method_path }
+            this.mainStore.rightTrayIsOpen = true
+            this.mainStore.rightTrayComponentName = 'RoutePerformanceTray'
+            this.mainStore.rightTrayComponentProps = { method_path: method_path }
         },
     },
     // mounted() {

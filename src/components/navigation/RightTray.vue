@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="Store.rightTrayIsOpen">
-    <Dialog as="div" class="relative z-40" @close="Store.closeRightTray(); Store.rightTrayIsOpen = false">
+  <TransitionRoot as="template" :show="mainStore.rightTrayIsOpen">
+    <Dialog as="div" class="relative z-40" @close="mainStore.closeRightTray(); mainStore.rightTrayIsOpen = false">
       <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-600 bg-opacity-75 " />
@@ -18,23 +18,23 @@
 
                   <div class="flex pr-3 justify-between ml-2">
 
-                    <button v-if="Store.rightTrayBackNavComponent" type="button"
+                    <button v-if="mainStore.rightTrayBackNavComponent" type="button"
                       class="rounded-md text-np-base hover:text-np-base"
-                      @click="Store.openRightTray(Store.rightTrayBackNavComponent, Store.rightTrayBackNavProps)">
+                      @click="mainStore.openRightTray(mainStore.rightTrayBackNavComponent, mainStore.rightTrayBackNavProps)">
                       <span class="sr-only">Close panel</span>
                       <ChevronLeftIcon class="h-6 w-6 text-np-base " aria-hidden="true" />
                     </button>
                     <div v-else></div>
                     <button type="button" class="rounded-md text-np-base hover:text-np-base"
-                      @click="Store.closeRightTray()">
+                      @click="mainStore.closeRightTray()">
                       <span class="sr-only">Close panel</span>
                       <XMarkIcon class="h-6 w-6 text-np-base " aria-hidden="true" />
                     </button>
                   </div>
 
-                  <div v-if="Store.rightTrayIsOpen && Store.rightTrayComponentName"
+                  <div v-if="mainStore.rightTrayIsOpen && mainStore.rightTrayComponentName"
                     class="relative mt-4 flex-1 px-4  mb-4 sm:px-6 overflow-auto">
-                    <component :is="Store.rightTrayComponentName" v-bind="Store.rightTrayComponentProps" />
+                    <component :is="mainStore.rightTrayComponentName" v-bind="mainStore.rightTrayComponentProps" />
                   </div>
 
 
@@ -51,7 +51,7 @@
 
 
 <script>
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
@@ -74,7 +74,7 @@ import PasswordResetRequestConfirm from '@/components/auth/PasswordResetRequestC
 
 export default {
   computed: {
-    ...mapStores(useStore)
+    ...mapStores(useMainStore)
   },
   components: {
     Dialog,

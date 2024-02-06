@@ -21,7 +21,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -32,14 +32,14 @@ import {
 
 export default {
   computed: {
-    ...mapStores(useStore, usePanelStore),
+    ...mapStores(useMainStore, usePanelStore),
     panel() {
       return this.panelStore.panels.find(panel => panel.id === this.panelId)
     }
   },
   methods: {
     toggleEditState() {
-      this.Store.panelTitleEditState = !this.Store.panelTitleEditState
+      this.mainStore.panelTitleEditState = !this.mainStore.panelTitleEditState
     }
   },
   components: {

@@ -16,7 +16,7 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { usePanelStore } from "@/stores/panelStore.js"
 
 import { mapStores } from 'pinia'
@@ -25,7 +25,7 @@ import { mapStores } from 'pinia'
 
 export default {
     computed: {
-        ...mapStores(useStore, usePanelStore),
+        ...mapStores(useMainStore, usePanelStore),
         panelFromStore() {
             const panelFromStore = this.panelStore.panels.find(panel => panel.id === this.panel.id)
             return { ...panelFromStore }
@@ -45,10 +45,10 @@ export default {
         async dispatchUpdatePanelAction(i) {
             if ((i + 1) <= this.panelStore.panels.length) {
                 if (i === this.panelFromStore.position) {
-                    this.Store.showMessage("That's where the panel already is 🙂")
+                    this.mainStore.showMessage("That's where the panel already is 🙂")
                 } else {
 
-                    this.Store.closeRightTray()
+                    this.mainStore.closeRightTray()
 
                     await this.panelStore.updatePanelAction(
                         this.panel.id,
@@ -58,7 +58,7 @@ export default {
                 }
             }
             else {
-                this.Store.showMessage("Please move panel within existing panels 🙏")
+                this.mainStore.showMessage("Please move panel within existing panels 🙏")
             }
         }
     }

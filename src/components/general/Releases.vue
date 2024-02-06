@@ -81,12 +81,12 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   methods: {
   },

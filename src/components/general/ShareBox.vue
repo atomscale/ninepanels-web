@@ -11,14 +11,14 @@
 
 <script>
 
-import { useStore } from '@/stores/store.js'
+import { useMainStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import rollbar from '@/rollbarClient.js'
 import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 
 export default {
   computed: {
-    ...mapStores(useStore),
+    ...mapStores(useMainStore),
   },
   components: {
     EnvelopeIcon
@@ -27,9 +27,9 @@ export default {
     whatsApp() {
       const msg = encodeURIComponent("Daily balance, long-term consistency.\nNine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]")
       window.location.href = `whatsapp://send?text=${msg}`
-      if (this.Store.user) {
+      if (this.mainStore.user) {
 
-        rollbar.info(`app: shared to whatsapp not using WebShare by ${this.Store.user.name}`)
+        rollbar.info(`app: shared to whatsapp not using WebShare by ${this.mainStore.user.name}`)
       } else {
         rollbar.info(`app: shared to whatsapp not using WebShare by a logged out visitor`)
       }
@@ -38,8 +38,8 @@ export default {
       const subject = encodeURIComponent("Daily balance, long-term consistency.");
       const body = encodeURIComponent("Nine Panels brings visibility to your daily consistency, nurturing awareness and connection to the most important areas of your life. [https://ninepanels.com]");
       window.location.href = `mailto:?subject=${subject}&body=${body}`
-      if (this.Store.user) {
-        rollbar.info(`app: shared to email not using WebShare by ${this.Store.user.name}`)
+      if (this.mainStore.user) {
+        rollbar.info(`app: shared to email not using WebShare by ${this.mainStore.user.name}`)
 
       } else {
         rollbar.info(`app: shared to whatsapp not using WebShare by a logged out visitor`)
