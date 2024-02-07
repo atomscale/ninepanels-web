@@ -52,8 +52,9 @@
                         class="grid grid-cols-7 gap-0.5 ">
                         <div v-for="entry in entries_by_day.slice(0, limit + missingDays() + 1)" :key="entry.id">
 
-                            <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs"
+                            <div v-if="entry.id" class="h-8 w-8 border rounded-md text-xs "
                                 :class="entry.is_complete ? 'bg-np-fill ' : 'bg-np-base border-np-base border-2 scale-95'">
+
                             </div>
 
                         </div>
@@ -71,6 +72,8 @@
 
     </div>
     <div v-else>
+        // TODO this is endlessly spinning on network error
+
         <LoaderSpin />
     </div>
 </template>
@@ -111,11 +114,16 @@ export default {
     methods: {
         async getEntries() {
             if (this.panelId === this.Store.selectedPanel && this.entries_by_day) {
-                // console.log("flip the last array entry")
                 this.entries_by_day = this.findLatest(this.entries_by_day)
-                // console.log(this.entries_by_day)
             }
+
+
+            // here - this will actually not be needed.
             this.entries_by_day = await this.Store.readEntriesAction(this.panelId)
+
+
+
+
             if (this.entries_by_day) {
                 this.padEntries()
             } else {
@@ -187,7 +195,7 @@ export default {
         infinityToggle() {
             if (this.onHome === true) {
                 // console.log("at home not tray")
-                this.Store.openRightTray('DailyPattern', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
+                this.Store.openRightTray('Graph', { panelId: this.panelId, onHome: false }, 'PanelTray', { panelId: this.panelId})
             } else {
                 // console.log("not on home, must be tray")
                 this.setSelectedLimit(1000)
@@ -272,6 +280,7 @@ export default {
             dayHeadings: ['m', 't', 'w', 't', 'f', 's', 's'],
             showEllipsis: false,
             show: true,
+            isLoading: false
         }
     }
 

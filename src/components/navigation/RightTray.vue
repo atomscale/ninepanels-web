@@ -57,7 +57,7 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import PanelTray from '@/components/panels/PanelDetails.vue'
-import DailyPattern from '@/components/panels/DailyPattern.vue'
+import Graph from '@/components/panels/Graph.vue'
 import RoutePerformanceTray from '@/components/admin/RoutePerformanceTray.vue'
 import HowToGuide from '@/components/general/HowToGuide.vue'
 import InstallGuide from '@/components/general/InstallGuide.vue'
@@ -88,7 +88,7 @@ export default {
     PanelCreateForm,
     InstallGuide,
     RoutePerformanceTray,
-    DailyPattern,
+    Graph,
     ChevronLeftIcon,
     Releases,
     About,

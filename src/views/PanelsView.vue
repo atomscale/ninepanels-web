@@ -11,7 +11,7 @@
 
 
         <div v-if="Store.panels && Store.panels.length > 0" class="flex flex-col justify-start h-full items-center">
-          <DailyPattern v-if="Store.selectedPanel && Store.panels && Store.panels.length > 0"
+          <Graph v-if="Store.selectedPanel && Store.panels && Store.panels.length > 0"
             :panelId="Store.selectedPanel" :onHome="true" @click.stop />
         </div>
         <div v-else class="flex justify-center items-center">
@@ -39,7 +39,7 @@ import { ChevronUpIcon } from '@heroicons/vue/24/outline'
 import { useStore } from '@/stores/store.js'
 import { mapStores } from 'pinia'
 import { PlusIcon } from '@heroicons/vue/24/outline'
-import DailyPattern from '@/components/panels/DailyPattern.vue'
+import Graph from '@/components/panels/Graph.vue'
 
 export default {
   computed: {
@@ -63,7 +63,7 @@ export default {
     PanelGridFrame,
     ChevronDownIcon,
     ChevronUpIcon,
-    DailyPattern,
+    Graph,
     PlusIcon
   },
 }
