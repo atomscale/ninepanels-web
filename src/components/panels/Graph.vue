@@ -72,7 +72,6 @@
 
     </div>
     <div v-else>
-        // TODO this is endlessly spinning on network error
 
         <LoaderSpin />
     </div>

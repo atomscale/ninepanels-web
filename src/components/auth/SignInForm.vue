@@ -63,8 +63,8 @@ export default {
     },
     data() {
         return {
-            username: 'bwdyer@gmail.com',
-            password: 'newpassword',
+            username: '',
+            password: '',
             passwordVisible: false
         }
     },
