@@ -19,7 +19,7 @@
     <div class="flex flex-col items-start fixed bottom-2 right-2 z-50" v-if="mainStore.messages">
       <FlashMessage v-for="message in mainStore.messages" :key="message.message" :message="message.message"
         :error="message.error" />
-      <!-- <div class="bg-np-base mt-1 text-sm border-2  border-red-800 shadow-lg w-1/3 px-2 mx-2 rounded-lg text-np-base">Outage message here. Last updated: 14:09 UK</div> -->
+      <!-- <div class="bg-np-base mt-1 text-sm border-2  border-red-800 shadow-lg w-1/3 px-2 mx-2 rounded-lg text-np-base">Currently investigating an outage. last update 0710</div> -->
     </div>
   </div>
 </template>
